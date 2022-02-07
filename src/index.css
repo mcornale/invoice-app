@@ -1,7 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-main: #7c5dfa;
+  --color-main-lighter: #9277ff;
+  --color-background: #f8f8fb;
+  --color-light-elements: #ffffff;
+  --color-dark-elements: #373b53;
+  --color-dark-text-and-icons: #0c0e16;
+  --color-light-text-and-icons: #7e88c3;
+  --color-very-light-text-and-icons: #888eb0;
+  --font-size-body-1: 1.2rem;
+  --line-height-body-1: 1.5rem;
+  --letter-spacing-body-1: -0.025rem;
+  --font-size-body-2: 1.1rem;
+  --line-height-body-2: 1.8rem;
+  --letter-spacing-body-2: -0.023rem;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Spartan', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 3.2rem;
+  line-height: 3.6rem;
+  letter-spacing: -0.1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.063rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  letter-spacing: -0.025rem;
 }
