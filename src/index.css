@@ -35,6 +35,12 @@ body {
   font-weight: 500;
 }
 
+#root {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  display: flex;
+}
+
 h1,
 h2,
 h3,
@@ -64,4 +70,11 @@ h4 {
   font-size: 1.2rem;
   line-height: 1.5rem;
   letter-spacing: -0.025rem;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
 }
