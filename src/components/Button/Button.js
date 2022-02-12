@@ -3,18 +3,18 @@ import styles from './Button.module.css';
 const Button = (props) => {
   const { text, iconSrc, buttonStyle } = props;
 
-  let buttonClassName = '';
+  let buttonClassName = [styles.button];
 
   switch (buttonStyle) {
     case '1':
-      buttonClassName = styles.button1;
+      buttonClassName.push(styles.button1);
       break;
     default:
       break;
   }
 
   return (
-    <button className={buttonClassName}>
+    <button className={buttonClassName.join(' ')}>
       {iconSrc && <img className={styles.buttonIcon} src={iconSrc} alt='' />}
       {text}
     </button>
