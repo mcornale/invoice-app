@@ -31,8 +31,11 @@ html {
 
 body {
   font-family: 'Spartan', sans-serif;
-  font-size: 1.6rem;
+  font-size: var(--font-size-body-1);
+  line-height: var(--line-height-body-1);
+  letter-spacing: var(--letter-spacing-body-1);
   font-weight: 500;
+  color: var(--color-very-light-text-and-icons);
 }
 
 #root {
@@ -41,17 +44,28 @@ body {
   display: flex;
 }
 
+aside {
+  flex-shrink: 0;
+}
+
+main {
+  padding: 6rem 10%;
+  width: 100%;
+}
+
 h1,
 h2,
 h3,
 h4 {
   font-weight: 700;
+  color: var(--color-dark-text-and-icons);
 }
 
 h1 {
   font-size: 3.2rem;
   line-height: 3.6rem;
   letter-spacing: -0.1rem;
+  margin-bottom: 0.6rem;
 }
 
 h2 {
@@ -77,4 +91,5 @@ button {
   border: none;
   background: none;
   outline: none;
+  font: inherit;
 }

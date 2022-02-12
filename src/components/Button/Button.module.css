@@ -1,0 +1,21 @@
+button {
+  border-radius: 10rem;
+  padding: 1.4rem 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+}
+
+.button1 {
+  background-color: var(--color-main);
+  color: #ffffff;
+  padding: 0.8rem 2rem 0.8rem 0.8rem;
+}
+
+.buttonIcon {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 10rem;
+}

@@ -1,6 +1,6 @@
-import Logo from './Logo';
-import profileImgSrc from '../assets/images/image-avatar.jpg';
-import darkModeIconSrc from '../assets/icons/icon-moon.svg';
+import Logo from '../Logo/Logo';
+import profileImgSrc from '../../assets/images/image-avatar.jpg';
+import darkModeIconSrc from '../../assets/icons/icon-moon.svg';
 import styles from './Sidebar.module.css';
 
 const Sidebar = () => {

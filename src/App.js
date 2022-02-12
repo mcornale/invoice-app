@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/Sidebar/Sidebar';
 import HomePage from './pages/HomePage';
 import InvoicePage from './pages/InvoicePage';
 
@@ -7,12 +7,14 @@ const App = () => {
   return (
     <>
       <Sidebar />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/:invoiceId' element={<InvoicePage />} />
-        </Routes>
-      </BrowserRouter>
+      <main>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/:invoiceId' element={<InvoicePage />} />
+          </Routes>
+        </BrowserRouter>
+      </main>
     </>
   );
 };

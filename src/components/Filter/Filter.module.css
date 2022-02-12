@@ -1,0 +1,9 @@
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-weight: 700;
+  color: var(--color-dark-text-and-icons);
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
