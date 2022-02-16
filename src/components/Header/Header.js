@@ -1,5 +1,5 @@
 import Filter from '../Filter/Filter';
-import Button from '../Button/Button';
+import Button from '../UI/Button/Button';
 
 import plusIconSrc from '../../assets/icons/icon-plus.svg';
 

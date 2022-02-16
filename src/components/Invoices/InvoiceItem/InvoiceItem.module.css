@@ -1,0 +1,60 @@
+.invoiceItem:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.invoiceItemLink {
+  width: 100%;
+  padding: 1.8rem 2.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-very-light-text-and-icons);
+}
+
+.invoiceItemLink > * {
+  flex-grow: 1;
+}
+
+.invoiceItemId {
+  color: var(--color-dark-text-and-icons);
+  font-weight: 700;
+  max-width: 6rem;
+}
+
+.invoiceItemId::before {
+  content: '#';
+  color: #7e88c3;
+  font-weight: 700;
+}
+
+.invoiceItemPaymentDue {
+  max-width: 11rem;
+  margin-left: 4rem;
+}
+
+.invoiceItemPaymentDue::before {
+  content: 'Due ';
+}
+
+.invoiceItemClientName {
+  max-width: 20rem;
+  text-align: left;
+  margin-left: 4rem;
+}
+
+.invoiceItemTotal {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+  color: var(--color-dark-text-and-icons);
+  font-weight: 700;
+  text-align: right;
+}
+
+.invoiceItemTotal::before {
+  content: '£ ';
+}
+
+.invoiceItemArrow {
+  max-width: 0.8rem;
+}

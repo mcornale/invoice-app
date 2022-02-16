@@ -1,7 +1,7 @@
 import Header from '../components/Header/Header';
-import InvoicesList from '../components/InvoicesList/InvoicesList';
+import InvoicesList from '../components/Invoices/InvoicesList/InvoicesList';
 import invoicesData from '../assets/data/data.json';
-import NoInvoicesFound from '../components/NoInvoicesFound/NoInvoicesFound';
+import NoInvoicesFound from '../components/Invoices/NoInvoicesFound/NoInvoicesFound';
 
 const HomePage = () => {
   return (

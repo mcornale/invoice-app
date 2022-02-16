@@ -1,6 +1,6 @@
 import styles from './NoInvoicesFound.module.css';
 
-import emptyIllustrationSrc from '../../assets/images/illustration-empty.svg';
+import emptyIllustrationSrc from '../../../assets/images/illustration-empty.svg';
 
 const NoInvoicesFound = () => {
   return (
