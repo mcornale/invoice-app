@@ -1,0 +1,114 @@
+.invoiceItem {
+  background-color: var(--color-light-elements);
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--box-shadow-default);
+}
+
+.invoiceItem:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.invoiceItemLink {
+  width: 100%;
+  padding: 1.8rem 2.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-very-light-text-and-icons);
+}
+
+.invoiceItemLink > * {
+  flex-grow: 1;
+}
+
+.invoiceItemId {
+  color: var(--color-dark-text-and-icons);
+  font-weight: 700;
+  max-width: 6rem;
+}
+
+.invoiceItemId::before {
+  content: '#';
+  color: #7e88c3;
+  font-weight: 700;
+}
+
+.invoiceItemPaymentDue {
+  max-width: 11rem;
+  margin-left: 4rem;
+}
+
+.invoiceItemPaymentDue::before {
+  content: 'Due ';
+}
+
+.invoiceItemClientName {
+  max-width: 20rem;
+  text-align: left;
+  margin-left: 4rem;
+}
+
+.invoiceItemTotal {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+  color: var(--color-dark-text-and-icons);
+  font-weight: 700;
+  text-align: right;
+}
+
+.invoiceItemTotal::before {
+  content: '£ ';
+}
+
+.invoiceItemStatus {
+  font-weight: 700;
+  max-width: 10.4rem;
+  text-align: center;
+  padding: 1.2rem;
+  border-radius: var(--border-radius-small);
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin: 0 2rem 0 4rem;
+}
+
+.invoiceItemStatus::before {
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.invoiceItemStatus[data-status='paid'] {
+  color: rgb(51, 214, 159);
+  background-color: rgba(51, 214, 159, 0.05);
+}
+
+.invoiceItemStatus[data-status='paid']::before {
+  background-color: rgb(51, 214, 159);
+}
+
+.invoiceItemStatus[data-status='pending'] {
+  color: rgb(255, 143, 0);
+  background-color: rgba(255, 143, 0, 0.05);
+}
+
+.invoiceItemStatus[data-status='pending']::before {
+  background-color: rgb(255, 143, 0);
+}
+
+.invoiceItemStatus[data-status='draft'] {
+  color: rgb(55, 59, 83);
+  background-color: rgba(55, 59, 83, 0.05);
+}
+
+.invoiceItemStatus[data-status='draft']::before {
+  background-color: rgb(55, 59, 83);
+}
+
+.invoiceItemArrow {
+  max-width: 0.8rem;
+}

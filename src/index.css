@@ -15,6 +15,9 @@
   --font-size-body-2: 1.1rem;
   --line-height-body-2: 1.8rem;
   --letter-spacing-body-2: -0.023rem;
+  --border-radius-default: 0.8rem;
+  --border-radius-small: 0.6rem;
+  --box-shadow-default: 0rem 1rem 1rem -1rem rgba(72, 84, 159, 0.104);
 }
 
 *,
@@ -51,6 +54,8 @@ aside {
 main {
   padding: 6rem 10%;
   width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
 }
 
 h1,
@@ -71,7 +76,7 @@ h1 {
 h2 {
   font-size: 2rem;
   line-height: 2.2rem;
-  letter-spacing: 0.063rem;
+  letter-spacing: -0.063rem;
 }
 
 h3 {
@@ -86,10 +91,22 @@ h4 {
   letter-spacing: -0.025rem;
 }
 
-button {
+button,
+a {
   cursor: pointer;
+}
+
+button {
   border: none;
   background: none;
   outline: none;
   font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }
