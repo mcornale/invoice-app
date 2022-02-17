@@ -11,6 +11,9 @@
 .button1 {
   background-color: var(--color-main);
   color: #ffffff;
+}
+
+.button1WithIcon {
   padding: 0.8rem 2rem 0.8rem 0.8rem;
 }
 
@@ -18,4 +21,19 @@
   background-color: #ffffff;
   padding: 1rem;
   border-radius: 10rem;
+}
+
+.button2 {
+  background-color: #f9fafe;
+  color: #7e88c3;
+}
+
+.button3 {
+  background-color: #373b53;
+  color: #888eb0;
+}
+
+.button4 {
+  background-color: #ec5757;
+  color: #ffffff;
 }
