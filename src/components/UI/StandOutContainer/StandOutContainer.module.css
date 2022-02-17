@@ -1,0 +1,6 @@
+.standOutContainer {
+  background-color: var(--color-light-elements);
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--box-shadow-default);
+  width: 100%;
+}
