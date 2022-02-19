@@ -5,12 +5,12 @@ import arrowSrc from '../../../assets/icons/icon-arrow-right.svg';
 import styles from './InvoiceListItem.module.css';
 import InvoiceStatus from '../InvoiceStatus/InvoiceStatus';
 import formatTotal from '../../../helpers/formatTotal';
-import formatPaymentDue from '../../../helpers/formatPaymentDue';
+import formatDate from '../../../helpers/formatDate';
 
 const InvoiceListItem = (props) => {
   const { id, paymentDue, clientName, total, status } = props;
 
-  const formattedPaymentDue = formatPaymentDue(new Date(paymentDue));
+  const formattedPaymentDue = formatDate(new Date(paymentDue));
 
   const formattedTotal = formatTotal(total);
 

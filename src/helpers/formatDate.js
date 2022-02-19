@@ -1,4 +1,4 @@
-const formatPaymentDue = (paymentDueDate) =>
+const formatDate = (paymentDueDate) =>
   `${paymentDueDate
     .getDate()
     .toString()
@@ -7,4 +7,4 @@ const formatPaymentDue = (paymentDueDate) =>
     month: 'short',
   })}`;
 
-export default formatPaymentDue;
+export default formatDate;
