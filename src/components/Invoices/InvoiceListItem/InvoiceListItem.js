@@ -10,20 +10,16 @@ import formatDate from '../../../helpers/formatDate';
 const InvoiceListItem = (props) => {
   const { id, paymentDue, clientName, total, status } = props;
 
-  const formattedPaymentDue = formatDate(new Date(paymentDue));
-
-  const formattedTotal = formatTotal(total);
-
   return (
     <li className={styles.invoiceListItem}>
       <StandOutContainer>
         <Link className={styles.invoiceListItemLink} to={`${id}`}>
           <p className={styles.invoiceListItemId}>{id}</p>
           <p className={styles.invoiceListItemPaymentDue}>
-            {formattedPaymentDue}
+            {formatDate(new Date(paymentDue))}
           </p>
           <p className={styles.invoiceListItemClientName}>{clientName}</p>
-          <p className={styles.invoiceListItemTotal}>{formattedTotal}</p>
+          <p className={styles.invoiceListItemTotal}>{formatTotal(total)}</p>
           <InvoiceStatus status={status} />
           <img
             className={styles.invoiceListItemArrow}
