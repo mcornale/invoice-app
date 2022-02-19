@@ -1,12 +1,12 @@
-import InvoiceItem from '../InvoiceItem/InvoiceItem';
+import InvoiceListItem from '../InvoiceListItem/InvoiceListItem';
 
 const InvoicesList = (props) => {
   const { invoicesData } = props;
 
   return (
     <ul>
-      {invoicesData.map((invoiceItem, index) => (
-        <InvoiceItem key={index} {...invoiceItem} />
+      {invoicesData.map((invoiceListItem, index) => (
+        <InvoiceListItem key={index} {...invoiceListItem} />
       ))}
     </ul>
   );

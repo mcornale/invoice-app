@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import StandOutContainer from '../../UI/StandOutContainer/StandOutContainer';
 import arrowSrc from '../../../assets/icons/icon-arrow-right.svg';
 
-import styles from './InvoiceItem.module.css';
+import styles from './InvoiceListItem.module.css';
 import InvoiceStatus from '../InvoiceStatus/InvoiceStatus';
 
-const InvoiceItem = (props) => {
+const InvoiceListItem = (props) => {
   const { id, paymentDue, clientName, total, status } = props;
 
   const formatPaymentDue = (paymentDueDate) =>
@@ -41,16 +41,18 @@ const InvoiceItem = (props) => {
   const formattedTotal = formatTotal(total);
 
   return (
-    <li className={styles.invoiceItem}>
+    <li className={styles.invoiceListItem}>
       <StandOutContainer>
-        <Link className={styles.invoiceItemLink} to={`${id}`}>
-          <p className={styles.invoiceItemId}>{id}</p>
-          <p className={styles.invoiceItemPaymentDue}>{formattedPaymentDue}</p>
-          <p className={styles.invoiceItemClientName}>{clientName}</p>
-          <p className={styles.invoiceItemTotal}>{formattedTotal}</p>
+        <Link className={styles.invoiceListItemLink} to={`${id}`}>
+          <p className={styles.invoiceListItemId}>{id}</p>
+          <p className={styles.invoiceListItemPaymentDue}>
+            {formattedPaymentDue}
+          </p>
+          <p className={styles.invoiceListItemClientName}>{clientName}</p>
+          <p className={styles.invoiceListItemTotal}>{formattedTotal}</p>
           <InvoiceStatus status={status} />
           <img
-            className={styles.invoiceItemArrow}
+            className={styles.invoiceListItemArrow}
             src={arrowSrc}
             alt='view invoice details'
           />
@@ -60,4 +62,4 @@ const InvoiceItem = (props) => {
   );
 };
 
-export default InvoiceItem;
+export default InvoiceListItem;

@@ -49,6 +49,7 @@
   color: var(--color-dark-text-and-icons);
   font-weight: 700;
   text-align: right;
+  margin-right: 4rem;
 }
 
 .invoiceItemTotal::before {
@@ -57,4 +58,5 @@
 
 .invoiceItemArrow {
   max-width: 0.8rem;
+  margin-left: 2rem;
 }
