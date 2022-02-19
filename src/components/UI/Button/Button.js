@@ -5,9 +5,10 @@ const Button = (props) => {
 
   let buttonClassName = [styles.button];
 
+  if (iconSrc) buttonClassName.push(styles.buttonWithIcon);
+
   switch (buttonStyle) {
     case '1':
-      if (iconSrc) buttonClassName.push(styles.button1WithIcon);
       buttonClassName.push(styles.button1);
       break;
     case '2':
@@ -20,6 +21,7 @@ const Button = (props) => {
       buttonClassName.push(styles.button4);
       break;
     default:
+      buttonClassName.push(styles.buttonDefault);
       break;
   }
 

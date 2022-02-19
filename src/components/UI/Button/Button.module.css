@@ -2,10 +2,15 @@
   border-radius: 10rem;
   padding: 1.4rem 2rem;
   font-weight: 700;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.4rem;
+}
+
+.buttonDefault {
+  padding: 1rem 1rem 1rem 0;
+  align-items: baseline;
 }
 
 .button1 {
@@ -13,11 +18,11 @@
   color: #ffffff;
 }
 
-.button1WithIcon {
+.button1.buttonWithIcon {
   padding: 0.8rem 2rem 0.8rem 0.8rem;
 }
 
-.buttonIcon {
+.button1.buttonWithIcon .buttonIcon {
   background-color: #ffffff;
   padding: 1rem;
   border-radius: 10rem;

@@ -1,0 +1,20 @@
+.invoiceActionsContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  margin: 1rem 0 2rem;
+}
+
+.invoiceStatus,
+.invoiceActions {
+  display: flex;
+  align-items: center;
+}
+
+.invoiceStatus {
+  gap: 2rem;
+}
+
+.invoiceActions {
+  gap: 1rem;
+}
