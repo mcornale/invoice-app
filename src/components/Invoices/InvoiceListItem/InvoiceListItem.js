@@ -4,39 +4,13 @@ import arrowSrc from '../../../assets/icons/icon-arrow-right.svg';
 
 import styles from './InvoiceListItem.module.css';
 import InvoiceStatus from '../InvoiceStatus/InvoiceStatus';
+import formatTotal from '../../../helpers/formatTotal';
+import formatPaymentDue from '../../../helpers/formatPaymentDue';
 
 const InvoiceListItem = (props) => {
   const { id, paymentDue, clientName, total, status } = props;
 
-  const formatPaymentDue = (paymentDueDate) =>
-    `${paymentDueDate
-      .getDate()
-      .toString()
-      .padStart(2, '0')} ${paymentDueDate.toLocaleDateString('en-EN', {
-      year: 'numeric',
-      month: 'short',
-    })}`;
-
   const formattedPaymentDue = formatPaymentDue(new Date(paymentDue));
-
-  const formatTotal = (total) => {
-    let [totalIntPart, totalDecimalPart] = total
-      .toFixed(2)
-      .toString()
-      .split('.');
-
-    if (totalIntPart.length > 3) {
-      totalIntPart = [...totalIntPart]
-        .reverse()
-        .map((digit, index) =>
-          index !== 0 && index % 3 === 0 ? `${digit}'` : digit
-        )
-        .reverse()
-        .join('');
-    }
-
-    return [totalIntPart, totalDecimalPart].join('.');
-  };
 
   const formattedTotal = formatTotal(total);
 
