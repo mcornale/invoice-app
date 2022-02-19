@@ -1,0 +1,47 @@
+.invoiceStatus {
+  font-weight: 700;
+  width: 10.4rem;
+  max-width: 10.4rem;
+  text-align: center;
+  padding: 1.2rem;
+  border-radius: var(--border-radius-small);
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.invoiceStatus::before {
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.invoiceStatus[data-status='paid'] {
+  color: rgb(51, 214, 159);
+  background-color: rgba(51, 214, 159, 0.05);
+}
+
+.invoiceStatus[data-status='paid']::before {
+  background-color: rgb(51, 214, 159);
+}
+
+.invoiceStatus[data-status='pending'] {
+  color: rgb(255, 143, 0);
+  background-color: rgba(255, 143, 0, 0.05);
+}
+
+.invoiceStatus[data-status='pending']::before {
+  background-color: rgb(255, 143, 0);
+}
+
+.invoiceStatus[data-status='draft'] {
+  color: rgb(55, 59, 83);
+  background-color: rgba(55, 59, 83, 0.05);
+}
+
+.invoiceStatus[data-status='draft']::before {
+  background-color: rgb(55, 59, 83);
+}
