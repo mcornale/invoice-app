@@ -1,8 +1,8 @@
-.invoiceItem:not(:last-child) {
+.invoiceListItem:not(:last-child) {
   margin-bottom: 2rem;
 }
 
-.invoiceItemLink {
+.invoiceListItemLink {
   width: 100%;
   padding: 1.8rem 2.6rem;
   display: flex;
@@ -11,38 +11,38 @@
   color: var(--color-very-light-text-and-icons);
 }
 
-.invoiceItemLink > * {
+.invoiceListItemLink > * {
   flex-grow: 1;
 }
 
-.invoiceItemId {
+.invoiceListItemId {
   color: var(--color-dark-text-and-icons);
   font-weight: 700;
   max-width: 6rem;
 }
 
-.invoiceItemId::before {
+.invoiceListItemId::before {
   content: '#';
   color: #7e88c3;
   font-weight: 700;
 }
 
-.invoiceItemPaymentDue {
+.invoiceListItemPaymentDue {
   max-width: 11rem;
   margin-left: 4rem;
 }
 
-.invoiceItemPaymentDue::before {
+.invoiceListItemPaymentDue::before {
   content: 'Due ';
 }
 
-.invoiceItemClientName {
+.invoiceListItemClientName {
   max-width: 20rem;
   text-align: left;
   margin-left: 4rem;
 }
 
-.invoiceItemTotal {
+.invoiceListItemTotal {
   font-size: 1.6rem;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
@@ -52,11 +52,7 @@
   margin-right: 4rem;
 }
 
-.invoiceItemTotal::before {
-  content: '£ ';
-}
-
-.invoiceItemArrow {
+.invoiceListItemArrow {
   max-width: 0.8rem;
   margin-left: 2rem;
 }
