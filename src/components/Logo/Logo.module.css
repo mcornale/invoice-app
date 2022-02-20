@@ -1,6 +1,6 @@
 .logo {
-  width: 10rem;
-  height: 10rem;
+  width: var(--sidebar-width);
+  height: var(--sidebar-width);
   background-color: var(--color-main);
   border-radius: 0 2rem 2rem 0;
   display: grid;
