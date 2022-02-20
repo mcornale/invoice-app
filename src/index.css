@@ -15,9 +15,12 @@
   --font-size-body-2: 1.1rem;
   --line-height-body-2: 1.8rem;
   --letter-spacing-body-2: -0.023rem;
+  --border-radius-big: 2rem;
   --border-radius-default: 0.8rem;
   --border-radius-small: 0.6rem;
+  --border-radius-x-small: 0.4rem;
   --box-shadow-default: 0rem 1rem 1rem -1rem rgba(72, 84, 159, 0.104);
+  --sidebar-width: 10rem;
 }
 
 *,
@@ -96,7 +99,8 @@ a {
   cursor: pointer;
 }
 
-button {
+button,
+input {
   border: none;
   background: none;
   outline: none;
