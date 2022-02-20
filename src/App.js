@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar/Sidebar';
+import SideBar from './components/SideBar/SideBar';
 import HomePage from './pages/HomePage';
 import InvoicePage from './pages/InvoicePage';
 import { fetchInvoices } from './store/invoicesSlice';
@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <>
-      <Sidebar />
+      <SideBar />
       <main>
         <BrowserRouter>
           <Routes>
