@@ -1,6 +1,6 @@
-import StandOutContainer from '../../UI/StandOutContainer/StandOutContainer';
+import StandOutContainer from '../../StandOutContainer/StandOutContainer';
 import styles from './InvoiceDetails.module.css';
-
+import InvoiceId from '../InvoiceId/InvoiceId';
 import formatTotal from '../../../helpers/formatTotal';
 import formatDate from '../../../helpers/formatDate';
 
@@ -33,7 +33,9 @@ const InvoiceDetails = (props) => {
       <section className={styles.invoiceDetails}>
         <div>
           <div className={styles.invoiceIdAndDescription}>
-            <h3 className={styles.invoiceId}>{id}</h3>
+            <h3 className={styles.invoiceId}>
+              <InvoiceId id={id} />
+            </h3>
             <p>{description}</p>
           </div>
           <div className={styles.invoiceSenderAddress}>

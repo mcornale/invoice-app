@@ -1,6 +1,6 @@
-import StandOutContainer from '../../UI/StandOutContainer/StandOutContainer';
+import StandOutContainer from '../../StandOutContainer/StandOutContainer';
 import InvoiceStatus from '../InvoiceStatus/InvoiceStatus';
-import Button from '../../UI/Button/Button';
+import Button from '../../Button/Button';
 import styles from './InvoiceActions.module.css';
 
 const InvoiceActions = (props) => {
