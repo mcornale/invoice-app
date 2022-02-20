@@ -15,18 +15,6 @@
   flex-grow: 1;
 }
 
-.invoiceListItemId {
-  color: var(--color-dark-text-and-icons);
-  font-weight: 700;
-  max-width: 6rem;
-}
-
-.invoiceListItemId::before {
-  content: '#';
-  color: #7e88c3;
-  font-weight: 700;
-}
-
 .invoiceListItemPaymentDue {
   max-width: 11rem;
   margin-left: 4rem;
