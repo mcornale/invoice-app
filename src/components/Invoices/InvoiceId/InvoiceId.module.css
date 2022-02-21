@@ -6,6 +6,6 @@
 
 .invoiceId::before {
   content: '#';
-  color: #7e88c3;
+  color: var(--color-light-text-and-icons);
   font-weight: 700;
 }

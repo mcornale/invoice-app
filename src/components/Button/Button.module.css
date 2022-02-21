@@ -30,7 +30,7 @@
 
 .button2 {
   background-color: #f9fafe;
-  color: #7e88c3;
+  color: var(--color-light-text-and-icons);
 }
 
 .button3 {
