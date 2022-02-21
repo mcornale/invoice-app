@@ -22,15 +22,24 @@
   padding: 0.8rem 2rem 0.8rem 0.8rem;
 }
 
-.button1.buttonWithIcon .buttonIcon {
+.button1.buttonWithIcon svg {
   background-color: #ffffff;
   padding: 1rem;
   border-radius: 10rem;
+  box-sizing: content-box;
+}
+
+.button1.buttonWithIcon svg path {
+  fill: var(--color-main);
 }
 
 .button2 {
   background-color: #f9fafe;
   color: var(--color-light-text-and-icons);
+}
+
+.button2.buttonWithIcon svg path {
+  fill: var(--color-light-text-and-icons);
 }
 
 .button3 {
