@@ -1,8 +1,8 @@
-.invoiceListItem:not(:last-child) {
+.invoicesListItem:not(:last-child) {
   margin-bottom: 2rem;
 }
 
-.invoiceListItemLink {
+.invoicesListItemLink {
   width: 100%;
   padding: 1.8rem 2.6rem;
   display: flex;
@@ -11,26 +11,26 @@
   color: var(--color-very-light-text-and-icons);
 }
 
-.invoiceListItemLink > * {
+.invoicesListItemLink > * {
   flex-grow: 1;
 }
 
-.invoiceListItemPaymentDue {
+.invoicesListItemPaymentDue {
   max-width: 11rem;
   margin-left: 4rem;
 }
 
-.invoiceListItemPaymentDue::before {
+.invoicesListItemPaymentDue::before {
   content: 'Due ';
 }
 
-.invoiceListItemClientName {
+.invoicesListItemClientName {
   max-width: 20rem;
   text-align: left;
   margin-left: 4rem;
 }
 
-.invoiceListItemTotal {
+.invoicesListItemTotal {
   font-size: 1.6rem;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
@@ -40,7 +40,7 @@
   margin-right: 4rem;
 }
 
-.invoiceListItemArrow {
+.invoicesListItemArrow {
   max-width: 0.8rem;
   margin-left: 2rem;
 }
