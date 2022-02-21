@@ -15,7 +15,7 @@ const Header = () => {
         <Filter />
         <Button
           text='New Invoice'
-          iconSrc={<Icon icon='plus' />}
+          icon={<Icon icon='plus' />}
           buttonStyle='1'
         />
       </div>
