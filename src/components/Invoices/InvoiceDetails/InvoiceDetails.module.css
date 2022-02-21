@@ -23,12 +23,6 @@
   margin-bottom: 0.2rem;
 }
 
-.invoiceId::before {
-  content: '#';
-  color: var(--color-light-text-and-icons);
-  font-weight: 700;
-}
-
 .invoiceDates {
   display: flex;
   flex-direction: column;

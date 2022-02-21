@@ -33,7 +33,7 @@ const InvoiceDetails = (props) => {
       <section className={styles.invoiceDetails}>
         <div>
           <div className={styles.invoiceIdAndDescription}>
-            <h3 className={styles.invoiceId}>
+            <h3>
               <InvoiceId id={id} />
             </h3>
             <p>{description}</p>
@@ -78,7 +78,7 @@ const InvoiceDetails = (props) => {
             <thead>
               <tr>
                 <th>Item Name</th>
-                <th>QTY.</th>
+                <th>Qty.</th>
                 <th>Price</th>
                 <th>Total</th>
               </tr>
