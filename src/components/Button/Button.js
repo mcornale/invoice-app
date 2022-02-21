@@ -1,11 +1,11 @@
 import styles from './Button.module.css';
 
 const Button = (props) => {
-  const { text, iconSrc, buttonStyle } = props;
+  const { text, icon, buttonStyle } = props;
 
   let buttonClassName = [styles.button];
 
-  if (iconSrc) buttonClassName.push(styles.buttonWithIcon);
+  if (icon) buttonClassName.push(styles.buttonWithIcon);
 
   switch (buttonStyle) {
     case '1':
@@ -27,7 +27,7 @@ const Button = (props) => {
 
   return (
     <button className={buttonClassName.join(' ')}>
-      {iconSrc && <img className={styles.buttonIcon} src={iconSrc} alt='' />}
+      {icon}
       {text}
     </button>
   );

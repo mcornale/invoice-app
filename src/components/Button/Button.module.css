@@ -4,12 +4,12 @@
   font-weight: 700;
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.4rem;
 }
 
 .buttonDefault {
-  padding: 1rem 1rem 1rem 0;
+  padding: 1rem;
   align-items: baseline;
 }
 
