@@ -1,9 +1,8 @@
 import Filter from '../Filter/Filter';
 import Button from '../Button/Button';
 
-import plusIconSrc from '../../assets/icons/icon-plus.svg';
-
 import styles from './Header.module.css';
+import Icon from '../Icon/Icon';
 
 const Header = () => {
   return (
@@ -14,7 +13,11 @@ const Header = () => {
       </div>
       <div className={styles.headerActions}>
         <Filter />
-        <Button text='New Invoice' iconSrc={plusIconSrc} buttonStyle='1' />
+        <Button
+          text='New Invoice'
+          iconSrc={<Icon icon='plus' />}
+          buttonStyle='1'
+        />
       </div>
     </header>
   );

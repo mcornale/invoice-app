@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import StandOutContainer from '../../StandOutContainer/StandOutContainer';
-import arrowSrc from '../../../assets/icons/icon-arrow-right.svg';
 
 import styles from './InvoicesListItem.module.css';
 import InvoiceStatus from '../InvoiceStatus/InvoiceStatus';
 import formatTotal from '../../../helpers/formatTotal';
 import formatDate from '../../../helpers/formatDate';
 import InvoiceId from '../InvoiceId/InvoiceId';
+import Icon from '../../Icon/Icon';
 
 const InvoicesListItem = (props) => {
   const { id, paymentDue, clientName, total, status } = props;
@@ -22,11 +22,7 @@ const InvoicesListItem = (props) => {
           <p className={styles.invoicesListItemClientName}>{clientName}</p>
           <p className={styles.invoicesListItemTotal}>{formatTotal(total)}</p>
           <InvoiceStatus status={status} />
-          <img
-            className={styles.invoicesListItemArrow}
-            src={arrowSrc}
-            alt='view invoice details'
-          />
+          <Icon icon='arrowRight' />
         </Link>
       </StandOutContainer>
     </li>

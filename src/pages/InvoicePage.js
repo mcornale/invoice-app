@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import InvoiceActions from '../components/Invoices/InvoiceActions/InvoiceActions';
 import InvoiceDetails from '../components/Invoices/InvoiceDetails/InvoiceDetails';
-import arrowLeftIconSrc from '../assets/icons/icon-arrow-left.svg';
-import Button from '../components/UI/Button/Button';
+import Button from '../components/Button/Button';
 import { useSelector } from 'react-redux';
+import Modal from '../components/Modal/Modal';
+import SideForm from '../components/SideWindow/SideForm/SideForm';
+import Icon from '../components/Icon/Icon';
 
 const InvoicePage = () => {
   const { invoiceId } = useParams();
@@ -15,7 +17,7 @@ const InvoicePage = () => {
   return (
     <>
       <Link to='/'>
-        <Button iconSrc={arrowLeftIconSrc} text='Go back' />
+        <Button icon={<Icon icon='arrowLeft' />} text='Go back' />
       </Link>
       <InvoiceActions status={currentInvoice.status} />
       <InvoiceDetails {...currentInvoice} />

@@ -1,16 +1,15 @@
 import Logo from '../Logo/Logo';
 import profileImgSrc from '../../assets/images/image-avatar.jpg';
-import darkModeIconSrc from '../../assets/icons/icon-moon.svg';
 import styles from './SideBar.module.css';
+import Button from '../Button/Button';
+import Icon from '../Icon/Icon';
 
 const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <Logo />
       <div className={styles.sidebarElements}>
-        <button className={styles.sidebarThemeSwitch}>
-          <img src={darkModeIconSrc} alt='user profile' />
-        </button>
+        <Button icon={<Icon icon='moon' />} />
         <img
           className={styles.sidebarProfileImg}
           src={profileImgSrc}
