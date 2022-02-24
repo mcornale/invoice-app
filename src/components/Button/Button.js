@@ -1,9 +1,9 @@
 import styles from './Button.module.css';
 
 const Button = (props) => {
-  const { text, icon, buttonStyle } = props;
+  const { text, icon, buttonStyle, onClick } = props;
 
-  let buttonClassName = [styles.button];
+  const buttonClassName = [styles.button];
 
   if (icon) buttonClassName.push(styles.buttonWithIcon);
 
@@ -26,7 +26,7 @@ const Button = (props) => {
   }
 
   return (
-    <button className={buttonClassName.join(' ')}>
+    <button onClick={onClick} className={buttonClassName.join(' ')}>
       {icon}
       {text}
     </button>

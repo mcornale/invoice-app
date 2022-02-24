@@ -22,7 +22,7 @@ const invoicesSlice = createSlice({
 
 export const { setInvoices, setLoading } = invoicesSlice.actions;
 
-export default invoicesSlice.reducer;
+export default invoicesSlice;
 
 export const fetchInvoices = () => (dispatch) => {
   dispatch(setLoading());

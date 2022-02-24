@@ -3,8 +3,16 @@ import Button from '../Button/Button';
 
 import styles from './Header.module.css';
 import Icon from '../Icon/Icon';
+import { useDispatch } from 'react-redux';
+import { showNewInvoiceForm } from '../../store/sideFormSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const handleNewInvoiceBtnClick = () => {
+    dispatch(showNewInvoiceForm());
+  };
+
   return (
     <header className={styles.header}>
       <div>
@@ -14,6 +22,7 @@ const Header = () => {
       <div className={styles.headerActions}>
         <Filter />
         <Button
+          onClick={handleNewInvoiceBtnClick}
           text='New Invoice'
           icon={<Icon icon='plus' />}
           buttonStyle='1'

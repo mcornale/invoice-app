@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import invoicesSliceReducer from './invoicesSlice';
+import invoicesSlice from './invoicesSlice';
+import sideFormSlice from './sideFormSlice';
 
 const store = configureStore({
-  reducer: { invoices: invoicesSliceReducer },
+  reducer: { invoices: invoicesSlice.reducer, sideForm: sideFormSlice.reducer },
 });
 
 export default store;
