@@ -1,0 +1,116 @@
+.sideFormWindow {
+  max-width: 72rem;
+  height: 100vh;
+  background-color: var(--color-light-elements);
+  padding: 5rem 3rem 5rem calc(var(--sidebar-width) + 5rem);
+  border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.sideForm {
+  max-height: 100%;
+  padding: 0 2rem 8rem 0;
+  overflow: auto;
+}
+
+.sideForm::before,
+.sideForm::after {
+  content: '';
+  width: 100%;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sideForm::after {
+  height: 20rem;
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+  bottom: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.sideForm::before {
+  height: 10rem;
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-light-elements) 30%,
+    transparent
+  );
+  top: 5rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.sideFormWithTopGradient::before {
+  opacity: 1;
+}
+
+.sideFormWithBottomGradient::after {
+  opacity: 1;
+}
+
+/* width */
+.sideForm::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+/* Track */
+.sideForm::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+
+/* Handle */
+.sideForm::-webkit-scrollbar-thumb {
+  background: #dfe3fa;
+  border-radius: 0.4rem;
+}
+
+.sideFormTitle {
+  position: sticky;
+  top: 0;
+  margin-bottom: 5rem;
+  background-color: var(--color-light-elements);
+  z-index: 2;
+}
+
+.sideFormSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2.6rem;
+  margin-bottom: 5rem;
+}
+
+.sideFormSectionTitle {
+  color: var(--color-main);
+  margin-bottom: 0.5rem;
+}
+
+.sideFormInputsRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.sideFormInputsRow > * {
+  flex: 1 1 auto;
+}
+
+.sideFormSubmitSection {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--color-light-elements);
+  padding: 3rem 5rem 3rem calc(var(--sidebar-width) + 5rem);
+  border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
+  z-index: 2;
+}

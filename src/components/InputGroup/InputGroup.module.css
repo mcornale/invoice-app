@@ -1,0 +1,23 @@
+.inputGroup > * {
+  width: 100%;
+  display: block;
+}
+
+.inputGroup label {
+  margin-bottom: 1rem;
+}
+
+.inputGroup input {
+  border-radius: var(--border-radius-x-small);
+  border: 0.1rem solid #dfe3fa;
+  padding: 1.4rem 1.8rem;
+  font-weight: 700;
+}
+
+.inputGroupReadOnly input {
+  padding-left: 0;
+  padding-right: 0;
+  border: none;
+  color: #888eb0;
+  font-weight: 700;
+}

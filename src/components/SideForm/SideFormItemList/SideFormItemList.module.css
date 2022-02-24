@@ -1,0 +1,14 @@
+.sideFormItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.sideFormItemListTitle {
+  color: #888eb0;
+}
+
+.sideFormItemListGrid {
+  display: grid;
+  grid-template-columns: 5fr 1.4fr 3fr 2fr auto;
+  gap: 1.5rem;
+}
