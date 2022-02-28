@@ -1,4 +1,4 @@
-import StandOutContainer from '../../StandOutContainer/StandOutContainer';
+import Container from '../../UI/Container/Container';
 import styles from './InvoiceDetails.module.css';
 import InvoiceId from '../InvoiceId/InvoiceId';
 import formatTotal from '../../../helpers/formatTotal';
@@ -8,7 +8,7 @@ const InvoiceDetails = (props) => {
   const { currentInvoice } = props;
 
   return (
-    <StandOutContainer>
+    <Container>
       <section className={styles.invoiceDetails}>
         <div>
           <div className={styles.invoiceIdAndDescription}>
@@ -83,7 +83,7 @@ const InvoiceDetails = (props) => {
           </div>
         </div>
       </section>
-    </StandOutContainer>
+    </Container>
   );
 };
 

@@ -1,16 +1,16 @@
 import { Fragment } from 'react';
-import Button from '../../Button/Button';
-import Icon from '../../Icon/Icon';
-import InputGroup from '../../InputGroup/InputGroup';
-import styles from './SideFormItemList.module.css';
+import Button from '../../UI/Button/Button';
+import Icon from '../../UI/Icon/Icon';
+import InputGroup from '../../UI/InputGroup/InputGroup';
+import styles from './InvoiceFormItemList.module.css';
 
-const SideFormItemList = (props) => {
+const InvoiceFormItemList = (props) => {
   const { currentInvoice } = props;
 
   return (
-    <section className={styles.sideFormItemList}>
-      <h3 className={styles.sideFormItemListTitle}>Item List</h3>
-      <div className={styles.sideFormItemListGrid}>
+    <section className={styles.invoiceFormItemList}>
+      <h3 className={styles.invoiceFormItemListTitle}>Item List</h3>
+      <div className={styles.invoiceFormItemListGrid}>
         <label>Item Name</label>
         <label>Qty.</label>
         <label>Price</label>
@@ -26,19 +26,14 @@ const SideFormItemList = (props) => {
             />
             <InputGroup
               label='Qty.'
-              type='string'
+              type='quantity'
               value={item.quantity}
               noLabel
             />
-            <InputGroup
-              label='Price'
-              type='string'
-              value={item.price}
-              noLabel
-            />
+            <InputGroup label='Price' type='price' value={item.price} noLabel />
             <InputGroup
               label='Total'
-              type='string'
+              type='price'
               value={item.total}
               noLabel
               readOnly
@@ -52,4 +47,4 @@ const SideFormItemList = (props) => {
   );
 };
 
-export default SideFormItemList;
+export default InvoiceFormItemList;

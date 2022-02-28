@@ -1,7 +1,7 @@
 import styles from './Button.module.css';
 
 const Button = (props) => {
-  const { text, icon, buttonStyle, onClick } = props;
+  const { text, icon, buttonStyle, onClick, style } = props;
 
   const buttonClassName = [styles.button];
 
@@ -26,7 +26,11 @@ const Button = (props) => {
   }
 
   return (
-    <button onClick={onClick} className={buttonClassName.join(' ')}>
+    <button
+      style={style}
+      onClick={onClick}
+      className={buttonClassName.join(' ')}
+    >
       {icon}
       {text}
     </button>

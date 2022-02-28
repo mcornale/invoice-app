@@ -1,4 +1,4 @@
-.sideFormWindow {
+.invoiceFormWindow {
   max-width: 72rem;
   height: 100vh;
   background-color: var(--color-light-elements);
@@ -10,14 +10,14 @@
   z-index: 1;
 }
 
-.sideForm {
+.invoiceForm {
   max-height: 100%;
   padding: 0 2rem 8rem 0;
   overflow: auto;
 }
 
-.sideForm::before,
-.sideForm::after {
+.invoiceForm::before,
+.invoiceForm::after {
   content: '';
   width: 100%;
   position: absolute;
@@ -26,14 +26,14 @@
   opacity: 0;
 }
 
-.sideForm::after {
+.invoiceForm::after {
   height: 20rem;
   background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
   bottom: 0;
   transition: all 0.4s ease-in-out;
 }
 
-.sideForm::before {
+.invoiceForm::before {
   height: 10rem;
   background-image: linear-gradient(
     to bottom,
@@ -44,33 +44,33 @@
   transition: all 0.1s ease-in-out;
 }
 
-.sideFormWithTopGradient::before {
+.invoiceFormWithTopGradient::before {
   opacity: 1;
 }
 
-.sideFormWithBottomGradient::after {
+.invoiceFormWithBottomGradient::after {
   opacity: 1;
 }
 
 /* width */
-.sideForm::-webkit-scrollbar {
+.invoiceForm::-webkit-scrollbar {
   width: 0.8rem;
 }
 
 /* Track */
-.sideForm::-webkit-scrollbar-track {
+.invoiceForm::-webkit-scrollbar-track {
   background: transparent;
   margin-top: 8rem;
   margin-bottom: 8rem;
 }
 
 /* Handle */
-.sideForm::-webkit-scrollbar-thumb {
+.invoiceForm::-webkit-scrollbar-thumb {
   background: #dfe3fa;
   border-radius: 0.4rem;
 }
 
-.sideFormTitle {
+.invoiceFormTitle {
   position: sticky;
   top: 0;
   margin-bottom: 5rem;
@@ -78,30 +78,30 @@
   z-index: 2;
 }
 
-.sideFormSection {
+.invoiceFormSection {
   display: flex;
   flex-direction: column;
   gap: 2.6rem;
   margin-bottom: 5rem;
 }
 
-.sideFormSectionTitle {
+.invoiceFormSectionTitle {
   color: var(--color-main);
   margin-bottom: 0.5rem;
 }
 
-.sideFormInputsRow {
+.invoiceFormInputsRow {
   display: flex;
   align-items: center;
   width: 100%;
   gap: 2rem;
 }
 
-.sideFormInputsRow > * {
+.invoiceFormInputsRow > * {
   flex: 1 1 auto;
 }
 
-.sideFormSubmitSection {
+.invoiceFormSubmitSection {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;

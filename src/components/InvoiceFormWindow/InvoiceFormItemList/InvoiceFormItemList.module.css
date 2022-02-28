@@ -1,14 +1,18 @@
-.sideFormItemList {
+.invoiceFormItemList {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.sideFormItemListTitle {
+.invoiceFormItemListTitle {
   color: #888eb0;
 }
 
-.sideFormItemListGrid {
+.invoiceFormItemListGrid {
   display: grid;
   grid-template-columns: 5fr 1.4fr 3fr 2fr auto;
   gap: 1.5rem;
+}
+
+.invoiceFormItemListGrid > *:nth-child(5n + 2) input {
+  text-align: center;
 }

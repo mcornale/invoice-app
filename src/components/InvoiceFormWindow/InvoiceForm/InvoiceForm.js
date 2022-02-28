@@ -1,36 +1,28 @@
-import styles from './SideForm.module.css';
-import InvoiceId from '../Invoices/InvoiceId/InvoiceId';
-import InputGroup from '../InputGroup/InputGroup';
-import Button from '../Button/Button';
+import styles from './InvoiceForm.module.css';
+import InvoiceId from '../../Invoices/InvoiceId/InvoiceId';
+import InputGroup from '../../UI/InputGroup/InputGroup';
+import Button from '../../UI/Button/Button';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { SIDE_FORM_MODES } from '../../constants/side-form-modes';
+import { INVOICE_FORM_MODES } from '../../../constants/invoice-form-modes';
 import { useParams } from 'react-router-dom';
-import SideFormItemList from './SideFormItemList/SideFormItemList';
-import useScrollPosition from '../../hooks/useScrollPosition';
+import InvoiceFormItemList from '../InvoiceFormItemList/InvoiceFormItemList';
+import useScrollPosition from '../../../hooks/useScrollPosition';
 
-const SideForm = () => {
-  const sideFormClassName = [styles.sideForm];
+const InvoiceForm = () => {
+  const invoiceFormClassName = [styles.invoiceForm];
+  const invoiceFormRef = useRef();
+  const invoiceFormScrollPosition = useScrollPosition(invoiceFormRef);
 
-  const sideFormRef = useRef();
-  const sideFormScrollPosition = useScrollPosition(sideFormRef);
-
-  const billFromStreetAddrInputRef = useRef();
-  const billFromCityInputRef = useRef();
-  const billFromPostCodeInputRef = useRef();
-  const billFromCountryInputRef = useRef();
-
-  if (sideFormRef.current && sideFormScrollPosition > 0)
-    sideFormClassName.push(styles.sideFormWithTopGradient);
+  if (invoiceFormRef.current && invoiceFormScrollPosition > 0)
+    invoiceFormClassName.push(styles.invoiceFormWithTopGradient);
 
   if (
-    sideFormRef.current &&
-    sideFormScrollPosition <
-      sideFormRef.current.scrollHeight - sideFormRef.current.clientHeight
+    invoiceFormRef.current &&
+    invoiceFormScrollPosition <
+      invoiceFormRef.current.scrollHeight - invoiceFormRef.current.clientHeight
   )
-    sideFormClassName.push(styles.sideFormWithBottomGradient);
-
-  console.log(sideFormScrollPosition);
+    invoiceFormClassName.push(styles.invoiceFormWithBottomGradient);
 
   const { invoiceId } = useParams();
 
@@ -39,52 +31,48 @@ const SideForm = () => {
   );
 
   const activeMode = currentInvoice
-    ? SIDE_FORM_MODES.EDIT_INVOICE
-    : SIDE_FORM_MODES.NEW_INVOICE;
+    ? INVOICE_FORM_MODES.EDIT_INVOICE
+    : INVOICE_FORM_MODES.NEW_INVOICE;
 
   return (
-    <div className={styles.sideFormWindow}>
-      <form className={sideFormClassName.join(' ')} ref={sideFormRef}>
-        <h2 className={styles.sideFormTitle}>
-          {activeMode === SIDE_FORM_MODES.NEW_INVOICE && 'New Invoice'}
-          {activeMode === SIDE_FORM_MODES.EDIT_INVOICE && (
+    <div className={styles.invoiceFormWindow}>
+      <form className={invoiceFormClassName.join(' ')} ref={invoiceFormRef}>
+        <h2 className={styles.invoiceFormTitle}>
+          {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && 'New Invoice'}
+          {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
             <>
               Edit <InvoiceId id={invoiceId} />
             </>
           )}
         </h2>
         <div>
-          <section className={styles.sideFormSection}>
-            <h4 className={styles.sideFormSectionTitle}>Bill From</h4>
+          <section className={styles.invoiceFormSection}>
+            <h4 className={styles.invoiceFormSectionTitle}>Bill From</h4>
             <InputGroup
               label='Street Address'
               type='text'
               value={currentInvoice?.senderAddress.street}
-              ref={billFromStreetAddrInputRef}
             />
-            <div className={styles.sideFormInputsRow}>
+            <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='City'
                 type='text'
                 value={currentInvoice?.senderAddress.city}
-                ref={billFromCityInputRef}
               />
               <InputGroup
                 label='Post Code'
                 type='text'
                 value={currentInvoice?.senderAddress.postCode}
-                ref={billFromPostCodeInputRef}
               />
               <InputGroup
                 label='Country'
                 type='text'
                 value={currentInvoice?.senderAddress.country}
-                ref={billFromCountryInputRef}
               />
             </div>
           </section>
-          <section className={styles.sideFormSection}>
-            <h4 className={styles.sideFormSectionTitle}>Bill To</h4>
+          <section className={styles.invoiceFormSection}>
+            <h4 className={styles.invoiceFormSectionTitle}>Bill To</h4>
             <InputGroup
               label="Client's Name"
               type='text'
@@ -100,7 +88,7 @@ const SideForm = () => {
               type='text'
               value={currentInvoice?.clientAddress.street}
             />
-            <div className={styles.sideFormInputsRow}>
+            <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='City'
                 type='text'
@@ -117,7 +105,7 @@ const SideForm = () => {
                 value={currentInvoice?.clientAddress.country}
               />
             </div>
-            <div className={styles.sideFormInputsRow}>
+            <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='Invoice Date'
                 type='date'
@@ -135,17 +123,21 @@ const SideForm = () => {
               value={currentInvoice?.description}
             />
           </section>
-          <SideFormItemList currentInvoice={currentInvoice} />
+          <InvoiceFormItemList currentInvoice={currentInvoice} />
         </div>
-        <section className={styles.sideFormSubmitSection}>
-          {activeMode === SIDE_FORM_MODES.NEW_INVOICE && (
+        <section className={styles.invoiceFormSubmitSection}>
+          {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && (
             <>
-              <Button text='Discard' buttonStyle='2' />
+              <Button
+                style={{ marginRight: 'auto' }}
+                text='Discard'
+                buttonStyle='2'
+              />
               <Button text='Save as Draft' buttonStyle='3' />
               <Button text='Save & Send' buttonStyle='1' />
             </>
           )}
-          {activeMode === SIDE_FORM_MODES.EDIT_INVOICE && (
+          {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
             <>
               <Button text='Cancel' buttonStyle='2' />
               <Button text='Save Changes' buttonStyle='1' />
@@ -157,4 +149,4 @@ const SideForm = () => {
   );
 };
 
-export default SideForm;
+export default InvoiceForm;

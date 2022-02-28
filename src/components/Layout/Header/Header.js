@@ -1,10 +1,10 @@
-import Filter from '../Filter/Filter';
-import Button from '../Button/Button';
+import Filter from '../../UI/Filter/Filter';
+import Button from '../../UI/Button/Button';
 
 import styles from './Header.module.css';
-import Icon from '../Icon/Icon';
+import Icon from '../../UI/Icon/Icon';
 import { useDispatch } from 'react-redux';
-import { showNewInvoiceForm } from '../../store/sideFormSlice';
+import { showNewInvoiceForm } from '../../../store/sideFormSlice';
 
 const Header = () => {
   const dispatch = useDispatch();

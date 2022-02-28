@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import InvoicesListItem from '../InvoicesListItem/InvoicesListItem';
+import InvoiceListItem from '../InvoiceListItem/InvoiceListItem';
 
 const InvoicesList = () => {
   const invoicesList = useSelector((state) => state.invoices.invoicesList);
@@ -7,7 +7,7 @@ const InvoicesList = () => {
   return (
     <ul>
       {invoicesList.map((invoiceListItem) => (
-        <InvoicesListItem key={invoiceListItem.id} {...invoiceListItem} />
+        <InvoiceListItem key={invoiceListItem.id} {...invoiceListItem} />
       ))}
     </ul>
   );

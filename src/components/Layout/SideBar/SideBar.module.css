@@ -12,6 +12,34 @@
   width: var(--sidebar-width);
 }
 
+.sidebarLogo {
+  width: var(--sidebar-width);
+  height: var(--sidebar-width);
+  background-color: var(--color-main);
+  border-radius: 0 2rem 2rem 0;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebarLogo::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  background-color: var(--color-main-lighter);
+  height: 50%;
+  width: 100%;
+  z-index: 0;
+  border-top-left-radius: 2rem;
+}
+
+.sidebarLogoImg {
+  width: 4rem;
+  height: auto;
+  position: relative;
+}
+
 .sidebarElements {
   display: flex;
   flex-direction: column;

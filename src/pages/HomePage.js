@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import Header from '../components/Header/Header';
-import InvoicesList from '../components/Invoices/InvoicesList/InvoicesList';
+import Header from '../components/Layout/Header/Header';
+import InvoicesList from '../components/Invoices/InvoiceList/InvoiceList';
 import NoInvoicesFound from '../components/Invoices/NoInvoicesFound/NoInvoicesFound';
-import SideForm from '../components/SideForm/SideForm';
-import Modal from '../components/Modal/Modal';
+import InvoiceForm from '../components/InvoiceFormWindow/InvoiceForm/InvoiceForm';
+import Modal from '../components/UI/Modal/Modal';
 
 const HomePage = () => {
   const invoicesCount = useSelector(
@@ -21,7 +21,7 @@ const HomePage = () => {
     <>
       {isNewInvoiceFormVisible && (
         <Modal>
-          <SideForm />
+          <InvoiceForm />
         </Modal>
       )}
       <Header />

@@ -1,6 +1,6 @@
-import StandOutContainer from '../../StandOutContainer/StandOutContainer';
+import Container from '../../UI/Container/Container';
 import InvoiceStatus from '../InvoiceStatus/InvoiceStatus';
-import Button from '../../Button/Button';
+import Button from '../../UI/Button/Button';
 import styles from './InvoiceActions.module.css';
 import { useDispatch } from 'react-redux';
 import { showEditInvoiceForm } from '../../../store/sideFormSlice';
@@ -15,7 +15,7 @@ const InvoiceActions = (props) => {
   };
 
   return (
-    <StandOutContainer>
+    <Container>
       <section className={styles.invoiceActionsContainer}>
         <div className={styles.invoiceStatus}>
           <p>Status</p>
@@ -27,7 +27,7 @@ const InvoiceActions = (props) => {
           <Button buttonStyle='1' text='Mark as Paid' />
         </div>
       </section>
-    </StandOutContainer>
+    </Container>
   );
 };
 

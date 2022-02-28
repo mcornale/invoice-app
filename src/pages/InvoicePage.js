@@ -1,12 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
 import InvoiceActions from '../components/Invoices/InvoiceActions/InvoiceActions';
 import InvoiceDetails from '../components/Invoices/InvoiceDetails/InvoiceDetails';
-import Button from '../components/Button/Button';
+import Button from '../components/UI/Button/Button';
 import { useSelector } from 'react-redux';
 
-import Icon from '../components/Icon/Icon';
-import Modal from '../components/Modal/Modal';
-import SideForm from '../components/SideForm/SideForm';
+import Icon from '../components/UI/Icon/Icon';
+import Modal from '../components/UI/Modal/Modal';
+import InvoiceForm from '../components/InvoiceFormWindow/InvoiceForm/InvoiceForm';
 
 const InvoicePage = () => {
   const { invoiceId } = useParams();
@@ -23,7 +23,7 @@ const InvoicePage = () => {
     <>
       {isEditInvoiceFormVisible && (
         <Modal>
-          <SideForm />
+          <InvoiceForm />
         </Modal>
       )}
       <Link to='/'>
