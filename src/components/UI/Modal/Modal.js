@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.css';
 
 const Modal = (props) => {
   const { children } = props;
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+  }, []);
+
   return createPortal(
     <>
       {children}
