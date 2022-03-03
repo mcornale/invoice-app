@@ -34,9 +34,17 @@ const InvoiceForm = () => {
     ? INVOICE_FORM_MODES.EDIT_INVOICE
     : INVOICE_FORM_MODES.NEW_INVOICE;
 
+  const handleInvoiceFormSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className={styles.invoiceFormContainer}>
-      <form className={invoiceFormClassName.join(' ')} ref={invoiceFormRef}>
+      <form
+        onSubmit={handleInvoiceFormSubmit}
+        className={invoiceFormClassName.join(' ')}
+        ref={invoiceFormRef}
+      >
         <h2 className={styles.invoiceFormTitle}>
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && 'New Invoice'}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
