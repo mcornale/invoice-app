@@ -15,7 +15,9 @@ const Sidebar = () => {
         />
       </div>
       <div className={styles.sidebarElements}>
-        <Button icon={<Icon icon='moon' />} />
+        <button className={styles.sidebarThemeSwitch}>
+          <Icon icon='moon' />
+        </button>
         <img
           className={styles.sidebarProfileImg}
           src={profileImgSrc}
