@@ -35,7 +35,7 @@ const InvoiceForm = () => {
     : INVOICE_FORM_MODES.NEW_INVOICE;
 
   return (
-    <div className={styles.invoiceFormWindow}>
+    <div className={styles.invoiceFormContainer}>
       <form className={invoiceFormClassName.join(' ')} ref={invoiceFormRef}>
         <h2 className={styles.invoiceFormTitle}>
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && 'New Invoice'}

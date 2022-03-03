@@ -1,8 +1,8 @@
-.invoiceFormWindow {
+.invoiceFormContainer {
   max-width: 72rem;
   height: 100vh;
   background-color: var(--color-light-elements);
-  padding: 5rem 3rem 5rem calc(var(--sidebar-width) + 5rem);
+  padding: 5rem 3rem 5rem var(--sidebar-width);
   border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
   position: fixed;
   top: 0;
@@ -12,7 +12,7 @@
 
 .invoiceForm {
   max-height: 100%;
-  padding: 0 2rem 8rem 0;
+  padding: 0 5rem 8rem 5rem;
   overflow: auto;
 }
 
