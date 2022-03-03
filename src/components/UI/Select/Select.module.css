@@ -1,0 +1,42 @@
+.selectContainer {
+  padding: 0;
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 1.6rem;
+}
+
+.select svg {
+  transition: all 0.3s;
+}
+
+.selectOpen svg {
+  transform: rotate(180deg);
+}
+
+.options {
+  position: absolute;
+  left: -0.1rem;
+  margin-top: 1rem;
+  width: calc(100% + 0.2rem);
+  background-color: var(--color-light-elements);
+  box-shadow: 0rem 1rem 2rem rgba(72, 84, 159, 0.25);
+  padding: 0;
+  border-radius: var(--border-radius-default);
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  padding: 1.5rem 2rem;
+  text-align: left;
+}
+
+.option:not(:last-child) {
+  border-bottom: 0.1rem solid #dfe3fa;
+}

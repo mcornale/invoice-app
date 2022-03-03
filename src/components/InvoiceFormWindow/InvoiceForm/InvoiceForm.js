@@ -8,6 +8,7 @@ import { INVOICE_FORM_MODES } from '../../../constants/invoice-form-modes';
 import { useParams } from 'react-router-dom';
 import InvoiceFormItemList from '../InvoiceFormItemList/InvoiceFormItemList';
 import useScrollPosition from '../../../hooks/useScrollPosition';
+import { PAYMENT_TERMS_OPTIONS } from '../../../constants/payment-terms-options';
 
 const InvoiceForm = () => {
   const invoiceFormClassName = [styles.invoiceForm];
@@ -121,8 +122,9 @@ const InvoiceForm = () => {
               />
               <InputGroup
                 label='Payment Terms'
-                type='date'
-                value={currentInvoice?.paymentDue}
+                type='select'
+                options={PAYMENT_TERMS_OPTIONS}
+                value={currentInvoice?.paymentTerms}
               />
             </div>
             <InputGroup

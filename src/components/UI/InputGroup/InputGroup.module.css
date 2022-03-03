@@ -10,7 +10,7 @@
 .inputField {
   border-radius: var(--border-radius-x-small);
   border: 0.1rem solid #dfe3fa;
-  padding: 1.4rem;
+  padding: 1.4rem 1.6rem;
   font-weight: 700;
   color: var(--color-dark-text-and-icons);
 }

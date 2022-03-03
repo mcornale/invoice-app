@@ -12,7 +12,7 @@
 
 .invoiceForm {
   max-height: 100%;
-  padding: 0 5rem 8rem 5rem;
+  padding: 0 2rem 8rem 5rem;
   overflow: auto;
 }
 
@@ -55,6 +55,7 @@
 /* width */
 .invoiceForm::-webkit-scrollbar {
   width: 0.8rem;
+  height: 8px;
 }
 
 /* Track */
@@ -98,7 +99,7 @@
 }
 
 .invoiceFormInputsRow > * {
-  flex: 1 1 auto;
+  flex: 1 1 50%;
 }
 
 .invoiceFormSubmitSection {

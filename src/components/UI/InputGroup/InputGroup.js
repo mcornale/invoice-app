@@ -2,9 +2,10 @@ import InputText from '../InputText';
 import styles from './InputGroup.module.css';
 import InputDate from '../InputDate/InputDate';
 import formatTotal from '../../../helpers/formatTotal';
+import Select from '../Select/Select';
 
 const InputGroup = (props) => {
-  const { label, type, value, noLabel, readOnly } = props;
+  const { label, type, value, noLabel, readOnly, options } = props;
 
   const inputFieldClassName = [styles.inputField];
   if (readOnly) inputFieldClassName.push(styles.inputFieldReadOnly);
@@ -35,7 +36,6 @@ const InputGroup = (props) => {
         <InputText
           className={inputFieldClassName.join(' ')}
           value={value}
-          readOnly={readOnly}
           isOkToUpdateInputText={isOkToUpdateInputText}
           formatInputText={formatInputText}
         />
@@ -43,9 +43,15 @@ const InputGroup = (props) => {
       {type === 'date' && (
         <InputDate
           className={inputFieldClassName.join(' ')}
-          type={type}
           value={value}
           readOnly={readOnly}
+        />
+      )}
+      {type === 'select' && (
+        <Select
+          className={inputFieldClassName.join(' ')}
+          value={value}
+          options={options}
         />
       )}
     </div>
