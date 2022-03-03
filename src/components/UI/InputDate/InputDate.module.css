@@ -1,0 +1,24 @@
+.inputDateContainer {
+  padding: 0;
+  position: relative;
+}
+
+.inputDate {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 1.6rem;
+}
+
+.inputDate svg path {
+  fill: var(--color-light-text-and-icons);
+}
+
+.inputDateCalendar {
+  position: absolute;
+  top: 100%;
+  left: -0.1rem;
+  margin-top: 1rem;
+  width: calc(100% + 0.2rem);
+}
