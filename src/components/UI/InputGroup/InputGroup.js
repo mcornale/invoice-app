@@ -21,7 +21,7 @@ const InputGroup = (props) => {
 
   if (type === 'quantity') {
     isOkToUpdateInputText = (inputValue) =>
-      inputValue.length <= 2 && !isNaN(inputValue) && inputValue !== '00';
+      inputValue.length <= 2 && Number.isInteger(Number(inputValue));
     formatInputText = (inputValue) => Number(inputValue).toString();
   }
 
