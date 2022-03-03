@@ -11,8 +11,18 @@
   display: grid;
   grid-template-columns: 5fr 1.4fr 3fr 2fr auto;
   gap: 1.5rem;
+  margin-right: -1rem;
 }
 
 .invoiceFormItemListGrid > *:nth-child(5n + 2) input {
   text-align: center;
+}
+
+.invoiceFormItemListGrid button {
+  padding: 1rem;
+  margin-top: -0.3rem;
+}
+
+.invoiceFormItemListGrid button svg path {
+  fill: var(--color-light-text-and-icons);
 }

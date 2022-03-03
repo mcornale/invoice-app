@@ -38,7 +38,9 @@ const InvoiceFormItemList = (props) => {
               noLabel
               readOnly
             />
-            <Button text='' icon={<Icon icon='delete' />} />
+            <button>
+              <Icon icon='delete' />
+            </button>
           </Fragment>
         ))}
       </div>
