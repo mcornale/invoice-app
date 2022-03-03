@@ -28,11 +28,11 @@ const InvoiceDetails = (props) => {
           <div className={styles.invoiceDates}>
             <div className={styles.invoiceCreationDate}>
               <p>Invoice Date</p>
-              <h3>{formatDate(new Date(currentInvoice.createdAt))}</h3>
+              <h3>{formatDate(currentInvoice.createdAt)}</h3>
             </div>
             <div className={styles.invoicePaymentDue}>
               <p>Payment Due</p>
-              <h3>{formatDate(new Date(currentInvoice.paymentDue))}</h3>
+              <h3>{formatDate(currentInvoice.paymentDue)}</h3>
             </div>
           </div>
           <div>

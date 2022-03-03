@@ -17,7 +17,7 @@ const InvoiceListItem = (props) => {
         <Link className={styles.invoiceListItemLink} to={`${id}`}>
           <InvoiceId id={id} />
           <p className={styles.invoiceListItemPaymentDue}>
-            {formatDate(new Date(paymentDue))}
+            {formatDate(paymentDue)}
           </p>
           <p className={styles.invoiceListItemClientName}>{clientName}</p>
           <p className={styles.invoiceListItemTotal}>{formatTotal(total)}</p>
