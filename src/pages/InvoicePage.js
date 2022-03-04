@@ -9,6 +9,10 @@ import Modal from '../components/UI/Modal/Modal';
 import InvoiceForm from '../components/InvoiceFormWindow/InvoiceForm/InvoiceForm';
 
 const InvoicePage = () => {
+  const isLoadingInvoices = useSelector(
+    (state) => state.sideForm.isLoadingInvoices
+  );
+
   const { invoiceId } = useParams();
 
   const currentInvoice = useSelector((state) =>
@@ -26,11 +30,16 @@ const InvoicePage = () => {
           <InvoiceForm />
         </Modal>
       )}
-      <Link to='/'>
-        <Button icon={<Icon icon='arrowLeft' />} text='Go back' />
-      </Link>
-      <InvoiceActions status={currentInvoice.status} />
-      <InvoiceDetails currentInvoice={currentInvoice} />
+      {isLoadingInvoices && <p>Loading...</p>}
+      {!isLoadingInvoices && currentInvoice && (
+        <>
+          <Link to='/'>
+            <Button icon={<Icon icon='arrowLeft' />} text='Go back' />
+          </Link>
+          <InvoiceActions status={currentInvoice.status} />
+          <InvoiceDetails currentInvoice={currentInvoice} />
+        </>
+      )}
     </>
   );
 };
