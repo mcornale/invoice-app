@@ -5,17 +5,17 @@ import { db } from '../firebase';
 const invoicesSlice = createSlice({
   name: 'invoices',
   initialState: {
-    isLoadingData: false,
+    isLoadingInvoices: false,
     invoicesList: [],
   },
   reducers: {
     setInvoices: (state, action) => {
       const { newInvoicesList } = action.payload;
       state.invoicesList = newInvoicesList;
-      state.isLoadingData = false;
+      state.isLoadingInvoices = false;
     },
     setLoading: (state) => {
-      if (!state.isLoadingData) state.isLoadingData = true;
+      if (!state.isLoadingInvoices) state.isLoadingInvoices = true;
     },
   },
 });
