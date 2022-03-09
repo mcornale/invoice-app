@@ -2,7 +2,7 @@ import Filter from '../../UI/Filter/Filter';
 import Button from '../../UI/Button/Button';
 
 import styles from './Header.module.css';
-import Icon from '../../UI/Icon/Icon';
+import Icon from '../../UI/Icon';
 import { useDispatch } from 'react-redux';
 import { showNewInvoiceForm } from '../../../store/sideFormSlice';
 

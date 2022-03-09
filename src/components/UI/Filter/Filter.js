@@ -1,4 +1,4 @@
-import Icon from '../Icon/Icon';
+import Icon from '../Icon';
 import styles from './Filter.module.css';
 
 const Filter = () => {

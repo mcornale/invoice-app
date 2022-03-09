@@ -1,8 +1,7 @@
 import logoImgSrc from '../../../assets/images/logo.svg';
 import profileImgSrc from '../../../assets/images/image-avatar.jpg';
 import styles from './SideBar.module.css';
-import Button from '../../UI/Button/Button';
-import Icon from '../../UI/Icon/Icon';
+import Icon from '../../UI/Icon';
 
 const Sidebar = () => {
   return (
