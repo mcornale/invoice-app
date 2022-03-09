@@ -6,7 +6,7 @@ import InvoiceStatus from '../InvoiceStatus/InvoiceStatus';
 import formatTotal from '../../../helpers/formatTotal';
 import formatDate from '../../../helpers/formatDate';
 import InvoiceId from '../InvoiceId/InvoiceId';
-import Icon from '../../UI/Icon/Icon';
+import Icon from '../../UI/Icon';
 
 const InvoiceListItem = (props) => {
   const { id, paymentDue, clientName, total, status } = props;

@@ -1,11 +1,22 @@
-import { Fragment } from 'react';
 import Button from '../../UI/Button/Button';
-import Icon from '../../UI/Icon/Icon';
-import InputGroup from '../../UI/InputGroup/InputGroup';
+import Icon from '../../UI/Icon';
+import InvoiceFormItem from '../InvoiceFormItem';
 import styles from './InvoiceFormItemList.module.css';
 
 const InvoiceFormItemList = (props) => {
-  const { currentInvoice } = props;
+  const { itemList, setItemList } = props;
+
+  const handleAddNewItemBtnClick = () => {
+    setItemList((prevItemList) => [
+      ...prevItemList,
+      {
+        name: undefined,
+        quantity: undefined,
+        price: undefined,
+        total: undefined,
+      },
+    ]);
+  };
 
   return (
     <section className={styles.invoiceFormItemList}>
@@ -16,35 +27,21 @@ const InvoiceFormItemList = (props) => {
         <label>Price</label>
         <label>Total</label>
         <label></label>
-        {currentInvoice?.items.map((item, index) => (
-          <Fragment key={index}>
-            <InputGroup
-              label='Item Name'
-              type='text'
-              value={item.name}
-              noLabel
-            />
-            <InputGroup
-              label='Qty.'
-              type='quantity'
-              value={item.quantity}
-              noLabel
-            />
-            <InputGroup label='Price' type='price' value={item.price} noLabel />
-            <InputGroup
-              label='Total'
-              type='price'
-              value={item.total}
-              noLabel
-              readOnly
-            />
-            <button>
-              <Icon icon='delete' />
-            </button>
-          </Fragment>
+        {itemList?.map((item, index) => (
+          <InvoiceFormItem
+            key={index}
+            index={index}
+            item={item}
+            setItemList={setItemList}
+          />
         ))}
       </div>
-      <Button text='Add New Item' icon={<Icon icon='plus' />} buttonStyle='2' />
+      <Button
+        onClick={handleAddNewItemBtnClick}
+        text='Add New Item'
+        icon={<Icon icon='plus' />}
+        buttonStyle='2'
+      />
     </section>
   );
 };

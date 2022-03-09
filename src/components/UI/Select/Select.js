@@ -1,11 +1,10 @@
-import { useState } from 'react';
-import Icon from '../Icon/Icon';
+import { forwardRef, useState } from 'react';
+import Icon from '../Icon';
 import styles from './Select.module.css';
 
-const Select = (props) => {
-  const { className, value, options } = props;
+const Select = forwardRef((props, ref) => {
+  const { className, value, onChange, options } = props;
 
-  const [selectedOption, setSelectedOption] = useState(value);
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
   const handleSelectClick = () => {
@@ -13,25 +12,31 @@ const Select = (props) => {
   };
 
   const handleOptionClick = (newSelectedOption) => {
-    setSelectedOption(newSelectedOption);
+    onChange(newSelectedOption);
     setAreOptionsVisible(false);
   };
 
   return (
     <div className={`${className} ${styles.selectContainer}`}>
       <button
+        type='button'
         onClick={handleSelectClick}
         className={`${styles.select} ${areOptionsVisible && styles.selectOpen}`}
       >
-        <p>{`Net ${selectedOption} ${
-          selectedOption === 1 ? 'Day' : 'Days'
-        }`}</p>
+        <input
+          type='text'
+          value={`Net ${value} ${value === 1 ? 'Day' : 'Days'}`}
+          ref={ref}
+          readOnly
+        />
         <Icon icon='arrowDown' />
       </button>
       {areOptionsVisible && (
         <div className={styles.options}>
-          {options.map((option) => (
+          {options.map((option, index) => (
             <button
+              type='button'
+              key={index}
               onClick={handleOptionClick.bind(null, option)}
               className={styles.option}
             >{`Net ${option} ${option === 1 ? 'Day' : 'Days'}`}</button>
@@ -40,6 +45,6 @@ const Select = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default Select;

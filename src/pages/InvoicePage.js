@@ -4,7 +4,7 @@ import InvoiceDetails from '../components/Invoices/InvoiceDetails/InvoiceDetails
 import Button from '../components/UI/Button/Button';
 import { useSelector } from 'react-redux';
 
-import Icon from '../components/UI/Icon/Icon';
+import Icon from '../components/UI/Icon';
 import Modal from '../components/UI/Modal/Modal';
 import InvoiceForm from '../components/InvoiceFormWindow/InvoiceForm/InvoiceForm';
 
@@ -27,7 +27,7 @@ const InvoicePage = () => {
     <>
       {isEditInvoiceFormVisible && (
         <Modal>
-          <InvoiceForm />
+          <InvoiceForm currentInvoice={currentInvoice} />
         </Modal>
       )}
       {isLoadingInvoices && <p>Loading...</p>}

@@ -2,15 +2,17 @@ import styles from './InvoiceForm.module.css';
 import InvoiceId from '../../Invoices/InvoiceId/InvoiceId';
 import InputGroup from '../../UI/InputGroup/InputGroup';
 import Button from '../../UI/Button/Button';
-import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
 import { INVOICE_FORM_MODES } from '../../../constants/invoice-form-modes';
-import { useParams } from 'react-router-dom';
 import InvoiceFormItemList from '../InvoiceFormItemList/InvoiceFormItemList';
 import useScrollPosition from '../../../hooks/useScrollPosition';
 import { PAYMENT_TERMS_OPTIONS } from '../../../constants/payment-terms-options';
+import useInput from '../../../hooks/useInput';
 
-const InvoiceForm = () => {
+const InvoiceForm = (props) => {
+  const { currentInvoice } = props;
+
+  //check scrolling position and change invoice form style according to that
   const invoiceFormClassName = [styles.invoiceForm];
   const invoiceFormRef = useRef();
   const invoiceFormScrollPosition = useScrollPosition(invoiceFormRef);
@@ -25,16 +27,47 @@ const InvoiceForm = () => {
   )
     invoiceFormClassName.push(styles.invoiceFormWithBottomGradient);
 
-  const { invoiceId } = useParams();
-
-  const currentInvoice = useSelector((state) =>
-    state.invoices.invoicesList.find((invoice) => invoice.id === invoiceId)
-  );
-
+  //check form mode
   const activeMode = currentInvoice
     ? INVOICE_FORM_MODES.EDIT_INVOICE
     : INVOICE_FORM_MODES.NEW_INVOICE;
 
+  //inputs
+  const senderAddressStreet = useInput(currentInvoice?.senderAddress.street);
+  const senderAddressCity = useInput(currentInvoice?.senderAddress.city);
+  const senderAddressPostCode = useInput(
+    currentInvoice?.senderAddress.postCode
+  );
+  const senderAddressCountry = useInput(currentInvoice?.senderAddress.country);
+  const clientName = useInput(currentInvoice?.clientName);
+  const clientEmail = useInput(currentInvoice?.clientEmail);
+  const clientAddressStreet = useInput(currentInvoice?.clientAddress.street);
+  const clientAddressCity = useInput(currentInvoice?.clientAddress.city);
+  const clientAddressPostCode = useInput(
+    currentInvoice?.clientAddress.postCode
+  );
+  const clientAddressCountry = useInput(currentInvoice?.clientAddress.country);
+  const invoiceDate = useInput(
+    activeMode === INVOICE_FORM_MODES.NEW_INVOICE
+      ? new Date()
+      : currentInvoice?.createdAt
+  );
+  const paymentTerms = useInput(
+    activeMode === INVOICE_FORM_MODES.NEW_INVOICE
+      ? PAYMENT_TERMS_OPTIONS[PAYMENT_TERMS_OPTIONS.length - 1]
+      : currentInvoice?.paymentTerms
+  );
+  const projectDescription = useInput(currentInvoice?.description);
+
+  //item list
+  const [itemList, setItemList] = useState(currentInvoice?.items ?? []);
+
+  //when item list changes scroll to bottom
+  useEffect(() => {
+    invoiceFormRef.current.scrollTo(0, invoiceFormRef.current.scrollHeight);
+  }, [itemList]);
+
+  //submit form
   const handleInvoiceFormSubmit = (event) => {
     event.preventDefault();
   };
@@ -50,7 +83,7 @@ const InvoiceForm = () => {
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && 'New Invoice'}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
             <>
-              Edit <InvoiceId id={invoiceId} />
+              Edit <InvoiceId id={currentInvoice.id} />
             </>
           )}
         </h2>
@@ -60,23 +93,27 @@ const InvoiceForm = () => {
             <InputGroup
               label='Street Address'
               type='text'
-              value={currentInvoice?.senderAddress.street}
+              value={senderAddressStreet.inputValue}
+              onChange={senderAddressStreet.handleInputValueChange}
             />
             <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='City'
                 type='text'
-                value={currentInvoice?.senderAddress.city}
+                value={senderAddressCity.inputValue}
+                onChange={senderAddressCity.handleInputValueChange}
               />
               <InputGroup
                 label='Post Code'
                 type='text'
-                value={currentInvoice?.senderAddress.postCode}
+                value={senderAddressPostCode.inputValue}
+                onChange={senderAddressPostCode.handleInputValueChange}
               />
               <InputGroup
                 label='Country'
                 type='text'
-                value={currentInvoice?.senderAddress.country}
+                value={senderAddressCountry.inputValue}
+                onChange={senderAddressCountry.handleInputValueChange}
               />
             </div>
           </section>
@@ -85,55 +122,65 @@ const InvoiceForm = () => {
             <InputGroup
               label="Client's Name"
               type='text'
-              value={currentInvoice?.clientName}
+              value={clientName.inputValue}
+              onChange={clientName.handleInputValueChange}
             />
             <InputGroup
               label="Client's Email"
               type='email'
-              value={currentInvoice?.clientEmail}
+              value={clientEmail.inputValue}
+              onChange={clientEmail.handleInputValueChange}
             />
             <InputGroup
               label='Street Address'
               type='text'
-              value={currentInvoice?.clientAddress.street}
+              value={clientAddressStreet.inputValue}
+              onChange={clientAddressStreet.handleInputValueChange}
             />
             <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='City'
                 type='text'
-                value={currentInvoice?.clientAddress.city}
+                value={clientAddressCity.inputValue}
+                onChange={clientAddressCity.handleInputValueChange}
               />
               <InputGroup
                 label='Post Code'
                 type='text'
-                value={currentInvoice?.clientAddress.postCode}
+                value={clientAddressPostCode.inputValue}
+                onChange={clientAddressPostCode.handleInputValueChange}
               />
               <InputGroup
                 label='Country'
                 type='text'
-                value={currentInvoice?.clientAddress.country}
+                value={clientAddressCountry.inputValue}
+                onChange={clientAddressCountry.handleInputValueChange}
               />
             </div>
             <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='Invoice Date'
                 type='date'
-                value={currentInvoice?.createdAt}
+                value={invoiceDate.inputValue}
+                onChange={invoiceDate.handleInputValueChange}
+                disabled={currentInvoice !== undefined}
               />
               <InputGroup
                 label='Payment Terms'
                 type='select'
                 options={PAYMENT_TERMS_OPTIONS}
-                value={currentInvoice?.paymentTerms}
+                value={paymentTerms.inputValue}
+                onChange={paymentTerms.handleInputValueChange}
               />
             </div>
             <InputGroup
               label='Project Description'
               type='text'
-              value={currentInvoice?.description}
+              value={projectDescription.inputValue}
+              onChange={projectDescription.handleInputValueChange}
             />
           </section>
-          <InvoiceFormItemList currentInvoice={currentInvoice} />
+          <InvoiceFormItemList itemList={itemList} setItemList={setItemList} />
         </div>
         <section className={styles.invoiceFormSubmitSection}>
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && (

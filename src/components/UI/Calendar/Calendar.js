@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import formatDate from '../../../helpers/formatDate';
-import Icon from '../Icon/Icon';
+import Icon from '../Icon';
 import styles from './Calendar.module.css';
 
 const MIN_DAY_NUMBER = 1;
@@ -78,6 +78,7 @@ const Calendar = (props) => {
     <div className={`${className} ${styles.calendar}`}>
       <div className={styles.calendarHeader}>
         <button
+          type='button'
           onClick={handleArrowLeftClick}
           className={styles.calendarHeaderButton}
         >
@@ -89,6 +90,7 @@ const Calendar = (props) => {
           ).slice(2)}
         </p>
         <button
+          type='button'
           onClick={handleArrowRightClick}
           className={styles.calendarHeaderButton}
         >
@@ -97,12 +99,17 @@ const Calendar = (props) => {
       </div>
       <div className={styles.calendarDays}>
         {previousMonthDays.map((day, index) => (
-          <button className={styles.calendarDayHidden} key={index}>
+          <button
+            type='button'
+            className={styles.calendarDayHidden}
+            key={index}
+          >
             {day}
           </button>
         ))}
         {selectedMonthDays.map((day, index) => (
           <button
+            type='button'
             onClick={onCalendarDayClick.bind(
               null,
               new Date(selectedYear, selectedMonth, day)
@@ -114,7 +121,11 @@ const Calendar = (props) => {
           </button>
         ))}
         {nextMonthDays.map((day, index) => (
-          <button className={styles.calendarDayHidden} key={index}>
+          <button
+            type='button'
+            className={styles.calendarDayHidden}
+            key={index}
+          >
             {day}
           </button>
         ))}

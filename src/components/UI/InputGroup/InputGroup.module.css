@@ -3,6 +3,10 @@
   display: block;
 }
 
+.inputGroup.inputGroupDisabled {
+  opacity: 0.5;
+}
+
 .inputGroup label {
   margin-bottom: 1rem;
 }

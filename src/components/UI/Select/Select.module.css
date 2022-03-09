@@ -1,5 +1,5 @@
 .selectContainer {
-  padding: 0;
+  padding: 0 !important;
   position: relative;
 }
 
@@ -9,6 +9,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.4rem 1.6rem;
+}
+
+.select input {
+  cursor: inherit;
 }
 
 .select svg {
