@@ -1,35 +1,24 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import InvoiceActions from '../components/Invoices/InvoiceActions/InvoiceActions';
 import InvoiceDetails from '../components/Invoices/InvoiceDetails/InvoiceDetails';
 import Button from '../components/UI/Button/Button';
 import { useSelector } from 'react-redux';
-
 import Icon from '../components/UI/Icon';
-import Modal from '../components/UI/Modal/Modal';
-import InvoiceForm from '../components/InvoiceFormWindow/InvoiceForm/InvoiceForm';
+import { getInvoiceById } from '../store/invoicesSlice';
 
-const InvoicePage = () => {
+const InvoiceDetailsPage = () => {
   const isLoadingInvoices = useSelector(
-    (state) => state.sideForm.isLoadingInvoices
+    (state) => state.invoices.isLoadingInvoices
   );
 
   const { invoiceId } = useParams();
 
   const currentInvoice = useSelector((state) =>
-    state.invoices.invoicesList.find((invoice) => invoice.id === invoiceId)
-  );
-
-  const isEditInvoiceFormVisible = useSelector(
-    (state) => state.sideForm.isEditInvoiceFormVisible
+    getInvoiceById(state, invoiceId)
   );
 
   return (
     <>
-      {isEditInvoiceFormVisible && (
-        <Modal>
-          <InvoiceForm currentInvoice={currentInvoice} />
-        </Modal>
-      )}
       {isLoadingInvoices && <p>Loading...</p>}
       {!isLoadingInvoices && currentInvoice && (
         <>
@@ -40,8 +29,9 @@ const InvoicePage = () => {
           <InvoiceDetails currentInvoice={currentInvoice} />
         </>
       )}
+      <Outlet />
     </>
   );
 };
 
-export default InvoicePage;
+export default InvoiceDetailsPage;

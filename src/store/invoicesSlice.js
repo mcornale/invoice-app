@@ -34,3 +34,6 @@ export const fetchInvoices = () => (dispatch) => {
     dispatch(setInvoices({ newInvoicesList: invoices }));
   });
 };
+
+export const getInvoiceById = (state, invoiceId) =>
+  state.invoices.invoicesList.find((invoice) => invoice.id === invoiceId);

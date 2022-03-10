@@ -2,33 +2,26 @@ import { useSelector } from 'react-redux';
 import Header from '../components/Layout/Header/Header';
 import InvoicesList from '../components/Invoices/InvoiceList/InvoiceList';
 import NoInvoicesFound from '../components/Invoices/NoInvoicesFound/NoInvoicesFound';
-import InvoiceForm from '../components/InvoiceFormWindow/InvoiceForm/InvoiceForm';
-import Modal from '../components/UI/Modal/Modal';
+import { Outlet } from 'react-router-dom';
 
-const HomePage = () => {
+const InvoicesPage = () => {
   const invoicesCount = useSelector(
     (state) => state.invoices.invoicesList.length
   );
-  const isLoadingInvoices = useSelector(
-    (state) => state.invoices.isLoadingData
-  );
 
-  const isNewInvoiceFormVisible = useSelector(
-    (state) => state.sideForm.isNewInvoiceFormVisible
+  const isLoadingInvoices = useSelector(
+    (state) => state.invoices.isLoadingInvoices
   );
 
   return (
     <>
-      {isNewInvoiceFormVisible && (
-        <Modal>
-          <InvoiceForm />
-        </Modal>
-      )}
       <Header />
+      {isLoadingInvoices && <p>Loading...</p>}
       {!isLoadingInvoices &&
         (invoicesCount > 0 ? <InvoicesList /> : <NoInvoicesFound />)}
+      <Outlet />
     </>
   );
 };
 
-export default HomePage;
+export default InvoicesPage;

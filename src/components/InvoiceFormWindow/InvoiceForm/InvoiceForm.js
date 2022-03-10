@@ -8,9 +8,16 @@ import InvoiceFormItemList from '../InvoiceFormItemList/InvoiceFormItemList';
 import useScrollPosition from '../../../hooks/useScrollPosition';
 import { PAYMENT_TERMS_OPTIONS } from '../../../constants/payment-terms-options';
 import useInput from '../../../hooks/useInput';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getInvoiceById } from '../../../store/invoicesSlice';
 
-const InvoiceForm = (props) => {
-  const { currentInvoice } = props;
+const InvoiceForm = () => {
+  const { invoiceId } = useParams();
+
+  const currentInvoice = useSelector((state) =>
+    getInvoiceById(state, invoiceId)
+  );
 
   //check scrolling position and change invoice form style according to that
   const invoiceFormRef = useRef();
@@ -77,7 +84,7 @@ const InvoiceForm = (props) => {
     setIsNewItemAdded(true);
   };
 
-  //when item list changes scroll to bottom
+  //when new item list is added scroll form to bottom
   useEffect(() => {
     if (isNewItemAdded) {
       invoiceFormRef.current.scrollTo(0, invoiceFormRef.current.scrollHeight);
