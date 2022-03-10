@@ -6,12 +6,12 @@ const invoicesSlice = createSlice({
   name: 'invoices',
   initialState: {
     isLoadingInvoices: false,
-    invoicesList: [],
+    invoiceList: null,
   },
   reducers: {
     setInvoices: (state, action) => {
-      const { newInvoicesList } = action.payload;
-      state.invoicesList = newInvoicesList;
+      const { newInvoiceList } = action.payload;
+      state.invoiceList = newInvoiceList;
       state.isLoadingInvoices = false;
     },
     setLoading: (state) => {
@@ -31,9 +31,9 @@ export const fetchInvoices = () => (dispatch) => {
     querySnapshot.docs.forEach((doc) => {
       invoices.push({ id: doc.id, ...doc.data() });
     });
-    dispatch(setInvoices({ newInvoicesList: invoices }));
+    dispatch(setInvoices({ newInvoiceList: invoices }));
   });
 };
 
 export const getInvoiceById = (state, invoiceId) =>
-  state.invoices.invoicesList.find((invoice) => invoice.id === invoiceId);
+  state.invoices.invoiceList?.find((invoice) => invoice.id === invoiceId);

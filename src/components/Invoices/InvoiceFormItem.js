@@ -1,3 +1,5 @@
+import { useCallback, useEffect } from 'react';
+import INPUT_TYPES from '../../constants/input-types';
 import useInput from '../../hooks/useInput';
 import Icon from '../UI/Icon';
 import InputGroup from '../UI/InputGroup/InputGroup';
@@ -5,10 +7,10 @@ import InputGroup from '../UI/InputGroup/InputGroup';
 const InvoiceFormItem = (props) => {
   const { item, setItemList, index } = props;
 
-  const itemName = useInput(item.name);
-  const itemQuantity = useInput(item.quantity);
-  const itemPrice = useInput(item.price);
-  const itemTotal = useInput(item.total);
+  const itemName = useInput(item.name, INPUT_TYPES.TEXT);
+  const itemQuantity = useInput(item.quantity, INPUT_TYPES.QUANTITY);
+  const itemPrice = useInput(item.price, INPUT_TYPES.PRICE);
+  const itemTotal = useInput(item.total, INPUT_TYPES.PRICE, true);
 
   const handleDeleteBtnClick = () => {
     setItemList((prevItemList) =>
@@ -27,48 +29,68 @@ const InvoiceFormItem = (props) => {
   };
 
   const handleItemQuantityInputChange = (newItemQuantity) => {
-    let newItemTotal = newItemQuantity * itemPrice.inputValue;
     setItemList((prevItemList) =>
       prevItemList.map((itemObj, itemIndex) =>
         itemIndex === index
           ? {
               ...itemObj,
               quantity: newItemQuantity,
-              total: newItemTotal,
             }
           : itemObj
       )
     );
 
     itemQuantity.handleInputValueChange(newItemQuantity);
-    itemTotal.handleInputValueChange(newItemTotal);
   };
 
   const handleItemPriceInputChange = (newItemPrice) => {
-    let newItemTotal = newItemPrice * itemQuantity.inputValue;
     setItemList((prevItemList) =>
       prevItemList.map((itemObj, itemIndex) =>
         itemIndex === index
           ? {
               ...itemObj,
               price: newItemPrice,
-              total: newItemTotal,
             }
           : itemObj
       )
     );
 
     itemPrice.handleInputValueChange(newItemPrice);
-    itemTotal.handleInputValueChange(newItemTotal);
   };
 
-  const handleItemTotalInputChange = (newItemTotal) => {
-    setItemList((prevItemList) =>
-      prevItemList.map((itemObj, itemIndex) =>
-        itemIndex === index ? { ...itemObj, total: newItemTotal } : itemObj
-      )
-    );
-  };
+  const handleItemTotalInputChange = useCallback(
+    (newItemTotal) => {
+      setItemList((prevItemList) =>
+        prevItemList.map((itemObj, itemIndex) =>
+          itemIndex === index
+            ? {
+                ...itemObj,
+                total: newItemTotal,
+              }
+            : itemObj
+        )
+      );
+
+      itemTotal.handleInputValueChange(newItemTotal);
+    },
+    [index, itemTotal, setItemList]
+  );
+
+  useEffect(() => {
+    let newItemTotal = itemQuantity.inputValue * itemPrice.inputValue;
+    if (
+      itemQuantity.isFormatted &&
+      itemPrice.isFormatted &&
+      newItemTotal !== item.total
+    )
+      handleItemTotalInputChange(newItemTotal);
+  }, [
+    itemQuantity,
+    itemPrice,
+    itemTotal,
+    item.total,
+    handleItemTotalInputChange,
+  ]);
 
   return (
     <>
@@ -97,7 +119,6 @@ const InvoiceFormItem = (props) => {
         label='Total'
         type='price'
         value={itemTotal.inputValue}
-        onChange={handleItemTotalInputChange}
         noLabel
         readOnly
       />

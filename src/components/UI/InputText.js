@@ -2,7 +2,7 @@ const InputText = (props) => {
   const { value, onChange, className, readOnly } = props;
 
   const handleInputTextChange = (event) => {
-    onChange.call(null, event.target.value);
+    if (onChange) onChange.call(null, event.target.value);
   };
 
   return (

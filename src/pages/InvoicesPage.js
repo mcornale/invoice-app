@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 const InvoicesPage = () => {
   const invoicesCount = useSelector(
-    (state) => state.invoices.invoicesList.length
+    (state) => state.invoices.invoiceList?.length
   );
 
   const isLoadingInvoices = useSelector(

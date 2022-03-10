@@ -12,7 +12,6 @@ const InvoiceDetailsPage = () => {
   );
 
   const { invoiceId } = useParams();
-
   const currentInvoice = useSelector((state) =>
     getInvoiceById(state, invoiceId)
   );

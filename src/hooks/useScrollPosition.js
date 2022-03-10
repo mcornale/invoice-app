@@ -17,7 +17,7 @@ const useScrollPosition = (elementRef) => {
     };
   }, [elementRef]);
 
-  return scrollPosition;
+  return Math.trunc(scrollPosition);
 };
 
 export default useScrollPosition;

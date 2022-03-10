@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const Header = () => {
   const invoicesCount = useSelector(
-    (state) => state.invoices.invoicesList.length
+    (state) => state.invoices.invoiceList?.length
   );
 
   return (

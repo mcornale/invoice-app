@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import formatDate from '../../../helpers/formatDate';
 import Calendar from '../Calendar/Calendar';
 import Icon from '../Icon';
 
@@ -28,7 +27,7 @@ const InputDate = (props) => {
         {...(!disabled && { onClick: handleInputDateClick })}
         className={inputDateClassName.join(' ')}
       >
-        <input type='text' value={formatDate(value)} readOnly />
+        <input type='text' value={value} readOnly />
         <Icon icon='calendar' />
       </button>
       {isCalendarOpen && (

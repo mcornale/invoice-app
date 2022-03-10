@@ -1,1 +1,3 @@
-export const PAYMENT_TERMS_OPTIONS = [1, 7, 14, 30];
+const PAYMENT_TERMS_OPTIONS = [1, 7, 14, 30];
+
+export default PAYMENT_TERMS_OPTIONS;

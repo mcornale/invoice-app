@@ -8,4 +8,5 @@ const formatDate = (date) => {
     month: 'short',
   })}`;
 };
+
 export default formatDate;

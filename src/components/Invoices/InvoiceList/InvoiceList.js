@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux';
 import InvoiceListItem from '../InvoiceListItem/InvoiceListItem';
 
-const InvoicesList = () => {
-  const invoicesList = useSelector((state) => state.invoices.invoicesList);
+const InvoiceList = () => {
+  const invoiceList = useSelector((state) => state.invoices.invoiceList);
 
   return (
     <ul>
-      {invoicesList.map((invoiceListItem) => (
+      {invoiceList.map((invoiceListItem) => (
         <InvoiceListItem key={invoiceListItem.id} {...invoiceListItem} />
       ))}
     </ul>
   );
 };
 
-export default InvoicesList;
+export default InvoiceList;

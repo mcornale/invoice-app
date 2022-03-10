@@ -3,21 +3,15 @@ import InvoiceId from '../InvoiceId/InvoiceId';
 import InputGroup from '../../UI/InputGroup/InputGroup';
 import Button from '../../UI/Button/Button';
 import { useEffect, useRef, useState } from 'react';
-import { INVOICE_FORM_MODES } from '../../../constants/invoice-form-modes';
+import INVOICE_FORM_MODES from '../../../constants/invoice-form-modes';
 import InvoiceFormItemList from '../InvoiceFormItemList/InvoiceFormItemList';
 import useScrollPosition from '../../../hooks/useScrollPosition';
-import { PAYMENT_TERMS_OPTIONS } from '../../../constants/payment-terms-options';
+import PAYMENT_TERMS_OPTIONS from '../../../constants/payment-terms-options';
 import useInput from '../../../hooks/useInput';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getInvoiceById } from '../../../store/invoicesSlice';
+import INPUT_TYPES from '../../../constants/input-types';
 
-const InvoiceForm = () => {
-  const { invoiceId } = useParams();
-
-  const currentInvoice = useSelector((state) =>
-    getInvoiceById(state, invoiceId)
-  );
+const InvoiceForm = (props) => {
+  const { currentInvoice } = props;
 
   //check scrolling position and change invoice form style according to that
   const invoiceFormRef = useRef();
@@ -50,31 +44,57 @@ const InvoiceForm = () => {
     : INVOICE_FORM_MODES.NEW_INVOICE;
 
   //inputs
-  const senderAddressStreet = useInput(currentInvoice?.senderAddress.street);
-  const senderAddressCity = useInput(currentInvoice?.senderAddress.city);
+  const senderAddressStreet = useInput(
+    currentInvoice?.senderAddress.street,
+    INPUT_TYPES.TEXT
+  );
+  const senderAddressCity = useInput(
+    currentInvoice?.senderAddress.city,
+    INPUT_TYPES.TEXT
+  );
   const senderAddressPostCode = useInput(
-    currentInvoice?.senderAddress.postCode
+    currentInvoice?.senderAddress.postCode,
+    INPUT_TYPES.TEXT
   );
-  const senderAddressCountry = useInput(currentInvoice?.senderAddress.country);
-  const clientName = useInput(currentInvoice?.clientName);
-  const clientEmail = useInput(currentInvoice?.clientEmail);
-  const clientAddressStreet = useInput(currentInvoice?.clientAddress.street);
-  const clientAddressCity = useInput(currentInvoice?.clientAddress.city);
+  const senderAddressCountry = useInput(
+    currentInvoice?.senderAddress.country,
+    INPUT_TYPES.TEXT
+  );
+  const clientName = useInput(currentInvoice?.clientName, INPUT_TYPES.TEXT);
+  const clientEmail = useInput(currentInvoice?.clientEmail, INPUT_TYPES.EMAIL);
+  const clientAddressStreet = useInput(
+    currentInvoice?.clientAddress.street,
+    INPUT_TYPES.TEXT
+  );
+  const clientAddressCity = useInput(
+    currentInvoice?.clientAddress.city,
+    INPUT_TYPES.TEXT
+  );
   const clientAddressPostCode = useInput(
-    currentInvoice?.clientAddress.postCode
+    currentInvoice?.clientAddress.postCode,
+    INPUT_TYPES.TEXT
   );
-  const clientAddressCountry = useInput(currentInvoice?.clientAddress.country);
+  const clientAddressCountry = useInput(
+    currentInvoice?.clientAddress.country,
+    INPUT_TYPES.TEXT
+  );
   const invoiceDate = useInput(
     activeMode === INVOICE_FORM_MODES.NEW_INVOICE
       ? new Date()
-      : currentInvoice?.createdAt
+      : currentInvoice?.createdAt,
+    INPUT_TYPES.DATE,
+    true
   );
   const paymentTerms = useInput(
     activeMode === INVOICE_FORM_MODES.NEW_INVOICE
       ? PAYMENT_TERMS_OPTIONS[PAYMENT_TERMS_OPTIONS.length - 1]
-      : currentInvoice?.paymentTerms
+      : currentInvoice?.paymentTerms,
+    INPUT_TYPES.SELECT
   );
-  const projectDescription = useInput(currentInvoice?.description);
+  const projectDescription = useInput(
+    currentInvoice?.description,
+    INPUT_TYPES.TEXT
+  );
 
   //item list
   const [itemList, setItemList] = useState(currentInvoice?.items ?? []);
@@ -117,26 +137,26 @@ const InvoiceForm = () => {
             <h4 className={styles.invoiceFormSectionTitle}>Bill From</h4>
             <InputGroup
               label='Street Address'
-              type='text'
+              type={senderAddressStreet.type}
               value={senderAddressStreet.inputValue}
               onChange={senderAddressStreet.handleInputValueChange}
             />
             <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='City'
-                type='text'
+                type={senderAddressCity.type}
                 value={senderAddressCity.inputValue}
                 onChange={senderAddressCity.handleInputValueChange}
               />
               <InputGroup
                 label='Post Code'
-                type='text'
+                type={senderAddressPostCode.type}
                 value={senderAddressPostCode.inputValue}
                 onChange={senderAddressPostCode.handleInputValueChange}
               />
               <InputGroup
                 label='Country'
-                type='text'
+                type={senderAddressCountry.type}
                 value={senderAddressCountry.inputValue}
                 onChange={senderAddressCountry.handleInputValueChange}
               />
@@ -146,38 +166,38 @@ const InvoiceForm = () => {
             <h4 className={styles.invoiceFormSectionTitle}>Bill To</h4>
             <InputGroup
               label="Client's Name"
-              type='text'
+              type={clientName.type}
               value={clientName.inputValue}
               onChange={clientName.handleInputValueChange}
             />
             <InputGroup
               label="Client's Email"
-              type='email'
+              type={clientEmail.type}
               value={clientEmail.inputValue}
               onChange={clientEmail.handleInputValueChange}
             />
             <InputGroup
               label='Street Address'
-              type='text'
+              type={clientAddressStreet.type}
               value={clientAddressStreet.inputValue}
               onChange={clientAddressStreet.handleInputValueChange}
             />
             <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='City'
-                type='text'
+                type={clientAddressCity.type}
                 value={clientAddressCity.inputValue}
                 onChange={clientAddressCity.handleInputValueChange}
               />
               <InputGroup
                 label='Post Code'
-                type='text'
+                type={clientAddressPostCode.type}
                 value={clientAddressPostCode.inputValue}
                 onChange={clientAddressPostCode.handleInputValueChange}
               />
               <InputGroup
                 label='Country'
-                type='text'
+                type={clientAddressCountry.type}
                 value={clientAddressCountry.inputValue}
                 onChange={clientAddressCountry.handleInputValueChange}
               />
@@ -185,14 +205,14 @@ const InvoiceForm = () => {
             <div className={styles.invoiceFormInputsRow}>
               <InputGroup
                 label='Invoice Date'
-                type='date'
+                type={invoiceDate.type}
                 value={invoiceDate.inputValue}
                 onChange={invoiceDate.handleInputValueChange}
                 disabled={currentInvoice !== undefined}
               />
               <InputGroup
                 label='Payment Terms'
-                type='select'
+                type={paymentTerms.type}
                 options={PAYMENT_TERMS_OPTIONS}
                 value={paymentTerms.inputValue}
                 onChange={paymentTerms.handleInputValueChange}
@@ -200,7 +220,7 @@ const InvoiceForm = () => {
             </div>
             <InputGroup
               label='Project Description'
-              type='text'
+              type={projectDescription.type}
               value={projectDescription.inputValue}
               onChange={projectDescription.handleInputValueChange}
             />

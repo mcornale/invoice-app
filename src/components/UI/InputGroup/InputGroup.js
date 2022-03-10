@@ -2,6 +2,7 @@ import InputText from '../InputText';
 import styles from './InputGroup.module.css';
 import InputDate from '../InputDate/InputDate';
 import Select from '../Select/Select';
+import INPUT_TYPES from '../../../constants/input-types';
 
 const InputGroup = (props) => {
   const { label, type, value, onChange, noLabel, readOnly, options, disabled } =
@@ -16,19 +17,18 @@ const InputGroup = (props) => {
   return (
     <div className={inputGroupClassName.join(' ')}>
       {!noLabel && <label>{label}</label>}
-      {(type === 'text' ||
-        type === 'email' ||
-        type === 'price' ||
-        type === 'quantity') && (
+      {(type === INPUT_TYPES.TEXT ||
+        type === INPUT_TYPES.EMAIL ||
+        type === INPUT_TYPES.PRICE ||
+        type === INPUT_TYPES.QUANTITY) && (
         <InputText
           className={inputFieldClassName.join(' ')}
-          type={type}
           value={value}
           readOnly={readOnly}
           onChange={onChange}
         />
       )}
-      {type === 'date' && (
+      {type === INPUT_TYPES.DATE && (
         <InputDate
           className={inputFieldClassName.join(' ')}
           value={value}
@@ -36,7 +36,7 @@ const InputGroup = (props) => {
           disabled={disabled}
         />
       )}
-      {type === 'select' && (
+      {type === INPUT_TYPES.SELECT && (
         <Select
           className={inputFieldClassName.join(' ')}
           value={value}
