@@ -1,4 +1,4 @@
-import InvoiceForm from '../components/InvoiceFormWindow/InvoiceForm/InvoiceForm';
+import InvoiceForm from '../components/Invoices/InvoiceForm/InvoiceForm';
 import Modal from '../components/UI/Modal/Modal';
 
 const InvoiceFormPage = () => {

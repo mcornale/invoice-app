@@ -1,5 +1,5 @@
 import styles from './InvoiceForm.module.css';
-import InvoiceId from '../../Invoices/InvoiceId/InvoiceId';
+import InvoiceId from '../InvoiceId/InvoiceId';
 import InputGroup from '../../UI/InputGroup/InputGroup';
 import Button from '../../UI/Button/Button';
 import { useEffect, useRef, useState } from 'react';
