@@ -13,19 +13,29 @@ const InvoiceForm = (props) => {
   const { currentInvoice } = props;
 
   //check scrolling position and change invoice form style according to that
-  const invoiceFormClassName = [styles.invoiceForm];
   const invoiceFormRef = useRef();
   const invoiceFormScrollPosition = useScrollPosition(invoiceFormRef);
+  const invoiceFormClassNameArr = [
+    styles.invoiceForm,
+    styles.invoiceFormWithBottomGradient,
+  ];
 
   if (invoiceFormRef.current && invoiceFormScrollPosition > 0)
-    invoiceFormClassName.push(styles.invoiceFormWithTopGradient);
+    invoiceFormClassNameArr.push(styles.invoiceFormWithTopGradient);
 
   if (
     invoiceFormRef.current &&
-    invoiceFormScrollPosition <
+    invoiceFormScrollPosition ===
       invoiceFormRef.current.scrollHeight - invoiceFormRef.current.clientHeight
-  )
-    invoiceFormClassName.push(styles.invoiceFormWithBottomGradient);
+  ) {
+    invoiceFormClassNameArr.splice(
+      invoiceFormClassNameArr.findIndex(
+        (invoiceFormClassName) =>
+          invoiceFormClassName === styles.invoiceFormWithBottomGradient
+      ),
+      1
+    );
+  }
 
   //check form mode
   const activeMode = currentInvoice
@@ -61,11 +71,19 @@ const InvoiceForm = (props) => {
 
   //item list
   const [itemList, setItemList] = useState(currentInvoice?.items ?? []);
+  const [isNewItemAdded, setIsNewItemAdded] = useState(false);
+
+  const handleNewItemAdded = () => {
+    setIsNewItemAdded(true);
+  };
 
   //when item list changes scroll to bottom
   useEffect(() => {
-    invoiceFormRef.current.scrollTo(0, invoiceFormRef.current.scrollHeight);
-  }, [itemList]);
+    if (isNewItemAdded) {
+      invoiceFormRef.current.scrollTo(0, invoiceFormRef.current.scrollHeight);
+      setIsNewItemAdded(false);
+    }
+  }, [isNewItemAdded]);
 
   //submit form
   const handleInvoiceFormSubmit = (event) => {
@@ -76,7 +94,7 @@ const InvoiceForm = (props) => {
     <div className={styles.invoiceFormContainer}>
       <form
         onSubmit={handleInvoiceFormSubmit}
-        className={invoiceFormClassName.join(' ')}
+        className={invoiceFormClassNameArr.join(' ')}
         ref={invoiceFormRef}
       >
         <h2 className={styles.invoiceFormTitle}>
@@ -180,7 +198,11 @@ const InvoiceForm = (props) => {
               onChange={projectDescription.handleInputValueChange}
             />
           </section>
-          <InvoiceFormItemList itemList={itemList} setItemList={setItemList} />
+          <InvoiceFormItemList
+            itemList={itemList}
+            setItemList={setItemList}
+            onAddNewItem={handleNewItemAdded}
+          />
         </div>
         <section className={styles.invoiceFormSubmitSection}>
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && (

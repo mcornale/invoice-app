@@ -4,7 +4,7 @@ import InvoiceFormItem from '../InvoiceFormItem';
 import styles from './InvoiceFormItemList.module.css';
 
 const InvoiceFormItemList = (props) => {
-  const { itemList, setItemList } = props;
+  const { itemList, setItemList, onAddNewItem } = props;
 
   const handleAddNewItemBtnClick = () => {
     setItemList((prevItemList) => [
@@ -16,6 +16,8 @@ const InvoiceFormItemList = (props) => {
         total: undefined,
       },
     ]);
+
+    onAddNewItem();
   };
 
   return (
