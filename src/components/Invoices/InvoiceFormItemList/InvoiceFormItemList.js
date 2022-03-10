@@ -10,10 +10,10 @@ const InvoiceFormItemList = (props) => {
     setItemList((prevItemList) => [
       ...prevItemList,
       {
-        name: undefined,
-        quantity: undefined,
-        price: undefined,
-        total: undefined,
+        name: '',
+        quantity: 0,
+        price: 0,
+        total: 0,
       },
     ]);
 
