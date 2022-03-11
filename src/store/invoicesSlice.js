@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const invoicesSlice = createSlice({
@@ -27,12 +27,16 @@ export default invoicesSlice;
 export const fetchInvoices = () => (dispatch) => {
   dispatch(setLoading());
   onSnapshot(collection(db, 'invoices'), (querySnapshot) => {
-    const invoices = [];
+    const newInvoiceList = [];
     querySnapshot.docs.forEach((doc) => {
-      invoices.push({ id: doc.id, ...doc.data() });
+      newInvoiceList.push({ id: doc.id, ...doc.data() });
     });
-    dispatch(setInvoices({ newInvoiceList: invoices }));
+    dispatch(setInvoices({ newInvoiceList: newInvoiceList }));
   });
+};
+
+export const createOrUpdateInvoice = (invoice) => async () => {
+  await setDoc(doc(db, 'invoices', invoice.id), invoice);
 };
 
 export const getInvoiceById = (state, invoiceId) =>

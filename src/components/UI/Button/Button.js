@@ -27,6 +27,7 @@ const Button = (props) => {
 
   return (
     <button
+      type='button'
       style={style}
       onClick={onClick}
       className={buttonClassName.join(' ')}

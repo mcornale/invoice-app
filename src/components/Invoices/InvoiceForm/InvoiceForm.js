@@ -9,9 +9,15 @@ import useScrollPosition from '../../../hooks/useScrollPosition';
 import PAYMENT_TERMS_OPTIONS from '../../../constants/payment-terms-options';
 import useInput from '../../../hooks/useInput';
 import INPUT_TYPES from '../../../constants/input-types';
+import formatDateForFirebase from '../../../helpers/formatDateForFirebase';
+import { useDispatch } from 'react-redux';
+import { createOrUpdateInvoice } from '../../../store/invoicesSlice';
+import { useNavigate } from 'react-router-dom';
 
 const InvoiceForm = (props) => {
   const { currentInvoice } = props;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //check scrolling position and change invoice form style according to that
   const invoiceFormRef = useRef();
@@ -112,18 +118,52 @@ const InvoiceForm = (props) => {
     }
   }, [isNewItemAdded]);
 
+  //close form
+  const handleInvoiceFormClose = () => {
+    navigate(-1);
+  };
+
   //submit form
-  const handleInvoiceFormSubmit = (event) => {
-    event.preventDefault();
+  const handleInvoiceFormSubmit = () => {
+    const invoice = {
+      id: currentInvoice.id,
+      senderAddress: {
+        street: senderAddressStreet.inputValue,
+        postCode: senderAddressPostCode.inputValue,
+        city: senderAddressCity.inputValue,
+        country: senderAddressCountry.inputValue,
+      },
+      clientAddress: {
+        street: clientAddressStreet.inputValue,
+        postCode: clientAddressPostCode.inputValue,
+        city: clientAddressCity.inputValue,
+        country: clientAddressCountry.inputValue,
+      },
+      clientName: clientName.inputValue,
+      clientEmail: clientEmail.inputValue,
+      createdAt: formatDateForFirebase(new Date(invoiceDate.inputValue)),
+      paymentDue: formatDateForFirebase(
+        new Date(invoiceDate.inputValue).setDate(
+          new Date(invoiceDate.inputValue).getDate() +
+            Number(paymentTerms.inputValue)
+        )
+      ),
+      paymentTerms: paymentTerms.inputValue,
+      items: itemList,
+      total: itemList.reduce(
+        (accTotal, currItem) => accTotal + currItem.total,
+        0
+      ),
+      status: currentInvoice.status,
+    };
+
+    dispatch(createOrUpdateInvoice(invoice));
+    handleInvoiceFormClose();
   };
 
   return (
     <div className={styles.invoiceFormContainer}>
-      <form
-        onSubmit={handleInvoiceFormSubmit}
-        className={invoiceFormClassNameArr.join(' ')}
-        ref={invoiceFormRef}
-      >
+      <form className={invoiceFormClassNameArr.join(' ')} ref={invoiceFormRef}>
         <h2 className={styles.invoiceFormTitle}>
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && 'New Invoice'}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
@@ -245,8 +285,16 @@ const InvoiceForm = (props) => {
           )}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
             <>
-              <Button text='Cancel' buttonStyle='2' />
-              <Button text='Save Changes' buttonStyle='1' />
+              <Button
+                onClick={handleInvoiceFormClose}
+                text='Cancel'
+                buttonStyle='2'
+              />
+              <Button
+                onClick={handleInvoiceFormSubmit}
+                text='Save Changes'
+                buttonStyle='1'
+              />
             </>
           )}
         </section>

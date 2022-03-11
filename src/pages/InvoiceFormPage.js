@@ -19,9 +19,13 @@ const InvoiceFormPage = () => {
   }, [invoices, navigate]);
 
   return (
-    <Modal>
-      <InvoiceForm currentInvoice={currentInvoice} />
-    </Modal>
+    <>
+      {invoices && (
+        <Modal>
+          <InvoiceForm currentInvoice={currentInvoice} />
+        </Modal>
+      )}
+    </>
   );
 };
 
