@@ -13,6 +13,7 @@ import formatDateForFirebase from '../../../helpers/formatDateForFirebase';
 import { useDispatch } from 'react-redux';
 import { createOrUpdateInvoice } from '../../../store/invoicesSlice';
 import { useNavigate } from 'react-router-dom';
+import generateRandomId from '../../../helpers/generateRandomId';
 
 const InvoiceForm = (props) => {
   const { currentInvoice } = props;
@@ -51,37 +52,43 @@ const InvoiceForm = (props) => {
 
   //inputs
   const senderAddressStreet = useInput(
-    currentInvoice?.senderAddress.street,
+    currentInvoice?.senderAddress.street ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressCity = useInput(
-    currentInvoice?.senderAddress.city,
+    currentInvoice?.senderAddress.city ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressPostCode = useInput(
-    currentInvoice?.senderAddress.postCode,
+    currentInvoice?.senderAddress.postCode ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressCountry = useInput(
-    currentInvoice?.senderAddress.country,
+    currentInvoice?.senderAddress.country ?? '',
     INPUT_TYPES.TEXT
   );
-  const clientName = useInput(currentInvoice?.clientName, INPUT_TYPES.TEXT);
-  const clientEmail = useInput(currentInvoice?.clientEmail, INPUT_TYPES.EMAIL);
+  const clientName = useInput(
+    currentInvoice?.clientName ?? '',
+    INPUT_TYPES.TEXT
+  );
+  const clientEmail = useInput(
+    currentInvoice?.clientEmail ?? '',
+    INPUT_TYPES.EMAIL
+  );
   const clientAddressStreet = useInput(
-    currentInvoice?.clientAddress.street,
+    currentInvoice?.clientAddress.street ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressCity = useInput(
-    currentInvoice?.clientAddress.city,
+    currentInvoice?.clientAddress.city ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressPostCode = useInput(
-    currentInvoice?.clientAddress.postCode,
+    currentInvoice?.clientAddress.postCode ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressCountry = useInput(
-    currentInvoice?.clientAddress.country,
+    currentInvoice?.clientAddress.country ?? '',
     INPUT_TYPES.TEXT
   );
   const invoiceDate = useInput(
@@ -98,7 +105,7 @@ const InvoiceForm = (props) => {
     INPUT_TYPES.SELECT
   );
   const projectDescription = useInput(
-    currentInvoice?.description,
+    currentInvoice?.description ?? '',
     INPUT_TYPES.TEXT
   );
 
@@ -124,23 +131,23 @@ const InvoiceForm = (props) => {
   };
 
   //submit form
-  const handleInvoiceFormSubmit = () => {
+  const handleInvoiceFormSubmit = (status) => {
     const invoice = {
-      id: currentInvoice.id,
+      id: currentInvoice?.id ?? generateRandomId(),
       senderAddress: {
-        street: senderAddressStreet.inputValue,
-        postCode: senderAddressPostCode.inputValue,
-        city: senderAddressCity.inputValue,
-        country: senderAddressCountry.inputValue,
+        street: senderAddressStreet?.inputValue ?? '',
+        postCode: senderAddressPostCode?.inputValue ?? '',
+        city: senderAddressCity?.inputValue ?? '',
+        country: senderAddressCountry?.inputValue ?? '',
       },
       clientAddress: {
-        street: clientAddressStreet.inputValue,
-        postCode: clientAddressPostCode.inputValue,
-        city: clientAddressCity.inputValue,
-        country: clientAddressCountry.inputValue,
+        street: clientAddressStreet?.inputValue ?? '',
+        postCode: clientAddressPostCode?.inputValue ?? '',
+        city: clientAddressCity?.inputValue ?? '',
+        country: clientAddressCountry?.inputValue ?? '',
       },
-      clientName: clientName.inputValue,
-      clientEmail: clientEmail.inputValue,
+      clientName: clientName?.inputValue ?? '',
+      clientEmail: clientEmail?.inputValue ?? '',
       createdAt: formatDateForFirebase(new Date(invoiceDate.inputValue)),
       paymentDue: formatDateForFirebase(
         new Date(invoiceDate.inputValue).setDate(
@@ -149,12 +156,13 @@ const InvoiceForm = (props) => {
         )
       ),
       paymentTerms: paymentTerms.inputValue,
-      items: itemList,
+      items: itemList ?? {},
       total: itemList.reduce(
         (accTotal, currItem) => accTotal + currItem.total,
         0
       ),
-      status: currentInvoice.status,
+      description: projectDescription?.inputValue ?? '',
+      status,
     };
 
     dispatch(createOrUpdateInvoice(invoice));
@@ -275,12 +283,21 @@ const InvoiceForm = (props) => {
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && (
             <>
               <Button
+                onClick={handleInvoiceFormClose}
                 style={{ marginRight: 'auto' }}
                 text='Discard'
                 buttonStyle='2'
               />
-              <Button text='Save as Draft' buttonStyle='3' />
-              <Button text='Save & Send' buttonStyle='1' />
+              <Button
+                onClick={handleInvoiceFormSubmit.bind(null, 'draft')}
+                text='Save as Draft'
+                buttonStyle='3'
+              />
+              <Button
+                onClick={handleInvoiceFormSubmit.bind(null, 'pending')}
+                text='Save & Send'
+                buttonStyle='1'
+              />
             </>
           )}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
@@ -291,7 +308,10 @@ const InvoiceForm = (props) => {
                 buttonStyle='2'
               />
               <Button
-                onClick={handleInvoiceFormSubmit}
+                onClick={handleInvoiceFormSubmit.bind(
+                  null,
+                  currentInvoice.status
+                )}
                 text='Save Changes'
                 buttonStyle='1'
               />

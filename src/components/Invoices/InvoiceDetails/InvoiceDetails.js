@@ -10,7 +10,7 @@ const InvoiceDetails = (props) => {
   return (
     <Container>
       <section className={styles.invoiceDetails}>
-        <div>
+        <div className={styles.invoiceDetailsRow}>
           <div className={styles.invoiceIdAndDescription}>
             <h3>
               <InvoiceId id={currentInvoice.id} />
@@ -24,7 +24,7 @@ const InvoiceDetails = (props) => {
             <p>{currentInvoice.senderAddress.country}</p>
           </div>
         </div>
-        <div>
+        <div className={styles.invoiceDetailsRow}>
           <div className={styles.invoiceDates}>
             <div className={styles.invoiceCreationDate}>
               <p>Invoice Date</p>

@@ -6,9 +6,17 @@
   color: var(--color-light-text-and-icons);
 }
 
-.invoiceDetails > div {
+.invoiceDetailsRow {
   display: flex;
   justify-content: space-between;
+}
+
+.invoiceDetailsRow:first-child {
+  min-height: 7.8rem;
+}
+
+.invoiceDetailsRow:nth-child(2) {
+  min-height: 13.5rem;
 }
 
 .invoiceIdAndDescription h3,
