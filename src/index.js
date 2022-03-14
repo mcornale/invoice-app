@@ -7,6 +7,7 @@ import store from './store/store';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import InvoicesPage from './pages/InvoicesPage';
 import InvoiceDetailsPage from './pages/InvoiceDetailsPage';
+import DeleteInvoicePage from './pages/DeleteInvoicePage';
 import InvoiceFormPage from './pages/InvoiceFormPage';
 
 ReactDOM.render(
@@ -21,6 +22,7 @@ ReactDOM.render(
             </Route>
             <Route path='invoices/:invoiceId' element={<InvoiceDetailsPage />}>
               <Route path='edit' element={<InvoiceFormPage />} />
+              <Route path='delete' element={<DeleteInvoicePage />} />
             </Route>
           </Route>
         </Routes>

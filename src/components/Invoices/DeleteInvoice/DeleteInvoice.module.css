@@ -1,0 +1,27 @@
+.deleteInvoice {
+  background-color: var(--color-light-elements);
+  padding: 5rem;
+  border-radius: var(--border-radius-default);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  max-width: 50rem;
+}
+
+.deleteInvoiceTitle {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.deleteInvoiceMessage {
+  line-height: 2.2rem;
+}
+
+.deleteInvoiceActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}

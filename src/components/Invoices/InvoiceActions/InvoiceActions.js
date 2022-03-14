@@ -18,7 +18,9 @@ const InvoiceActions = (props) => {
           <Link to='edit'>
             <Button buttonStyle='2' text='Edit' />
           </Link>
-          <Button buttonStyle='4' text='Delete' />
+          <Link to='delete'>
+            <Button buttonStyle='4' text='Delete' />
+          </Link>
           <Button buttonStyle='1' text='Mark as Paid' />
         </div>
       </section>
