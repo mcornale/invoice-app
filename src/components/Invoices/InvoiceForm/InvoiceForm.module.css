@@ -2,7 +2,7 @@
   max-width: 72rem;
   height: 100vh;
   background-color: var(--color-light-elements);
-  padding: 5rem 3rem 5rem var(--sidebar-width);
+  padding: 5rem 3rem 10rem var(--sidebar-width);
   border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
   position: fixed;
   top: 0;
@@ -13,8 +13,9 @@
 
 .invoiceForm {
   max-height: 100%;
-  padding: 0 2rem 8rem 5rem;
+  padding: 0 2rem 2rem 5rem;
   overflow: auto;
+  scroll-behavior: smooth;
 }
 
 .invoiceForm::before,
@@ -63,7 +64,7 @@
 .invoiceForm::-webkit-scrollbar-track {
   background: transparent;
   margin-top: 8rem;
-  margin-bottom: 8rem;
+  margin-bottom: 2rem;
 }
 
 /* Handle */
