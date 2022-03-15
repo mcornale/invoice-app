@@ -4,7 +4,7 @@
   gap: 2rem;
 }
 .invoiceFormItemListTitle {
-  color: #888eb0;
+  color: var(--color-light-text-and-icons);
 }
 
 .invoiceFormItemListGrid {

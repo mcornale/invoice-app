@@ -3,6 +3,7 @@
 :root {
   --color-main: #7c5dfa;
   --color-main-lighter: #9277ff;
+
   --font-size-body-1: 1.2rem;
   --line-height-body-1: 1.5rem;
   --letter-spacing-body-1: -0.025rem;
@@ -35,30 +36,44 @@ body {
   line-height: var(--line-height-body-1);
   letter-spacing: var(--letter-spacing-body-1);
   font-weight: 500;
-  color: var(--color-very-light-text-and-icons);
+  color: var(--color-light-text-and-icons);
 }
 
 body[data-theme='light'] {
-  --color-background: #f8f8fb;
-  --color-light-elements: #ffffff;
-  --color-dark-elements: #373b53;
+  --background-color-root: #f8f8fb;
+  --background-color-sidebar: #373b53;
+  --background-color-container: #ffffff;
+  --background-color-invoice-item-list: #f9fafe;
+  --background-color-invoice-amount: #373b53;
+  --background-color-invoice-form-container: #ffffff;
+  --background-color-input: #ffffff;
+  --background-color-custom-scrollbar: #dfe3fa;
+
+  --border-color-input: #dfe3fa;
+
   --color-dark-text-and-icons: #0c0e16;
-  --color-light-text-and-icons: #7e88c3;
-  --color-very-light-text-and-icons: #888eb0;
+  --color-light-text-and-icons: #858bb2;
 }
 
 body[data-theme='dark'] {
-  --color-background: #141625;
-  --color-light-elements: #1e2139;
-  --color-dark-elements: #1e2139;
+  --background-color-root: #141625;
+  --background-color-sidebar: #1e2139;
+  --background-color-container: #1e2139;
+  --background-color-invoice-item-list: #252945;
+  --background-color-invoice-amount: #0c0e16;
+  --background-color-invoice-form-container: #141625;
+  --background-color-input: #1e2139;
+  --background-color-custom-scrollbar: #252945;
+
+  --border-color-input: #252945;
+
   --color-dark-text-and-icons: #ffffff;
-  --color-light-text-and-icons: #ffffff;
-  --color-very-light-text-and-icons: #ffffff;
+  --color-light-text-and-icons: #dfe3fa;
 }
 
 #root {
   min-height: 100vh;
-  background-color: var(--color-background);
+  background-color: var(--background-color-root);
   display: flex;
 }
 

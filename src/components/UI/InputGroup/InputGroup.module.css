@@ -13,22 +13,18 @@
 
 .inputField {
   border-radius: var(--border-radius-x-small);
-  border: 0.1rem solid #dfe3fa;
+  border: 0.1rem solid var(--border-color-input);
   padding: 1.4rem 1.6rem;
   font-weight: 700;
   color: var(--color-dark-text-and-icons);
-  background-color: var(--color-light-elements);
-}
-
-body[data-theme='dark'] .inputField {
-  border-color: #252945;
+  background-color: var(--background-color-input);
 }
 
 .inputField.inputFieldReadOnly {
   padding-left: 0;
   padding-right: 0;
   border: none;
-  color: #888eb0;
+  color: var(--color-light-text-and-icons);
   font-weight: 700;
   background-color: transparent;
 }

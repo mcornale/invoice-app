@@ -1,6 +1,4 @@
 .deleteInvoice {
-  background-color: var(--color-light-elements);
-  padding: 5rem;
   border-radius: var(--border-radius-default);
   position: fixed;
   top: 50%;
@@ -8,6 +6,10 @@
   z-index: 1;
   transform: translate(-50%, -50%);
   max-width: 50rem;
+}
+
+.deleteInvoice > * {
+  padding: 5rem;
 }
 
 .deleteInvoiceTitle {

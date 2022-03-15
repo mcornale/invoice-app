@@ -30,7 +30,7 @@
   left: -0.1rem;
   margin-top: 1rem;
   width: calc(100% + 0.2rem);
-  background-color: var(--color-light-elements);
+  background-color: var(--background-color-input);
   box-shadow: 0rem 1rem 2rem rgba(72, 84, 159, 0.25);
   padding: 0;
   border-radius: var(--border-radius-default);
@@ -44,14 +44,11 @@ body[data-theme='dark'] .options {
 
 .option {
   padding: 1.5rem 2rem;
-  text-align: left;
+  display: flex;
+  justify-content: flex-start;
   color: var(--color-dark-text-and-icons);
 }
 
 .option:not(:last-child) {
-  border-bottom: 0.1rem solid #dfe3fa;
-}
-
-body[data-theme='dark'] .option {
-  border-color: var(--color-background);
+  border-bottom: 0.1rem solid var(--border-color-input);
 }

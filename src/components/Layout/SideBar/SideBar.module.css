@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: var(--color-dark-elements);
+  background-color: var(--background-color-sidebar);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

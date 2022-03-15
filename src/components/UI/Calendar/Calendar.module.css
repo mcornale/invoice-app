@@ -1,5 +1,5 @@
 .calendar {
-  background-color: var(--color-light-elements);
+  background-color: var(--background-color-input);
   box-shadow: 0rem 1rem 2rem rgba(72, 84, 159, 0.25);
   padding: 0;
   border-radius: var(--border-radius-default);

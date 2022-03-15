@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--color-light-elements);
+  background-color: var(--background-color-container);
   border-radius: var(--border-radius-default);
   box-shadow: var(--box-shadow-default);
   width: 100%;

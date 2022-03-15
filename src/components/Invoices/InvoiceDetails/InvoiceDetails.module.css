@@ -54,12 +54,8 @@
 
 .invoiceItemsTable {
   width: 100%;
-  background-color: #f9fafe;
+  background-color: var(--background-color-invoice-item-list);
   padding: 3rem 4rem;
-}
-
-body[data-theme='dark'] .invoiceItemsTable {
-  background-color: #252945;
 }
 
 .invoiceItemsTable thead th,
@@ -104,12 +100,8 @@ body[data-theme='dark'] .invoiceItemsTable {
   justify-content: space-between;
   align-items: center;
   color: #ffffff;
-  background-color: var(--color-dark-elements);
+  background-color: var(--background-color-invoice-amount);
   padding: 3rem 4rem;
-}
-
-body[data-theme='dark'] .invoiceItemsTotal {
-  background-color: #0c0e16;
 }
 
 .invoiceItemsTotalValue {

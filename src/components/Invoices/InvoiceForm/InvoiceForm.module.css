@@ -1,7 +1,7 @@
 .invoiceFormContainer {
   max-width: 72rem;
   height: 100vh;
-  background-color: var(--color-light-elements);
+  background-color: var(--background-color-invoice-form-container);
   padding: 5rem 3rem 10rem var(--sidebar-width);
   border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
   position: fixed;
@@ -9,10 +9,6 @@
   left: 0;
   z-index: 1;
   overflow: hidden;
-}
-
-body[data-theme='dark'] .invoiceFormContainer {
-  background-color: var(--color-background);
 }
 
 .invoiceForm {
@@ -36,19 +32,11 @@ body[data-theme='dark'] .invoiceFormContainer {
   height: 10rem;
   background-image: linear-gradient(
     to bottom,
-    var(--color-light-elements) 30%,
+    var(--background-color-invoice-form-container) 30%,
     transparent
   );
   top: 6rem;
   transition: all 0.1s ease-in-out;
-}
-
-body[data-theme='dark'] .invoiceForm::before {
-  background-image: linear-gradient(
-    to bottom,
-    var(--color-background) 30%,
-    transparent
-  );
 }
 
 .invoiceForm::after {
@@ -85,12 +73,8 @@ body[data-theme='dark'] .invoiceForm::after {
 
 /* Handle */
 .invoiceForm::-webkit-scrollbar-thumb {
-  background: #dfe3fa;
+  background: var(--background-color-custom-scrollbar);
   border-radius: 0.4rem;
-}
-
-body[data-theme='dark'] .invoiceForm::-webkit-scrollbar-thumb {
-  background: #252945;
 }
 
 .invoiceFormTitle {
@@ -98,11 +82,7 @@ body[data-theme='dark'] .invoiceForm::-webkit-scrollbar-thumb {
   top: 0;
   margin-bottom: 5rem;
   z-index: 2;
-  background-color: var(--color-light-elements);
-}
-
-body[data-theme='dark'] .invoiceFormTitle {
-  background-color: var(--color-background);
+  background-color: var(--background-color-invoice-form-container);
 }
 
 .invoiceFormSection {
@@ -136,12 +116,8 @@ body[data-theme='dark'] .invoiceFormTitle {
   position: absolute;
   left: 0;
   bottom: 0;
-  background-color: var(--color-light-elements);
+  background-color: var(--background-color-invoice-form-container);
   padding: 3rem 5rem 3rem calc(var(--sidebar-width) + 5rem);
   border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
   z-index: 2;
-}
-
-body[data-theme='dark'] .invoiceFormSubmitSection {
-  background-color: var(--color-background);
 }

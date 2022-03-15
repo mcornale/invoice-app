@@ -51,7 +51,7 @@ body[data-theme='dark'] .button2 {
 
 .button3 {
   background-color: #373b53;
-  color: #888eb0;
+  color: var(--color-light-text-and-icons);
 }
 
 body[data-theme='dark'] .button3 {
