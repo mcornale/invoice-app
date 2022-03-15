@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   gap: 1.4rem;
+  color: var(--color-dark-text-and-icons);
 }
 
 .button1,
