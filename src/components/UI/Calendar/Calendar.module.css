@@ -8,6 +8,10 @@
   align-items: center;
 }
 
+body[data-theme='dark'] .calendar {
+  box-shadow: none;
+}
+
 .calendarHeader {
   display: flex;
   justify-content: space-between;
@@ -30,6 +34,7 @@
 .calendarDay,
 .calendarDayHidden {
   height: 3rem;
+  color: var(--color-dark-text-and-icons);
 }
 
 .calendarDayHidden {

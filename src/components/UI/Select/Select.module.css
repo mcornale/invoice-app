@@ -13,6 +13,7 @@
 
 .select input {
   cursor: inherit;
+  color: var(--color-dark-text-and-icons);
 }
 
 .select svg {
@@ -36,11 +37,20 @@
   flex-direction: column;
 }
 
+body[data-theme='dark'] .options {
+  box-shadow: none;
+}
+
 .option {
   padding: 1.5rem 2rem;
   text-align: left;
+  color: var(--color-dark-text-and-icons);
 }
 
 .option:not(:last-child) {
   border-bottom: 0.1rem solid #dfe3fa;
+}
+
+body[data-theme='dark'] .option {
+  border-color: var(--color-background);
 }

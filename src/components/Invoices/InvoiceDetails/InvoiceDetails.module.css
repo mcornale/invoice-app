@@ -58,6 +58,10 @@
   padding: 3rem 4rem;
 }
 
+body[data-theme='dark'] .invoiceItemsTable {
+  background-color: #252945;
+}
+
 .invoiceItemsTable thead th,
 .invoiceClientAddress,
 .invoiceSenderAddress,
@@ -102,6 +106,10 @@
   color: #ffffff;
   background-color: var(--color-dark-elements);
   padding: 3rem 4rem;
+}
+
+body[data-theme='dark'] .invoiceItemsTotal {
+  background-color: #0c0e16;
 }
 
 .invoiceItemsTotalValue {

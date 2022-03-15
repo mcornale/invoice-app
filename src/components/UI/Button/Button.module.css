@@ -11,6 +11,7 @@
 .buttonDefault {
   padding: 1rem;
   align-items: baseline;
+  color: var(--color-dark-text-and-icons);
 }
 
 .button1 {
@@ -38,6 +39,11 @@
   color: var(--color-light-text-and-icons);
 }
 
+body[data-theme='dark'] .button2 {
+  background-color: #252945;
+  color: #dfe3fa;
+}
+
 .button2.buttonWithIcon svg path {
   fill: var(--color-light-text-and-icons);
 }
@@ -45,6 +51,11 @@
 .button3 {
   background-color: #373b53;
   color: #888eb0;
+}
+
+body[data-theme='dark'] .button3 {
+  background-color: #373b53;
+  color: #dfe3fa;
 }
 
 .button4 {

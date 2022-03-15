@@ -17,6 +17,11 @@
   padding: 1.4rem 1.6rem;
   font-weight: 700;
   color: var(--color-dark-text-and-icons);
+  background-color: var(--color-light-elements);
+}
+
+body[data-theme='dark'] .inputField {
+  border-color: #252945;
 }
 
 .inputField.inputFieldReadOnly {
@@ -25,4 +30,5 @@
   border: none;
   color: #888eb0;
   font-weight: 700;
+  background-color: transparent;
 }

@@ -3,12 +3,6 @@
 :root {
   --color-main: #7c5dfa;
   --color-main-lighter: #9277ff;
-  --color-background: #f8f8fb;
-  --color-light-elements: #ffffff;
-  --color-dark-elements: #373b53;
-  --color-dark-text-and-icons: #0c0e16;
-  --color-light-text-and-icons: #7e88c3;
-  --color-very-light-text-and-icons: #888eb0;
   --font-size-body-1: 1.2rem;
   --line-height-body-1: 1.5rem;
   --letter-spacing-body-1: -0.025rem;
@@ -42,6 +36,24 @@ body {
   letter-spacing: var(--letter-spacing-body-1);
   font-weight: 500;
   color: var(--color-very-light-text-and-icons);
+}
+
+body[data-theme='light'] {
+  --color-background: #f8f8fb;
+  --color-light-elements: #ffffff;
+  --color-dark-elements: #373b53;
+  --color-dark-text-and-icons: #0c0e16;
+  --color-light-text-and-icons: #7e88c3;
+  --color-very-light-text-and-icons: #888eb0;
+}
+
+body[data-theme='dark'] {
+  --color-background: #141625;
+  --color-light-elements: #1e2139;
+  --color-dark-elements: #1e2139;
+  --color-dark-text-and-icons: #ffffff;
+  --color-light-text-and-icons: #ffffff;
+  --color-very-light-text-and-icons: #ffffff;
 }
 
 #root {

@@ -18,6 +18,7 @@
 
 .inputDate input {
   cursor: inherit;
+  color: var(--color-dark-text-and-icons);
 }
 
 .inputDate svg path {

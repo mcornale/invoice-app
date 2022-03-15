@@ -44,14 +44,12 @@
   border-bottom: 0.1rem solid #494e6e;
 }
 
-.sidebarThemeSwitch {
+.sidebarElements > * {
   width: 100%;
   padding: 3rem;
 }
 
 .sidebarProfileImg {
-  padding: 3rem;
   border-radius: 50%;
-  width: 100%;
   height: auto;
 }
