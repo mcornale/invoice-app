@@ -3,6 +3,7 @@ import profileImgSrc from '../../../assets/images/image-avatar.jpg';
 import styles from './SideBar.module.css';
 import Icon from '../../UI/Icon';
 import { useState } from 'react';
+import Button from '../../UI/Button/Button';
 
 const Sidebar = () => {
   const [theme, setTheme] = useState(document.body.dataset.theme);
@@ -23,9 +24,10 @@ const Sidebar = () => {
         />
       </div>
       <div className={styles.sidebarElements}>
-        <button onClick={handleChangeThemeBtn}>
-          <Icon icon={theme === 'light' ? 'moon' : 'sun'} />
-        </button>
+        <Button
+          onClick={handleChangeThemeBtn}
+          icon={<Icon icon={theme === 'light' ? 'moon' : 'sun'} />}
+        />
         <img
           className={styles.sidebarProfileImg}
           src={profileImgSrc}

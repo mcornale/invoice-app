@@ -1,4 +1,5 @@
 import { forwardRef, useState } from 'react';
+import Button from '../Button/Button';
 import Icon from '../Icon';
 import styles from './Select.module.css';
 
@@ -18,10 +19,10 @@ const Select = forwardRef((props, ref) => {
 
   return (
     <div className={`${className} ${styles.selectContainer}`}>
-      <button
-        type='button'
+      <Button
         onClick={handleSelectClick}
         className={`${styles.select} ${areOptionsVisible && styles.selectOpen}`}
+        icon={<Icon icon='arrowDown' />}
       >
         <input
           type='text'
@@ -29,17 +30,19 @@ const Select = forwardRef((props, ref) => {
           ref={ref}
           readOnly
         />
-        <Icon icon='arrowDown' />
-      </button>
+      </Button>
+
       {areOptionsVisible && (
         <div className={styles.options}>
           {options.map((option, index) => (
-            <button
+            <Button
               type='button'
               key={index}
               onClick={handleOptionClick.bind(null, option)}
               className={styles.option}
-            >{`Net ${option} ${option === 1 ? 'Day' : 'Days'}`}</button>
+            >
+              Net {option} {option === 1 ? 'Day' : 'Days'}
+            </Button>
           ))}
         </div>
       )}

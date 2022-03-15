@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import formatDate from '../../../helpers/formatDate';
+import Button from '../Button/Button';
 import Icon from '../Icon';
 import styles from './Calendar.module.css';
 
@@ -77,39 +78,31 @@ const Calendar = (props) => {
   return (
     <div className={`${className} ${styles.calendar}`}>
       <div className={styles.calendarHeader}>
-        <button
-          type='button'
+        <Button
           onClick={handleArrowLeftClick}
+          icon={<Icon icon='arrowLeft' />}
           className={styles.calendarHeaderButton}
-        >
-          <Icon icon='arrowLeft' />
-        </button>
+        />
+
         <p>
           {formatDate(
             new Date(selectedYear, selectedMonth, MIN_DAY_NUMBER)
           ).slice(2)}
         </p>
-        <button
-          type='button'
+        <Button
           onClick={handleArrowRightClick}
           className={styles.calendarHeaderButton}
-        >
-          <Icon icon='arrowRight' />
-        </button>
+          icon={<Icon icon='arrowRight' />}
+        />
       </div>
       <div className={styles.calendarDays}>
         {previousMonthDays.map((day, index) => (
-          <button
-            type='button'
-            className={styles.calendarDayHidden}
-            key={index}
-          >
+          <Button className={styles.calendarDayHidden} key={index}>
             {day}
-          </button>
+          </Button>
         ))}
         {selectedMonthDays.map((day, index) => (
-          <button
-            type='button'
+          <Button
             onClick={onCalendarDayClick.bind(
               null,
               new Date(selectedYear, selectedMonth, day)
@@ -118,16 +111,12 @@ const Calendar = (props) => {
             key={index}
           >
             {day}
-          </button>
+          </Button>
         ))}
         {nextMonthDays.map((day, index) => (
-          <button
-            type='button'
-            className={styles.calendarDayHidden}
-            key={index}
-          >
+          <Button className={styles.calendarDayHidden} key={index}>
             {day}
-          </button>
+          </Button>
         ))}
       </div>
     </div>

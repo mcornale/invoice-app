@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '../Button/Button';
 import Calendar from '../Calendar/Calendar';
 import Icon from '../Icon';
 
@@ -22,14 +23,13 @@ const InputDate = (props) => {
 
   return (
     <div className={`${className} ${styles.inputDateContainer}`}>
-      <button
-        type='button'
+      <Button
         {...(!disabled && { onClick: handleInputDateClick })}
         className={inputDateClassName.join(' ')}
+        icon={<Icon icon='calendar' />}
       >
         <input type='text' value={value} readOnly />
-        <Icon icon='calendar' />
-      </button>
+      </Button>
       {isCalendarOpen && (
         <Calendar
           onCalendarDayClick={handleCalendarDayClick}

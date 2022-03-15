@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import INPUT_TYPES from '../../constants/input-types';
 import useInput from '../../hooks/useInput';
+import Button from '../UI/Button/Button';
 import Icon from '../UI/Icon';
 import InputGroup from '../UI/InputGroup/InputGroup';
 
@@ -122,9 +123,7 @@ const InvoiceFormItem = (props) => {
         noLabel
         readOnly
       />
-      <button onClick={handleDeleteBtnClick} type='button'>
-        <Icon icon='delete' />
-      </button>
+      <Button onClick={handleDeleteBtnClick} icon={<Icon icon='delete' />} />
     </>
   );
 };

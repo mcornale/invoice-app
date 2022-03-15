@@ -20,11 +20,9 @@ const Header = () => {
       <div className={styles.headerActions}>
         <Filter />
         <Link to='new'>
-          <Button
-            text='New Invoice'
-            icon={<Icon icon='plus' />}
-            buttonStyle='1'
-          />
+          <Button icon={<Icon icon='plus' />} buttonStyle='1'>
+            New Invoice
+          </Button>
         </Link>
       </div>
     </header>

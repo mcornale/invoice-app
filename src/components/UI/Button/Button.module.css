@@ -1,6 +1,4 @@
 .button {
-  border-radius: 10rem;
-  padding: 1.4rem 2rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
@@ -8,10 +6,12 @@
   gap: 1.4rem;
 }
 
-.buttonDefault {
-  padding: 1rem;
-  align-items: baseline;
-  color: var(--color-dark-text-and-icons);
+.button1,
+.button2,
+.button3,
+.button4 {
+  padding: 1.4rem 2rem;
+  border-radius: 10rem;
 }
 
 .button1 {

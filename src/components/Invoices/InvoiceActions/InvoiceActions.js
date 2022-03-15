@@ -16,12 +16,12 @@ const InvoiceActions = (props) => {
         </div>
         <div className={styles.invoiceActions}>
           <Link to='edit'>
-            <Button buttonStyle='2' text='Edit' />
+            <Button buttonStyle='2'>Edit</Button>
           </Link>
           <Link to='delete'>
-            <Button buttonStyle='4' text='Delete' />
+            <Button buttonStyle='4'>Delete</Button>
           </Link>
-          <Button buttonStyle='1' text='Mark as Paid' />
+          <Button buttonStyle='1'>Mark as Paid</Button>
         </div>
       </section>
     </Container>

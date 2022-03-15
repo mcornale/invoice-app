@@ -285,36 +285,38 @@ const InvoiceForm = (props) => {
               <Button
                 onClick={handleInvoiceFormClose}
                 style={{ marginRight: 'auto' }}
-                text='Discard'
                 buttonStyle='2'
-              />
+              >
+                Discard
+              </Button>
               <Button
                 onClick={handleInvoiceFormSubmit.bind(null, 'draft')}
-                text='Save as Draft'
                 buttonStyle='3'
-              />
+              >
+                Save as Draft
+              </Button>
               <Button
                 onClick={handleInvoiceFormSubmit.bind(null, 'pending')}
-                text='Save & Send'
                 buttonStyle='1'
-              />
+              >
+                Save & Send
+              </Button>
             </>
           )}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
             <>
-              <Button
-                onClick={handleInvoiceFormClose}
-                text='Cancel'
-                buttonStyle='2'
-              />
+              <Button onClick={handleInvoiceFormClose} buttonStyle='2'>
+                Cancel
+              </Button>
               <Button
                 onClick={handleInvoiceFormSubmit.bind(
                   null,
                   currentInvoice.status
                 )}
-                text='Save Changes'
                 buttonStyle='1'
-              />
+              >
+                Save Changes
+              </Button>
             </>
           )}
         </section>

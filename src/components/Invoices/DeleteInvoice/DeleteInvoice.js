@@ -26,8 +26,12 @@ const DeleteInvoice = (props) => {
         cannot be undone.
       </p>
       <div className={styles.deleteInvoiceActions}>
-        <Button onClick={handleCancelBtnClick} buttonStyle='2' text='Cancel' />
-        <Button onClick={handleDeleteBtnClick} buttonStyle='4' text='Delete' />
+        <Button onClick={handleCancelBtnClick} buttonStyle='2'>
+          Cancel
+        </Button>
+        <Button onClick={handleDeleteBtnClick} buttonStyle='4'>
+          Delete
+        </Button>
       </div>
     </div>
   );

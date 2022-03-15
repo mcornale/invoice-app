@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 2rem 3rem;
-  margin: 1rem 0 2rem;
+  margin: 2rem 0;
 }
 
 .invoiceStatus,

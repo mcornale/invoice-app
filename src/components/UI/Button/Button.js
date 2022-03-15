@@ -1,29 +1,18 @@
 import styles from './Button.module.css';
 
 const Button = (props) => {
-  const { text, icon, buttonStyle, onClick, style } = props;
+  const { children, icon, buttonStyle, onClick, style, className } = props;
 
   const buttonClassName = [styles.button];
 
-  if (icon) buttonClassName.push(styles.buttonWithIcon);
+  if (className) buttonClassName.push(className);
 
-  switch (buttonStyle) {
-    case '1':
-      buttonClassName.push(styles.button1);
-      break;
-    case '2':
-      buttonClassName.push(styles.button2);
-      break;
-    case '3':
-      buttonClassName.push(styles.button3);
-      break;
-    case '4':
-      buttonClassName.push(styles.button4);
-      break;
-    default:
-      buttonClassName.push(styles.buttonDefault);
-      break;
-  }
+  if (buttonStyle === '1') buttonClassName.push(styles.button1);
+  if (buttonStyle === '2') buttonClassName.push(styles.button2);
+  if (buttonStyle === '3') buttonClassName.push(styles.button3);
+  if (buttonStyle === '4') buttonClassName.push(styles.button4);
+
+  if (icon) buttonClassName.push(styles.buttonWithIcon);
 
   return (
     <button
@@ -33,7 +22,7 @@ const Button = (props) => {
       className={buttonClassName.join(' ')}
     >
       {icon}
-      {text}
+      {children}
     </button>
   );
 };

@@ -40,10 +40,11 @@ const InvoiceFormItemList = (props) => {
       </div>
       <Button
         onClick={handleAddNewItemBtnClick}
-        text='Add New Item'
         icon={<Icon icon='plus' />}
         buttonStyle='2'
-      />
+      >
+        Add New Item
+      </Button>
     </section>
   );
 };

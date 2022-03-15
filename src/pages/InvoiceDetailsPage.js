@@ -22,7 +22,7 @@ const InvoiceDetailsPage = () => {
       {!isLoadingInvoices && currentInvoice && (
         <>
           <Link to='/'>
-            <Button icon={<Icon icon='arrowLeft' />} text='Go back' />
+            <Button icon={<Icon icon='arrowLeft' />}>Go back</Button>
           </Link>
           <InvoiceActions status={currentInvoice.status} />
           <InvoiceDetails currentInvoice={currentInvoice} />
