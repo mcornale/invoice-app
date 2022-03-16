@@ -7,6 +7,11 @@
   color: var(--color-dark-text-and-icons);
 }
 
+.button,
+.button svg path {
+  transition: all 0.2s linear;
+}
+
 .button1,
 .button2,
 .button3,
@@ -16,8 +21,12 @@
 }
 
 .button1 {
-  background-color: var(--color-main);
-  color: #ffffff;
+  background-color: var(--background-color-btn-1);
+  color: var(--color-btn-1);
+}
+
+.button1:hover {
+  background-color: var(--background-color-btn-1-hover);
 }
 
 .button1.buttonWithIcon {
@@ -25,41 +34,48 @@
 }
 
 .button1.buttonWithIcon svg {
-  background-color: #ffffff;
+  background-color: var(--color-btn-1);
   padding: 1rem;
   border-radius: 10rem;
   box-sizing: content-box;
 }
 
 .button1.buttonWithIcon svg path {
-  fill: var(--color-main);
+  fill: var(--background-color-btn-1);
 }
 
 .button2 {
-  background-color: #f9fafe;
-  color: var(--color-light-text-and-icons);
+  background-color: var(--background-color-btn-2);
+  color: var(--color-btn-2);
 }
 
-body[data-theme='dark'] .button2 {
-  background-color: #252945;
-  color: #dfe3fa;
+.button2:hover {
+  background-color: var(--background-color-btn-2-hover);
+  color: var(--color-btn-2-hover);
 }
 
 .button2.buttonWithIcon svg path {
-  fill: var(--color-light-text-and-icons);
+  fill: var(--color-btn-2);
+}
+
+.button2:hover.buttonWithIcon svg path {
+  fill: var(--color-btn-2-hover);
 }
 
 .button3 {
-  background-color: #373b53;
-  color: var(--color-light-text-and-icons);
+  background-color: var(--background-color-btn-3);
+  color: var(--color-btn-3);
 }
 
-body[data-theme='dark'] .button3 {
-  background-color: #373b53;
-  color: #dfe3fa;
+.button3:hover {
+  background-color: var(--background-color-btn-3-hover);
 }
 
 .button4 {
-  background-color: #ec5757;
-  color: #ffffff;
+  background-color: var(--background-color-btn-4);
+  color: var(--color-btn-4);
+}
+
+.button4:hover {
+  background-color: var(--background-color-btn-4-hover);
 }

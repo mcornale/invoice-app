@@ -4,6 +4,14 @@
   --color-main: #7c5dfa;
   --color-main-lighter: #9277ff;
 
+  --background-color-btn-1: #7c5dfa;
+  --background-color-btn-1-hover: #9277ff;
+  --color-btn-1: #ffffff;
+  --background-color-btn-3: #373b53;
+  --background-color-btn-4: #ec5757;
+  --background-color-btn-4-hover: #ff9797;
+  --color-btn-4: #ffffff;
+
   --font-size-body-1: 1.2rem;
   --line-height-body-1: 1.5rem;
   --letter-spacing-body-1: -0.025rem;
@@ -51,6 +59,12 @@ body[data-theme='light'] {
 
   --border-color-input: #dfe3fa;
 
+  --background-color-btn-2: #f9fafe;
+  --background-color-btn-2-hover: #dfe3fa;
+  --color-btn-2: #7e88c3;
+  --background-color-btn-3-hover: #0c0e16;
+  --color-btn-3: #888eb0;
+
   --color-dark-text-and-icons: #0c0e16;
   --color-light-text-and-icons: #858bb2;
 }
@@ -66,6 +80,13 @@ body[data-theme='dark'] {
   --background-color-custom-scrollbar: #252945;
 
   --border-color-input: #252945;
+
+  --background-color-btn-2: #252945;
+  --background-color-btn-2-hover: #ffffff;
+  --color-btn-2: #dfe3fa;
+  --color-btn-2-hover: #7e88c3;
+  --background-color-btn-3-hover: #1e2139;
+  --color-btn-3: #dfe3fa;
 
   --color-dark-text-and-icons: #ffffff;
   --color-light-text-and-icons: #dfe3fa;
