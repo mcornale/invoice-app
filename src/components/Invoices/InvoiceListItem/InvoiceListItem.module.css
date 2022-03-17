@@ -9,7 +9,6 @@
   justify-content: space-between;
   align-items: center;
   color: var(--color-light-text-and-icons);
-  transition: all 0.3s;
 }
 
 .invoiceListItemLink > * {
@@ -36,7 +35,6 @@
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
   color: var(--color-dark-text-and-icons);
-  transition: all 0.3s;
   font-weight: 700;
   text-align: right;
   margin-right: 4rem;

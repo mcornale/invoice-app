@@ -4,7 +4,6 @@
   gap: 1.2rem;
   font-weight: 700;
   color: var(--color-dark-text-and-icons);
-  transition: all 0.3s;
   padding: 1rem 2rem;
   cursor: pointer;
 }

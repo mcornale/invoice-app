@@ -17,9 +17,7 @@
   padding: 1.4rem 1.6rem;
   font-weight: 700;
   color: var(--color-dark-text-and-icons);
-  transition: all 0.3s;
   background-color: var(--background-color-input);
-  transition: all 0.3s;
 }
 
 .inputField.inputFieldReadOnly {
@@ -27,7 +25,6 @@
   padding-right: 0;
   border: none;
   color: var(--color-light-text-and-icons);
-  transition: all 0.3s;
   font-weight: 700;
   background-color: transparent;
 }

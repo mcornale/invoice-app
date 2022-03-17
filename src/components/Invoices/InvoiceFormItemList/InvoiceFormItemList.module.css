@@ -5,7 +5,6 @@
 }
 .invoiceFormItemListTitle {
   color: var(--color-light-text-and-icons);
-  transition: all 0.3s;
 }
 
 .invoiceFormItemListGrid {
@@ -26,5 +25,4 @@
 
 .invoiceFormItemListGrid button svg path {
   fill: var(--color-light-text-and-icons);
-  transition: all 0.3s;
 }

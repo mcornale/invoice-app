@@ -7,17 +7,13 @@
   color: var(--color-dark-text-and-icons);
 }
 
-.button,
-.button svg path {
-  transition: all 0.3s linear;
-}
-
 .button1,
 .button2,
 .button3,
 .button4 {
   padding: 1.4rem 2rem;
   border-radius: 10rem;
+  transition: all 0.2s linear;
 }
 
 .button1 {

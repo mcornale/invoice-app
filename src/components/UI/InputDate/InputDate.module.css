@@ -20,12 +20,10 @@
 .inputDate input {
   cursor: inherit;
   color: var(--color-dark-text-and-icons);
-  transition: all 0.3s;
 }
 
 .inputDate svg path {
   fill: var(--color-light-text-and-icons);
-  transition: all 0.3s;
 }
 
 .inputDateCalendar {

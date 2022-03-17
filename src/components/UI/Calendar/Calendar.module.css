@@ -1,6 +1,5 @@
 .calendar {
   background-color: var(--background-color-input);
-  transition: all 0.3s;
   box-shadow: 0rem 1rem 2rem rgba(72, 84, 159, 0.25);
   padding: 0;
   border-radius: var(--border-radius-default);
@@ -36,7 +35,6 @@ body[data-theme='dark'] .calendar {
 .calendarDayHidden {
   height: 3rem;
   color: var(--color-dark-text-and-icons);
-  transition: all 0.3s;
 }
 
 .calendarDayHidden {
