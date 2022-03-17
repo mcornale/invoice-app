@@ -45,6 +45,7 @@ body {
   letter-spacing: var(--letter-spacing-body-1);
   font-weight: 500;
   color: var(--color-light-text-and-icons);
+  transition: all 0.3s;
 }
 
 body[data-theme='light'] {
@@ -96,6 +97,7 @@ body[data-theme='dark'] {
 #root {
   min-height: 100vh;
   background-color: var(--background-color-root);
+  transition: all 0.3s;
   display: flex;
 }
 
@@ -116,6 +118,7 @@ h3,
 h4 {
   font-weight: 700;
   color: var(--color-dark-text-and-icons);
+  transition: all 0.3s;
 }
 
 h1 {

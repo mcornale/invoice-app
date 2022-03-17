@@ -1,5 +1,6 @@
 .invoiceId {
   color: var(--color-dark-text-and-icons);
+  transition: all 0.3s;
   font-weight: 700;
   max-width: 6rem;
 }
@@ -7,5 +8,6 @@
 .invoiceId::before {
   content: '#';
   color: var(--color-light-text-and-icons);
+  transition: all 0.3s;
   font-weight: 700;
 }

@@ -2,6 +2,7 @@
   max-width: 72rem;
   height: 100vh;
   background-color: var(--background-color-invoice-form-container);
+  transition: all 0.3s;
   padding: 5rem 3rem 10rem var(--sidebar-width);
   border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
   position: fixed;
@@ -74,6 +75,7 @@ body[data-theme='dark'] .invoiceForm::after {
 /* Handle */
 .invoiceForm::-webkit-scrollbar-thumb {
   background: var(--background-color-custom-scrollbar);
+  transition: all 0.3s;
   border-radius: 0.4rem;
 }
 
@@ -83,6 +85,7 @@ body[data-theme='dark'] .invoiceForm::after {
   margin-bottom: 5rem;
   z-index: 2;
   background-color: var(--background-color-invoice-form-container);
+  transition: all 0.3s;
 }
 
 .invoiceFormSection {
@@ -94,6 +97,7 @@ body[data-theme='dark'] .invoiceForm::after {
 
 .invoiceFormSectionTitle {
   color: var(--color-main);
+  transition: all 0.3s;
   margin-bottom: 0.5rem;
 }
 
@@ -117,6 +121,7 @@ body[data-theme='dark'] .invoiceForm::after {
   left: 0;
   bottom: 0;
   background-color: var(--background-color-invoice-form-container);
+  transition: all 0.3s;
   padding: 3rem 5rem 3rem calc(var(--sidebar-width) + 5rem);
   border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
   z-index: 2;

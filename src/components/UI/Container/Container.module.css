@@ -1,5 +1,6 @@
 .container {
   background-color: var(--background-color-container);
+  transition: all 0.3s;
   border-radius: var(--border-radius-default);
   box-shadow: var(--box-shadow-default);
   width: 100%;

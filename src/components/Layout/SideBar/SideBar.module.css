@@ -1,5 +1,6 @@
 .sidebar {
   background-color: var(--background-color-sidebar);
+  transition: all 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -16,6 +17,7 @@
   width: var(--sidebar-width);
   height: var(--sidebar-width);
   background-color: var(--color-main);
+  transition: all 0.3s;
   border-radius: 0 2rem 2rem 0;
   display: grid;
   place-items: center;
@@ -28,6 +30,7 @@
   position: absolute;
   bottom: 0;
   background-color: var(--color-main-lighter);
+  transition: all 0.3s;
   height: 50%;
   width: 100%;
   z-index: 0;

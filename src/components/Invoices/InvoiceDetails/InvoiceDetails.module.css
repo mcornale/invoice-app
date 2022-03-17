@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 2.2rem;
   color: var(--color-light-text-and-icons);
+  transition: all 0.3s;
 }
 
 .invoiceDetailsRow {
@@ -55,6 +56,7 @@
 .invoiceItemsTable {
   width: 100%;
   background-color: var(--background-color-invoice-item-list);
+  transition: all 0.3s;
   padding: 3rem 4rem;
 }
 
@@ -93,6 +95,7 @@
 .invoiceItemName,
 .invoiceItemTotal {
   color: var(--color-dark-text-and-icons);
+  transition: all 0.3s;
 }
 
 .invoiceItemsTotal {
@@ -101,6 +104,7 @@
   align-items: center;
   color: #ffffff;
   background-color: var(--background-color-invoice-amount);
+  transition: all 0.3s;
   padding: 3rem 4rem;
 }
 
