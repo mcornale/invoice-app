@@ -17,7 +17,7 @@ const DeleteInvoicePage = () => {
   return (
     <>
       {invoices && (
-        <Modal>
+        <Modal hideSideBar>
           <DeleteInvoice currentInvoiceId={invoiceId} />
         </Modal>
       )}
