@@ -42,7 +42,9 @@ export const fetchInvoices = () => (dispatch) => {
 };
 
 export const createOrUpdateInvoice = (invoice) => async () => {
-  await setDoc(doc(db, 'invoices', invoice.id), invoice);
+  const invoiceId = invoice.id;
+  delete invoice.id;
+  await setDoc(doc(db, 'invoices', invoiceId), invoice);
 };
 
 export const deleteInvoice = (invoiceId) => async () => {
