@@ -7,7 +7,10 @@ import { getInvoiceById } from '../store/invoicesSlice';
 
 const InvoiceFormPage = () => {
   const navigate = useNavigate();
-  const invoices = useSelector((state) => state.invoices.invoiceList);
+
+  const isInvoiceListFetched = useSelector(
+    (state) => state.invoices.isInvoiceListFetched
+  );
 
   const { invoiceId } = useParams();
   const currentInvoice = useSelector((state) =>
@@ -15,14 +18,14 @@ const InvoiceFormPage = () => {
   );
 
   useEffect(() => {
-    if (!invoices) navigate(-1);
-  }, [invoices, navigate]);
+    if (!isInvoiceListFetched) navigate(-1);
+  }, [isInvoiceListFetched, navigate]);
 
   return (
     <>
-      {invoices && (
+      {isInvoiceListFetched && (
         <Modal>
-          <InvoiceForm currentInvoice={currentInvoice} />
+          <InvoiceForm invoice={currentInvoice} />
         </Modal>
       )}
     </>

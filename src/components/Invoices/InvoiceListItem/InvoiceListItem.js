@@ -15,12 +15,14 @@ const InvoiceListItem = (props) => {
     <li className={styles.invoiceListItem}>
       <Container>
         <Link className={styles.invoiceListItemLink} to={`${id}`}>
-          <InvoiceId id={id} />
+          <p className={styles.invoiceListItemId}>
+            <InvoiceId id={id} />
+          </p>
           <p className={styles.invoiceListItemPaymentDue}>
-            {formatDate(paymentDue)}
+            Due {formatDate(paymentDue)}
           </p>
           <p className={styles.invoiceListItemClientName}>{clientName}</p>
-          <p className={styles.invoiceListItemTotal}>{formatTotal(total)}</p>
+          <p className={styles.invoiceListItemTotal}>£ {formatTotal(total)}</p>
           <InvoiceStatus status={status} />
           <Icon icon='arrowRight' />
         </Link>

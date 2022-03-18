@@ -14,7 +14,7 @@ const formatTotal = (total) => {
       .join('');
   }
 
-  return `£ ${[totalIntPart, totalDecimalPart].join('.')}`;
+  return [totalIntPart, totalDecimalPart].join('.');
 };
 
 export default formatTotal;

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { deleteInvoice } from '../../../store/invoicesSlice';
 
 const DeleteInvoice = (props) => {
-  const { currentInvoiceId } = props;
+  const { invoiceId } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const DeleteInvoice = (props) => {
 
   const handleDeleteBtnClick = () => {
     navigate(-2);
-    dispatch(deleteInvoice(currentInvoiceId));
+    dispatch(deleteInvoice(invoiceId));
   };
 
   return (
@@ -24,8 +24,8 @@ const DeleteInvoice = (props) => {
       <Container>
         <h2 className={styles.deleteInvoiceTitle}>Confirm Deletion</h2>
         <p className={styles.deleteInvoiceMessage}>
-          Are you sure you want to delete invoice #{currentInvoiceId}? This
-          action cannot be undone.
+          Are you sure you want to delete invoice #{invoiceId}? This action
+          cannot be undone.
         </p>
         <div className={styles.deleteInvoiceActions}>
           <Button onClick={handleCancelBtnClick} buttonStyle='2'>

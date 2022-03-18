@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
-import Header from '../components/Layout/Header/Header';
 import InvoicesList from '../components/Invoices/InvoiceList/InvoiceList';
 import NoInvoicesFound from '../components/Invoices/NoInvoicesFound/NoInvoicesFound';
 import { Outlet } from 'react-router-dom';
+import InvoiceListHeader from '../components/Invoices/InvoiceListHeader/InvoiceListHeader';
 
-const InvoicesPage = () => {
+const InvoiceListPage = () => {
   const invoicesCount = useSelector(
     (state) => state.invoices.invoiceList?.length
   );
@@ -15,7 +15,7 @@ const InvoicesPage = () => {
 
   return (
     <>
-      <Header />
+      <InvoiceListHeader />
       {isLoadingInvoices && <p>Loading...</p>}
       {!isLoadingInvoices &&
         (invoicesCount > 0 ? <InvoicesList /> : <NoInvoicesFound />)}
@@ -24,4 +24,4 @@ const InvoicesPage = () => {
   );
 };
 
-export default InvoicesPage;
+export default InvoiceListPage;

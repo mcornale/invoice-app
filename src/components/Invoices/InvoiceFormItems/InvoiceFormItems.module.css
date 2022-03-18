@@ -1,28 +1,28 @@
-.invoiceFormItemList {
+.invoiceFormItems {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.invoiceFormItemListTitle {
+.invoiceFormItemsTitle {
   color: var(--color-light-text-and-icons);
 }
 
-.invoiceFormItemListGrid {
+.invoiceFormItemsGrid {
   display: grid;
   grid-template-columns: 5fr 1.4fr 3fr 2fr 1fr;
   gap: 1.5rem;
   margin-right: -1rem;
 }
 
-.invoiceFormItemListGrid > *:nth-child(5n + 2) input {
+.invoiceFormItemsGrid > *:nth-child(5n + 2) input {
   text-align: center;
 }
 
-.invoiceFormItemListGrid button {
+.invoiceFormItemsGrid button {
   padding: 1rem;
   margin-top: -0.6rem;
 }
 
-.invoiceFormItemListGrid button svg path {
+.invoiceFormItemsGrid button svg path {
   fill: var(--color-light-text-and-icons);
 }

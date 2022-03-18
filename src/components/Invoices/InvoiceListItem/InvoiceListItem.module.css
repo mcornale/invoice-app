@@ -15,29 +15,30 @@
   flex-grow: 1;
 }
 
+.invoiceListItemId {
+  color: var(--color-dark-text-and-icons);
+  max-width: 6rem;
+}
+
 .invoiceListItemPaymentDue {
   max-width: 12rem;
   margin-left: 4rem;
 }
 
-.invoiceListItemPaymentDue::before {
-  content: 'Due ';
-}
-
 .invoiceListItemClientName {
   max-width: 20rem;
-  text-align: left;
   margin-left: 4rem;
+  text-align: left;
 }
 
 .invoiceListItemTotal {
   font-size: 1.6rem;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
-  color: var(--color-dark-text-and-icons);
   font-weight: 700;
-  text-align: right;
+  color: var(--color-dark-text-and-icons);
   margin-right: 4rem;
+  text-align: right;
 }
 
 .invoiceListItem svg {

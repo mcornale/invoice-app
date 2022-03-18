@@ -6,19 +6,21 @@ import Modal from '../components/UI/Modal/Modal';
 
 const DeleteInvoicePage = () => {
   const navigate = useNavigate();
-  const invoices = useSelector((state) => state.invoices.invoiceList);
+  const isInvoiceListFetched = useSelector(
+    (state) => state.invoices.isInvoiceListFetched
+  );
 
   const { invoiceId } = useParams();
 
   useEffect(() => {
-    if (!invoices) navigate(-1);
-  }, [invoices, navigate]);
+    if (!isInvoiceListFetched) navigate(-1);
+  }, [isInvoiceListFetched, navigate]);
 
   return (
     <>
-      {invoices && (
+      {isInvoiceListFetched && (
         <Modal hideSideBar>
-          <DeleteInvoice currentInvoiceId={invoiceId} />
+          <DeleteInvoice invoiceId={invoiceId} />
         </Modal>
       )}
     </>

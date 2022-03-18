@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   gap: 2.2rem;
-  color: var(--color-light-text-and-icons);
 }
 
 .invoiceDetailsRow {

@@ -4,7 +4,7 @@ import InputGroup from '../../UI/InputGroup/InputGroup';
 import Button from '../../UI/Button/Button';
 import { useEffect, useRef, useState } from 'react';
 import INVOICE_FORM_MODES from '../../../constants/invoice-form-modes';
-import InvoiceFormItemList from '../InvoiceFormItemList/InvoiceFormItemList';
+import InvoiceFormItems from '../InvoiceFormItems/InvoiceFormItems';
 import useScrollPosition from '../../../hooks/useScrollPosition';
 import PAYMENT_TERMS_OPTIONS from '../../../constants/payment-terms-options';
 import useInput from '../../../hooks/useInput';
@@ -16,7 +16,13 @@ import { useNavigate } from 'react-router-dom';
 import generateRandomId from '../../../helpers/generateRandomId';
 
 const InvoiceForm = (props) => {
-  const { currentInvoice } = props;
+  const { invoiceId } = props;
+
+  //check form mode
+  const activeMode = invoiceId
+    ? INVOICE_FORM_MODES.EDIT_INVOICE
+    : INVOICE_FORM_MODES.NEW_INVOICE;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,72 +51,61 @@ const InvoiceForm = (props) => {
     );
   }
 
-  //check form mode
-  const activeMode = currentInvoice
-    ? INVOICE_FORM_MODES.EDIT_INVOICE
-    : INVOICE_FORM_MODES.NEW_INVOICE;
-
   //inputs
   const senderAddressStreet = useInput(
-    currentInvoice?.senderAddress.street ?? '',
+    invoiceId?.senderAddress.street ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressCity = useInput(
-    currentInvoice?.senderAddress.city ?? '',
+    invoiceId?.senderAddress.city ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressPostCode = useInput(
-    currentInvoice?.senderAddress.postCode ?? '',
+    invoiceId?.senderAddress.postCode ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressCountry = useInput(
-    currentInvoice?.senderAddress.country ?? '',
+    invoiceId?.senderAddress.country ?? '',
     INPUT_TYPES.TEXT
   );
-  const clientName = useInput(
-    currentInvoice?.clientName ?? '',
-    INPUT_TYPES.TEXT
-  );
-  const clientEmail = useInput(
-    currentInvoice?.clientEmail ?? '',
-    INPUT_TYPES.EMAIL
-  );
+  const clientName = useInput(invoiceId?.clientName ?? '', INPUT_TYPES.TEXT);
+  const clientEmail = useInput(invoiceId?.clientEmail ?? '', INPUT_TYPES.EMAIL);
   const clientAddressStreet = useInput(
-    currentInvoice?.clientAddress.street ?? '',
+    invoiceId?.clientAddress.street ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressCity = useInput(
-    currentInvoice?.clientAddress.city ?? '',
+    invoiceId?.clientAddress.city ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressPostCode = useInput(
-    currentInvoice?.clientAddress.postCode ?? '',
+    invoiceId?.clientAddress.postCode ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressCountry = useInput(
-    currentInvoice?.clientAddress.country ?? '',
+    invoiceId?.clientAddress.country ?? '',
     INPUT_TYPES.TEXT
   );
   const invoiceDate = useInput(
     activeMode === INVOICE_FORM_MODES.NEW_INVOICE
       ? new Date()
-      : currentInvoice?.createdAt,
+      : invoiceId?.createdAt,
     INPUT_TYPES.DATE,
     true
   );
   const paymentTerms = useInput(
     activeMode === INVOICE_FORM_MODES.NEW_INVOICE
       ? PAYMENT_TERMS_OPTIONS[PAYMENT_TERMS_OPTIONS.length - 1]
-      : currentInvoice?.paymentTerms,
+      : invoiceId?.paymentTerms,
     INPUT_TYPES.SELECT
   );
   const projectDescription = useInput(
-    currentInvoice?.description ?? '',
+    invoiceId?.description ?? '',
     INPUT_TYPES.TEXT
   );
 
   //item list
-  const [itemList, setItemList] = useState(currentInvoice?.items ?? []);
+  const [invoiceItems, setInvoiceItems] = useState(invoiceId?.items ?? []);
   const [isNewItemAdded, setIsNewItemAdded] = useState(false);
 
   const handleNewItemAdded = () => {
@@ -132,8 +127,8 @@ const InvoiceForm = (props) => {
 
   //submit form
   const handleInvoiceFormSubmit = (status) => {
-    const invoice = {
-      id: currentInvoice?.id ?? generateRandomId(),
+    const newOrUpdatedInvoice = {
+      id: invoiceId?.id ?? generateRandomId(),
       senderAddress: {
         street: senderAddressStreet?.inputValue ?? '',
         postCode: senderAddressPostCode?.inputValue ?? '',
@@ -156,8 +151,8 @@ const InvoiceForm = (props) => {
         )
       ),
       paymentTerms: paymentTerms.inputValue,
-      items: itemList ?? {},
-      total: itemList.reduce(
+      items: invoiceItems ?? {},
+      total: invoiceItems.reduce(
         (accTotal, currItem) => accTotal + currItem.total,
         0
       ),
@@ -165,7 +160,7 @@ const InvoiceForm = (props) => {
       status,
     };
 
-    dispatch(createOrUpdateInvoice(invoice));
+    dispatch(createOrUpdateInvoice(newOrUpdatedInvoice));
     handleInvoiceFormClose();
   };
 
@@ -176,7 +171,7 @@ const InvoiceForm = (props) => {
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && 'New Invoice'}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
             <>
-              Edit <InvoiceId id={currentInvoice.id} />
+              Edit <InvoiceId id={invoiceId.id} />
             </>
           )}
         </h2>
@@ -256,7 +251,7 @@ const InvoiceForm = (props) => {
                 type={invoiceDate.type}
                 value={invoiceDate.inputValue}
                 onChange={invoiceDate.handleInputValueChange}
-                disabled={currentInvoice !== undefined}
+                disabled={invoiceId !== undefined}
               />
               <InputGroup
                 label='Payment Terms'
@@ -273,9 +268,9 @@ const InvoiceForm = (props) => {
               onChange={projectDescription.handleInputValueChange}
             />
           </section>
-          <InvoiceFormItemList
-            itemList={itemList}
-            setItemList={setItemList}
+          <InvoiceFormItems
+            itemList={invoiceItems}
+            setItemList={setInvoiceItems}
             onAddNewItem={handleNewItemAdded}
           />
         </div>
@@ -309,10 +304,7 @@ const InvoiceForm = (props) => {
                 Cancel
               </Button>
               <Button
-                onClick={handleInvoiceFormSubmit.bind(
-                  null,
-                  currentInvoice.status
-                )}
+                onClick={handleInvoiceFormSubmit.bind(null, invoiceId.status)}
                 buttonStyle='1'
               >
                 Save Changes

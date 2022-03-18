@@ -1,12 +1,12 @@
 import Filter from '../../UI/Filter/Filter';
 import Button from '../../UI/Button/Button';
 
-import styles from './Header.module.css';
+import styles from './InvoiceListHeader.module.css';
 import Icon from '../../UI/Icon';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Header = () => {
+const InvoiceListHeader = () => {
   const invoicesCount = useSelector(
     (state) => state.invoices.invoiceList?.length
   );
@@ -29,4 +29,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default InvoiceListHeader;

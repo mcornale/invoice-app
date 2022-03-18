@@ -1,7 +1,6 @@
 .invoiceId {
-  color: var(--color-dark-text-and-icons);
+  color: inherit;
   font-weight: 700;
-  max-width: 6rem;
 }
 
 .invoiceId::before {

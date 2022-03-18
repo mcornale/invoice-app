@@ -1,9 +1,9 @@
 import Button from '../../UI/Button/Button';
 import Icon from '../../UI/Icon';
 import InvoiceFormItem from '../InvoiceFormItem';
-import styles from './InvoiceFormItemList.module.css';
+import styles from './InvoiceFormItems.module.css';
 
-const InvoiceFormItemList = (props) => {
+const InvoiceFormItems = (props) => {
   const { itemList, setItemList, onAddNewItem } = props;
 
   const handleAddNewItemBtnClick = () => {
@@ -21,9 +21,9 @@ const InvoiceFormItemList = (props) => {
   };
 
   return (
-    <section className={styles.invoiceFormItemList}>
-      <h3 className={styles.invoiceFormItemListTitle}>Item List</h3>
-      <div className={styles.invoiceFormItemListGrid}>
+    <section className={styles.invoiceFormItems}>
+      <h3 className={styles.invoiceFormItemsTitle}>Item List</h3>
+      <div className={styles.invoiceFormItemsGrid}>
         <label>Item Name</label>
         <label>Qty.</label>
         <label>Price</label>
@@ -49,4 +49,4 @@ const InvoiceFormItemList = (props) => {
   );
 };
 
-export default InvoiceFormItemList;
+export default InvoiceFormItems;

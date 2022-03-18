@@ -5,7 +5,18 @@ import formatTotal from '../../../helpers/formatTotal';
 import formatDate from '../../../helpers/formatDate';
 
 const InvoiceDetails = (props) => {
-  const { currentInvoice } = props;
+  const {
+    invoiceId,
+    invoiceDescription,
+    invoiceSenderAddress,
+    invoiceClientAddress,
+    invoiceDate,
+    invoicePaymentDue,
+    invoiceClientName,
+    invoiceClientEmail,
+    invoiceItems,
+    invoiceTotal,
+  } = props;
 
   return (
     <Container>
@@ -13,43 +24,43 @@ const InvoiceDetails = (props) => {
         <div className={styles.invoiceDetailsRow}>
           <div className={styles.invoiceIdAndDescription}>
             <h3>
-              <InvoiceId id={currentInvoice.id} />
+              <InvoiceId id={invoiceId} />
             </h3>
-            <p>{currentInvoice.description}</p>
+            <p>{invoiceDescription}</p>
           </div>
           <div className={styles.invoiceSenderAddress}>
-            <p>{currentInvoice.senderAddress.street}</p>
-            <p>{currentInvoice.senderAddress.city}</p>
-            <p>{currentInvoice.senderAddress.postCode}</p>
-            <p>{currentInvoice.senderAddress.country}</p>
+            <p>{invoiceSenderAddress.street}</p>
+            <p>{invoiceSenderAddress.city}</p>
+            <p>{invoiceSenderAddress.postCode}</p>
+            <p>{invoiceSenderAddress.country}</p>
           </div>
         </div>
         <div className={styles.invoiceDetailsRow}>
           <div className={styles.invoiceDates}>
             <div className={styles.invoiceCreationDate}>
               <p>Invoice Date</p>
-              <h3>{formatDate(currentInvoice.createdAt)}</h3>
+              <h3>{formatDate(invoiceDate)}</h3>
             </div>
             <div className={styles.invoicePaymentDue}>
               <p>Payment Due</p>
-              <h3>{formatDate(currentInvoice.paymentDue)}</h3>
+              <h3>{formatDate(invoicePaymentDue)}</h3>
             </div>
           </div>
           <div>
             <div className={styles.invoiceBillInfo}>
               <p>Bill To</p>
-              <h3>{currentInvoice.clientName}</h3>
+              <h3>{invoiceClientName}</h3>
             </div>
             <div className={styles.invoiceClientAddress}>
-              <p>{currentInvoice.clientAddress.street}</p>
-              <p>{currentInvoice.clientAddress.city}</p>
-              <p>{currentInvoice.clientAddress.postCode}</p>
-              <p>{currentInvoice.clientAddress.country}</p>
+              <p>{invoiceClientAddress.street}</p>
+              <p>{invoiceClientAddress.city}</p>
+              <p>{invoiceClientAddress.postCode}</p>
+              <p>{invoiceClientAddress.country}</p>
             </div>
           </div>
           <div className={styles.invoiceClientEmai}>
             <p>Sent To</p>
-            <h3>{currentInvoice.clientEmail}</h3>
+            <h3>{invoiceClientEmail}</h3>
           </div>
         </div>
         <div className={styles.invoiceItems}>
@@ -63,7 +74,7 @@ const InvoiceDetails = (props) => {
               </tr>
             </thead>
             <tbody>
-              {currentInvoice.items.map((item, index) => (
+              {invoiceItems.map((item, index) => (
                 <tr key={index}>
                   <td className={styles.invoiceItemName}>{item.name}</td>
                   <td>{item.quantity}</td>
@@ -78,7 +89,7 @@ const InvoiceDetails = (props) => {
           <div className={styles.invoiceItemsTotal}>
             <p className={styles.invoiceItemsTotalLabel}>Amount Due</p>
             <p className={styles.invoiceItemsTotalValue}>
-              {formatTotal(currentInvoice.total)}
+              {formatTotal(invoiceTotal)}
             </p>
           </div>
         </div>

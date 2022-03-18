@@ -12,6 +12,7 @@ const invoicesSlice = createSlice({
   name: 'invoices',
   initialState: {
     isLoadingInvoices: false,
+    isInvoiceListFetched: false,
     invoiceList: null,
   },
   reducers: {
@@ -19,6 +20,7 @@ const invoicesSlice = createSlice({
       const { newInvoiceList } = action.payload;
       state.invoiceList = newInvoiceList;
       state.isLoadingInvoices = false;
+      state.isInvoiceListFetched = true;
     },
     setLoading: (state) => {
       if (!state.isLoadingInvoices) state.isLoadingInvoices = true;
