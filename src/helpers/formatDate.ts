@@ -1,6 +1,4 @@
-const formatDate = (date) => {
-  if (!(date instanceof Date)) date = new Date(date);
-
+const formatDate = (date: Date) => {
   const day = date.getDate().toString().padStart(2, '0');
 
   return `${day} ${date.toLocaleDateString('en-EN', {

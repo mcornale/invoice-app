@@ -1,6 +1,10 @@
 import styles from './InvoiceId.module.css';
 
-const InvoiceId = (props) => {
+type Props = {
+  id: string;
+};
+
+const InvoiceId = (props: Props) => {
   const { id } = props;
 
   return <span className={styles.invoiceId}>{id}</span>;

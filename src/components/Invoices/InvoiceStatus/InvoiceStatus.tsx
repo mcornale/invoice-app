@@ -1,6 +1,10 @@
 import styles from './InvoiceStatus.module.css';
 
-const InvoiceStatus = (props) => {
+type Props = {
+  status: string;
+};
+
+const InvoiceStatus = (props: Props) => {
   const { status } = props;
 
   return (

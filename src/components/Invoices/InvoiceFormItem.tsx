@@ -1,26 +1,33 @@
 import { useCallback, useEffect } from 'react';
 import INPUT_TYPES from '../../constants/input-types';
 import useInput from '../../hooks/useInput';
+import { InvoiceItem, InvoiceItems } from '../../types/invoice-types';
 import Button from '../UI/Button/Button';
 import Icon from '../UI/Icon';
 import InputGroup from '../UI/InputGroup/InputGroup';
 
-const InvoiceFormItem = (props) => {
-  const { item, setItemList, index } = props;
+type Props = {
+  item: InvoiceItem;
+  setItems: React.Dispatch<React.SetStateAction<InvoiceItems>>;
+  index: number;
+};
+
+const InvoiceFormItem = (props: Props) => {
+  const { item, setItems, index } = props;
 
   const itemName = useInput(item.name, INPUT_TYPES.TEXT);
-  const itemQuantity = useInput(item.quantity, INPUT_TYPES.QUANTITY);
-  const itemPrice = useInput(item.price, INPUT_TYPES.PRICE);
-  const itemTotal = useInput(item.total, INPUT_TYPES.PRICE, true);
+  const itemQuantity = useInput(item.quantity.toString(), INPUT_TYPES.QUANTITY);
+  const itemPrice = useInput(item.price.toString(), INPUT_TYPES.PRICE);
+  const itemTotal = useInput(item.total.toString(), INPUT_TYPES.PRICE, true);
 
   const handleDeleteBtnClick = () => {
-    setItemList((prevItemList) =>
+    setItems((prevItemList) =>
       prevItemList.filter((_, itemIndex) => itemIndex !== index)
     );
   };
 
-  const handleItemNameInputChange = (newItemName) => {
-    setItemList((prevItemList) =>
+  const handleItemNameInputChange = (newItemName: string) => {
+    setItems((prevItemList) =>
       prevItemList.map((itemObj, itemIndex) =>
         itemIndex === index ? { ...itemObj, name: newItemName } : itemObj
       )
@@ -29,8 +36,8 @@ const InvoiceFormItem = (props) => {
     itemName.handleInputValueChange(newItemName);
   };
 
-  const handleItemQuantityInputChange = (newItemQuantity) => {
-    setItemList((prevItemList) =>
+  const handleItemQuantityInputChange = (newItemQuantity: number) => {
+    setItems((prevItemList) =>
       prevItemList.map((itemObj, itemIndex) =>
         itemIndex === index
           ? {
@@ -41,11 +48,11 @@ const InvoiceFormItem = (props) => {
       )
     );
 
-    itemQuantity.handleInputValueChange(newItemQuantity);
+    itemQuantity.handleInputValueChange(newItemQuantity.toString());
   };
 
-  const handleItemPriceInputChange = (newItemPrice) => {
-    setItemList((prevItemList) =>
+  const handleItemPriceInputChange = (newItemPrice: number) => {
+    setItems((prevItemList) =>
       prevItemList.map((itemObj, itemIndex) =>
         itemIndex === index
           ? {
@@ -56,12 +63,12 @@ const InvoiceFormItem = (props) => {
       )
     );
 
-    itemPrice.handleInputValueChange(newItemPrice);
+    itemPrice.handleInputValueChange(newItemPrice.toString());
   };
 
   const handleItemTotalInputChange = useCallback(
     (newItemTotal) => {
-      setItemList((prevItemList) =>
+      setItems((prevItemList) =>
         prevItemList.map((itemObj, itemIndex) =>
           itemIndex === index
             ? {
@@ -72,13 +79,14 @@ const InvoiceFormItem = (props) => {
         )
       );
 
-      itemTotal.handleInputValueChange(newItemTotal);
+      itemTotal.handleInputValueChange(newItemTotal.toString());
     },
-    [index, itemTotal, setItemList]
+    [index, itemTotal, setItems]
   );
 
   useEffect(() => {
-    let newItemTotal = itemQuantity.inputValue * itemPrice.inputValue;
+    let newItemTotal =
+      Number(itemQuantity.inputValue) * Number(itemPrice.inputValue);
     if (
       itemQuantity.isFormatted &&
       itemPrice.isFormatted &&

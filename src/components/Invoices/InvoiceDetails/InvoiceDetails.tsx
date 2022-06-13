@@ -3,8 +3,22 @@ import styles from './InvoiceDetails.module.css';
 import InvoiceId from '../InvoiceId/InvoiceId';
 import formatTotal from '../../../helpers/formatTotal';
 import formatDate from '../../../helpers/formatDate';
+import { InvoiceAddress, InvoiceItems } from '../../../types/invoice-types';
 
-const InvoiceDetails = (props) => {
+type Props = {
+  invoiceId: string;
+  invoiceSenderAddress: InvoiceAddress;
+  invoiceClientAddress: InvoiceAddress;
+  invoiceClientEmail: string;
+  invoiceClientName: string;
+  invoiceDate: string;
+  invoicePaymentDue: string;
+  invoiceDescription: string;
+  invoiceItems: InvoiceItems;
+  invoiceTotal: number;
+};
+
+const InvoiceDetails = (props: Props) => {
   const {
     invoiceId,
     invoiceDescription,
@@ -39,11 +53,11 @@ const InvoiceDetails = (props) => {
           <div className={styles.invoiceDates}>
             <div className={styles.invoiceCreationDate}>
               <p>Invoice Date</p>
-              <h3>{formatDate(invoiceDate)}</h3>
+              <h3>{formatDate(new Date(invoiceDate))}</h3>
             </div>
             <div className={styles.invoicePaymentDue}>
               <p>Payment Due</p>
-              <h3>{formatDate(invoicePaymentDue)}</h3>
+              <h3>{formatDate(new Date(invoicePaymentDue))}</h3>
             </div>
           </div>
           <div>

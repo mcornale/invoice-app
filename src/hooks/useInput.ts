@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import INPUT_TYPES from '../constants/input-types';
 import formatDate from '../helpers/formatDate';
 
-const useInput = (value, type, formatNow = false) => {
-  let formatInputValue;
+const useInput = (value: string, type: string, formatNow = false) => {
+  let formatInputValue: ((inputValue: string) => string) | null = null;
 
   if (type === INPUT_TYPES.PRICE)
-    formatInputValue = (inputValue) => Number(inputValue).toFixed(2);
+    formatInputValue = (inputValue) => Number(inputValue).toFixed(2).toString();
 
   if (type === INPUT_TYPES.QUANTITY)
-    formatInputValue = (inputValue) => Number(inputValue).toFixed(0);
+    formatInputValue = (inputValue) => Number(inputValue).toFixed(0).toString();
 
   if (type === INPUT_TYPES.DATE)
-    formatInputValue = (inputValue) => formatDate(inputValue);
+    formatInputValue = (inputValue) => formatDate(new Date(inputValue));
 
   const [inputValue, setInputValue] = useState(
     formatInputValue ? formatInputValue(value) : value
@@ -24,7 +24,9 @@ const useInput = (value, type, formatNow = false) => {
   useEffect(() => {
     if (formatInputValue && isTouched && !isFormatted) {
       const formatInputTimeout = setTimeout(() => {
-        setInputValue((prevInputValue) => formatInputValue(prevInputValue));
+        setInputValue((prevInputValue) =>
+          formatInputValue ? formatInputValue(prevInputValue) : prevInputValue
+        );
         setIsFormatted(true);
       }, 400);
 
@@ -34,7 +36,7 @@ const useInput = (value, type, formatNow = false) => {
     }
   }, [formatInputValue, isTouched, isFormatted]);
 
-  const handleInputValueChange = (newInputValue) => {
+  const handleInputValueChange = (newInputValue: string) => {
     setIsTouched(true);
 
     if (!formatNow && formatInputValue) setIsFormatted(false);

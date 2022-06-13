@@ -4,7 +4,11 @@ import Button from '../../UI/Button/Button';
 import styles from './InvoiceActions.module.css';
 import { Link } from 'react-router-dom';
 
-const InvoiceActions = (props) => {
+type Props = {
+  status: string;
+};
+
+const InvoiceActions = (props: Props) => {
   const { status } = props;
 
   return (

@@ -1,14 +1,21 @@
+import { InvoiceItems } from '../../../types/invoice-types';
 import Button from '../../UI/Button/Button';
 import Icon from '../../UI/Icon';
 import InvoiceFormItem from '../InvoiceFormItem';
 import styles from './InvoiceFormItems.module.css';
 
-const InvoiceFormItems = (props) => {
-  const { itemList, setItemList, onAddNewItem } = props;
+type Props = {
+  items: InvoiceItems;
+  setItems: React.Dispatch<React.SetStateAction<InvoiceItems>>;
+  onAddNewItem: () => void;
+};
+
+const InvoiceFormItems = (props: Props) => {
+  const { items, setItems, onAddNewItem } = props;
 
   const handleAddNewItemBtnClick = () => {
-    setItemList((prevItemList) => [
-      ...prevItemList,
+    setItems((prevItems) => [
+      ...prevItems,
       {
         name: '',
         quantity: 0,
@@ -29,12 +36,12 @@ const InvoiceFormItems = (props) => {
         <label>Price</label>
         <label>Total</label>
         <label></label>
-        {itemList?.map((item, index) => (
+        {items?.map((item, index) => (
           <InvoiceFormItem
             key={index}
             index={index}
             item={item}
-            setItemList={setItemList}
+            setItems={setItems}
           />
         ))}
       </div>

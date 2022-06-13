@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import InvoiceForm from '../components/Invoices/InvoiceForm/InvoiceForm';
 import Modal from '../components/UI/Modal/Modal';
 import { getInvoiceById } from '../store/invoicesSlice';
+import { useAppSelector } from '../store/store';
 
 const InvoiceFormPage = () => {
   const navigate = useNavigate();
 
-  const isInvoiceListFetched = useSelector(
+  const isInvoiceListFetched = useAppSelector(
     (state) => state.invoices.isInvoiceListFetched
   );
 
   const { invoiceId } = useParams();
-  const currentInvoice = useSelector((state) =>
+  const currentInvoice = useAppSelector((state) =>
     getInvoiceById(state, invoiceId)
   );
 
@@ -25,7 +25,7 @@ const InvoiceFormPage = () => {
     <>
       {isInvoiceListFetched && (
         <Modal>
-          <InvoiceForm invoice={currentInvoice} />
+          <InvoiceForm invoice={currentInvoice!} />
         </Modal>
       )}
     </>

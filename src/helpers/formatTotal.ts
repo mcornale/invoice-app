@@ -1,11 +1,9 @@
-const formatTotal = (total) => {
-  let [totalIntPart, totalDecimalPart] = Number(total)
-    .toFixed(2)
-    .toString()
-    .split('.');
+const formatTotal = (total: number) => {
+  let [totalIntPart, totalDecimalPart] = total.toFixed(2).toString().split('.');
 
   if (totalIntPart.length > 3) {
-    totalIntPart = [...totalIntPart]
+    totalIntPart = totalIntPart
+      .split('')
       .reverse()
       .map((digit, index) =>
         index !== 0 && index % 3 === 0 ? `${digit},` : digit

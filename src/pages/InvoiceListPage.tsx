@@ -1,16 +1,16 @@
-import { useSelector } from 'react-redux';
 import InvoicesList from '../components/Invoices/InvoiceList/InvoiceList';
 import NoInvoicesFound from '../components/Invoices/NoInvoicesFound/NoInvoicesFound';
 import { Outlet } from 'react-router-dom';
 import InvoiceListHeader from '../components/Invoices/InvoiceListHeader/InvoiceListHeader';
+import { useAppSelector } from '../store/store';
 
 const InvoiceListPage = () => {
-  const invoicesCount = useSelector(
-    (state) => state.invoices.invoiceList?.length
+  const isLoadingInvoices = useAppSelector(
+    (state) => state.invoices.isLoadingInvoices
   );
 
-  const isLoadingInvoices = useSelector(
-    (state) => state.invoices.isLoadingInvoices
+  const invoicesCount = useAppSelector(
+    (state) => state.invoices.invoiceList?.length
   );
 
   return (
@@ -18,7 +18,7 @@ const InvoiceListPage = () => {
       <InvoiceListHeader />
       {isLoadingInvoices && <p>Loading...</p>}
       {!isLoadingInvoices &&
-        (invoicesCount > 0 ? <InvoicesList /> : <NoInvoicesFound />)}
+        (invoicesCount! > 0 ? <InvoicesList /> : <NoInvoicesFound />)}
       <Outlet />
     </>
   );

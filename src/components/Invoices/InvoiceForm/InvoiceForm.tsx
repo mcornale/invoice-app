@@ -14,12 +14,17 @@ import { useDispatch } from 'react-redux';
 import { createOrUpdateInvoice } from '../../../store/invoicesSlice';
 import { useNavigate } from 'react-router-dom';
 import generateRandomId from '../../../helpers/generateRandomId';
+import { Invoice } from '../../../types/invoice-types';
 
-const InvoiceForm = (props) => {
-  const { invoiceId } = props;
+type Props = {
+  invoice: Invoice;
+};
+
+const InvoiceForm = (props: Props) => {
+  const { invoice } = props;
 
   //check form mode
-  const activeMode = invoiceId
+  const activeMode = invoice
     ? INVOICE_FORM_MODES.EDIT_INVOICE
     : INVOICE_FORM_MODES.NEW_INVOICE;
 
@@ -27,7 +32,7 @@ const InvoiceForm = (props) => {
   const dispatch = useDispatch();
 
   //check scrolling position and change invoice form style according to that
-  const invoiceFormRef = useRef();
+  const invoiceFormRef = useRef<HTMLFormElement>(null);
   const invoiceFormScrollPosition = useScrollPosition(invoiceFormRef);
   const invoiceFormClassNameArr = [
     styles.invoiceForm,
@@ -53,59 +58,59 @@ const InvoiceForm = (props) => {
 
   //inputs
   const senderAddressStreet = useInput(
-    invoiceId?.senderAddress.street ?? '',
+    invoice?.senderAddress.street ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressCity = useInput(
-    invoiceId?.senderAddress.city ?? '',
+    invoice?.senderAddress.city ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressPostCode = useInput(
-    invoiceId?.senderAddress.postCode ?? '',
+    invoice?.senderAddress.postCode ?? '',
     INPUT_TYPES.TEXT
   );
   const senderAddressCountry = useInput(
-    invoiceId?.senderAddress.country ?? '',
+    invoice?.senderAddress.country ?? '',
     INPUT_TYPES.TEXT
   );
-  const clientName = useInput(invoiceId?.clientName ?? '', INPUT_TYPES.TEXT);
-  const clientEmail = useInput(invoiceId?.clientEmail ?? '', INPUT_TYPES.EMAIL);
+  const clientName = useInput(invoice?.clientName ?? '', INPUT_TYPES.TEXT);
+  const clientEmail = useInput(invoice?.clientEmail ?? '', INPUT_TYPES.EMAIL);
   const clientAddressStreet = useInput(
-    invoiceId?.clientAddress.street ?? '',
+    invoice?.clientAddress.street ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressCity = useInput(
-    invoiceId?.clientAddress.city ?? '',
+    invoice?.clientAddress.city ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressPostCode = useInput(
-    invoiceId?.clientAddress.postCode ?? '',
+    invoice?.clientAddress.postCode ?? '',
     INPUT_TYPES.TEXT
   );
   const clientAddressCountry = useInput(
-    invoiceId?.clientAddress.country ?? '',
+    invoice?.clientAddress.country ?? '',
     INPUT_TYPES.TEXT
   );
   const invoiceDate = useInput(
     activeMode === INVOICE_FORM_MODES.NEW_INVOICE
-      ? new Date()
-      : invoiceId?.createdAt,
+      ? new Date().toString()
+      : invoice?.createdAt,
     INPUT_TYPES.DATE,
     true
   );
   const paymentTerms = useInput(
     activeMode === INVOICE_FORM_MODES.NEW_INVOICE
-      ? PAYMENT_TERMS_OPTIONS[PAYMENT_TERMS_OPTIONS.length - 1]
-      : invoiceId?.paymentTerms,
+      ? PAYMENT_TERMS_OPTIONS[PAYMENT_TERMS_OPTIONS.length - 1].toString()
+      : invoice?.paymentTerms.toString(),
     INPUT_TYPES.SELECT
   );
   const projectDescription = useInput(
-    invoiceId?.description ?? '',
+    invoice?.description ?? '',
     INPUT_TYPES.TEXT
   );
 
   //item list
-  const [invoiceItems, setInvoiceItems] = useState(invoiceId?.items ?? []);
+  const [invoiceItems, setInvoiceItems] = useState(invoice?.items ?? []);
   const [isNewItemAdded, setIsNewItemAdded] = useState(false);
 
   const handleNewItemAdded = () => {
@@ -114,7 +119,7 @@ const InvoiceForm = (props) => {
 
   //when new item list is added scroll form to bottom
   useEffect(() => {
-    if (isNewItemAdded) {
+    if (invoiceFormRef.current && isNewItemAdded) {
       invoiceFormRef.current.scrollTo(0, invoiceFormRef.current.scrollHeight);
       setIsNewItemAdded(false);
     }
@@ -126,9 +131,9 @@ const InvoiceForm = (props) => {
   };
 
   //submit form
-  const handleInvoiceFormSubmit = (status) => {
+  const handleInvoiceFormSubmit = (status: string) => {
     const newOrUpdatedInvoice = {
-      id: invoiceId?.id ?? generateRandomId(),
+      id: invoice?.id ?? generateRandomId(),
       senderAddress: {
         street: senderAddressStreet?.inputValue ?? '',
         postCode: senderAddressPostCode?.inputValue ?? '',
@@ -145,12 +150,14 @@ const InvoiceForm = (props) => {
       clientEmail: clientEmail?.inputValue ?? '',
       createdAt: formatDateForFirebase(new Date(invoiceDate.inputValue)),
       paymentDue: formatDateForFirebase(
-        new Date(invoiceDate.inputValue).setDate(
-          new Date(invoiceDate.inputValue).getDate() +
-            Number(paymentTerms.inputValue)
+        new Date(
+          new Date(invoiceDate.inputValue).setDate(
+            new Date(invoiceDate.inputValue).getDate() +
+              Number(paymentTerms.inputValue)
+          )
         )
       ),
-      paymentTerms: paymentTerms.inputValue,
+      paymentTerms: Number(paymentTerms.inputValue),
       items: invoiceItems ?? {},
       total: invoiceItems.reduce(
         (accTotal, currItem) => accTotal + currItem.total,
@@ -171,7 +178,7 @@ const InvoiceForm = (props) => {
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && 'New Invoice'}
           {activeMode === INVOICE_FORM_MODES.EDIT_INVOICE && (
             <>
-              Edit <InvoiceId id={invoiceId.id} />
+              Edit <InvoiceId id={invoice.id} />
             </>
           )}
         </h2>
@@ -251,7 +258,7 @@ const InvoiceForm = (props) => {
                 type={invoiceDate.type}
                 value={invoiceDate.inputValue}
                 onChange={invoiceDate.handleInputValueChange}
-                disabled={invoiceId !== undefined}
+                disabled={invoice !== undefined}
               />
               <InputGroup
                 label='Payment Terms'
@@ -269,8 +276,8 @@ const InvoiceForm = (props) => {
             />
           </section>
           <InvoiceFormItems
-            itemList={invoiceItems}
-            setItemList={setInvoiceItems}
+            items={invoiceItems}
+            setItems={setInvoiceItems}
             onAddNewItem={handleNewItemAdded}
           />
         </div>
@@ -304,7 +311,7 @@ const InvoiceForm = (props) => {
                 Cancel
               </Button>
               <Button
-                onClick={handleInvoiceFormSubmit.bind(null, invoiceId.status)}
+                onClick={handleInvoiceFormSubmit.bind(null, invoice.status)}
                 buttonStyle='1'
               >
                 Save Changes

@@ -5,7 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteInvoice } from '../../../store/invoicesSlice';
 
-const DeleteInvoice = (props) => {
+type Props = {
+  invoiceId: string;
+};
+
+const DeleteInvoice = (props: Props) => {
   const { invoiceId } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();

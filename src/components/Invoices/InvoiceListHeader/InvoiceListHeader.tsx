@@ -4,10 +4,10 @@ import Button from '../../UI/Button/Button';
 import styles from './InvoiceListHeader.module.css';
 import Icon from '../../UI/Icon';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../store/store';
 
 const InvoiceListHeader = () => {
-  const invoicesCount = useSelector(
+  const invoicesCount = useAppSelector(
     (state) => state.invoices.invoiceList?.length
   );
 

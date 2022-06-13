@@ -2,19 +2,19 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import InvoiceActions from '../components/Invoices/InvoiceActions/InvoiceActions';
 import InvoiceDetails from '../components/Invoices/InvoiceDetails/InvoiceDetails';
 import Button from '../components/UI/Button/Button';
-import { useSelector } from 'react-redux';
 import Icon from '../components/UI/Icon';
 import { getInvoiceById } from '../store/invoicesSlice';
+import { useAppSelector } from '../store/store';
 
 const InvoiceDetailsPage = () => {
   const navigate = useNavigate();
 
-  const isLoadingInvoices = useSelector(
+  const isLoadingInvoices = useAppSelector(
     (state) => state.invoices.isLoadingInvoices
   );
 
   const { invoiceId } = useParams();
-  const currentInvoice = useSelector((state) =>
+  const currentInvoice = useAppSelector((state) =>
     getInvoiceById(state, invoiceId)
   );
 

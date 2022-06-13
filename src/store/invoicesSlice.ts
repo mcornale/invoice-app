@@ -7,6 +7,14 @@ import {
   setDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { Invoice } from '../types/invoice-types';
+import { AppDispatch, RootState } from './store';
+
+type InitialState = {
+  isLoadingInvoices: boolean;
+  isInvoiceListFetched: boolean;
+  invoiceList: Invoice[] | null;
+};
 
 const invoicesSlice = createSlice({
   name: 'invoices',
@@ -14,7 +22,7 @@ const invoicesSlice = createSlice({
     isLoadingInvoices: false,
     isInvoiceListFetched: false,
     invoiceList: null,
-  },
+  } as InitialState,
   reducers: {
     setInvoices: (state, action) => {
       const { newInvoiceList } = action.payload;
@@ -32,26 +40,32 @@ export const { setInvoices, setLoading } = invoicesSlice.actions;
 
 export default invoicesSlice;
 
-export const fetchInvoices = () => (dispatch) => {
+export const fetchInvoices = () => (dispatch: AppDispatch) => {
   dispatch(setLoading());
   onSnapshot(collection(db, 'invoices'), (querySnapshot) => {
-    const newInvoiceList = [];
+    const newInvoiceList: Invoice[] = [];
     querySnapshot.docs.forEach((doc) => {
-      newInvoiceList.push({ id: doc.id, ...doc.data() });
+      newInvoiceList.push({ id: doc.id, ...doc.data() } as Invoice);
     });
     dispatch(setInvoices({ newInvoiceList: newInvoiceList }));
   });
 };
 
-export const createOrUpdateInvoice = (invoice) => async () => {
-  const invoiceId = invoice.id;
-  delete invoice.id;
-  await setDoc(doc(db, 'invoices', invoiceId), invoice);
+export const createOrUpdateInvoice = (invoice: Invoice) => async () => {
+  const { id: invoiceId, ...invoiceData } = invoice;
+  await setDoc(doc(db, 'invoices', invoiceId), invoiceData);
 };
 
-export const deleteInvoice = (invoiceId) => async () => {
+export const deleteInvoice = (invoiceId: string) => async () => {
   await deleteDoc(doc(db, 'invoices', invoiceId));
 };
 
-export const getInvoiceById = (state, invoiceId) =>
-  state.invoices.invoiceList?.find((invoice) => invoice.id === invoiceId);
+export const getInvoiceById = (
+  state: RootState,
+  invoiceId: string | undefined
+) =>
+  invoiceId
+    ? state.invoices.invoiceList?.find(
+        (invoice: Invoice) => invoice.id === invoiceId
+      )
+    : null;
