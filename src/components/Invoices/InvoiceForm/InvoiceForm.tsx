@@ -15,6 +15,7 @@ import { createOrUpdateInvoice } from '../../../store/invoicesSlice';
 import { useNavigate } from 'react-router-dom';
 import generateRandomId from '../../../helpers/generateRandomId';
 import { Invoice } from '../../../types/invoice';
+import INVOICES_STATUSES from '../../../constants/invoices-statuses';
 
 type Props = {
   invoice: Invoice;
@@ -292,13 +293,19 @@ const InvoiceForm = (props: Props) => {
                 Discard
               </Button>
               <Button
-                onClick={handleInvoiceFormSubmit.bind(null, 'draft')}
+                onClick={handleInvoiceFormSubmit.bind(
+                  null,
+                  INVOICES_STATUSES.DRAFT
+                )}
                 buttonStyle='3'
               >
                 Save as Draft
               </Button>
               <Button
-                onClick={handleInvoiceFormSubmit.bind(null, 'pending')}
+                onClick={handleInvoiceFormSubmit.bind(
+                  null,
+                  INVOICES_STATUSES.PENDING
+                )}
                 buttonStyle='1'
               >
                 Save & Send

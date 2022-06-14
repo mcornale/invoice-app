@@ -19,38 +19,38 @@
   border-radius: 50%;
 }
 
-.invoiceStatus[data-status='paid'] {
+.invoiceStatusPaid {
   color: rgb(51, 214, 159);
   background-color: rgba(51, 214, 159, 0.05);
 }
 
-.invoiceStatus[data-status='paid']::before {
+.invoiceStatusPaid::before {
   background-color: rgb(51, 214, 159);
 }
 
-.invoiceStatus[data-status='pending'] {
+.invoiceStatusPending {
   color: rgb(255, 143, 0);
   background-color: rgba(255, 143, 0, 0.05);
 }
 
-.invoiceStatus[data-status='pending']::before {
+.invoiceStatusPending::before {
   background-color: rgb(255, 143, 0);
 }
 
-.invoiceStatus[data-status='draft'] {
+.invoiceStatusDraft {
   color: rgb(55, 59, 83);
   background-color: rgba(55, 59, 83, 0.05);
 }
 
-.invoiceStatus[data-status='draft']::before {
+.invoiceStatusDraft::before {
   background-color: rgb(55, 59, 83);
 }
 
-body[data-theme='dark'] .invoiceStatus[data-status='draft'] {
+body[data-theme='dark'] .invoiceStatusDraft {
   color: rgb(223, 227, 250);
   background-color: rgba(223, 227, 250, 0.05);
 }
 
-.invoiceStatus[data-status='draft']::before {
+.invoiceStatusDraft::before {
   background-color: rgb(223, 227, 250);
 }
