@@ -51,6 +51,6 @@ body[data-theme='dark'] .invoiceStatusDraft {
   background-color: rgba(223, 227, 250, 0.05);
 }
 
-.invoiceStatusDraft::before {
+body[data-theme='dark'] .invoiceStatusDraft::before {
   background-color: rgb(223, 227, 250);
 }
