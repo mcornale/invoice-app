@@ -3,7 +3,7 @@ import styles from './InvoiceDetails.module.css';
 import InvoiceId from '../InvoiceId/InvoiceId';
 import formatTotal from '../../../helpers/formatTotal';
 import formatDate from '../../../helpers/formatDate';
-import { InvoiceAddress, InvoiceItems } from '../../../types/invoice-types';
+import { InvoiceAddress, InvoiceItems } from '../../../types/invoice';
 
 type Props = {
   invoiceId: string;

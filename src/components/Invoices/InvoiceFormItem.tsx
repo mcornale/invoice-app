@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import INPUT_TYPES from '../../constants/input-types';
 import useInput from '../../hooks/useInput';
-import { InvoiceItem, InvoiceItems } from '../../types/invoice-types';
+import { InvoiceItem, InvoiceItems } from '../../types/invoice';
 import Button from '../UI/Button/Button';
 import Icon from '../UI/Icon';
 import InputGroup from '../UI/InputGroup/InputGroup';

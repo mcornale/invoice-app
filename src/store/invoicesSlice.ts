@@ -7,7 +7,7 @@ import {
   setDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase';
-import { Invoice } from '../types/invoice-types';
+import { Invoice } from '../types/invoice';
 import { AppDispatch, RootState } from './store';
 
 type InitialState = {

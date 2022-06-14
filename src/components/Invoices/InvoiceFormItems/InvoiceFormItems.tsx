@@ -1,4 +1,4 @@
-import { InvoiceItems } from '../../../types/invoice-types';
+import { InvoiceItems } from '../../../types/invoice';
 import Button from '../../UI/Button/Button';
 import Icon from '../../UI/Icon';
 import InvoiceFormItem from '../InvoiceFormItem';

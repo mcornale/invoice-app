@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { createOrUpdateInvoice } from '../../../store/invoicesSlice';
 import { useNavigate } from 'react-router-dom';
 import generateRandomId from '../../../helpers/generateRandomId';
-import { Invoice } from '../../../types/invoice-types';
+import { Invoice } from '../../../types/invoice';
 
 type Props = {
   invoice: Invoice;
