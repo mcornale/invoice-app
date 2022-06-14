@@ -1,9 +1,14 @@
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.css';
 
-const Modal = (props) => {
+type Props = {
+  children: ReactNode;
+  hideSideBar?: boolean;
+};
+
+const Modal = (props: Props) => {
   const { children, hideSideBar } = props;
 
   const modalClassNameArr = [styles.modal];
@@ -22,7 +27,7 @@ const Modal = (props) => {
       {children}
       <div className={styles.modalBackdrop}></div>
     </div>,
-    document.getElementById('modal')
+    document.getElementById('modal') as HTMLElement
   );
 };
 

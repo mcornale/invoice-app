@@ -259,7 +259,7 @@ const InvoiceForm = (props: Props) => {
                 type={invoiceDate.type}
                 value={invoiceDate.inputValue}
                 onChange={invoiceDate.handleInputValueChange}
-                disabled={invoice !== undefined}
+                disabled={invoice !== null}
               />
               <InputGroup
                 label='Payment Terms'
@@ -287,8 +287,8 @@ const InvoiceForm = (props: Props) => {
             <>
               <Button
                 onClick={handleInvoiceFormClose}
-                style={{ marginRight: 'auto' }}
                 buttonStyle='2'
+                marginRightAuto
               >
                 Discard
               </Button>

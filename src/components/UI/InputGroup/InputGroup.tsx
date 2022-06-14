@@ -4,7 +4,18 @@ import InputDate from '../InputDate/InputDate';
 import Select from '../Select/Select';
 import INPUT_TYPES from '../../../constants/input-types';
 
-const InputGroup = (props) => {
+type Props = {
+  label: string;
+  type: string;
+  value: string;
+  onChange?: (newValue: string) => void;
+  noLabel?: boolean;
+  readOnly?: boolean;
+  options?: number[];
+  disabled?: boolean;
+};
+
+const InputGroup = (props: Props) => {
   const { label, type, value, onChange, noLabel, readOnly, options, disabled } =
     props;
 
@@ -32,16 +43,16 @@ const InputGroup = (props) => {
         <InputDate
           className={inputFieldClassName.join(' ')}
           value={value}
-          onChange={onChange}
-          disabled={disabled}
+          onChange={onChange!}
+          disabled={disabled ?? false}
         />
       )}
       {type === INPUT_TYPES.SELECT && (
         <Select
           className={inputFieldClassName.join(' ')}
           value={value}
-          onChange={onChange}
-          options={options}
+          onChange={onChange!}
+          options={options!}
         />
       )}
     </div>

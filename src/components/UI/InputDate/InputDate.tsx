@@ -5,7 +5,14 @@ import Icon from '../Icon';
 
 import styles from './InputDate.module.css';
 
-const InputDate = (props) => {
+type Props = {
+  value: string;
+  onChange: (newValue: string) => void;
+  className: string;
+  disabled: boolean;
+};
+
+const InputDate = (props: Props) => {
   const { value, onChange, className, disabled } = props;
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -16,7 +23,7 @@ const InputDate = (props) => {
     setIsCalendarOpen((prevCalendarState) => !prevCalendarState);
   };
 
-  const handleCalendarDayClick = (newDate) => {
+  const handleCalendarDayClick = (newDate: string) => {
     onChange(newDate);
     setIsCalendarOpen(false);
   };

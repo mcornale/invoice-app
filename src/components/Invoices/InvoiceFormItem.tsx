@@ -36,13 +36,13 @@ const InvoiceFormItem = (props: Props) => {
     itemName.handleInputValueChange(newItemName);
   };
 
-  const handleItemQuantityInputChange = (newItemQuantity: number) => {
+  const handleItemQuantityInputChange = (newItemQuantity: string) => {
     setItems((prevItemList) =>
       prevItemList.map((itemObj, itemIndex) =>
         itemIndex === index
           ? {
               ...itemObj,
-              quantity: newItemQuantity,
+              quantity: Number(newItemQuantity),
             }
           : itemObj
       )
@@ -51,13 +51,13 @@ const InvoiceFormItem = (props: Props) => {
     itemQuantity.handleInputValueChange(newItemQuantity.toString());
   };
 
-  const handleItemPriceInputChange = (newItemPrice: number) => {
+  const handleItemPriceInputChange = (newItemPrice: string) => {
     setItems((prevItemList) =>
       prevItemList.map((itemObj, itemIndex) =>
         itemIndex === index
           ? {
               ...itemObj,
-              price: newItemPrice,
+              price: Number(newItemPrice),
             }
           : itemObj
       )

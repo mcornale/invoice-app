@@ -3,7 +3,14 @@ import Button from '../Button/Button';
 import Icon from '../Icon';
 import styles from './Select.module.css';
 
-const Select = forwardRef((props, ref) => {
+type Props = {
+  className: string;
+  value: string;
+  onChange: (newValue: string) => void;
+  options: number[];
+};
+
+const Select = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const { className, value, onChange, options } = props;
 
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
@@ -12,7 +19,7 @@ const Select = forwardRef((props, ref) => {
     setAreOptionsVisible((prevOptionsState) => !prevOptionsState);
   };
 
-  const handleOptionClick = (newSelectedOption) => {
+  const handleOptionClick = (newSelectedOption: string) => {
     onChange(newSelectedOption);
     setAreOptionsVisible(false);
   };
@@ -26,7 +33,7 @@ const Select = forwardRef((props, ref) => {
       >
         <input
           type='text'
-          value={`Net ${value} ${value === 1 ? 'Day' : 'Days'}`}
+          value={`Net ${value} ${Number(value) === 1 ? 'Day' : 'Days'}`}
           ref={ref}
           readOnly
         />
@@ -36,9 +43,8 @@ const Select = forwardRef((props, ref) => {
         <div className={styles.options}>
           {options.map((option, index) => (
             <Button
-              type='button'
               key={index}
-              onClick={handleOptionClick.bind(null, option)}
+              onClick={handleOptionClick.bind(null, option.toString())}
               className={styles.option}
             >
               Net {option} {option === 1 ? 'Day' : 'Days'}

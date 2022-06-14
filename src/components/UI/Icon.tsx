@@ -1,4 +1,17 @@
-const Icon = (props) => {
+type Props = {
+  icon:
+    | 'arrowDown'
+    | 'arrowLeft'
+    | 'arrowRight'
+    | 'calendar'
+    | 'check'
+    | 'delete'
+    | 'moon'
+    | 'plus'
+    | 'sun';
+};
+
+const Icon = (props: Props) => {
   const { icon } = props;
 
   return (

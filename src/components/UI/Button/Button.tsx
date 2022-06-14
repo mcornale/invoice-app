@@ -1,11 +1,22 @@
+import { ReactNode } from 'react';
 import styles from './Button.module.css';
 
-const Button = (props) => {
-  const { children, icon, buttonStyle, onClick, style, className } = props;
+type Props = {
+  children?: ReactNode;
+  icon?: JSX.Element;
+  buttonStyle?: '1' | '2' | '3' | '4';
+  onClick?: () => void;
+  marginRightAuto?: boolean;
+  className?: string;
+};
+
+const Button = (props: Props) => {
+  const { children, icon, buttonStyle, onClick, className, marginRightAuto } =
+    props;
 
   const buttonClassName = [styles.button];
-
   if (className) buttonClassName.push(className);
+  if (marginRightAuto) buttonClassName.push(styles.buttonMarginRightAuto);
 
   if (buttonStyle === '1') buttonClassName.push(styles.button1);
   if (buttonStyle === '2') buttonClassName.push(styles.button2);
@@ -17,7 +28,6 @@ const Button = (props) => {
   return (
     <button
       type='button'
-      style={style}
       onClick={onClick}
       className={buttonClassName.join(' ')}
     >

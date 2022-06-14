@@ -9,7 +9,13 @@ const MIN_MONTH_NUMBER = 0;
 const MAX_MONTH_NUMBER = 11;
 const DAYS_OF_THE_WEEK = 7;
 
-const Calendar = (props) => {
+type Props = {
+  className: string;
+  inputDate: string;
+  onCalendarDayClick: (newDate: string) => void;
+};
+
+const Calendar = (props: Props) => {
   const { className, inputDate, onCalendarDayClick } = props;
 
   const selectedDate = new Date(inputDate);
@@ -17,9 +23,9 @@ const Calendar = (props) => {
   const [selectedYear, setSelectedYear] = useState(selectedDate.getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(selectedDate.getMonth());
 
-  const selectedMonthDays = [];
-  const previousMonthDays = [];
-  const nextMonthDays = [];
+  const selectedMonthDays: number[] = [];
+  const previousMonthDays: number[] = [];
+  const nextMonthDays: number[] = [];
 
   const handleArrowLeftClick = () => {
     if (selectedMonth - 1 < MIN_MONTH_NUMBER) {
@@ -35,7 +41,7 @@ const Calendar = (props) => {
     } else setSelectedMonth((prevSelectedMonth) => ++prevSelectedMonth);
   };
 
-  const populateDaysArray = (date, daysArr) => {
+  const populateDaysArray = (date: Date, daysArr: number[]) => {
     let dayToPush = date.getDate();
     daysArr.push(dayToPush);
     date.setDate(dayToPush + 1);
@@ -105,7 +111,7 @@ const Calendar = (props) => {
           <Button
             onClick={onCalendarDayClick.bind(
               null,
-              new Date(selectedYear, selectedMonth, day)
+              new Date(selectedYear, selectedMonth, day).toString()
             )}
             className={styles.calendarDay}
             key={index}
