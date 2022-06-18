@@ -25,7 +25,7 @@
   transform: rotate(180deg);
 }
 
-.options {
+.selectOptions {
   position: absolute;
   left: -0.1rem;
   margin-top: 1rem;
@@ -38,17 +38,17 @@
   flex-direction: column;
 }
 
-body[data-theme='dark'] .options {
-  box-shadow: none;
+body[data-theme='dark'] .selectOptions {
+  box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.25);
 }
 
-.option {
+.selectOption {
   padding: 1.5rem 2rem;
   display: flex;
   justify-content: flex-start;
   color: var(--color-dark-text-and-icons);
 }
 
-.option:not(:last-child) {
+.selectOption:not(:last-child) {
   border-bottom: 0.1rem solid var(--border-color-input);
 }

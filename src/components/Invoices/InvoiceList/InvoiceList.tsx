@@ -2,11 +2,20 @@ import { useAppSelector } from '../../../store/store';
 import InvoiceListItem from '../InvoiceListItem/InvoiceListItem';
 
 const InvoiceList = () => {
-  const invoiceList = useAppSelector((state) => state.invoices.invoiceList);
+  const { invoiceList, invoiceListFilters } = useAppSelector(
+    (state) => state.invoices
+  );
+
+  const filteredInvoiceList =
+    invoiceListFilters.length > 0
+      ? invoiceList!.filter((invoiceListItem) =>
+          invoiceListFilters.includes(invoiceListItem.status)
+        )
+      : invoiceList;
 
   return (
     <ul>
-      {invoiceList!.map((invoiceListItem) => (
+      {filteredInvoiceList!.map((invoiceListItem) => (
         <InvoiceListItem
           key={invoiceListItem.id}
           invoiceId={invoiceListItem.id}

@@ -1,15 +1,32 @@
-import Filter from '../../UI/Filter/Filter';
+import MultiCheckBox from '../../UI/MultiCheckBox/MultiCheckBox';
 import Button from '../../UI/Button/Button';
 
 import styles from './InvoiceListHeader.module.css';
 import Icon from '../../UI/Icon';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../store/store';
+import INVOICES_STATUSES from '../../../constants/invoices-statuses';
+import { useDispatch } from 'react-redux';
+import { setInvoiceListFilters } from '../../../store/invoicesSlice';
 
 const InvoiceListHeader = () => {
+  const invoiceListFilters = useAppSelector(
+    (state) => state.invoices.invoiceListFilters
+  );
   const invoicesCount = useAppSelector(
     (state) => state.invoices.invoiceList?.length
   );
+  const dispatch = useDispatch();
+
+  const invoiceListFiltersOptions = Object.values(INVOICES_STATUSES);
+
+  const handleMultiCheckBoxChange = (optionClicked: string) => {
+    const newInvoiceListFilters = invoiceListFilters.includes(optionClicked)
+      ? invoiceListFilters.filter((option) => option !== optionClicked)
+      : [...invoiceListFilters, optionClicked];
+
+    dispatch(setInvoiceListFilters({ newInvoiceListFilters }));
+  };
 
   return (
     <header className={styles.header}>
@@ -18,7 +35,11 @@ const InvoiceListHeader = () => {
         <p>There are {invoicesCount} total invoices</p>
       </div>
       <div className={styles.headerActions}>
-        <Filter />
+        <MultiCheckBox
+          options={invoiceListFiltersOptions}
+          activeOptions={invoiceListFilters}
+          onChange={handleMultiCheckBoxChange}
+        />
         <Link to='new'>
           <Button icon={<Icon icon='plus' />} buttonStyle='1'>
             New Invoice

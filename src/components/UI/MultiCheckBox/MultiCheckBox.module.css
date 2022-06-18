@@ -1,0 +1,84 @@
+.multiCheckBoxContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.multiCheckBox {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1.2rem;
+  font-weight: 700;
+  color: var(--color-dark-text-and-icons);
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.multiCheckBox svg {
+  transition: transform 0.3s;
+}
+
+.multiCheckBoxOpen svg {
+  transform: rotate(180deg);
+}
+
+.multiCheckBoxOptions {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: -0.5rem;
+  width: 100%;
+  background-color: var(--background-color-input);
+  box-shadow: 0rem 1rem 2rem rgba(72, 84, 159, 0.25);
+  padding: 1.5rem 0;
+  border-radius: var(--border-radius-default);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+}
+
+body[data-theme='dark'] .multiCheckBoxOptions {
+  box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.25);
+}
+
+.multiCheckBoxOption {
+  padding: 0.6rem 2rem;
+  display: flex;
+  justify-content: flex-start;
+  color: var(--color-dark-text-and-icons);
+}
+
+.multiCheckBoxCheckBox {
+  position: relative;
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: var(--background-color-checkbox);
+  border-radius: 0.2rem;
+  transition: all 0.1s;
+}
+
+.multiCheckBoxCheckBox::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 60%;
+  height: 40%;
+  background-color: transparent;
+  border: 0.2rem solid transparent;
+  border-left-color: #ffffff;
+  border-bottom-color: #ffffff;
+  border-radius: 0.2rem;
+  transform: translate(-50%, -75%) rotate(-45deg) scale(0);
+  transition: all 0.2s;
+}
+
+.multiCheckBoxActiveCheckBox {
+  background-color: var(--color-main);
+}
+
+.multiCheckBoxCheckBox.multiCheckBoxActiveCheckBox::after {
+  transform: translate(-50%, -75%) rotate(-45deg) scale(1);
+}

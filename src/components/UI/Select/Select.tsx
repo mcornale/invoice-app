@@ -40,12 +40,12 @@ const Select = forwardRef<HTMLInputElement, Props>((props, ref) => {
       </Button>
 
       {areOptionsVisible && (
-        <div className={styles.options}>
+        <div className={styles.selectOptions}>
           {options.map((option, index) => (
             <Button
               key={index}
               onClick={handleOptionClick.bind(null, option.toString())}
-              className={styles.option}
+              className={styles.selectOption}
             >
               Net {option} {option === 1 ? 'Day' : 'Days'}
             </Button>

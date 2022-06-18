@@ -56,6 +56,7 @@ body[data-theme='light'] {
   --background-color-invoice-form-container: #ffffff;
   --background-color-input: #ffffff;
   --background-color-custom-scrollbar: #dfe3fa;
+  --background-color-checkbox: #dfe3fa;
 
   --border-color-input: #dfe3fa;
 
@@ -79,6 +80,7 @@ body[data-theme='dark'] {
   --background-color-invoice-form-container: #141625;
   --background-color-input: #1e2139;
   --background-color-custom-scrollbar: #252945;
+  --background-color-checkbox: #1e2139;
 
   --border-color-input: #252945;
 

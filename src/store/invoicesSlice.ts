@@ -6,6 +6,7 @@ import {
   onSnapshot,
   setDoc,
 } from 'firebase/firestore';
+import INVOICES_STATUSES from '../constants/invoices-statuses';
 import { db } from '../firebase';
 import { Invoice } from '../types/invoice';
 import { AppDispatch, RootState } from './store';
@@ -14,6 +15,7 @@ type InitialState = {
   isLoadingInvoices: boolean;
   isInvoiceListFetched: boolean;
   invoiceList: Invoice[] | null;
+  invoiceListFilters: string[];
 };
 
 const invoicesSlice = createSlice({
@@ -22,6 +24,7 @@ const invoicesSlice = createSlice({
     isLoadingInvoices: false,
     isInvoiceListFetched: false,
     invoiceList: null,
+    invoiceListFilters: Object.values(INVOICES_STATUSES),
   } as InitialState,
   reducers: {
     setInvoices: (state, action) => {
@@ -33,10 +36,15 @@ const invoicesSlice = createSlice({
     setLoading: (state) => {
       if (!state.isLoadingInvoices) state.isLoadingInvoices = true;
     },
+    setInvoiceListFilters: (state, action) => {
+      const { newInvoiceListFilters } = action.payload;
+      state.invoiceListFilters = newInvoiceListFilters;
+    },
   },
 });
 
-export const { setInvoices, setLoading } = invoicesSlice.actions;
+export const { setInvoices, setLoading, setInvoiceListFilters } =
+  invoicesSlice.actions;
 
 export default invoicesSlice;
 
