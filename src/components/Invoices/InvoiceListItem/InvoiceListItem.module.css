@@ -2,6 +2,15 @@
   margin-bottom: 2rem;
 }
 
+.invoiceListItemContainer {
+  border: 0.1rem solid var(--background-color-container);
+  transition: all 0.2s;
+}
+
+.invoiceListItemContainer:hover {
+  border: 0.1rem solid var(--color-main);
+}
+
 .invoiceListItemLink {
   width: 100%;
   padding: 1.8rem 2.6rem;

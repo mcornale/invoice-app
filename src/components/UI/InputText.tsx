@@ -5,10 +5,11 @@ type Props = {
   onChange?: (newValue: string) => void;
   className: string;
   readOnly?: boolean;
+  placeholder?: string;
 };
 
 const InputText = (props: Props) => {
-  const { value, onChange, className, readOnly } = props;
+  const { value, onChange, className, readOnly, placeholder } = props;
 
   const handleInputTextChange = (event: FormEvent<HTMLInputElement>) => {
     if (onChange) onChange.call(null, (event.target as HTMLInputElement).value);
@@ -21,6 +22,7 @@ const InputText = (props: Props) => {
       value={value}
       onChange={handleInputTextChange}
       readOnly={readOnly ?? false}
+      {...(placeholder && { placeholder })}
     />
   );
 };

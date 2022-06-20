@@ -121,3 +121,7 @@ body[data-theme='dark'] .invoiceForm::after {
   border-radius: 0 var(--border-radius-big) var(--border-radius-big) 0;
   z-index: 2;
 }
+
+.invoiceFormSubmitSectionAloneButton {
+  margin-right: auto;
+}

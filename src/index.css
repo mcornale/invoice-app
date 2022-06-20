@@ -69,6 +69,7 @@ body[data-theme='light'] {
 
   --color-dark-text-and-icons: #0c0e16;
   --color-light-text-and-icons: #858bb2;
+  --color-text-input-placeholder: rgba(12, 14, 22, 0.4);
 }
 
 body[data-theme='dark'] {
@@ -80,7 +81,7 @@ body[data-theme='dark'] {
   --background-color-invoice-form-container: #141625;
   --background-color-input: #1e2139;
   --background-color-custom-scrollbar: #252945;
-  --background-color-checkbox: #1e2139;
+  --background-color-checkbox: #141625;
 
   --border-color-input: #252945;
 
@@ -93,6 +94,7 @@ body[data-theme='dark'] {
 
   --color-dark-text-and-icons: #ffffff;
   --color-light-text-and-icons: #dfe3fa;
+  --color-text-input-placeholder: #ffffff;
 }
 
 #root {

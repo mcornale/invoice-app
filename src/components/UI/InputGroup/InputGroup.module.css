@@ -28,3 +28,7 @@
   font-weight: 700;
   background-color: transparent;
 }
+
+.inputField::placeholder {
+  color: var(--color-text-input-placeholder);
+}

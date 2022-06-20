@@ -53,3 +53,11 @@
   border-radius: 50%;
   height: auto;
 }
+
+.sidebarChangeThemeIcon path {
+  transition: all 0.2s;
+}
+
+.sidebarChangeThemeIcon:hover path {
+  fill: #dfe3fa;
+}

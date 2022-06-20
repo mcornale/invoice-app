@@ -25,6 +25,7 @@ const Sidebar = () => {
       </div>
       <div className={styles.sidebarElements}>
         <Button
+          className={styles.sidebarChangeThemeIcon}
           onClick={handleChangeThemeBtn}
           icon={<Icon icon={theme === 'light' ? 'moon' : 'sun'} />}
         />

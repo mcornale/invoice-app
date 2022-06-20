@@ -13,11 +13,21 @@ type Props = {
   readOnly?: boolean;
   options?: number[];
   disabled?: boolean;
+  placeholder?: string;
 };
 
 const InputGroup = (props: Props) => {
-  const { label, type, value, onChange, noLabel, readOnly, options, disabled } =
-    props;
+  const {
+    label,
+    type,
+    value,
+    onChange,
+    noLabel,
+    readOnly,
+    options,
+    disabled,
+    placeholder,
+  } = props;
 
   const inputFieldClassName = [styles.inputField];
   if (readOnly) inputFieldClassName.push(styles.inputFieldReadOnly);
@@ -37,6 +47,7 @@ const InputGroup = (props: Props) => {
           value={value}
           readOnly={readOnly}
           onChange={onChange}
+          {...(placeholder && { placeholder })}
         />
       )}
       {type === INPUT_TYPES.DATE && (

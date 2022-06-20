@@ -27,7 +27,7 @@ const InvoiceListItem = (props: Props) => {
 
   return (
     <li className={styles.invoiceListItem}>
-      <Container>
+      <Container className={styles.invoiceListItemContainer}>
         <Link className={styles.invoiceListItemLink} to={`${invoiceId}`}>
           <p className={styles.invoiceListItemId}>
             <InvoiceId id={invoiceId} />

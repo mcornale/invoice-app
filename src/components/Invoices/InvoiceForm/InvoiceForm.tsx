@@ -226,6 +226,7 @@ const InvoiceForm = (props: Props) => {
               type={clientEmail.type}
               value={clientEmail.inputValue}
               onChange={clientEmail.handleInputValueChange}
+              placeholder='e.g. email@example.com'
             />
             <InputGroup
               label='Street Address'
@@ -274,6 +275,7 @@ const InvoiceForm = (props: Props) => {
               type={projectDescription.type}
               value={projectDescription.inputValue}
               onChange={projectDescription.handleInputValueChange}
+              placeholder='e.g. Graphic Design Service'
             />
           </section>
           <InvoiceFormItems
@@ -288,7 +290,7 @@ const InvoiceForm = (props: Props) => {
               <Button
                 onClick={handleInvoiceFormClose}
                 buttonStyle='2'
-                marginRightAuto
+                className={styles.invoiceFormSubmitSectionAloneButton}
               >
                 Discard
               </Button>

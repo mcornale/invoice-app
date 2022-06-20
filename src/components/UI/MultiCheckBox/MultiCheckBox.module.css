@@ -55,7 +55,12 @@ body[data-theme='dark'] .multiCheckBoxOptions {
   height: 1.6rem;
   background-color: var(--background-color-checkbox);
   border-radius: 0.2rem;
-  transition: all 0.1s;
+  border: 0.1rem solid var(--background-color-checkbox);
+  transition: all 0.2s;
+}
+
+.multiCheckBoxOption:hover .multiCheckBoxCheckBox {
+  border: 0.1rem solid var(--color-main);
 }
 
 .multiCheckBoxCheckBox::after {
