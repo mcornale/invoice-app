@@ -14,6 +14,7 @@ type Props = {
   options?: number[];
   disabled?: boolean;
   placeholder?: string;
+  isErrorVisible?: boolean;
 };
 
 const InputGroup = (props: Props) => {

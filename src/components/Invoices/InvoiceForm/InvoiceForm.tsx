@@ -110,9 +110,28 @@ const InvoiceForm = (props: Props) => {
     INPUT_TYPES.TEXT
   );
 
+  const inputsArr = [
+    senderAddressStreet,
+    senderAddressCity,
+    senderAddressPostCode,
+    senderAddressCountry,
+    clientName,
+    clientEmail,
+    clientAddressStreet,
+    clientAddressCity,
+    clientAddressPostCode,
+    clientAddressCountry,
+    invoiceDate,
+    paymentTerms,
+    projectDescription,
+  ];
+
   //item list
   const [invoiceItems, setInvoiceItems] = useState(invoice?.items ?? []);
   const [isNewItemAdded, setIsNewItemAdded] = useState(false);
+  const [isSomeInputEmpty, setIsSomeInputEmpty] = useState(false);
+  const [areItemsEmpty, setAreItemsEmpty] = useState(false);
+  const [areErrorsVisible, setAreErrorsVisible] = useState(false);
 
   const handleNewItemAdded = () => {
     setIsNewItemAdded(true);
@@ -120,11 +139,12 @@ const InvoiceForm = (props: Props) => {
 
   //when new item list is added scroll form to bottom
   useEffect(() => {
-    if (invoiceFormRef.current && isNewItemAdded) {
+    if (invoiceFormRef.current && (isNewItemAdded || areErrorsVisible)) {
       invoiceFormRef.current.scrollTo(0, invoiceFormRef.current.scrollHeight);
       setIsNewItemAdded(false);
+      setAreErrorsVisible(false);
     }
-  }, [isNewItemAdded]);
+  }, [isNewItemAdded, areErrorsVisible]);
 
   //close form
   const handleInvoiceFormClose = () => {
@@ -133,6 +153,19 @@ const InvoiceForm = (props: Props) => {
 
   //submit form
   const handleInvoiceFormSubmit = (status: string) => {
+    if (status === INVOICES_STATUSES.PENDING) {
+      if (inputsArr.some((input) => input.isEmpty)) {
+        setIsSomeInputEmpty(true);
+        setAreErrorsVisible(true);
+      } else setIsSomeInputEmpty(false);
+      if (invoiceItems.length === 0) {
+        setAreItemsEmpty(true);
+        setAreErrorsVisible(true);
+      } else setAreItemsEmpty(false);
+
+      return;
+    }
+
     const newOrUpdatedInvoice = {
       id: invoice?.id ?? generateRandomId(),
       senderAddress: {
@@ -283,6 +316,20 @@ const InvoiceForm = (props: Props) => {
             setItems={setInvoiceItems}
             onAddNewItem={handleNewItemAdded}
           />
+          {(isSomeInputEmpty || areItemsEmpty) && (
+            <section className={styles.invoiceFormErrorsContainer}>
+              {isSomeInputEmpty && (
+                <p className={styles.invoiceFormError}>
+                  - All fields must be added
+                </p>
+              )}
+              {areItemsEmpty && (
+                <p className={styles.invoiceFormError}>
+                  - An item must be added
+                </p>
+              )}
+            </section>
+          )}
         </div>
         <section className={styles.invoiceFormSubmitSection}>
           {activeMode === INVOICE_FORM_MODES.NEW_INVOICE && (

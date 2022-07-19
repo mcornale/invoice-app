@@ -20,6 +20,7 @@ const useInput = (value: string, type: string, formatNow = false) => {
 
   const [isTouched, setIsTouched] = useState(false);
   const [isFormatted, setIsFormatted] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(value === '');
 
   useEffect(() => {
     if (formatInputValue && isTouched && !isFormatted) {
@@ -39,6 +40,8 @@ const useInput = (value: string, type: string, formatNow = false) => {
   const handleInputValueChange = (newInputValue: string) => {
     setIsTouched(true);
 
+    if (newInputValue === '') setIsEmpty(true);
+
     if (!formatNow && formatInputValue) setIsFormatted(false);
 
     if (formatNow && formatInputValue)
@@ -46,7 +49,14 @@ const useInput = (value: string, type: string, formatNow = false) => {
     else setInputValue(newInputValue);
   };
 
-  return { inputValue, handleInputValueChange, isFormatted, isTouched, type };
+  return {
+    inputValue,
+    handleInputValueChange,
+    isFormatted,
+    isTouched,
+    type,
+    isEmpty,
+  };
 };
 
 export default useInput;

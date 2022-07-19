@@ -18,6 +18,11 @@
   font-weight: 700;
   color: var(--color-dark-text-and-icons);
   background-color: var(--background-color-input);
+  transition: all 0.3s;
+}
+
+.inputField:focus {
+  border: 0.1rem solid var(--color-main);
 }
 
 .inputField.inputFieldReadOnly {

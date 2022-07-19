@@ -108,6 +108,15 @@ body[data-theme='dark'] .invoiceForm::after {
   flex: 1 1 50%;
 }
 
+.invoiceFormErrorsContainer {
+  margin-top: 3rem;
+}
+
+.invoiceFormError {
+  color: var(--color-text-error);
+  font-size: 1rem;
+}
+
 .invoiceFormSubmitSection {
   display: flex;
   justify-content: flex-end;
