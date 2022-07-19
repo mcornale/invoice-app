@@ -11,7 +11,7 @@ const InvoiceList = () => {
       ? invoiceList!.filter((invoiceListItem) =>
           invoiceListFilters.includes(invoiceListItem.status)
         )
-      : invoiceList;
+      : [];
 
   return (
     <ul>
