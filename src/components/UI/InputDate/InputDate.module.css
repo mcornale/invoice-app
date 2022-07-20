@@ -1,6 +1,11 @@
 .inputDateContainer {
   padding: 0 !important;
   position: relative;
+  outline: none;
+}
+
+.inputDateContainerOpen {
+  border-color: var(--color-main);
 }
 
 .inputDate {

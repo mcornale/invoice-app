@@ -1,6 +1,11 @@
 .selectContainer {
   padding: 0 !important;
   position: relative;
+  outline: none;
+}
+
+.selectContainerOpen {
+  border-color: var(--color-main);
 }
 
 .select {

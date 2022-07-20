@@ -15,6 +15,10 @@ const Select = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
+  const selectContainerClassName = [className, styles.selectContainer];
+  if (areOptionsVisible)
+    selectContainerClassName.push(styles.selectContainerOpen);
+
   const handleSelectClick = () => {
     setAreOptionsVisible((prevOptionsState) => !prevOptionsState);
   };
@@ -25,7 +29,7 @@ const Select = forwardRef<HTMLInputElement, Props>((props, ref) => {
   };
 
   return (
-    <div className={`${className} ${styles.selectContainer}`}>
+    <div className={selectContainerClassName.join(' ')}>
       <Button
         onClick={handleSelectClick}
         className={`${styles.select} ${areOptionsVisible && styles.selectOpen}`}

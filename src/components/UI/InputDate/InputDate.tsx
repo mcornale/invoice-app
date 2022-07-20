@@ -16,6 +16,10 @@ const InputDate = (props: Props) => {
   const { value, onChange, className, disabled } = props;
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
+  const inputDateContainerClassName = [className, styles.inputDateContainer];
+  if (isCalendarOpen)
+    inputDateContainerClassName.push(styles.inputDateContainerOpen);
+
   const inputDateClassName = [styles.inputDate];
   if (disabled) inputDateClassName.push(styles.inputDateDisabled);
 
@@ -29,7 +33,7 @@ const InputDate = (props: Props) => {
   };
 
   return (
-    <div className={`${className} ${styles.inputDateContainer}`}>
+    <div className={inputDateContainerClassName.join(' ')}>
       <Button
         {...(!disabled && { onClick: handleInputDateClick })}
         className={inputDateClassName.join(' ')}
