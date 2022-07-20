@@ -154,7 +154,12 @@ const InvoiceForm = (props: Props) => {
   //submit form
   const handleInvoiceFormSubmit = (status: string) => {
     if (status === INVOICES_STATUSES.PENDING) {
-      if (inputsArr.some((input) => input.isEmpty)) {
+      if (
+        inputsArr.some((input) => input.inputValue === '') ||
+        invoiceItems.some((item) =>
+          Object.values(item).some((val) => val === '')
+        )
+      ) {
         setIsSomeInputEmpty(true);
         setAreErrorsVisible(true);
       } else setIsSomeInputEmpty(false);
