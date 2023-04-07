@@ -3,8 +3,10 @@ import { Outlet } from '@remix-run/react';
 export default function InvoicesRoute() {
   return (
     <div>
-      Hello from Invoices route
-      <Outlet />
+      <header>logo, mode switch, profile icon</header>
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }
