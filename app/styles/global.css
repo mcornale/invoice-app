@@ -1,0 +1,335 @@
+:root {
+  /* COLORS */
+  --color-mauve1: hsl(300, 20%, 99%);
+  --color-mauve2: hsl(300, 7.7%, 97.5%);
+  --color-mauve3: hsl(294, 5.5%, 95.3%);
+  --color-mauve4: hsl(289, 4.7%, 93.3%);
+  --color-mauve5: hsl(283, 4.4%, 91.3%);
+  --color-mauve6: hsl(278, 4.1%, 89.1%);
+  --color-mauve7: hsl(271, 3.9%, 86.3%);
+  --color-mauve8: hsl(255, 3.7%, 78.8%);
+  --color-mauve9: hsl(252, 4%, 57.3%);
+  --color-mauve10: hsl(253, 3.5%, 53.5%);
+  --color-mauve11: hsl(252, 4%, 44.8%);
+  --color-mauve12: hsl(260, 25%, 11%);
+  --color-violet1: hsl(255, 65%, 99.4%);
+  --color-violet2: hsl(252, 100%, 99%);
+  --color-violet3: hsl(252, 96.9%, 97.4%);
+  --color-violet4: hsl(252, 91.5%, 95.5%);
+  --color-violet5: hsl(252, 85.1%, 93%);
+  --color-violet6: hsl(252, 77.8%, 89.4%);
+  --color-violet7: hsl(252, 71%, 83.7%);
+  --color-violet8: hsl(252, 68.6%, 76.3%);
+  --color-violet9: hsl(252, 56%, 57.5%);
+  --color-violet10: hsl(251, 48.1%, 53.5%);
+  --color-violet11: hsl(250, 43%, 48%);
+  --color-violet12: hsl(254, 60%, 18.5%);
+
+  /* FONTS */
+  --font-family: 'Poppins', sans-serif;
+  --font-display-md: 3.6rem/4.4rem var(--font-family);
+  --font-display-sm: 3rem/3.8rem var(--font-family);
+  --font-display-xs: 2.4rem/3.2rem var(--font-family);
+  --font-text-xl: 2rem/3rem var(--font-family);
+  --font-text-lg: 1.8rem/2.8rem var(--font-family);
+  --font-text-md: 1.6rem/2.4rem var(--font-family);
+  --font-text-sm: 1.4rem/2rem var(--font-family);
+  --font-text-xs: 1.2rem/1.8rem var(--font-family);
+
+  /* SHADOWS */
+  --shadow-3xl: 0rem 3.2rem 6.4rem -1.2rem hsl(260, 25%, 11% / 1.4);
+  --shadow-2xl: 0rem 2.4rem 4.8rem -1.2rem hsl(260, 25%, 11% / 1.8);
+  --shadow-xl: 0rem 2rem 2.4rem -0.4rem hsl(260, 25%, 11% / 0.08),
+    0rem 0.8rem 0.8rem -0.4rem hsl(260, 25%, 11% / 0.03);
+  --shadow-lg: 0rem 1.2rem 1.6rem -0.4rem hsl(260, 25%, 11% / 0.08),
+    0rem 0.4rem 0.6rem -0.2rem hsl(260, 25%, 11% / 0.03);
+  --shadow-md: 0rem 0.4rem 0.8rem -0.2rem hsl(260, 25%, 11% / 0.1),
+    0rem 0.2rem 0.4rem -0.2rem hsl(260, 25%, 11% / 0.06);
+  --shadow-sm: 0rem 0.1rem 0.3rem hsl(260, 25%, 11% / 0.1),
+    0rem 0.1rem 0.2rem hsl(260, 25%, 11% / 0.06);
+  --shadow-xs: 0rem 0.1rem 0.2rem hsl(260, 25%, 11% / 0.05);
+
+  /* SPACING */
+  --spacing-unit: 0.4rem;
+  --spacing-1: calc(1 * var(--spacing-unit));
+  --spacing-2: calc(2 * var(--spacing-unit));
+  --spacing-3: calc(3 * var(--spacing-unit));
+  --spacing-4: calc(4 * var(--spacing-unit));
+  --spacing-5: calc(5 * var(--spacing-unit));
+  --spacing-6: calc(6 * var(--spacing-unit));
+  --spacing-8: calc(8 * var(--spacing-unit));
+  --spacing-10: calc(10 * var(--spacing-unit));
+  --spacing-12: calc(12 * var(--spacing-unit));
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font: var(--font-text-md);
+  min-height: 100vh;
+  min-height: calc(100vh - env(safe-area-inset-bottom));
+  color: var(--color-mauve12);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* interactive elements generic styles */
+:focus {
+  outline: 0.2rem solid var(--color-violet7);
+}
+
+[disabled],
+[aria-disabled='true'] {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* button styles */
+button {
+  appearance: none;
+  font-family: inherit;
+  font-weight: 600;
+  border: 0;
+  border-radius: 0.8rem;
+  outline-width: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button--primary {
+  background-color: var(--color-violet9);
+  color: var(--color-mauve1);
+  border: 0.1rem solid var(--color-violet9);
+}
+
+.button--primary:hover {
+  background-color: var(--color-violet10);
+  border-color: var(--color-violet10);
+}
+
+.button--secondary-color {
+  background-color: var(--color-violet3);
+  color: var(--color-violet10);
+  border: 0.1rem solid var(--color-violet3);
+}
+
+.button--secondary-color:hover {
+  background-color: var(--color-violet4);
+  border-color: var(--color-violet4);
+}
+
+.button--secondary-color:active {
+  background-color: var(--color-violet5);
+  border-color: var(--color-violet5);
+}
+
+.button--secondary-gray {
+  background-color: var(--color-mauve1);
+  color: var(--color-mauve12);
+  border: 0.1rem solid var(--color-mauve7);
+}
+
+.button--secondary-gray:hover {
+  background-color: var(--color-mauve4);
+  border-color: var(--color-mauve8);
+}
+
+.button--secondary-gray:active {
+  background-color: var(--color-mauve5);
+}
+
+.button--secondary-gray:focus {
+  outline-color: var(--color-mauve7);
+}
+
+.button--tertiary-color {
+  background-color: transparent;
+  color: var(--color-violet10);
+  border: 0.1rem solid transparent;
+}
+
+.button--tertiary-color:hover {
+  background-color: var(--color-violet4);
+  border-color: var(--color-violet4);
+}
+
+.button--tertiary-color:active {
+  background-color: var(--color-violet5);
+  border-color: var(--color-violet5);
+}
+
+.button--tertiary-gray {
+  background-color: transparent;
+  color: var(--color-mauve12);
+  border: 0.1rem solid transparent;
+}
+
+.button--tertiary-gray:hover {
+  background-color: var(--color-mauve4);
+  border-color: var(--color-mauve4);
+}
+
+.button--tertiary-gray:active {
+  background-color: var(--color-mauve5);
+  border-color: var(--color-mauve5);
+}
+
+.button--tertiary-gray:focus {
+  outline-color: var(--color-mauve7);
+}
+
+.button--sm {
+  font: var(--font-text-sm);
+  font-weight: 600;
+  padding: var(--spacing-2) 1.4rem;
+}
+
+.button--md {
+  font: var(--font-text-sm);
+  font-weight: 600;
+  padding: 1rem var(--spacing-4);
+}
+
+.button--lg {
+  font: var(--font-text-md);
+  font-weight: 600;
+  padding: 1rem 1.8rem;
+}
+
+.button--xl {
+  font: var(--font-text-md);
+  font-weight: 600;
+  padding: var(--spacing-3) 2rem;
+}
+
+/* form styles */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+label {
+  display: block;
+  font: var(--font-text-sm);
+  font-weight: 500;
+  padding-bottom: 0.6rem;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='date'],
+input[type='email'],
+input[type='number'],
+input[type='tel'] {
+  appearance: none;
+  background-color: var(--color-mauve1);
+  border: 0.1rem solid var(--color-mauve7);
+  border-radius: 0.8rem;
+  padding: 1rem 1.4rem;
+  font: var(--font-text-md);
+  font-weight: 400;
+  width: 100%;
+}
+
+input[type='text']:hover,
+input[type='password']:hover,
+input[type='date']:hover,
+input[type='email']:hover,
+input[type='number']:hover,
+input[type='tel']:hover {
+  border-color: var(--color-mauve8);
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='date']:focus,
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='tel']:focus {
+  border-color: var(--color-violet8);
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='date']:focus,
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='tel']:focus {
+  border-color: var(--color-violet8);
+}
+
+::placeholder {
+  color: var(--color-mauve10);
+}
+
+/* font styles */
+.text--4xl {
+  font: var(--font-display-lg);
+}
+
+.text--3xl {
+  font: var(--font-display-md);
+}
+
+.text--2xl {
+  font: var(--font-display-xs);
+}
+
+.text--xl {
+  font: var(--font-text-xl);
+}
+
+.text--md {
+  font: var(--font-text-md);
+}
+
+.text--sm {
+  font: var(--font-text-sm);
+}
+
+.text--xs {
+  font: var(--font-text-xs);
+}
+
+.text--light {
+  font-weight: 300;
+}
+
+.text--normal {
+  font-weight: 400;
+}
+
+.text--medium {
+  font-weight: 500;
+}
+
+.text--semibold {
+  font-weight: 600;
+}
+
+.text--bold {
+  font-weight: 700;
+}
