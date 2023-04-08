@@ -44,14 +44,24 @@
 
 .invoices__item {
   display: grid;
-  grid-template-columns: auto auto 1fr 1fr 8rem auto;
+  grid-template-columns: auto auto 1fr 1fr 9.6rem auto;
   align-items: center;
-  gap: var(--spacing-10);
   background-color: var(--color-mauve1);
   padding: var(--spacing-6);
   border-radius: 0.8rem;
   box-shadow: var(--shadow-xs);
   border: 0.1rem solid var(--color-mauve6);
+}
+
+.invoices__item > *:nth-child(2),
+.invoices__item > *:nth-child(4),
+.invoices__item > *:nth-child(6),
+.invoices__item > *:nth-child(8) {
+  margin-right: var(--spacing-10);
+}
+
+.invoices__item > *:nth-child(10) {
+  margin-right: var(--spacing-4);
 }
 
 .invoices__item > *:nth-child(8) {

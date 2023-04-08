@@ -1,17 +1,6 @@
 :root {
   /* COLORS */
-  --color-mauve1: hsl(300, 20%, 99%);
-  --color-mauve2: hsl(300, 7.7%, 97.5%);
-  --color-mauve3: hsl(294, 5.5%, 95.3%);
-  --color-mauve4: hsl(289, 4.7%, 93.3%);
-  --color-mauve5: hsl(283, 4.4%, 91.3%);
-  --color-mauve6: hsl(278, 4.1%, 89.1%);
-  --color-mauve7: hsl(271, 3.9%, 86.3%);
-  --color-mauve8: hsl(255, 3.7%, 78.8%);
-  --color-mauve9: hsl(252, 4%, 57.3%);
-  --color-mauve10: hsl(253, 3.5%, 53.5%);
-  --color-mauve11: hsl(252, 4%, 44.8%);
-  --color-mauve12: hsl(260, 25%, 11%);
+  /* brand scale */
   --color-violet1: hsl(255, 65%, 99.4%);
   --color-violet2: hsl(252, 100%, 99%);
   --color-violet3: hsl(252, 96.9%, 97.4%);
@@ -24,6 +13,58 @@
   --color-violet10: hsl(251, 48.1%, 53.5%);
   --color-violet11: hsl(250, 43%, 48%);
   --color-violet12: hsl(254, 60%, 18.5%);
+  /* gray scale */
+  --color-mauve1: hsl(300, 20%, 99%);
+  --color-mauve2: hsl(300, 7.7%, 97.5%);
+  --color-mauve3: hsl(294, 5.5%, 95.3%);
+  --color-mauve4: hsl(289, 4.7%, 93.3%);
+  --color-mauve5: hsl(283, 4.4%, 91.3%);
+  --color-mauve6: hsl(278, 4.1%, 89.1%);
+  --color-mauve7: hsl(271, 3.9%, 86.3%);
+  --color-mauve8: hsl(255, 3.7%, 78.8%);
+  --color-mauve9: hsl(252, 4%, 57.3%);
+  --color-mauve10: hsl(253, 3.5%, 53.5%);
+  --color-mauve11: hsl(252, 4%, 44.8%);
+  --color-mauve12: hsl(260, 25%, 11%);
+  /* success scale */
+  --color-green1: hsl(136, 50%, 98.9%);
+  --color-green2: hsl(138, 62.5%, 96.9%);
+  --color-green3: hsl(139, 55.2%, 94.5%);
+  --color-green4: hsl(140, 48.7%, 91%);
+  --color-green5: hsl(141, 43.7%, 86%);
+  --color-green6: hsl(143, 40.3%, 79%);
+  --color-green7: hsl(146, 38.5%, 69%);
+  --color-green8: hsl(151, 40.2%, 54.1%);
+  --color-green9: hsl(151, 55%, 41.5%);
+  --color-green10: hsl(152, 57.5%, 37.6%);
+  --color-green11: hsl(153, 67%, 28.5%);
+  --color-green12: hsl(155, 40%, 14%);
+  /* warning scale */
+  --color-orange1: hsl(24, 70%, 99%);
+  --color-orange2: hsl(24, 83.3%, 97.6%);
+  --color-orange3: hsl(24, 100%, 95.3%);
+  --color-orange4: hsl(25, 100%, 92.2%);
+  --color-orange5: hsl(25, 100%, 88.2%);
+  --color-orange6: hsl(25, 100%, 82.8%);
+  --color-orange7: hsl(24, 100%, 75.3%);
+  --color-orange8: hsl(24, 94.5%, 64.3%);
+  --color-orange9: hsl(24, 94%, 50%);
+  --color-orange10: hsl(24, 100%, 46.5%);
+  --color-orange11: hsl(24, 100%, 37%);
+  --color-orange12: hsl(15, 60%, 17%);
+  /* error scale */
+  --color-red1: hsl(359, 100%, 99.4%);
+  --color-red2: hsl(359, 100%, 98.6%);
+  --color-red3: hsl(360, 100%, 96.8%);
+  --color-red4: hsl(360, 97.9%, 94.8%);
+  --color-red5: hsl(360, 90.2%, 91.9%);
+  --color-red6: hsl(360, 81.7%, 87.8%);
+  --color-red7: hsl(359, 74.2%, 81.7%);
+  --color-red8: hsl(359, 69.5%, 74.3%);
+  --color-red9: hsl(358, 75%, 59%);
+  --color-red10: hsl(358, 69.4%, 55.2%);
+  --color-red11: hsl(358, 65%, 48.7%);
+  --color-red12: hsl(354, 50%, 14.6%);
 
   /* FONTS */
   --font-family: 'Poppins', sans-serif;

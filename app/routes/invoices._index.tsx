@@ -35,7 +35,7 @@ export default function InvoicesIndexRoute() {
             <dt className='sr-only'>Amount Due</dt>
             <dd className='text--md text--semibold'>€ 1,800.90</dd>
             <dt className='sr-only'>Status</dt>
-            <dd className='text--xs text--lc'>Paid</dd>
+            <dd className='badge badge--sm badge--success'>Paid</dd>
             <RxCaretRight />
           </dl>
         </li>
@@ -55,7 +55,7 @@ export default function InvoicesIndexRoute() {
             <dt className='sr-only'>Amount Due</dt>
             <dd className='text--md text--semibold'>€ 556.00</dd>
             <dt className='sr-only'>Status</dt>
-            <dd className='text--xs text--lc'>Pending</dd>
+            <dd className='badge badge--sm badge--warning'>Pending</dd>
             <RxCaretRight />
           </dl>
         </li>
