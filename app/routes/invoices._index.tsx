@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react';
+import { RxCaretRight } from 'react-icons/rx';
 
 export default function InvoicesIndexRoute() {
   return (
@@ -35,6 +36,7 @@ export default function InvoicesIndexRoute() {
             <dd className='text--md text--semibold'>€ 1,800.90</dd>
             <dt className='sr-only'>Status</dt>
             <dd className='text--xs text--lc'>Paid</dd>
+            <RxCaretRight />
           </dl>
         </li>
         <li>
@@ -54,6 +56,7 @@ export default function InvoicesIndexRoute() {
             <dd className='text--md text--semibold'>€ 556.00</dd>
             <dt className='sr-only'>Status</dt>
             <dd className='text--xs text--lc'>Pending</dd>
+            <RxCaretRight />
           </dl>
         </li>
       </ul>
