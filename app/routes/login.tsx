@@ -13,7 +13,7 @@ export default function LoginRoute() {
         <h1 className='text--3xl text--semibold'>Invoice App</h1>
       </header>
       <form className='form'>
-        <div className='input-group'>
+        <div>
           <label htmlFor='email'>Email</label>
           <input
             id='email'
@@ -23,7 +23,7 @@ export default function LoginRoute() {
             required
           />
         </div>
-        <div className='input-group'>
+        <div>
           <label htmlFor='password'>Password</label>
           <input
             id='password'

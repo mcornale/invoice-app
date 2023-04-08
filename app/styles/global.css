@@ -224,13 +224,6 @@ button {
 }
 
 /* form styles */
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
 label {
   display: block;
   font: var(--font-text-sm);

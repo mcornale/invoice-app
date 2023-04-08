@@ -17,6 +17,9 @@
 
 .form {
   width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .form__button-group {
