@@ -5,18 +5,21 @@
   justify-content: center;
   align-items: center;
   background-color: var(--color-mauve2);
+  padding: var(--spacing-4);
 }
 
 .header {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--spacing-5);
   margin-bottom: var(--spacing-10);
 }
 
 .form {
-  width: 40rem;
+  width: 100%;
+  max-width: 40rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -24,9 +27,11 @@
 
 .form__button-group {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-4);
 }
 
 .form__button-group > * {
-  flex: 1 1 50%;
+  flex: 1 1 auto;
+  min-width: 14.4rem;
 }
