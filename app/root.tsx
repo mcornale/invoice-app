@@ -8,12 +8,27 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 import globalStylesUrl from '~/styles/global.css';
+import buttonStylesUrl from '~/styles/button.css';
+import fontStylesUrl from '~/styles/font.css';
+import formStylesUrl from '~/styles/form.css';
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
       href: globalStylesUrl,
+    },
+    {
+      rel: 'stylesheet',
+      href: buttonStylesUrl,
+    },
+    {
+      rel: 'stylesheet',
+      href: fontStylesUrl,
+    },
+    {
+      rel: 'stylesheet',
+      href: formStylesUrl,
     },
   ];
 };

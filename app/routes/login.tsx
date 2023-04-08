@@ -14,24 +14,28 @@ export default function LoginRoute() {
       </header>
       <form className='form'>
         <div>
-          <label htmlFor='email'>Email</label>
-          <input
-            id='email'
-            type='email'
-            name='email'
-            placeholder='Enter your email'
-            required
-          />
+          <label htmlFor='email'>
+            Email
+            <input
+              id='email'
+              type='email'
+              name='email'
+              placeholder='Enter your email'
+              required
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor='password'>Password</label>
-          <input
-            id='password'
-            type='password'
-            name='password'
-            placeholder='••••••••'
-            required
-          />
+          <label htmlFor='password'>
+            Password
+            <input
+              id='password'
+              type='password'
+              name='password'
+              placeholder='••••••••'
+              required
+            />
+          </label>
         </div>
         <div className='form__button-group'>
           <button className='button--lg button--primary'>Login</button>
