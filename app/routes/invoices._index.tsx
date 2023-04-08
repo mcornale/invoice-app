@@ -1,5 +1,6 @@
 import { Link } from '@remix-run/react';
 import { RxCaretRight } from 'react-icons/rx';
+import { formatPrice } from '~/utils/helpers/format-price';
 
 export default function InvoicesIndexRoute() {
   return (
@@ -33,7 +34,7 @@ export default function InvoicesIndexRoute() {
             <dt className='sr-only'>Client Name</dt>
             <dd className='text--xs text--lc'>Jensen Huang</dd>
             <dt className='sr-only'>Amount Due</dt>
-            <dd className='text--md text--semibold'>€ 1,800.90</dd>
+            <dd className='text--md text--semibold'>{formatPrice(1800.9)}</dd>
             <dt className='sr-only'>Status</dt>
             <dd className='badge badge--sm badge--success'>Paid</dd>
             <RxCaretRight />
@@ -53,7 +54,7 @@ export default function InvoicesIndexRoute() {
             <dt className='sr-only'>Client Name</dt>
             <dd className='text--xs text--lc'>Alex Grim</dd>
             <dt className='sr-only'>Amount Due</dt>
-            <dd className='text--md text--semibold'>€ 556.00</dd>
+            <dd className='text--md text--semibold'>{formatPrice(556)}</dd>
             <dt className='sr-only'>Status</dt>
             <dd className='badge badge--sm badge--warning'>Pending</dd>
             <RxCaretRight />
