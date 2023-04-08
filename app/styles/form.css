@@ -20,6 +20,7 @@ input[type='tel'] {
   font: var(--font-text-md);
   font-weight: 400;
   width: 100%;
+  box-shadow: var(--shadow-xs);
 }
 
 input[type='text']:focus-visible,

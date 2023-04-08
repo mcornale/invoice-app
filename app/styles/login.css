@@ -1,4 +1,4 @@
-.main {
+.container {
   min-height: inherit;
   display: flex;
   flex-direction: column;
@@ -17,9 +17,12 @@
   margin-bottom: var(--spacing-10);
 }
 
-.form {
+.main {
   width: 100%;
   max-width: 40rem;
+}
+
+.form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
