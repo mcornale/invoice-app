@@ -9,8 +9,8 @@ import {
 } from '@remix-run/react';
 import globalStylesUrl from '~/styles/global.css';
 import buttonStylesUrl from '~/styles/button.css';
-import fontStylesUrl from '~/styles/font.css';
-import formStylesUrl from '~/styles/form.css';
+import textStylesUrl from '~/styles/text.css';
+import inputStylesUrl from '~/styles/input.css';
 
 export const links: LinksFunction = () => {
   return [
@@ -24,11 +24,11 @@ export const links: LinksFunction = () => {
     },
     {
       rel: 'stylesheet',
-      href: fontStylesUrl,
+      href: textStylesUrl,
     },
     {
       rel: 'stylesheet',
-      href: formStylesUrl,
+      href: inputStylesUrl,
     },
   ];
 };

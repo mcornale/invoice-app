@@ -1,0 +1,59 @@
+.container {
+  min-height: inherit;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-mauve2);
+}
+
+.header {
+  background-color: var(--color-mauve1);
+  border-right: 0.1rem solid var(--color-mauve6);
+  padding: var(--spacing-6);
+}
+
+.main {
+  max-width: 96rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-16);
+}
+
+.invoices {
+  width: 100%;
+}
+
+.invoices__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoices__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.invoices__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-8);
+}
+
+.invoices__item {
+  display: grid;
+  grid-template-columns: auto auto 1fr 1fr 1fr;
+  align-items: center;
+  gap: var(--spacing-10);
+  background-color: var(--color-mauve1);
+  padding: var(--spacing-6);
+  border-radius: 0.8rem;
+  box-shadow: var(--shadow-xs);
+  border: 0.1rem solid var(--color-mauve6);
+}
+
+.invoices__item > *:nth-child(8) {
+  text-align: right;
+}

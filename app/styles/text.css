@@ -1,9 +1,9 @@
 .text--4xl {
-  font: var(--font-display-lg);
+  font: var(--font-display-md);
 }
 
 .text--3xl {
-  font: var(--font-display-md);
+  font: var(--font-display-sm);
 }
 
 .text--2xl {
@@ -44,4 +44,12 @@
 
 .text--bold {
   font-weight: 700;
+}
+
+.text--hc {
+  color: var(--color-mauve12);
+}
+
+.text--lc {
+  color: var(--color-mauve11);
 }

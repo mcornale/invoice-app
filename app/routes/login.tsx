@@ -9,7 +9,7 @@ export default function LoginRoute() {
   return (
     <div className='container'>
       <header className='header'>
-        <img src='logo.svg' alt='logo' aria-hidden />
+        <img src='/logo.svg' alt='logo' />
         <h1 className='text--3xl text--semibold'>Invoice App</h1>
       </header>
       <main className='main'>
