@@ -37,10 +37,13 @@ export default function LoginRoute() {
             </label>
           </div>
           <div className='form__button-group'>
-            <button type='submit' className='button--lg button--primary'>
+            <button type='submit' className='button button--lg button--primary'>
               Login
             </button>
-            <button type='submit' className='button--lg button--secondary-gray'>
+            <button
+              type='submit'
+              className='button button--lg button--secondary-gray'
+            >
               Sign Up
             </button>
           </div>

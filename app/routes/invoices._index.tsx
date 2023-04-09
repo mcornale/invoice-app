@@ -14,7 +14,7 @@ export default function InvoicesIndexRoute() {
           <form>
             <span className='text--sm'>Filter by status</span>
           </form>
-          <Link to='new' className='button--primary button--md'>
+          <Link to='new' className='button button--primary button--md'>
             <span aria-hidden>+</span> New Invoice
           </Link>
         </div>
