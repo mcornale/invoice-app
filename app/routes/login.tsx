@@ -8,17 +8,17 @@ export const links: LinksFunction = () => {
 export default function LoginRoute() {
   return (
     <div className='container'>
-      <header className='header'>
+      <header>
         <img src='/logo.svg' alt='logo' />
         <h1 className='text--3xl text--semibold'>Invoice App</h1>
       </header>
-      <main className='main'>
-        <form className='form'>
-          <div className='input-field'>
-            <label className='input-field__label'>
+      <main>
+        <form>
+          <div className='form-field'>
+            <label className='label'>
               Email
               <input
-                className='input-field__input'
+                className='input'
                 type='email'
                 name='email'
                 placeholder='Enter your email'
@@ -26,11 +26,11 @@ export default function LoginRoute() {
               />
             </label>
           </div>
-          <div className='input-field'>
-            <label className='input-field__label'>
+          <div className='form-field'>
+            <label className='label'>
               Password
               <input
-                className='input-field__input'
+                className='input'
                 type='password'
                 name='password'
                 placeholder='••••••••'
@@ -38,13 +38,13 @@ export default function LoginRoute() {
               />
             </label>
           </div>
-          <div className='form__button-group'>
-            <button type='submit' className='button button--md button--primary'>
+          <div>
+            <button type='submit' className='button button-md button-primary'>
               Login
             </button>
             <button
               type='submit'
-              className='button button--md button--secondary-gray'
+              className='button button-md button-secondary-gray'
             >
               Sign Up
             </button>

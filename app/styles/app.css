@@ -1,0 +1,19 @@
+.app {
+  min-height: inherit;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-mauve2);
+}
+
+.app-header {
+  background-color: var(--color-mauve1);
+  border-right: 0.1rem solid var(--color-mauve6);
+  padding: var(--spacing-6);
+}
+
+.app-main {
+  max-width: 104rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-16);
+}

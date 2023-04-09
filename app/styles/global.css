@@ -68,7 +68,6 @@
 
   /* FONTS */
   --font-family: 'Poppins', sans-serif;
-  --font-display-md: 3.6rem/4.4rem var(--font-family);
   --font-display-sm: 3rem/3.8rem var(--font-family);
   --font-display-xs: 2.4rem/3.2rem var(--font-family);
   --font-text-xl: 2rem/3rem var(--font-family);
@@ -134,18 +133,6 @@ button {
 a {
   text-decoration: none;
   outline-offset: 0;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
 
 /* interactive elements generic styles */
