@@ -1,10 +1,17 @@
 import type { LinksFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
-import { RxCaretRight, RxCaretDown, RxPlus, RxCheck } from 'react-icons/rx';
+import {
+  RxCaretRight,
+  RxCaretDown,
+  RxPlus,
+  RxCheck,
+  RxCaretUp,
+} from 'react-icons/rx';
 import { formatPrice } from '~/utils/helpers/format-price';
 import * as Popover from '@radix-ui/react-popover';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import invoiceStylesUrl from '~/styles/invoices.css';
+import { useState } from 'react';
 
 export const links: LinksFunction = () => {
   return [
@@ -16,6 +23,8 @@ export const links: LinksFunction = () => {
 };
 
 export default function InvoicesRoute() {
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
   return (
     <section className='invoices'>
       <header className='invoices-header'>
@@ -24,10 +33,11 @@ export default function InvoicesRoute() {
           <span className='text-xs text-lc'>There are 7 total invoices</span>
         </div>
         <div className='invoices-header-actions'>
-          <Popover.Root>
+          <Popover.Root open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
             <Popover.Trigger asChild>
               <button className='button button-md button-secondary-gray'>
-                Filter by status <RxCaretDown />
+                Filter by status{' '}
+                {isPopoverOpen ? <RxCaretUp /> : <RxCaretDown />}
               </button>
             </Popover.Trigger>
             <Popover.Portal>
