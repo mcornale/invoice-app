@@ -1,12 +1,12 @@
 import type { LinksFunction } from '@remix-run/node';
 import { Link, Outlet } from '@remix-run/react';
 import {
-  RxCaretRight,
-  RxCaretDown,
-  RxPlus,
-  RxCheck,
-  RxCaretUp,
-} from 'react-icons/rx';
+  CaretRightIcon,
+  CaretDownIcon,
+  PlusIcon,
+  CheckIcon,
+  CaretUpIcon,
+} from '@radix-ui/react-icons';
 import { formatPrice } from '~/utils/helpers/format-price';
 import * as Popover from '@radix-ui/react-popover';
 import * as Checkbox from '@radix-ui/react-checkbox';
@@ -38,7 +38,7 @@ export default function InvoicesRoute() {
               <Popover.Trigger asChild>
                 <button className='button button-md button-secondary-gray'>
                   Filter by status{' '}
-                  {isPopoverOpen ? <RxCaretUp /> : <RxCaretDown />}
+                  {isPopoverOpen ? <CaretUpIcon /> : <CaretDownIcon />}
                 </button>
               </Popover.Trigger>
               <Popover.Portal>
@@ -55,7 +55,7 @@ export default function InvoicesRoute() {
                         id='cb-draft'
                       >
                         <Checkbox.Indicator>
-                          <RxCheck />
+                          <CheckIcon />
                         </Checkbox.Indicator>
                       </Checkbox.Root>
                       <label className='label' htmlFor='cb-draft'>
@@ -69,7 +69,7 @@ export default function InvoicesRoute() {
                         id='cb-pending'
                       >
                         <Checkbox.Indicator>
-                          <RxCheck />
+                          <CheckIcon />
                         </Checkbox.Indicator>
                       </Checkbox.Root>
                       <label className='label' htmlFor='cb-pending'>
@@ -83,7 +83,7 @@ export default function InvoicesRoute() {
                         id='cb-paid'
                       >
                         <Checkbox.Indicator>
-                          <RxCheck />
+                          <CheckIcon />
                         </Checkbox.Indicator>
                       </Checkbox.Root>
                       <label className='label' htmlFor='cb-paid'>
@@ -95,7 +95,7 @@ export default function InvoicesRoute() {
               </Popover.Portal>
             </Popover.Root>
             <Link to='new' className='button button-primary button-md'>
-              <RxPlus /> New Invoice
+              <PlusIcon /> New Invoice
             </Link>
           </div>
         </header>
@@ -118,7 +118,7 @@ export default function InvoicesRoute() {
                 <dd className='text-lg text-semibold'>{formatPrice(1800.9)}</dd>
                 <dt className='sr-only'>Status</dt>
                 <dd className='badge badge-sm badge-success'>Paid</dd>
-                <RxCaretRight />
+                <CaretRightIcon />
               </dl>
             </Link>
           </li>
@@ -140,7 +140,7 @@ export default function InvoicesRoute() {
                 <dd className='text-lg text-semibold'>{formatPrice(556)}</dd>
                 <dt className='sr-only'>Status</dt>
                 <dd className='badge badge-sm badge-warning'>Pending</dd>
-                <RxCaretRight />
+                <CaretRightIcon />
               </dl>
             </Link>
           </li>

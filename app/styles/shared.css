@@ -161,6 +161,7 @@ body.dark-mode .button-primary {
 
 .form-field:has(input[type='checkbox']) {
   flex-direction: row;
+  gap: var(--spacing-3);
 }
 
 /* input styles */
@@ -210,8 +211,8 @@ body.dark-mode .button-primary {
   border: 0.1rem solid var(--color-mauve7);
   background-color: var(--color-mauve1);
   color: var(--color-violet9);
-  width: 2rem;
-  height: 2rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 .checkbox[data-state='checked'] {
@@ -277,7 +278,7 @@ body.dark-mode .button-primary {
 .popover {
   width: var(--radix-popover-trigger-width);
   background-color: var(--color-mauve1);
-  border-radius: 0.4rem;
+  border-radius: 0.8rem;
   padding: var(--spacing-4);
   box-shadow: var(--shadow-lg);
   display: flex;

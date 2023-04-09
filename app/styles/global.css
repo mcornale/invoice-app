@@ -207,7 +207,7 @@ a {
 
 /* interactive elements generic styles */
 :focus {
-  outline: 0.2rem solid var(--color-violet6);
+  outline: 0.3rem solid var(--color-violet6);
 }
 
 [disabled],
