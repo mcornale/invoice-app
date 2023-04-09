@@ -77,6 +77,10 @@
   border: 0.1rem solid var(--color-violet9);
 }
 
+body.dark-mode .button-primary {
+  color: var(--color-mauve-12);
+}
+
 .button-secondary-color {
   background-color: var(--color-violet3);
   color: var(--color-violet10);
@@ -179,6 +183,7 @@
   font-weight: 400;
   width: 100%;
   box-shadow: var(--shadow-xs);
+  color: inherit;
 }
 
 .input:focus {
@@ -209,6 +214,11 @@
   height: 2rem;
 }
 
+.checkbox[data-state='checked'] {
+  background-color: var(--color-violet3);
+  border-color: var(--color-violet8);
+}
+
 .checkbox > * {
   display: grid;
   place-items: center;
@@ -219,7 +229,7 @@
 }
 
 @media (hover: hover) {
-  .checkbox:hover:not(:focus) {
+  .checkbox:hover:not(:focus):not([data-state='checked']) {
     border-color: var(--color-mauve8);
   }
 }
