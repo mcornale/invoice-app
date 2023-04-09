@@ -8,32 +8,17 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 import globalStylesUrl from '~/styles/global.css';
-import badgeStylesUrl from '~/styles/badge.css';
-import buttonStylesUrl from '~/styles/button.css';
-import textStylesUrl from '~/styles/text.css';
-import inputStylesUrl from '~/styles/input.css';
+import sharedStylesUrl from '~/styles/shared.css';
 
 export const links: LinksFunction = () => {
   return [
-    {
-      rel: 'stylesheet',
-      href: badgeStylesUrl,
-    },
     {
       rel: 'stylesheet',
       href: globalStylesUrl,
     },
     {
       rel: 'stylesheet',
-      href: buttonStylesUrl,
-    },
-    {
-      rel: 'stylesheet',
-      href: textStylesUrl,
-    },
-    {
-      rel: 'stylesheet',
-      href: inputStylesUrl,
+      href: sharedStylesUrl,
     },
   ];
 };

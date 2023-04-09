@@ -14,10 +14,11 @@ export default function LoginRoute() {
       </header>
       <main className='main'>
         <form className='form'>
-          <div>
-            <label>
+          <div className='input-field'>
+            <label className='input-field__label'>
               Email
               <input
+                className='input-field__input'
                 type='email'
                 name='email'
                 placeholder='Enter your email'
@@ -25,10 +26,11 @@ export default function LoginRoute() {
               />
             </label>
           </div>
-          <div>
-            <label>
+          <div className='input-field'>
+            <label className='input-field__label'>
               Password
               <input
+                className='input-field__input'
                 type='password'
                 name='password'
                 placeholder='••••••••'
@@ -37,12 +39,12 @@ export default function LoginRoute() {
             </label>
           </div>
           <div className='form__button-group'>
-            <button type='submit' className='button button--lg button--primary'>
+            <button type='submit' className='button button--md button--primary'>
               Login
             </button>
             <button
               type='submit'
-              className='button button--lg button--secondary-gray'
+              className='button button--md button--secondary-gray'
             >
               Sign Up
             </button>

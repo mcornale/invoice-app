@@ -125,6 +125,17 @@ body {
   color: var(--color-mauve12);
 }
 
+button {
+  appearance: none;
+  font-family: inherit;
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+  outline-offset: 0;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -138,18 +149,8 @@ body {
 }
 
 /* interactive elements generic styles */
-button {
-  appearance: none;
-  font-family: inherit;
-  border: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-:focus-visible {
-  outline: 0.2rem solid var(--color-violet7);
+:focus {
+  outline: 0.2rem solid var(--color-violet6);
 }
 
 [disabled],
