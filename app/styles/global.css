@@ -133,6 +133,8 @@ button {
 a {
   text-decoration: none;
   outline-offset: 0;
+  color: var(--color-mauve12);
+  display: inline-flex;
 }
 
 /* interactive elements generic styles */

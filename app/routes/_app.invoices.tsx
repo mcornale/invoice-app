@@ -96,44 +96,48 @@ export default function InvoicesRoute() {
       </header>
       <ul className='invoices-list'>
         <li>
-          <dl className='invoices-list-item'>
-            <dt className='sr-only'>Id</dt>
-            <dd className='text-sm text-semibold'>
-              <span className='text-lc' aria-hidden>
-                #
-              </span>
-              RT3080
-            </dd>
-            <dt className='sr-only'>Due Date</dt>
-            <dd className='text-sm text-lc'>Due 19 Aug 2021</dd>
-            <dt className='sr-only'>Client Name</dt>
-            <dd className='text-sm text-lc'>Jensen Huang</dd>
-            <dt className='sr-only'>Amount Due</dt>
-            <dd className='text-lg text-semibold'>{formatPrice(1800.9)}</dd>
-            <dt className='sr-only'>Status</dt>
-            <dd className='badge badge-sm badge-success'>Paid</dd>
-            <RxCaretRight />
-          </dl>
+          <Link to='RT3080' className='invoices-list-item-link'>
+            <dl className='invoices-list-item-dl'>
+              <dt className='sr-only'>Id</dt>
+              <dd className='text-sm text-semibold'>
+                <span className='text-lc' aria-hidden>
+                  #
+                </span>
+                RT3080
+              </dd>
+              <dt className='sr-only'>Due Date</dt>
+              <dd className='text-sm text-lc'>Due 19 Aug 2021</dd>
+              <dt className='sr-only'>Client Name</dt>
+              <dd className='text-sm text-lc'>Jensen Huang</dd>
+              <dt className='sr-only'>Amount Due</dt>
+              <dd className='text-lg text-semibold'>{formatPrice(1800.9)}</dd>
+              <dt className='sr-only'>Status</dt>
+              <dd className='badge badge-sm badge-success'>Paid</dd>
+              <RxCaretRight />
+            </dl>
+          </Link>
         </li>
         <li>
-          <dl className='invoices-list-item'>
-            <dt className='sr-only'>Id</dt>
-            <dd className='text-sm text-semibold'>
-              <span className='text-lc' aria-hidden>
-                #
-              </span>
-              XM9141
-            </dd>
-            <dt className='sr-only'>Due Date</dt>
-            <dd className='text-sm text-lc'>Due 20 Sep 2021</dd>
-            <dt className='sr-only'>Client Name</dt>
-            <dd className='text-sm text-lc'>Alex Grim</dd>
-            <dt className='sr-only'>Amount Due</dt>
-            <dd className='text-lg text-semibold'>{formatPrice(556)}</dd>
-            <dt className='sr-only'>Status</dt>
-            <dd className='badge badge-sm badge-warning'>Pending</dd>
-            <RxCaretRight />
-          </dl>
+          <Link to='XM9141' className='invoices-list-item-link'>
+            <dl className='invoices-list-item-dl'>
+              <dt className='sr-only'>Id</dt>
+              <dd className='text-sm text-semibold'>
+                <span className='text-lc' aria-hidden>
+                  #
+                </span>
+                XM9141
+              </dd>
+              <dt className='sr-only'>Due Date</dt>
+              <dd className='text-sm text-lc'>Due 20 Sep 2021</dd>
+              <dt className='sr-only'>Client Name</dt>
+              <dd className='text-sm text-lc'>Alex Grim</dd>
+              <dt className='sr-only'>Amount Due</dt>
+              <dd className='text-lg text-semibold'>{formatPrice(556)}</dd>
+              <dt className='sr-only'>Status</dt>
+              <dd className='badge badge-sm badge-warning'>Pending</dd>
+              <RxCaretRight />
+            </dl>
+          </Link>
         </li>
       </ul>
     </section>
