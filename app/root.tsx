@@ -8,7 +8,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 import globalStylesUrl from '~/styles/global.css';
-import sharedStylesUrl from '~/styles/shared.css';
+import uiStylesUrl from '~/styles/ui.css';
 
 export const links: LinksFunction = () => {
   return [
@@ -19,7 +19,7 @@ export const links: LinksFunction = () => {
 
     {
       rel: 'stylesheet',
-      href: sharedStylesUrl,
+      href: uiStylesUrl,
     },
   ];
 };

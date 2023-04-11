@@ -320,12 +320,6 @@ body.dark-mode .button-primary {
 }
 
 /* slide-over styles */
-.slide-over-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
 .slide-over-overlay {
   background-color: var(--color-mauve12);
   position: absolute;
@@ -349,12 +343,7 @@ body.dark-mode .button-primary {
   outline: none;
 }
 
-.slide-over-top-bar {
+.slide-over-title {
   padding: var(--spacing-8) var(--spacing-12);
   border-bottom: 0.1rem solid var(--color-mauve6);
-}
-
-.slide-over-bottom-bar {
-  padding: var(--spacing-8) var(--spacing-12);
-  border-top: 0.1rem solid var(--color-mauve6);
 }

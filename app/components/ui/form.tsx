@@ -8,28 +8,17 @@ interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode;
 }
 
-interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  name: string;
-}
-
-interface CheckboxFieldProps {
-  label: string;
-  name: string;
-}
-
-interface SelectFieldProps {
-  label: string;
-  name: string;
-  values: string[];
-}
-
 export function Form({ children, className, ...props }: FormProps) {
   return (
     <form className={`form ${className}`} {...props}>
       {children}
     </form>
   );
+}
+
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  name: string;
 }
 
 export function InputField({ label, name, ...props }: InputFieldProps) {
@@ -56,14 +45,15 @@ export function InputField({ label, name, ...props }: InputFieldProps) {
   );
 }
 
+interface CheckboxFieldProps {
+  label: string;
+  name: string;
+}
+
 export function CheckboxField({ label, name }: CheckboxFieldProps) {
   return (
     <div className='checkbox-field'>
-      <Checkbox.Root
-        className='checkbox'
-        defaultChecked
-        id={`${name}-checkbox`}
-      >
+      <Checkbox.Root className='checkbox' id={`${name}-checkbox`}>
         <Checkbox.Indicator>
           <CheckIcon />
         </Checkbox.Indicator>
@@ -75,7 +65,19 @@ export function CheckboxField({ label, name }: CheckboxFieldProps) {
   );
 }
 
-export function SelectField({ label, name, values }: SelectFieldProps) {
+interface SelectFieldProps {
+  label: string;
+  name: string;
+  placeholder: string;
+  values: string[];
+}
+
+export function SelectField({
+  label,
+  name,
+  placeholder,
+  values,
+}: SelectFieldProps) {
   return (
     <div className='input-field'>
       <label className='label' htmlFor={`${name}-select`}>
@@ -83,7 +85,7 @@ export function SelectField({ label, name, values }: SelectFieldProps) {
       </label>
       <Select.Root>
         <Select.Trigger className='select-trigger input' id={`${name}-select`}>
-          <Select.Value placeholder='Select Payment Terms' />
+          <Select.Value placeholder={placeholder} />
           <CaretDownIcon />
         </Select.Trigger>
         <Select.Portal>

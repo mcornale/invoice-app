@@ -1,22 +1,12 @@
-import type { LinksFunction } from '@remix-run/node';
-import { Link, Outlet } from '@remix-run/react';
-import { CaretRightIcon, CaretDownIcon, PlusIcon } from '@radix-ui/react-icons';
+import { Link } from '@remix-run/react';
+import { CaretRightIcon, CaretDownIcon } from '@radix-ui/react-icons';
 import { formatPrice } from '~/utils/helpers/format-price';
 import * as Popover from '@radix-ui/react-popover';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import invoiceStylesUrl from '~/styles/invoices.css';
-import { Button } from '~/components/button';
-import { CheckboxField } from '~/components/form';
-import { Badge } from '~/components/badge';
-
-export const links: LinksFunction = () => {
-  return [
-    {
-      rel: 'stylesheet',
-      href: invoiceStylesUrl,
-    },
-  ];
-};
+import { Button } from '~/components/ui/button';
+import { CheckboxField } from '~/components/ui/form';
+import { Badge } from '~/components/ui/badge';
+import { NewInvoiceSlideOver } from '~/components/new-invoice-slide-over';
 
 export default function InvoicesRoute() {
   return (
@@ -28,29 +18,27 @@ export default function InvoicesRoute() {
             <span className='invoices-summary'>There are 7 total invoices</span>
           </div>
           <div className='invoices-header-actions'>
-            <Popover.Root>
-              <Popover.Trigger className='popover-trigger' asChild>
-                <Button variant='secondary-gray'>
-                  Filter by status <CaretDownIcon />
-                </Button>
-              </Popover.Trigger>
-              <Popover.Portal>
-                <Popover.Content
-                  className='popover-content'
-                  sideOffset={8}
-                  align='start'
-                >
-                  <form className='invoices-header-form'>
+            <form>
+              <Popover.Root>
+                <Popover.Trigger className='popover-trigger' asChild>
+                  <Button variant='secondary-gray'>
+                    Filter by status <CaretDownIcon />
+                  </Button>
+                </Popover.Trigger>
+                <Popover.Portal>
+                  <Popover.Content
+                    className='popover-content'
+                    sideOffset={8}
+                    align='start'
+                  >
                     <CheckboxField label='Draft' name='draft' />
                     <CheckboxField label='Pending' name='pending' />
                     <CheckboxField label='Paid' name='paid' />
-                  </form>
-                </Popover.Content>
-              </Popover.Portal>
-            </Popover.Root>
-            <Link to='new' className='button button-primary'>
-              <PlusIcon /> New Invoice
-            </Link>
+                  </Popover.Content>
+                </Popover.Portal>
+              </Popover.Root>
+            </form>
+            <NewInvoiceSlideOver />
           </div>
         </header>
         <ul className='invoices-list'>
@@ -87,7 +75,6 @@ export default function InvoicesRoute() {
           </li>
         </ul>
       </section>
-      <Outlet />
     </>
   );
 }

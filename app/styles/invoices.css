@@ -19,12 +19,6 @@
   gap: var(--spacing-2);
 }
 
-.invoices-header-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
 .invoices-list {
   display: flex;
   flex-direction: column;
@@ -151,6 +145,8 @@
 }
 
 .invoice-form-buttons {
+  padding: var(--spacing-8) var(--spacing-12);
+  border-top: 0.1rem solid var(--color-mauve6);
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-4);
