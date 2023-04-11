@@ -25,16 +25,15 @@ export function SlideOverContent({
 
   return (
     <Dialog.Portal container={container}>
-      <Dialog.Overlay className='slide-over-overlay' {...props}>
-        <Dialog.Content
-          className='slide-over-content'
-          aria-describedby={undefined}
-          {...props}
-        >
-          <Dialog.Title className='slide-over-title'>{title}</Dialog.Title>
-          {children}
-        </Dialog.Content>
-      </Dialog.Overlay>
+      <Dialog.Overlay className='slide-over-overlay' {...props} />
+      <Dialog.Content
+        className='slide-over-content'
+        aria-describedby={undefined}
+        {...props}
+      >
+        <Dialog.Title className='slide-over-title'>{title}</Dialog.Title>
+        {children}
+      </Dialog.Content>
     </Dialog.Portal>
   );
 }
