@@ -1,6 +1,13 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
+import * as Select from '@radix-ui/react-select';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import {
+  CalendarIcon,
+  CaretDownIcon,
+  CheckIcon,
+  PlusIcon,
+  TrashIcon,
+} from '@radix-ui/react-icons';
 import { useNavigate } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -50,6 +57,7 @@ export default function NewInvoiceRoute() {
                       className='input'
                       id='street-address-input'
                       name='street-address'
+                      type='text'
                     />
                   </div>
                   <div className='invoice-form-fieldset-row'>
@@ -57,7 +65,12 @@ export default function NewInvoiceRoute() {
                       <label className='label' htmlFor='city-input'>
                         City
                       </label>
-                      <input className='input' id='city-input' name='city' />
+                      <input
+                        className='input'
+                        id='city-input'
+                        name='city'
+                        type='text'
+                      />
                     </div>
                     <div className='field'>
                       <label className='label' htmlFor='post-code-input'>
@@ -67,6 +80,7 @@ export default function NewInvoiceRoute() {
                         className='input'
                         id='post-code-input'
                         name='post-code'
+                        type='text'
                       />
                     </div>
                     <div className='field'>
@@ -77,6 +91,7 @@ export default function NewInvoiceRoute() {
                         className='input'
                         id='country-input'
                         name='country'
+                        type='text'
                       />
                     </div>
                   </div>
@@ -91,6 +106,7 @@ export default function NewInvoiceRoute() {
                       className='input'
                       id='client-name-input'
                       name='client-name'
+                      type='text'
                     />
                   </div>
                   <div className='field'>
@@ -101,6 +117,7 @@ export default function NewInvoiceRoute() {
                       className='input'
                       id='client-email-input'
                       name='client-email'
+                      type='email'
                     />
                   </div>
                   <div className='field'>
@@ -114,6 +131,7 @@ export default function NewInvoiceRoute() {
                       className='input'
                       id='client-street-address-input'
                       name='client-street-address'
+                      type='text'
                     />
                   </div>
                   <div className='invoice-form-fieldset-row'>
@@ -125,6 +143,7 @@ export default function NewInvoiceRoute() {
                         className='input'
                         id='client-city-input'
                         name='client-city'
+                        type='text'
                       />
                     </div>
                     <div className='field'>
@@ -135,6 +154,7 @@ export default function NewInvoiceRoute() {
                         className='input'
                         id='client-post-code-input'
                         name='client-post-code'
+                        type='text'
                       />
                     </div>
                     <div className='field'>
@@ -145,8 +165,99 @@ export default function NewInvoiceRoute() {
                         className='input'
                         id='client-country-input'
                         name='client-country'
+                        type='text'
                       />
                     </div>
+                  </div>
+                  <div className='invoice-form-fieldset-row'>
+                    <div className='field'>
+                      <label className='label' htmlFor='issue-date-input'>
+                        Issue Date
+                      </label>
+                      <div className='input-date-container'>
+                        <input
+                          className='input'
+                          id='issue-date-input'
+                          name='issue-date'
+                          type='date'
+                        />
+                        <CalendarIcon />
+                      </div>
+                    </div>
+                    <div className='field'>
+                      <label className='label' id='payment-terms-label'>
+                        Payment terms
+                      </label>
+                      <Select.Root>
+                        <Select.Trigger
+                          className='select-trigger input'
+                          aria-labelledby='payment-terms-label'
+                        >
+                          <Select.Value placeholder='Select Payment Terms' />
+                          <CaretDownIcon />
+                        </Select.Trigger>
+                        <Select.Portal>
+                          <Select.Content
+                            className='select-content'
+                            position='popper'
+                            sideOffset={8}
+                          >
+                            <Select.Viewport className='select-viewport'>
+                              <Select.Item
+                                className='select-item'
+                                value='net 1 day'
+                              >
+                                <Select.ItemText>Net 1 day</Select.ItemText>
+                                <Select.ItemIndicator className='select-item-indicator'>
+                                  <CheckIcon />
+                                </Select.ItemIndicator>
+                              </Select.Item>
+                              <Select.Item
+                                className='select-item'
+                                value='net 7 days'
+                              >
+                                <Select.ItemText>Net 7 days</Select.ItemText>
+                                <Select.ItemIndicator className='select-item-indicator'>
+                                  <CheckIcon />
+                                </Select.ItemIndicator>
+                              </Select.Item>
+                              <Select.Item
+                                className='select-item'
+                                value='net 14 days'
+                              >
+                                <Select.ItemText>Net 14 days</Select.ItemText>
+                                <Select.ItemIndicator className='select-item-indicator'>
+                                  <CheckIcon />
+                                </Select.ItemIndicator>
+                              </Select.Item>
+                              <Select.Item
+                                className='select-item'
+                                value='net 30 days'
+                              >
+                                <Select.ItemText>Net 30 days</Select.ItemText>
+                                <Select.ItemIndicator className='select-item-indicator'>
+                                  <CheckIcon />
+                                </Select.ItemIndicator>
+                              </Select.Item>
+                            </Select.Viewport>
+                          </Select.Content>
+                        </Select.Portal>
+                      </Select.Root>
+                    </div>
+                  </div>
+                  <div className='field'>
+                    <label
+                      className='label'
+                      htmlFor='project-description-input'
+                    >
+                      Project Description
+                    </label>
+                    <input
+                      className='input'
+                      id='project-description-input'
+                      name='project-description'
+                      type='text'
+                    />
                   </div>
                 </fieldset>
               </section>
@@ -168,15 +279,32 @@ export default function NewInvoiceRoute() {
                       className='input'
                       id='item-name-input'
                       name='item-name'
+                      type='text'
                     />
                     <input
                       className='input'
                       id='quantity-input'
                       name='quantity'
                       type='number'
+                      min={0}
                     />
-                    <input className='input' id='price-input' name='price' />
-                    <input className='input' id='total-input' name='total' />
+                    <input
+                      className='input'
+                      id='price-input'
+                      name='price'
+                      type='number'
+                      min={0}
+                      step={0.01}
+                    />
+                    <input
+                      className='input'
+                      id='total-input'
+                      name='total'
+                      type='number'
+                      min={0}
+                      defaultValue={0}
+                      readOnly
+                    />
                     <button className='button button-tertiary-gray button-sm'>
                       <TrashIcon />
                     </button>

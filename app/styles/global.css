@@ -216,6 +216,12 @@ fieldset {
   border: none;
 }
 
+input {
+  appearance: none;
+  color: inherit;
+  border: none;
+}
+
 /* interactive elements generic styles */
 :focus {
   outline: 0.3rem solid var(--color-violet6);

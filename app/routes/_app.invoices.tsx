@@ -24,8 +24,6 @@ export const links: LinksFunction = () => {
 };
 
 export default function InvoicesRoute() {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
   return (
     <>
       <section className='invoices'>
@@ -35,16 +33,15 @@ export default function InvoicesRoute() {
             <span className='text-xs text-lc'>There are 7 total invoices</span>
           </div>
           <div className='invoices-header-actions'>
-            <Popover.Root open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-              <Popover.Trigger asChild>
+            <Popover.Root>
+              <Popover.Trigger className='popover-trigger' asChild>
                 <button className='button button-md button-secondary-gray'>
-                  Filter by status{' '}
-                  {isPopoverOpen ? <CaretUpIcon /> : <CaretDownIcon />}
+                  Filter by status <CaretDownIcon />
                 </button>
               </Popover.Trigger>
               <Popover.Portal>
                 <Popover.Content
-                  className='popover'
+                  className='popover-content'
                   sideOffset={8}
                   align='start'
                 >

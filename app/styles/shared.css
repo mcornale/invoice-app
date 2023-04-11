@@ -187,7 +187,6 @@ body.dark-mode .button-primary {
 }
 
 .input {
-  appearance: none;
   background-color: var(--color-mauve1);
   border: 0.1rem solid var(--color-mauve7);
   border-radius: 0.8rem;
@@ -196,7 +195,6 @@ body.dark-mode .button-primary {
   font-weight: 400;
   width: 100%;
   box-shadow: var(--shadow-xs);
-  color: inherit;
 }
 
 .input:focus {
@@ -211,6 +209,28 @@ body.dark-mode .button-primary {
   .input:hover:not(:focus) {
     border-color: var(--color-mauve8);
   }
+}
+
+.input-date-container {
+  width: 100%;
+  position: relative;
+}
+
+.input-date-container svg {
+  width: 1.6rem;
+  height: auto;
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  pointer-events: none;
+}
+
+.input-date-container .input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.input-date-container .input {
+  padding: 0.9rem 1.4rem;
 }
 
 .checkbox-field {
@@ -244,6 +264,60 @@ body.dark-mode .button-primary {
   .checkbox:hover:not(:focus):not([data-state='checked']) {
     border-color: var(--color-mauve8);
   }
+}
+
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+}
+
+.select-trigger svg {
+  width: 2rem;
+  height: auto;
+}
+
+.select-trigger[data-state='open'] svg {
+  transform: rotate(180deg);
+}
+
+.select-content {
+  overflow: hidden;
+  background-color: var(--color-mauve1);
+  border-radius: 0.8rem;
+  box-shadow: var(--shadow-lg);
+  width: var(--radix-select-trigger-width);
+}
+
+.select-viewport {
+  padding: 0.7rem;
+}
+
+.select-item {
+  font: var(--font-text-sm);
+  padding: 1rem 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+  border-radius: 0.4rem;
+}
+
+.select-item:focus {
+  background-color: var(--color-violet4);
+  outline: none;
+}
+
+.select-item-indicator {
+  display: flex;
+  align-items: center;
+  color: var(--color-violet9);
+  border: none;
+}
+
+.select-item svg {
+  width: 2rem;
+  height: auto;
 }
 
 /* badge styles */
@@ -286,7 +360,11 @@ body.dark-mode .button-primary {
 }
 
 /* popover styles */
-.popover {
+.popover-trigger[data-state='open'] svg {
+  transform: rotate(180deg);
+}
+
+.popover-content {
   width: var(--radix-popover-trigger-width);
   background-color: var(--color-mauve1);
   border-radius: 0.8rem;
@@ -297,7 +375,7 @@ body.dark-mode .button-primary {
   gap: var(--spacing-2);
 }
 
-.popover:focus {
+.popover-content:focus {
   outline: none;
 }
 

@@ -100,7 +100,7 @@
 }
 
 .invoice-form-fieldset-row > * {
-  flex: 1 1 auto;
+  flex: 1 1 50%;
 }
 
 .invoice-form-items-section {
