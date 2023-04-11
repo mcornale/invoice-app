@@ -12,8 +12,12 @@
 }
 
 .app-main {
-  max-width: 104rem;
   width: 100%;
-  margin: 0 auto;
   padding: var(--spacing-16);
+  position: relative;
+}
+
+.app-content {
+  max-width: 104rem;
+  margin: 0 auto;
 }

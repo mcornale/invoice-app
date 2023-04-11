@@ -103,6 +103,9 @@
   --spacing-16: calc(16 * var(--spacing-unit));
   --spacing-20: calc(20 * var(--spacing-unit));
   --spacing-24: calc(24 * var(--spacing-unit));
+  --spacing-32: calc(32 * var(--spacing-unit));
+  --spacing-40: calc(40 * var(--spacing-unit));
+  --spacing-48: calc(48 * var(--spacing-unit));
 }
 
 *,
@@ -192,6 +195,10 @@ body.dark-mode {
   --color-red12: hsl(351, 89%, 96%);
 }
 
+ul {
+  list-style: none;
+}
+
 button {
   appearance: none;
   font-family: inherit;
@@ -203,6 +210,10 @@ a {
   outline-offset: 0;
   color: var(--color-mauve12);
   display: inline-flex;
+}
+
+fieldset {
+  border: none;
 }
 
 /* interactive elements generic styles */

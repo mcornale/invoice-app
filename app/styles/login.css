@@ -1,4 +1,4 @@
-.container {
+.login {
   min-height: inherit;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
   padding: var(--spacing-4);
 }
 
-header {
+.login-header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -17,19 +17,19 @@ header {
   margin-bottom: var(--spacing-12);
 }
 
-main {
+.login-main {
   width: 100%;
   max-width: 40rem;
 }
 
-form {
+.login-form-buttons {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-5);
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
 }
 
-form > *:last-child {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
+.login-form-buttons > * {
+  flex: 1 1 auto;
+  min-width: 14.4rem;
 }

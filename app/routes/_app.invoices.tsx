@@ -10,6 +10,7 @@ import {
 import { formatPrice } from '~/utils/helpers/format-price';
 import * as Popover from '@radix-ui/react-popover';
 import * as Checkbox from '@radix-ui/react-checkbox';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import invoiceStylesUrl from '~/styles/invoices.css';
 import { useState } from 'react';
 
@@ -48,45 +49,45 @@ export default function InvoicesRoute() {
                   align='start'
                 >
                   <form className='invoices-header-form'>
-                    <div className='form-field'>
+                    <div className='field'>
                       <Checkbox.Root
                         className='checkbox'
                         defaultChecked
-                        id='cb-draft'
+                        id='draft-checkbox'
                       >
                         <Checkbox.Indicator>
                           <CheckIcon />
                         </Checkbox.Indicator>
                       </Checkbox.Root>
-                      <label className='label' htmlFor='cb-draft'>
+                      <label className='label' htmlFor='draft-checkbox'>
                         Draft
                       </label>
                     </div>
-                    <div className='form-field'>
+                    <div className='field'>
                       <Checkbox.Root
                         className='checkbox'
                         defaultChecked
-                        id='cb-pending'
+                        id='pending-checkbox'
                       >
                         <Checkbox.Indicator>
                           <CheckIcon />
                         </Checkbox.Indicator>
                       </Checkbox.Root>
-                      <label className='label' htmlFor='cb-pending'>
+                      <label className='label' htmlFor='pending-checkbox'>
                         Pending
                       </label>
                     </div>
-                    <div className='form-field'>
+                    <div className='field'>
                       <Checkbox.Root
                         className='checkbox'
                         defaultChecked
-                        id='cb-paid'
+                        id='paid-checkbox'
                       >
                         <Checkbox.Indicator>
                           <CheckIcon />
                         </Checkbox.Indicator>
                       </Checkbox.Root>
-                      <label className='label' htmlFor='cb-paid'>
+                      <label className='label' htmlFor='paid-checkbox'>
                         Paid
                       </label>
                     </div>
@@ -103,20 +104,30 @@ export default function InvoicesRoute() {
           <li>
             <Link to='RT3080' className='invoices-list-item-link'>
               <dl className='invoices-list-item-dl'>
-                <dt className='sr-only'>Id</dt>
+                <VisuallyHidden.Root>
+                  <dt>Id</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-sm text-semibold'>
                   <span className='text-lc' aria-hidden>
                     #
                   </span>
                   RT3080
                 </dd>
-                <dt className='sr-only'>Due Date</dt>
+                <VisuallyHidden.Root>
+                  <dt>Due Date</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-sm text-lc'>Due 19 Aug 2021</dd>
-                <dt className='sr-only'>Client Name</dt>
+                <VisuallyHidden.Root>
+                  <dt>Client Name</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-sm text-lc'>Jensen Huang</dd>
-                <dt className='sr-only'>Amount Due</dt>
+                <VisuallyHidden.Root>
+                  <dt>Amount Due</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-lg text-semibold'>{formatPrice(1800.9)}</dd>
-                <dt className='sr-only'>Status</dt>
+                <VisuallyHidden.Root>
+                  <dt>Status</dt>
+                </VisuallyHidden.Root>
                 <dd className='badge badge-sm badge-success'>Paid</dd>
                 <CaretRightIcon />
               </dl>
@@ -125,20 +136,30 @@ export default function InvoicesRoute() {
           <li>
             <Link to='XM9141' className='invoices-list-item-link'>
               <dl className='invoices-list-item-dl'>
-                <dt className='sr-only'>Id</dt>
+                <VisuallyHidden.Root>
+                  <dt>Id</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-sm text-semibold'>
                   <span className='text-lc' aria-hidden>
                     #
                   </span>
                   XM9141
                 </dd>
-                <dt className='sr-only'>Due Date</dt>
+                <VisuallyHidden.Root>
+                  <dt>Due Date</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-sm text-lc'>Due 20 Sep 2021</dd>
-                <dt className='sr-only'>Client Name</dt>
+                <VisuallyHidden.Root>
+                  <dt>Client Name</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-sm text-lc'>Alex Grim</dd>
-                <dt className='sr-only'>Amount Due</dt>
+                <VisuallyHidden.Root>
+                  <dt>Amount Due</dt>
+                </VisuallyHidden.Root>
                 <dd className='text-lg text-semibold'>{formatPrice(556)}</dd>
-                <dt className='sr-only'>Status</dt>
+                <VisuallyHidden.Root>
+                  <dt>Status</dt>
+                </VisuallyHidden.Root>
                 <dd className='badge badge-sm badge-warning'>Pending</dd>
                 <CaretRightIcon />
               </dl>

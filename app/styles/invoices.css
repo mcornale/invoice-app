@@ -21,7 +21,6 @@
 }
 
 .invoices-list {
-  list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
@@ -68,10 +67,65 @@
 }
 
 .invoices-list-item-dl svg {
-  width: 1.8rem;
+  width: 2rem;
   height: auto;
 }
 
-.invoices-list-item-dl svg path {
-  fill: var(--color-mauve12);
+.invoice-form {
+  overflow: auto;
+  padding: var(--spacing-8) var(--spacing-12);
+}
+
+.invoice-form::-webkit-scrollbar {
+  width: 0.2rem;
+}
+.invoice-form::-webkit-scrollbar-track {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+}
+
+.invoice-form::-webkit-scrollbar-thumb {
+  background-color: var(--color-mauve9);
+}
+
+.invoice-form-billing-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.invoice-form-fieldset-row {
+  display: flex;
+  gap: inherit;
+}
+
+.invoice-form-fieldset-row > * {
+  flex: 1 1 auto;
+}
+
+.invoice-form-items-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+.invoice-form-items {
+  display: grid;
+  grid-template-columns: auto 6.4rem 8.8rem 8.8rem min-content;
+  row-gap: 0.6rem;
+  column-gap: var(--spacing-5);
+}
+
+.invoice-form-items li {
+  display: contents;
+}
+
+.invoice-form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-4);
+}
+
+.invoice-form-button-left {
+  margin-right: auto;
 }

@@ -1,5 +1,6 @@
 import type { LinksFunction } from '@remix-run/node';
 import loginStylesUrl from '~/styles/login.css';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: loginStylesUrl }];
@@ -7,38 +8,43 @@ export const links: LinksFunction = () => {
 
 export default function LoginRoute() {
   return (
-    <div className='container'>
-      <header>
+    <div className='login'>
+      <header className='login-header'>
         <img src='/logo.svg' alt='logo' />
         <h1 className='text--3xl text--semibold'>Invoice App</h1>
       </header>
-      <main>
-        <form>
-          <div className='form-field'>
-            <label className='label'>
-              Email
+      <main className='login-main'>
+        <form className='form'>
+          <fieldset className='fieldset'>
+            <VisuallyHidden.Root>
+              <legend className='legend'>Login or Sign Up</legend>
+            </VisuallyHidden.Root>
+            <div className='field'>
+              <label className='label' htmlFor='email-input'>
+                Email
+              </label>
               <input
                 className='input'
                 type='email'
                 name='email'
-                placeholder='Enter your email'
+                id='email-input'
                 required
               />
-            </label>
-          </div>
-          <div className='form-field'>
-            <label className='label'>
-              Password
+            </div>
+            <div className='field'>
+              <label className='label' htmlFor='password-input'>
+                Password
+              </label>
               <input
                 className='input'
                 type='password'
                 name='password'
-                placeholder='••••••••'
+                id='password-input'
                 required
               />
-            </label>
-          </div>
-          <div>
+            </div>
+          </fieldset>
+          <div className='login-form-buttons'>
             <button type='submit' className='button button-md button-primary'>
               Login
             </button>

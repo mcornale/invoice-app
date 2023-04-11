@@ -1,15 +1,3 @@
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
 /* text styles */
 .text-3xl {
   font: var(--font-display-sm);
@@ -101,12 +89,14 @@ body.dark-mode .button-primary {
   background-color: transparent;
   color: var(--color-violet10);
   border: 0.1rem solid transparent;
+  box-shadow: none;
 }
 
 .button-tertiary-gray {
   background-color: transparent;
   color: var(--color-mauve12);
   border: 0.1rem solid transparent;
+  box-shadow: none;
 }
 
 .button-tertiary-gray:focus {
@@ -153,22 +143,44 @@ body.dark-mode .button-primary {
 }
 
 /* form styles */
-.form-field {
+.form {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: var(--spacing-12);
 }
 
-.form-field:has(input[type='checkbox']) {
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+.legend {
+  color: var(--color-violet9);
+  font: var(--font-text-sm);
+  font-weight: 600;
+  margin-bottom: var(--spacing-5);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field:has(input[type='checkbox']) {
   flex-direction: row;
-  gap: var(--spacing-3);
+  align-items: center;
 }
 
-/* input styles */
+.field:not(:has(input[type='checkbox'])) .label {
+  padding-bottom: 0.6rem;
+}
+
+.field:has(input[type='checkbox']) .label {
+  padding-left: var(--spacing-2);
+}
+
 .label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
   font: var(--font-text-sm);
   font-weight: 500;
   color: var(--color-mauve12);
@@ -201,7 +213,6 @@ body.dark-mode .button-primary {
   }
 }
 
-/* checkbox styles */
 .checkbox-field {
   display: flex;
 }
@@ -288,4 +299,44 @@ body.dark-mode .button-primary {
 
 .popover:focus {
   outline: none;
+}
+
+/* slide-over styles */
+.slide-over-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.slide-over-overlay {
+  background-color: var(--color-mauve12);
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+}
+
+.slide-over-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 72rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-mauve1);
+}
+
+.slide-over-content:focus {
+  outline: none;
+}
+
+.slide-over-top-bar {
+  padding: var(--spacing-8) var(--spacing-12);
+  border-bottom: 0.1rem solid var(--color-mauve6);
+}
+
+.slide-over-bottom-bar {
+  padding: var(--spacing-8) var(--spacing-12);
+  border-top: 0.1rem solid var(--color-mauve6);
 }

@@ -19,7 +19,9 @@ export default function AppRoute() {
         <img src='/logo.svg' alt='logo' />
       </header>
       <main className='app-main'>
-        <Outlet />
+        <div className='app-content'>
+          <Outlet />
+        </div>
       </main>
     </div>
   );
