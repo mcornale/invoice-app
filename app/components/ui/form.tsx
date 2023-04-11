@@ -18,7 +18,6 @@ export function Form({ children, className, ...props }: FormProps) {
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  name: string;
 }
 
 export function InputField({ label, name, ...props }: InputFieldProps) {
@@ -45,20 +44,30 @@ export function InputField({ label, name, ...props }: InputFieldProps) {
   );
 }
 
-interface CheckboxFieldProps {
+interface CheckboxFieldProps extends Checkbox.CheckboxProps {
   label: string;
-  name: string;
 }
 
-export function CheckboxField({ label, name }: CheckboxFieldProps) {
+export function CheckboxField({
+  label,
+  name,
+  value,
+  ...props
+}: CheckboxFieldProps) {
   return (
     <div className='checkbox-field'>
-      <Checkbox.Root className='checkbox' id={`${name}-checkbox`}>
+      <Checkbox.Root
+        className='checkbox'
+        id={`${value ?? name}-checkbox`}
+        name={name}
+        value={value}
+        {...props}
+      >
         <Checkbox.Indicator>
           <CheckIcon />
         </Checkbox.Indicator>
       </Checkbox.Root>
-      <label className='label' htmlFor={`${name}-checkbox`}>
+      <label className='label' htmlFor={`${value ?? name}-checkbox`}>
         {label}
       </label>
     </div>

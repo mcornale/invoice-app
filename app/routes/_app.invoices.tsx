@@ -4,7 +4,7 @@ import { formatPrice } from '~/utils/helpers/format-price';
 import * as Popover from '@radix-ui/react-popover';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { Button } from '~/components/ui/button';
-import { CheckboxField } from '~/components/ui/form';
+import { CheckboxField, Form } from '~/components/ui/form';
 import { Badge } from '~/components/ui/badge';
 import { NewInvoiceSlideOver } from '~/components/new-invoice-slide-over';
 
@@ -18,26 +18,30 @@ export default function InvoicesRoute() {
             <span className='invoices-summary'>There are 7 total invoices</span>
           </div>
           <div className='invoices-header-actions'>
-            <form>
-              <Popover.Root>
-                <Popover.Trigger className='popover-trigger' asChild>
-                  <Button variant='secondary-gray'>
-                    Filter by status <CaretDownIcon />
-                  </Button>
-                </Popover.Trigger>
-                <Popover.Portal>
+            <Popover.Root>
+              <Popover.Trigger className='popover-trigger' asChild>
+                <Button variant='secondary-gray'>
+                  Filter by status <CaretDownIcon />
+                </Button>
+              </Popover.Trigger>
+              <Popover.Portal>
+                <Form>
                   <Popover.Content
                     className='popover-content'
                     sideOffset={8}
                     align='start'
                   >
-                    <CheckboxField label='Draft' name='draft' />
-                    <CheckboxField label='Pending' name='pending' />
-                    <CheckboxField label='Paid' name='paid' />
+                    <CheckboxField label='Draft' name='status' value='draft' />
+                    <CheckboxField
+                      label='Pending'
+                      name='status'
+                      value='pending'
+                    />
+                    <CheckboxField label='Paid' name='status' value='paid' />
                   </Popover.Content>
-                </Popover.Portal>
-              </Popover.Root>
-            </form>
+                </Form>
+              </Popover.Portal>
+            </Popover.Root>
             <NewInvoiceSlideOver />
           </div>
         </header>
