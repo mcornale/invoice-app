@@ -186,7 +186,7 @@ export default function NewInvoiceRoute() {
                     </div>
                     <div className='field'>
                       <label className='label' id='payment-terms-label'>
-                        Payment terms
+                        Payment Terms
                       </label>
                       <Select.Root>
                         <Select.Trigger
@@ -305,7 +305,7 @@ export default function NewInvoiceRoute() {
                       defaultValue={0}
                       readOnly
                     />
-                    <button className='button button-tertiary-gray button-sm'>
+                    <button className='button button-tertiary-gray button-md'>
                       <TrashIcon />
                     </button>
                   </li>

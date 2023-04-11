@@ -68,8 +68,8 @@
 
   /* FONTS */
   --font-family: 'Poppins', sans-serif;
-  --font-display-sm: 3rem/3.8rem var(--font-family);
-  --font-display-xs: 2.4rem/3.2rem var(--font-family);
+  --font-text-3xl: 3rem/3.8rem var(--font-family);
+  --font-text-2xl: 2.4rem/3.2rem var(--font-family);
   --font-text-xl: 2rem/3rem var(--font-family);
   --font-text-lg: 1.8rem/2.8rem var(--font-family);
   --font-text-md: 1.6rem/2.4rem var(--font-family);
@@ -193,6 +193,11 @@ body.dark-mode {
   --color-red10: hsl(358, 85.3%, 64%);
   --color-red11: hsl(358, 100%, 69.5%);
   --color-red12: hsl(351, 89%, 96%);
+}
+
+h1 {
+  font: var(--font-text-3xl);
+  font-weight: 600;
 }
 
 ul {

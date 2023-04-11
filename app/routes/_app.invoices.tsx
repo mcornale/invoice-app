@@ -5,14 +5,12 @@ import {
   CaretDownIcon,
   PlusIcon,
   CheckIcon,
-  CaretUpIcon,
 } from '@radix-ui/react-icons';
 import { formatPrice } from '~/utils/helpers/format-price';
 import * as Popover from '@radix-ui/react-popover';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import invoiceStylesUrl from '~/styles/invoices.css';
-import { useState } from 'react';
 
 export const links: LinksFunction = () => {
   return [

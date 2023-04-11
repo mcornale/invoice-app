@@ -1,48 +1,3 @@
-/* text styles */
-.text-3xl {
-  font: var(--font-display-sm);
-}
-
-.text-2xl {
-  font: var(--font-display-xs);
-}
-
-.text-xl {
-  font: var(--font-text-xl);
-}
-
-.text-lg {
-  font: var(--font-text-lg);
-}
-
-.text-md {
-  font: var(--font-text-md);
-}
-
-.text-sm {
-  font: var(--font-text-sm);
-}
-
-.text-xs {
-  font: var(--font-text-xs);
-}
-
-.text-normal {
-  font-weight: 400;
-}
-
-.text-medium {
-  font-weight: 500;
-}
-
-.text-semibold {
-  font-weight: 600;
-}
-
-.text-lc {
-  color: var(--color-mauve11);
-}
-
 /* button styles */
 .button {
   font-weight: 600;
@@ -52,6 +7,9 @@
   align-items: center;
   gap: var(--spacing-2);
   box-shadow: var(--shadow-xs);
+  font: var(--font-text-sm);
+  font-weight: 500;
+  padding: 1rem var(--spacing-4);
 }
 
 .button svg {
@@ -130,18 +88,6 @@ body.dark-mode .button-primary {
   }
 }
 
-.button-sm {
-  font: var(--font-text-sm);
-  font-weight: 500;
-  padding: var(--spacing-2) 1.4rem;
-}
-
-.button-md {
-  font: var(--font-text-sm);
-  font-weight: 500;
-  padding: 1rem var(--spacing-4);
-}
-
 /* form styles */
 .form {
   display: flex;
@@ -149,34 +95,34 @@ body.dark-mode .button-primary {
   gap: var(--spacing-12);
 }
 
-.fieldset {
+.form fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-5);
 }
 
-.legend {
+.form legend {
   color: var(--color-violet9);
   font: var(--font-text-sm);
   font-weight: 600;
   margin-bottom: var(--spacing-5);
 }
 
-.field {
+.input-field {
   display: flex;
   flex-direction: column;
 }
 
-.field:has(input[type='checkbox']) {
+.input-field:has(input[type='checkbox']) {
   flex-direction: row;
   align-items: center;
 }
 
-.field:not(:has(input[type='checkbox'])) .label {
+.input-field:not(:has(input[type='checkbox'])) .label {
   padding-bottom: 0.6rem;
 }
 
-.field:has(input[type='checkbox']) .label {
+.input-field:has(input[type='checkbox']) .label {
   padding-left: var(--spacing-2);
 }
 
