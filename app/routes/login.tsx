@@ -1,7 +1,7 @@
 import type { LinksFunction } from '@remix-run/node';
 import loginStylesUrl from '~/styles/login.css';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Form, InputField } from '~/components/fom';
+import { Form, InputField } from '~/components/form';
 import { Button } from '~/components/button';
 
 export const links: LinksFunction = () => {

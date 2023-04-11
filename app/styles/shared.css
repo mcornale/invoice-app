@@ -118,12 +118,8 @@ body.dark-mode .button-primary {
   align-items: center;
 }
 
-.input-field:not(:has(input[type='checkbox'])) .label {
+.input-field .label {
   padding-bottom: 0.6rem;
-}
-
-.input-field:has(input[type='checkbox']) .label {
-  padding-left: var(--spacing-2);
 }
 
 .label {
@@ -143,7 +139,16 @@ body.dark-mode .button-primary {
   box-shadow: var(--shadow-xs);
 }
 
-.input:focus {
+.input[readonly] {
+  cursor: not-allowed;
+  outline: none;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+  box-shadow: none;
+}
+
+.input:focus:not([readonly]) {
   border-color: var(--color-violet8);
 }
 
@@ -152,7 +157,7 @@ body.dark-mode .button-primary {
 }
 
 @media (hover: hover) {
-  .input:hover:not(:focus) {
+  .input:hover:not(:focus):not([readonly]) {
     border-color: var(--color-mauve8);
   }
 }
@@ -181,6 +186,10 @@ body.dark-mode .button-primary {
 
 .checkbox-field {
   display: flex;
+}
+
+.checkbox-field .label {
+  padding-left: var(--spacing-2);
 }
 
 .checkbox {
@@ -270,23 +279,8 @@ body.dark-mode .button-primary {
 .badge {
   text-align: center;
   border-radius: 0.4rem;
-}
-
-.badge-sm {
   padding: var(--spacing-1) var(--spacing-2);
   font: var(--font-text-xs);
-  font-weight: 500;
-}
-
-.badge-md {
-  padding: var(--spacing-1) 1rem;
-  font: var(--font-text-sm);
-  font-weight: 500;
-}
-
-.badge-lg {
-  padding: var(--spacing-1) var(--spacing-3);
-  font: var(--font-text-sm);
   font-weight: 500;
 }
 

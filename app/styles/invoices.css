@@ -8,6 +8,11 @@
   align-items: center;
 }
 
+.invoices-summary {
+  font: var(--font-text-xs);
+  color: var(--color-mauve11);
+}
+
 .invoices-header-actions {
   display: flex;
   align-items: center;
@@ -27,7 +32,7 @@
   margin-top: var(--spacing-10);
 }
 
-.invoices-list-item-link {
+.invoices-list-item a {
   display: block;
   background-color: var(--color-mauve1);
   padding: var(--spacing-6);
@@ -36,37 +41,62 @@
   border: 0.1rem solid var(--color-mauve7);
 }
 
-.invoices-list-item-link:hover:not(:focus) {
+.invoices-list-item a:hover:not(:focus) {
   border-color: var(--color-mauve8);
 }
 
-.invoices-list-item-link:focus {
+.invoices-list-item a:focus {
   border-color: var(--color-violet8);
 }
 
-.invoices-list-item-dl {
+.invoices-list-item dl {
   width: 100%;
   display: grid;
   grid-template-columns: auto auto 1fr 1fr 9.6rem auto;
   align-items: center;
+  font: var(--font-text-sm);
 }
 
-.invoices-list-item-dl > *:nth-child(2),
-.invoices-list-item-dl > *:nth-child(4),
-.invoices-list-item-dl > *:nth-child(6),
-.invoices-list-item-dl > *:nth-child(8) {
+.invoices-list-item-id {
+  font-weight: 600;
+}
+
+.invoices-list-item-id::before {
+  content: '#';
+  color: var(--color-mauve11);
+}
+
+.invoices-list-item-amount-due {
+  font: var(--font-text-lg);
+  font-weight: 600;
+}
+
+.invoices-list-item-due-date,
+.invoices-list-item-client-name {
+  color: var(--color-mauve11);
+}
+
+.invoices-list-item-id,
+.invoices-list-item-due-date,
+.invoices-list-item-client-name,
+.invoices-list-item-amount-due {
   margin-right: var(--spacing-10);
 }
 
-.invoices-list-item-dl > *:nth-child(10) {
+.invoices-list-item-status {
   margin-right: var(--spacing-4);
 }
 
-.invoices-list-item-dl > *:nth-child(8) {
+.invoices-list-item-status > * {
+  width: 100%;
+  display: block;
+}
+
+.invoices-list-item-amount-due {
   text-align: right;
 }
 
-.invoices-list-item-dl svg {
+.invoices-list-item dl svg {
   width: 2rem;
   height: auto;
 }
@@ -103,20 +133,20 @@
   flex: 1 1 50%;
 }
 
-.invoice-form-items-section {
+.invoice-form-items {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-5);
 }
 
-.invoice-form-items {
+.invoice-form-items ul {
   display: grid;
-  grid-template-columns: auto 6.4rem 8.8rem 8.8rem min-content;
+  grid-template-columns: auto 7.2rem 10.4rem 8rem min-content;
   row-gap: 0.6rem;
   column-gap: var(--spacing-5);
 }
 
-.invoice-form-items li {
+.invoice-form-items ul li {
   display: contents;
 }
 

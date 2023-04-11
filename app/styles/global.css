@@ -200,6 +200,16 @@ h1 {
   font-weight: 600;
 }
 
+h2 {
+  font: var(--font-text-2xl);
+  font-weight: 600;
+}
+
+h3 {
+  font: var(--font-text-lg);
+  font-weight: 600;
+}
+
 ul {
   list-style: none;
 }
@@ -235,5 +245,5 @@ input {
 [disabled],
 [aria-disabled='true'] {
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.7;
 }

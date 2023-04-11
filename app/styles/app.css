@@ -17,7 +17,7 @@
   position: relative;
 }
 
-.app-content {
+.app-outlet {
   max-width: 104rem;
   margin: 0 auto;
 }
