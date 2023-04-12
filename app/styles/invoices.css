@@ -16,34 +16,39 @@
   gap: var(--spacing-2);
 }
 
-.invoices-list {
+.invoices-item-list {
   margin-top: var(--spacing-10);
 }
 
-.invoices-list ul {
+.invoices-item-list ul {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
 }
 
-.invoices-list a {
+.invoices-item-list a {
   display: block;
   background-color: var(--color-mauve-1);
   padding: var(--spacing-6);
   border-radius: var(--border-radius-2);
   box-shadow: var(--shadow-xs);
-  border: 0.1rem solid var(--color-mauve-7);
+  border: 0.1rem solid var(--color-mauve-6);
 }
 
-.invoices-list a:hover:not(:focus) {
-  border-color: var(--color-mauve-8);
+.invoices-item-list a:hover:not(:focus) {
+  border-color: var(--color-mauve-7);
 }
 
-.invoices-list a:focus {
+.invoices-item-list a:focus {
   border-color: var(--color-violet-8);
 }
 
-.invoices-list dl {
+.invoices-item-list a svg {
+  width: 2rem;
+  height: auto;
+}
+
+.invoices-item-list dl {
   width: 100%;
   display: grid;
   grid-template-columns: auto auto 1fr 1fr 9.6rem auto;
@@ -51,48 +56,184 @@
   font: var(--font-text-sm);
 }
 
-.invoices-item-id {
+.invoices-item-id dd {
   font-weight: 600;
 }
 
-.invoices-item-id::before {
+.invoices-item-id dd::before {
   content: '#';
   color: var(--color-mauve-11);
 }
 
-.invoices-item-amount-due {
+.invoices-item-amount-due dd {
   font: var(--font-text-lg);
   font-weight: 600;
 }
 
-.invoices-item-due-date,
-.invoices-item-client-name {
+.invoices-item-due-date dd,
+.invoices-item-client-name dd {
   color: var(--color-mauve-11);
 }
 
-.invoices-item-id,
-.invoices-item-due-date,
-.invoices-item-client-name,
-.invoices-item-amount-due {
+.invoices-item-id dd,
+.invoices-item-due-date dd,
+.invoices-item-client-name dd,
+.invoices-item-amount-due dd {
   margin-right: var(--spacing-10);
 }
 
-.invoices-item-status {
+.invoices-item-status dd {
   margin-right: var(--spacing-4);
 }
 
-.invoices-item-status > * {
-  width: 100%;
+.invoices-item-status dd > * {
   display: block;
 }
 
-.invoices-item-amount-due {
+.invoices-item-amount-due dd {
   text-align: right;
 }
 
-.invoices-item dl svg {
-  width: 2rem;
-  height: auto;
+/* invoice route */
+.invoice-management,
+.invoice-details {
+  background-color: var(--color-mauve-1);
+  border-radius: var(--border-radius-2);
+  box-shadow: var(--shadow-xs);
+  border: 0.1rem solid var(--color-mauve-6);
+  margin-top: var(--spacing-6);
+}
+
+.invoice-management {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-6);
+}
+
+.invoice-status,
+.invoice-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.invoice-details dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-12);
+  padding: var(--spacing-12);
+}
+
+.invoice-details dl > *:nth-child(1) {
+  grid-column: 1 / span 2;
+}
+
+.invoice-details dl > *:nth-child(2) {
+  grid-column: 3 / span 2;
+  text-align: right;
+}
+
+.invoice-details dl > *:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.invoice-details dl > *:nth-child(5) {
+  grid-column: 3 / span 2;
+}
+
+.invoice-details dl > *:last-child {
+  grid-column: 1 / span 4;
+}
+
+.invoice-id dd,
+.invoice-date dd,
+.invoice-payment-due dd,
+.invoice-client-name,
+.invoice-sent-to dd {
+  font: var(--font-text-lg);
+  font-weight: 600;
+}
+
+.invoice-status dt,
+.invoice-project-desc dd,
+.invoice-bill-from dd,
+.invoice-client-address,
+.invoice-date dt,
+.invoice-bill-to dt,
+.invoice-sent-to dt,
+.invoice-payment-due dt,
+.invoice-item-list li:nth-child(1),
+.invoice-amount-due dt {
+  font: var(--font-text-sm);
+  color: var(--color-mauve-11);
+}
+
+.invoice-id dd {
+  margin-bottom: var(--spacing-1);
+}
+
+.invoice-client-address {
+  margin-top: var(--spacing-1);
+}
+
+.invoice-date dt,
+.invoice-payment-due dt,
+.invoice-bill-to dt,
+.invoice-sent-to dt {
+  margin-bottom: var(--spacing-2);
+}
+
+.invoice-bill-from *,
+.invoice-client-address {
+  line-height: 1.7;
+}
+
+.invoice-item-list {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  gap: var(--spacing-6);
+  padding: var(--spacing-8);
+  border: 0.1rem solid var(--color-mauve-6);
+  border-bottom: none;
+  border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
+}
+
+.invoice-amount-due {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-mauve-2);
+  padding: var(--spacing-8);
+  border: 0.1rem solid var(--color-mauve-6);
+  border-radius: 0 0 var(--border-radius-2) var(--border-radius-2);
+}
+
+.invoice-amount-due dd {
+  font: var(--font-text-2xl);
+  font-weight: 600;
+}
+
+.invoice-item-list dd,
+.invoice-item-list ul,
+.invoice-item-list li {
+  display: contents;
+}
+
+.invoice-item-list li:not(:nth-child(1)) {
+  font: var(--font-text-md);
+  font-weight: 500;
+}
+
+.invoice-item-list li > *:nth-child(2) {
+  text-align: center;
+}
+
+.invoice-item-list li > *:nth-child(3),
+.invoice-item-list li > *:nth-child(4) {
+  text-align: right;
 }
 
 /* invoice form */

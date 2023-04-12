@@ -44,7 +44,7 @@ export default function InvoicesIndexRoute() {
           <NewInvoiceSlideOver />
         </div>
       </header>
-      <section className='invoices-list'>
+      <section className='invoices-item-list'>
         <VisuallyHidden.Root>
           <h2>Invoice list</h2>
         </VisuallyHidden.Root>
@@ -52,30 +52,38 @@ export default function InvoicesIndexRoute() {
           <li>
             <Link to='RT3080'>
               <dl>
-                <VisuallyHidden.Root>
-                  <dt>Id</dt>
-                </VisuallyHidden.Root>
-                <dd className='invoices-item-id'>RT3080</dd>
-                <VisuallyHidden.Root>
-                  <dt>Due Date</dt>
-                </VisuallyHidden.Root>
-                <dd className='invoices-item-due-date'>Due 19 Aug 2021</dd>
-                <VisuallyHidden.Root>
-                  <dt>Client Name</dt>
-                </VisuallyHidden.Root>
-                <dd className='invoices-item-client-name'>Jensen Huang</dd>
-                <VisuallyHidden.Root>
-                  <dt>Amount Due</dt>
-                </VisuallyHidden.Root>
-                <dd className='invoices-item-amount-due'>
-                  {formatPrice(1800.9)}
-                </dd>
-                <VisuallyHidden.Root>
-                  <dt>Status</dt>
-                </VisuallyHidden.Root>
-                <dd className='invoices-item-status'>
-                  <Badge variant='success'>Paid</Badge>
-                </dd>
+                <div className='invoices-item-id'>
+                  <VisuallyHidden.Root>
+                    <dt>Id</dt>
+                  </VisuallyHidden.Root>
+                  <dd>RT3080</dd>
+                </div>
+                <div className='invoices-item-due-date'>
+                  <VisuallyHidden.Root>
+                    <dt>Due Date</dt>
+                  </VisuallyHidden.Root>
+                  <dd>Due 19 Aug 2021</dd>
+                </div>
+                <div className='invoices-item-client-name'>
+                  <VisuallyHidden.Root>
+                    <dt>Client Name</dt>
+                  </VisuallyHidden.Root>
+                  <dd>Jensen Huang</dd>
+                </div>
+                <div className='invoices-item-amount-due'>
+                  <VisuallyHidden.Root>
+                    <dt>Amount Due</dt>
+                  </VisuallyHidden.Root>
+                  <dd>{formatPrice(1800.9)}</dd>
+                </div>
+                <div className='invoices-item-status'>
+                  <VisuallyHidden.Root>
+                    <dt>Status</dt>
+                  </VisuallyHidden.Root>
+                  <dd>
+                    <Badge variant='success'>Paid</Badge>
+                  </dd>
+                </div>
                 <CaretRightIcon />
               </dl>
             </Link>

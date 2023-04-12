@@ -37,7 +37,7 @@ body.dark-mode .button-primary {
   outline-color: var(--color-red-6);
 }
 
-body.dark-mode .button-primary {
+body.dark-mode .button-primary-destructive {
   color: var(--color-mauve-12);
 }
 
@@ -297,9 +297,9 @@ body.dark-mode .button-primary {
 /* badge styles */
 .badge {
   text-align: center;
-  border-radius: var(--border-radius-1);
-  padding: var(--spacing-1) var(--spacing-2);
-  font: var(--font-text-xs);
+  border-radius: var(--border-radius-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  font: var(--font-text-sm);
   font-weight: 500;
 }
 

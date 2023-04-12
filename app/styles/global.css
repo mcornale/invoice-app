@@ -242,6 +242,10 @@ input {
   border: none;
 }
 
+address {
+  font-style: normal;
+}
+
 /* interactive elements generic styles */
 :focus {
   outline: 0.3rem solid var(--color-violet-6);
