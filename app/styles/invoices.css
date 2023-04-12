@@ -1,29 +1,29 @@
 /* invoice list route */
-.invoice-list-header {
+.invoices-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.invoice-list-summary {
+.invoices-summary {
   font: var(--font-text-xs);
   color: var(--color-mauve11);
 }
 
-.invoice-list-actions {
+.invoices-actions {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
 }
 
-.invoice-list ul {
+.invoices ul {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
   margin-top: var(--spacing-10);
 }
 
-.invoice-list a {
+.invoices a {
   display: block;
   background-color: var(--color-mauve1);
   padding: var(--spacing-6);
@@ -32,15 +32,15 @@
   border: 0.1rem solid var(--color-mauve7);
 }
 
-.invoice-list a:hover:not(:focus) {
+.invoices a:hover:not(:focus) {
   border-color: var(--color-mauve8);
 }
 
-.invoice-list a:focus {
+.invoices a:focus {
   border-color: var(--color-violet8);
 }
 
-.invoice-list dl {
+.invoices dl {
   width: 100%;
   display: grid;
   grid-template-columns: auto auto 1fr 1fr 9.6rem auto;
@@ -48,46 +48,46 @@
   font: var(--font-text-sm);
 }
 
-.invoice-list-item-id {
+.invoices-item-id {
   font-weight: 600;
 }
 
-.invoice-list-item-id::before {
+.invoices-item-id::before {
   content: '#';
   color: var(--color-mauve11);
 }
 
-.invoice-list-item-amount-due {
+.invoices-item-amount-due {
   font: var(--font-text-lg);
   font-weight: 600;
 }
 
-.invoice-list-item-due-date,
-.invoice-list-item-client-name {
+.invoices-item-due-date,
+.invoices-item-client-name {
   color: var(--color-mauve11);
 }
 
-.invoice-list-item-id,
-.invoice-list-item-due-date,
-.invoice-list-item-client-name,
-.invoice-list-item-amount-due {
+.invoices-item-id,
+.invoices-item-due-date,
+.invoices-item-client-name,
+.invoices-item-amount-due {
   margin-right: var(--spacing-10);
 }
 
-.invoice-list-item-status {
+.invoices-item-status {
   margin-right: var(--spacing-4);
 }
 
-.invoice-list-item-status > * {
+.invoices-item-status > * {
   width: 100%;
   display: block;
 }
 
-.invoice-list-item-amount-due {
+.invoices-item-amount-due {
   text-align: right;
 }
 
-.invoice-list-item dl svg {
+.invoices-item dl svg {
   width: 2rem;
   height: auto;
 }

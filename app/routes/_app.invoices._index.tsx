@@ -11,14 +11,12 @@ import { NewInvoiceSlideOver } from '~/components/new-invoice-slide-over';
 export default function InvoicesIndexRoute() {
   return (
     <>
-      <header className='invoice-list-header'>
+      <header className='invoices-header'>
         <div>
           <h1>Invoices</h1>
-          <span className='invoice-list-summary'>
-            There are 7 total invoices
-          </span>
+          <span className='invoices-summary'>There are 7 total invoices</span>
         </div>
-        <div className='invoice-list-actions'>
+        <div className='invoices-actions'>
           <Popover.Root>
             <Popover.Trigger className='popover-trigger' asChild>
               <Button variant='secondary-gray'>
@@ -46,7 +44,7 @@ export default function InvoicesIndexRoute() {
           <NewInvoiceSlideOver />
         </div>
       </header>
-      <section className='invoice-list'>
+      <section className='invoices'>
         <VisuallyHidden.Root>
           <h2>Invoice list</h2>
         </VisuallyHidden.Root>
@@ -57,25 +55,25 @@ export default function InvoicesIndexRoute() {
                 <VisuallyHidden.Root>
                   <dt>Id</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoice-list-item-id'>RT3080</dd>
+                <dd className='invoices-item-id'>RT3080</dd>
                 <VisuallyHidden.Root>
                   <dt>Due Date</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoice-list-item-due-date'>Due 19 Aug 2021</dd>
+                <dd className='invoices-item-due-date'>Due 19 Aug 2021</dd>
                 <VisuallyHidden.Root>
                   <dt>Client Name</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoice-list-item-client-name'>Jensen Huang</dd>
+                <dd className='invoices-item-client-name'>Jensen Huang</dd>
                 <VisuallyHidden.Root>
                   <dt>Amount Due</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoice-list-item-amount-due'>
+                <dd className='invoices-item-amount-due'>
                   {formatPrice(1800.9)}
                 </dd>
                 <VisuallyHidden.Root>
                   <dt>Status</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoice-list-item-status'>
+                <dd className='invoices-item-status'>
                   <Badge variant='success'>Paid</Badge>
                 </dd>
                 <CaretRightIcon />
