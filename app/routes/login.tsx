@@ -1,7 +1,7 @@
 import type { LinksFunction } from '@remix-run/node';
 import loginStylesUrl from '~/styles/login.css';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Form, InputField } from '~/components/ui/form';
+import { Fieldset, Form, InputField } from '~/components/ui/form';
 import { Button } from '~/components/ui/button';
 
 export const links: LinksFunction = () => {
@@ -17,7 +17,7 @@ export default function LoginRoute() {
       </header>
       <main className='login-main'>
         <Form>
-          <fieldset>
+          <Fieldset className='fieldset'>
             <VisuallyHidden.Root>
               <legend>Login or Sign Up</legend>
             </VisuallyHidden.Root>
@@ -28,8 +28,8 @@ export default function LoginRoute() {
               type='password'
               required
             />
-          </fieldset>
-          <div className='login-form-buttons'>
+          </Fieldset>
+          <div className='login-form-actions'>
             <Button variant='primary'>Login</Button>
             <Button variant='secondary-gray'>Sign Up</Button>
           </div>

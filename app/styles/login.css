@@ -22,14 +22,14 @@
   max-width: 40rem;
 }
 
-.login-form-buttons {
+.login-form-actions {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: var(--spacing-4);
 }
 
-.login-form-buttons > * {
+.login-form-actions > * {
   flex: 1 1 auto;
   min-width: 14.4rem;
 }
