@@ -1,3 +1,8 @@
+.invoices-container {
+  max-width: 104rem;
+  margin: 0 auto;
+}
+
 /* invoices route */
 .invoices-header {
   display: flex;
@@ -16,17 +21,17 @@
   gap: var(--spacing-2);
 }
 
-.invoices-item-list {
+.invoices-section {
   margin-top: var(--spacing-10);
 }
 
-.invoices-item-list ul {
+.invoices-list {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
 }
 
-.invoices-item-list a {
+.invoices-list .invoice-link {
   display: block;
   background-color: var(--color-mauve-1);
   padding: var(--spacing-6);
@@ -35,20 +40,20 @@
   border: 0.1rem solid var(--color-mauve-6);
 }
 
-.invoices-item-list a:hover:not(:focus) {
+.invoices-list .invoice-link:hover:not(:focus) {
   border-color: var(--color-mauve-7);
 }
 
-.invoices-item-list a:focus {
+.invoices-list .invoice-link:focus {
   border-color: var(--color-violet-8);
 }
 
-.invoices-item-list a svg {
+.invoices-list .invoice-link svg {
   width: 2rem;
   height: auto;
 }
 
-.invoices-item-list dl {
+.invoices-list dl {
   width: 100%;
   display: grid;
   grid-template-columns: auto auto 1fr 1fr 9.6rem auto;
@@ -56,41 +61,41 @@
   font: var(--font-text-sm);
 }
 
-.invoices-item-id dd {
+.invoices-list .invoice-id dd {
   font-weight: 600;
 }
 
-.invoices-item-id dd::before {
+.invoices-list .invoice-id dd::before {
   content: '#';
   color: var(--color-mauve-11);
 }
 
-.invoices-item-amount-due dd {
+.invoices-list .invoice-amount-due dd {
   font: var(--font-text-lg);
   font-weight: 600;
 }
 
-.invoices-item-due-date dd,
-.invoices-item-client-name dd {
+.invoices-list .invoice-due-date dd,
+.invoices-list .invoice-client-name dd {
   color: var(--color-mauve-11);
 }
 
-.invoices-item-id dd,
-.invoices-item-due-date dd,
-.invoices-item-client-name dd,
-.invoices-item-amount-due dd {
+.invoices-list .invoice-id dd,
+.invoices-list .invoice-due-date dd,
+.invoices-list .invoice-client-name dd,
+.invoices-list .invoice-amount-due dd {
   margin-right: var(--spacing-10);
 }
 
-.invoices-item-status dd {
+.invoices-list .invoice-status dd {
   margin-right: var(--spacing-4);
 }
 
-.invoices-item-status dd > * {
+.invoices-list .invoice-status dd > * {
   display: block;
 }
 
-.invoices-item-amount-due dd {
+.invoices-list .invoice-amount-due dd {
   text-align: right;
 }
 
@@ -148,50 +153,50 @@
   grid-column: 1 / span 4;
 }
 
-.invoice-id dd,
-.invoice-date dd,
-.invoice-payment-due dd,
-.invoice-client-name,
-.invoice-sent-to dd {
+.invoice-details .invoice-id dd,
+.invoice-details .invoice-date dd,
+.invoice-details .invoice-payment-due dd,
+.invoice-details .invoice-client-name,
+.invoice-details .invoice-sent-to dd {
   font: var(--font-text-lg);
   font-weight: 600;
 }
 
-.invoice-status dt,
-.invoice-project-desc dd,
-.invoice-bill-from dd,
-.invoice-client-address,
-.invoice-date dt,
-.invoice-bill-to dt,
-.invoice-sent-to dt,
-.invoice-payment-due dt,
-.invoice-item-list li:nth-child(1),
-.invoice-amount-due dt {
+.invoice-management .invoice-status dt,
+.invoice-details .invoice-project-desc dd,
+.invoice-details .invoice-bill-from dd,
+.invoice-details .invoice-client-address,
+.invoice-details .invoice-date dt,
+.invoice-details .invoice-bill-to dt,
+.invoice-details .invoice-sent-to dt,
+.invoice-details .invoice-payment-due dt,
+.invoice-details .invoice-item-list li:nth-child(1),
+.invoice-details .invoice-amount-due dt {
   font: var(--font-text-sm);
   color: var(--color-mauve-11);
 }
 
-.invoice-id dd {
+.invoice-details .invoice-id dd {
   margin-bottom: var(--spacing-1);
 }
 
-.invoice-client-address {
+.invoice-details .invoice-client-address {
   margin-top: var(--spacing-1);
 }
 
-.invoice-date dt,
-.invoice-payment-due dt,
-.invoice-bill-to dt,
-.invoice-sent-to dt {
+.invoice-details .invoice-date dt,
+.invoice-details .invoice-payment-due dt,
+.invoice-details .invoice-bill-to dt,
+.invoice-details .invoice-sent-to dt {
   margin-bottom: var(--spacing-2);
 }
 
-.invoice-bill-from *,
-.invoice-client-address {
+.invoice-details .invoice-bill-from *,
+.invoice-details .invoice-client-address {
   line-height: 1.7;
 }
 
-.invoice-item-list {
+.invoice-details .invoice-item-list {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr 1fr;
   gap: var(--spacing-6);
@@ -201,7 +206,7 @@
   border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
 }
 
-.invoice-amount-due {
+.invoice-details .invoice-amount-due {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -211,28 +216,28 @@
   border-radius: 0 0 var(--border-radius-2) var(--border-radius-2);
 }
 
-.invoice-amount-due dd {
+.invoice-details .invoice-amount-due dd {
   font: var(--font-text-2xl);
   font-weight: 600;
 }
 
-.invoice-item-list dd,
-.invoice-item-list ul,
-.invoice-item-list li {
+.invoice-details .invoice-item-list dd,
+.invoice-details .invoice-item-list ul,
+.invoice-details .invoice-item-list li {
   display: contents;
 }
 
-.invoice-item-list li:not(:nth-child(1)) {
+.invoice-details .invoice-item-list li:not(:nth-child(1)) {
   font: var(--font-text-md);
   font-weight: 500;
 }
 
-.invoice-item-list li > *:nth-child(2) {
+.invoice-details .invoice-item-list li > *:nth-child(2) {
   text-align: center;
 }
 
-.invoice-item-list li > *:nth-child(3),
-.invoice-item-list li > *:nth-child(4) {
+.invoice-details .invoice-item-list li > *:nth-child(3),
+.invoice-details .invoice-item-list li > *:nth-child(4) {
   text-align: right;
 }
 

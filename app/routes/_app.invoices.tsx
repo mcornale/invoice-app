@@ -12,5 +12,9 @@ export const links: LinksFunction = () => {
 };
 
 export default function InvoicesRoute() {
-  return <Outlet />;
+  return (
+    <div className='invoices-container'>
+      <Outlet />
+    </div>
+  );
 }

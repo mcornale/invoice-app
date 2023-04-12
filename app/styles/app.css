@@ -17,14 +17,9 @@
   position: relative;
 }
 
-.app-outlet-wrapper {
+.app-outlet {
   width: 100%;
   height: 100%;
   overflow: auto;
   padding: var(--spacing-16);
-}
-
-.app-outlet {
-  max-width: 104rem;
-  margin: 0 auto;
 }
