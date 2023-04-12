@@ -11,48 +11,53 @@ import { NewInvoiceSlideOver } from '~/components/new-invoice-slide-over';
 export default function InvoicesIndexRoute() {
   return (
     <>
-      <section className='invoices'>
-        <header className='invoices-header'>
-          <div>
-            <h1>Invoices</h1>
-            <span className='invoices-summary'>There are 7 total invoices</span>
-          </div>
-          <div className='invoices-header-actions'>
-            <Popover.Root>
-              <Popover.Trigger className='popover-trigger' asChild>
-                <Button variant='secondary-gray'>
-                  Filter by status <CaretDownIcon />
-                </Button>
-              </Popover.Trigger>
-              <Popover.Portal>
-                <Form>
-                  <Popover.Content
-                    className='popover-content'
-                    sideOffset={8}
-                    align='start'
-                  >
-                    <CheckboxField label='Draft' name='status' value='draft' />
-                    <CheckboxField
-                      label='Pending'
-                      name='status'
-                      value='pending'
-                    />
-                    <CheckboxField label='Paid' name='status' value='paid' />
-                  </Popover.Content>
-                </Form>
-              </Popover.Portal>
-            </Popover.Root>
-            <NewInvoiceSlideOver />
-          </div>
-        </header>
-        <ul className='invoices-list'>
-          <li className='invoices-list-item'>
+      <header className='invoice-list-header'>
+        <div>
+          <h1>Invoices</h1>
+          <span className='invoice-list-summary'>
+            There are 7 total invoices
+          </span>
+        </div>
+        <div className='invoice-list-actions'>
+          <Popover.Root>
+            <Popover.Trigger className='popover-trigger' asChild>
+              <Button variant='secondary-gray'>
+                Filter by status <CaretDownIcon />
+              </Button>
+            </Popover.Trigger>
+            <Popover.Portal>
+              <Form>
+                <Popover.Content
+                  className='popover-content'
+                  sideOffset={8}
+                  align='start'
+                >
+                  <CheckboxField label='Draft' name='status' value='draft' />
+                  <CheckboxField
+                    label='Pending'
+                    name='status'
+                    value='pending'
+                  />
+                  <CheckboxField label='Paid' name='status' value='paid' />
+                </Popover.Content>
+              </Form>
+            </Popover.Portal>
+          </Popover.Root>
+          <NewInvoiceSlideOver />
+        </div>
+      </header>
+      <section className='invoice-list'>
+        <VisuallyHidden.Root>
+          <h2>Invoice list</h2>
+        </VisuallyHidden.Root>
+        <ul>
+          <li>
             <Link to='RT3080'>
               <dl>
                 <VisuallyHidden.Root>
                   <dt>Id</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoices-list-item-id'>RT3080</dd>
+                <dd className='invoice-list-item-id'>RT3080</dd>
                 <VisuallyHidden.Root>
                   <dt>Due Date</dt>
                 </VisuallyHidden.Root>
