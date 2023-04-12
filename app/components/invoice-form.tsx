@@ -63,9 +63,15 @@ export function InvoiceForm(props: InvoiceFormProps) {
             <span id='item-name-label' className='label'>
               Item Name
             </span>
-            <span className='label'>Qty.</span>
-            <span className='label'>Price</span>
-            <span className='label'>Total</span>
+            <span id='quantity-label' className='label'>
+              Qty.
+            </span>
+            <span id='price-label' className='label'>
+              Price
+            </span>
+            <span id='total-label' className='label'>
+              Total
+            </span>
             <span></span>
           </li>
           <li>
