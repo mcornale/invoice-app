@@ -2,12 +2,12 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-  background-color: var(--color-mauve2);
+  background-color: var(--color-mauve-2);
 }
 
 .app-header {
-  background-color: var(--color-mauve1);
-  border-right: 0.1rem solid var(--color-mauve6);
+  background-color: var(--color-mauve-1);
+  border-right: 0.1rem solid var(--color-mauve-6);
   padding: var(--spacing-6);
 }
 
