@@ -1,4 +1,4 @@
-/* invoice list route */
+/* invoices route */
 .invoices-header {
   display: flex;
   justify-content: space-between;
@@ -16,31 +16,34 @@
   gap: var(--spacing-2);
 }
 
-.invoices ul {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
+.invoices-list {
   margin-top: var(--spacing-10);
 }
 
-.invoices a {
+.invoices-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.invoices-list a {
   display: block;
   background-color: var(--color-mauve1);
   padding: var(--spacing-6);
-  border-radius: 0.8rem;
+  border-radius: var(--border-radius-2);
   box-shadow: var(--shadow-xs);
   border: 0.1rem solid var(--color-mauve7);
 }
 
-.invoices a:hover:not(:focus) {
+.invoices-list a:hover:not(:focus) {
   border-color: var(--color-mauve8);
 }
 
-.invoices a:focus {
+.invoices-list a:focus {
   border-color: var(--color-violet8);
 }
 
-.invoices dl {
+.invoices-list dl {
   width: 100%;
   display: grid;
   grid-template-columns: auto auto 1fr 1fr 9.6rem auto;

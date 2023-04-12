@@ -44,7 +44,7 @@ export default function InvoicesIndexRoute() {
           <NewInvoiceSlideOver />
         </div>
       </header>
-      <section className='invoices'>
+      <section className='invoices-list'>
         <VisuallyHidden.Root>
           <h2>Invoice list</h2>
         </VisuallyHidden.Root>

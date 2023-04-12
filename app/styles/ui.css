@@ -1,7 +1,7 @@
 /* button styles */
 .button {
   font-weight: 600;
-  border-radius: 0.8rem;
+  border-radius: var(--border-radius-2);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -150,7 +150,7 @@ body.dark-mode .button-primary {
 .input {
   background-color: var(--color-mauve1);
   border: 0.1rem solid var(--color-mauve7);
-  border-radius: 0.8rem;
+  border-radius: var(--border-radius-2);
   padding: 1rem 1.4rem;
   font: var(--font-text-sm);
   font-weight: 400;
@@ -212,7 +212,7 @@ body.dark-mode .button-primary {
 }
 
 .checkbox {
-  border-radius: 0.4rem;
+  border-radius: var(--border-radius-1);
   border: 0.1rem solid var(--color-mauve7);
   background-color: var(--color-mauve1);
   color: var(--color-violet9);
@@ -259,7 +259,7 @@ body.dark-mode .button-primary {
 .select-content {
   overflow: hidden;
   background-color: var(--color-mauve1);
-  border-radius: 0.8rem;
+  border-radius: var(--border-radius-2);
   box-shadow: var(--shadow-lg);
   width: var(--radix-select-trigger-width);
 }
@@ -274,7 +274,7 @@ body.dark-mode .button-primary {
   display: flex;
   justify-content: space-between;
   user-select: none;
-  border-radius: 0.4rem;
+  border-radius: var(--border-radius-1);
 }
 
 .select-item:focus {
@@ -297,7 +297,7 @@ body.dark-mode .button-primary {
 /* badge styles */
 .badge {
   text-align: center;
-  border-radius: 0.4rem;
+  border-radius: var(--border-radius-1);
   padding: var(--spacing-1) var(--spacing-2);
   font: var(--font-text-xs);
   font-weight: 500;
@@ -326,7 +326,7 @@ body.dark-mode .button-primary {
 .popover-content {
   width: var(--radix-popover-trigger-width);
   background-color: var(--color-mauve1);
-  border-radius: 0.8rem;
+  border-radius: var(--border-radius-2);
   padding: var(--spacing-4);
   box-shadow: var(--shadow-lg);
   display: flex;
