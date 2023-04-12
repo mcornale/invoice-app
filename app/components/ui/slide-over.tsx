@@ -25,7 +25,7 @@ export function SlideOverContent({
 
   return (
     <Dialog.Portal container={container}>
-      <Dialog.Overlay className='slide-over-overlay' {...props} />
+      <Dialog.Overlay className='slide-over-overlay' />
       <Dialog.Content
         className='slide-over-content'
         aria-describedby={undefined}

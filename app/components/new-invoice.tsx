@@ -8,7 +8,7 @@ import {
 } from './ui/slide-over';
 import { InvoiceForm } from './invoice-form';
 
-export function NewInvoiceSlideOver() {
+export function NewInvoice() {
   return (
     <SlideOver>
       <SlideOverTrigger asChild>

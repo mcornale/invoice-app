@@ -7,7 +7,7 @@ import {
 } from './ui/slide-over';
 import { InvoiceForm } from './invoice-form';
 
-export function EditInvoiceSlideOver() {
+export function EditInvoice() {
   return (
     <SlideOver>
       <SlideOverTrigger asChild>
