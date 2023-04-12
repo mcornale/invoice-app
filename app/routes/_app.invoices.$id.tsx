@@ -1,6 +1,7 @@
 import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { EditInvoiceSlideOver } from '~/components/edit-invoice-slide-over';
+import { DeleteInvoice } from '~/components/delete-invoice';
+import { EditInvoice } from '~/components/edit-invoice';
 import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
 import { formatPrice } from '~/utils/helpers/format-price';
@@ -25,8 +26,8 @@ export default function InvoiceRoute() {
           </dd>
         </dl>
         <div className='invoice-actions'>
-          <EditInvoiceSlideOver />
-          <Button variant='primary-destructive'>Delete</Button>
+          <EditInvoice />
+          <DeleteInvoice />
           <Button variant='primary'>Mark as Paid</Button>
         </div>
       </section>

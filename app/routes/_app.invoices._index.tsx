@@ -6,7 +6,7 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { Button } from '~/components/ui/button';
 import { CheckboxField, Form } from '~/components/ui/form';
 import { Badge } from '~/components/ui/badge';
-import { NewInvoiceSlideOver } from '~/components/new-invoice-slide-over';
+import { NewInvoice } from '~/components/new-invoice';
 
 export default function InvoicesIndexRoute() {
   return (
@@ -41,7 +41,7 @@ export default function InvoicesIndexRoute() {
               </Form>
             </Popover.Portal>
           </Popover.Root>
-          <NewInvoiceSlideOver />
+          <NewInvoice />
         </div>
       </header>
       <section className='invoices-section'>
