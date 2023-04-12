@@ -1,4 +1,9 @@
-import type { FormHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react';
+import type {
+  FieldsetHTMLAttributes,
+  FormHTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Select from '@radix-ui/react-select';
 import { CalendarIcon, CaretDownIcon, CheckIcon } from '@radix-ui/react-icons';
@@ -8,11 +13,23 @@ interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode;
 }
 
-export function Form({ children, className, ...props }: FormProps) {
+export function Form({ children, ...props }: FormProps) {
   return (
-    <form className={`form ${className}`} {...props}>
+    <form className={`form ${props.className ?? ''}`} {...props}>
       {children}
     </form>
+  );
+}
+
+interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  children: ReactNode;
+}
+
+export function Fieldset({ children, ...props }: FieldsetProps) {
+  return (
+    <fieldset className={`fieldset ${props.className ?? ''}`} {...props}>
+      {children}
+    </fieldset>
   );
 }
 
@@ -22,7 +39,12 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function InputField({ label, name, ...props }: InputFieldProps) {
   const input = (
-    <input className='input' name={name} id={`${name}-input`} {...props} />
+    <input
+      className={`input ${props.className ?? ''}`}
+      name={name}
+      id={`${name}-input`}
+      {...props}
+    />
   );
 
   return (
