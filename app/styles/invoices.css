@@ -7,7 +7,7 @@
 
 .invoices-summary {
   font: var(--font-text-xs);
-  color: var(--color-mauve11);
+  color: var(--color-mauve-11);
 }
 
 .invoices-actions {
@@ -28,19 +28,19 @@
 
 .invoices-list a {
   display: block;
-  background-color: var(--color-mauve1);
+  background-color: var(--color-mauve-1);
   padding: var(--spacing-6);
   border-radius: var(--border-radius-2);
   box-shadow: var(--shadow-xs);
-  border: 0.1rem solid var(--color-mauve7);
+  border: 0.1rem solid var(--color-mauve-7);
 }
 
 .invoices-list a:hover:not(:focus) {
-  border-color: var(--color-mauve8);
+  border-color: var(--color-mauve-8);
 }
 
 .invoices-list a:focus {
-  border-color: var(--color-violet8);
+  border-color: var(--color-violet-8);
 }
 
 .invoices-list dl {
@@ -57,7 +57,7 @@
 
 .invoices-item-id::before {
   content: '#';
-  color: var(--color-mauve11);
+  color: var(--color-mauve-11);
 }
 
 .invoices-item-amount-due {
@@ -67,7 +67,7 @@
 
 .invoices-item-due-date,
 .invoices-item-client-name {
-  color: var(--color-mauve11);
+  color: var(--color-mauve-11);
 }
 
 .invoices-item-id,
@@ -110,7 +110,7 @@
 }
 
 .invoice-form::-webkit-scrollbar-thumb {
-  background-color: var(--color-mauve9);
+  background-color: var(--color-mauve-9);
 }
 
 .invoice-form-billing-section {
@@ -147,7 +147,7 @@
 
 .invoice-form-buttons {
   padding: var(--spacing-8) var(--spacing-12);
-  border-top: 0.1rem solid var(--color-mauve6);
+  border-top: 0.1rem solid var(--color-mauve-6);
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-4);
