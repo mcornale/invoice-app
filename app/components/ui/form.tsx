@@ -14,9 +14,9 @@ interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode;
 }
 
-export function Form({ children, ...props }: FormProps) {
+export function Form({ children, className, ...props }: FormProps) {
   return (
-    <form className={`form ${props.className ?? ''}`} {...props}>
+    <form className={`form ${className ?? ''}`} {...props}>
       {children}
     </form>
   );
@@ -26,9 +26,9 @@ interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
   children: ReactNode;
 }
 
-export function Fieldset({ children, ...props }: FieldsetProps) {
+export function Fieldset({ children, className, ...props }: FieldsetProps) {
   return (
-    <fieldset className={`fieldset ${props.className ?? ''}`} {...props}>
+    <fieldset className={`fieldset ${className ?? ''}`} {...props}>
       {children}
     </fieldset>
   );
@@ -38,9 +38,9 @@ interface LegendProps extends HTMLAttributes<HTMLLegendElement> {
   children: ReactNode;
 }
 
-export function Legend({ children, ...props }: LegendProps) {
+export function Legend({ children, className, ...props }: LegendProps) {
   return (
-    <legend className={`legend ${props.className ?? ''}`} {...props}>
+    <legend className={`legend ${className ?? ''}`} {...props}>
       {children}
     </legend>
   );
@@ -50,10 +50,15 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-export function InputField({ label, name, ...props }: InputFieldProps) {
+export function InputField({
+  label,
+  name,
+  className,
+  ...props
+}: InputFieldProps) {
   const input = (
     <input
-      className={`input ${props.className ?? ''}`}
+      className={`input ${className ?? ''}`}
       name={name}
       id={`${name}-input`}
       {...props}

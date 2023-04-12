@@ -114,13 +114,13 @@ body.dark-mode .button-primary-destructive {
   gap: var(--spacing-12);
 }
 
-.form fieldset {
+.fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-5);
 }
 
-.form legend {
+.legend {
   color: var(--color-violet-9);
   font: var(--font-text-sm);
   font-weight: 600;

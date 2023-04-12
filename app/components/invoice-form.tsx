@@ -6,9 +6,9 @@ import type { FormHTMLAttributes } from 'react';
 
 interface InvoiceFormProps extends FormHTMLAttributes<HTMLFormElement> {}
 
-export function InvoiceForm(props: InvoiceFormProps) {
+export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
   return (
-    <Form className='invoice-form' {...props}>
+    <Form className={`invoice-form ${className ?? ''}`} {...props}>
       <section className='billing-information'>
         <VisuallyHidden.Root>
           <h3>Billing Information</h3>
