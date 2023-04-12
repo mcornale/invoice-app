@@ -1,5 +1,6 @@
 import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { useNavigate } from '@remix-run/react';
 import { DeleteInvoice } from '~/components/delete-invoice';
 import { EditInvoice } from '~/components/edit-invoice';
 import { Badge } from '~/components/ui/badge';
@@ -7,9 +8,15 @@ import { Button } from '~/components/ui/button';
 import { formatPrice } from '~/utils/helpers/format-price';
 
 export default function InvoiceRoute() {
+  const navigate = useNavigate();
+
+  function handleBackButtonClick() {
+    navigate(-1);
+  }
+
   return (
     <>
-      <Button variant='tertiary-gray'>
+      <Button variant='tertiary-gray' onClick={handleBackButtonClick}>
         <CaretLeftIcon /> Back
       </Button>
       <VisuallyHidden.Root>
