@@ -18,7 +18,7 @@ export function NewInvoiceSlideOver() {
       </SlideOverTrigger>
       <SlideOverContent title='New Invoice'>
         <InvoiceForm id='new-invoice-form' />
-        <div className='invoice-form-buttons'>
+        <div className='invoice-form-actions'>
           <SlideOverClose asChild>
             <Button
               variant='secondary-gray'

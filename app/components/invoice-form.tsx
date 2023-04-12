@@ -9,7 +9,7 @@ interface InvoiceFormProps extends FormHTMLAttributes<HTMLFormElement> {}
 export function InvoiceForm(props: InvoiceFormProps) {
   return (
     <Form className='invoice-form' {...props}>
-      <section className='invoice-form-billing-section'>
+      <section className='billing-information'>
         <VisuallyHidden.Root>
           <h3>Billing Information</h3>
         </VisuallyHidden.Root>
@@ -20,7 +20,7 @@ export function InvoiceForm(props: InvoiceFormProps) {
             name='street-address'
             type='text'
           />
-          <div className='invoice-form-fieldset-row'>
+          <div className='fieldset-row'>
             <InputField label='City' name='city' type='text' />
             <InputField label='Post Code' name='post-code' type='text' />
             <InputField label='Country' name='country' type='text' />
@@ -35,12 +35,12 @@ export function InvoiceForm(props: InvoiceFormProps) {
             name='client-street-address'
             type='text'
           />
-          <div className='invoice-form-fieldset-row'>
+          <div className='fieldset-row'>
             <InputField label='City' name='client-city' type='text' />
             <InputField label='Post Code' name='client-post-code' type='text' />
             <InputField label='Country' name='client-country' type='text' />
           </div>
-          <div className='invoice-form-fieldset-row'>
+          <div className='fieldset-row'>
             <InputField label='Invoice Date' name='invoice-date' type='date' />
             <SelectField
               label='Payment terms'
@@ -56,10 +56,10 @@ export function InvoiceForm(props: InvoiceFormProps) {
           />
         </fieldset>
       </section>
-      <section className='invoice-form-items'>
+      <section className='item-list-section'>
         <h3>Item List</h3>
-        <ul>
-          <li aria-hidden>
+        <ul className='item-list'>
+          <li className='item' aria-hidden>
             <span id='item-name-label' className='label'>
               Item Name
             </span>
@@ -74,7 +74,7 @@ export function InvoiceForm(props: InvoiceFormProps) {
             </span>
             <span></span>
           </li>
-          <li>
+          <li className='item'>
             <InputField
               aria-labelledby='item-name-label'
               name='item-name'

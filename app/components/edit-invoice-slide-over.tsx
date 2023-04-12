@@ -15,12 +15,12 @@ export function EditInvoiceSlideOver() {
       </SlideOverTrigger>
       <SlideOverContent title='Edit Invoice'>
         <InvoiceForm id='edit-invoice-form' />
-        <div className='invoice-form-buttons'>
+        <div className='invoice-form-actions'>
           <SlideOverClose asChild>
             <Button variant='secondary-gray'>Cancel</Button>
           </SlideOverClose>
           <Button type='submit' variant='primary' form='edit-invoice-form'>
-            Save & Send
+            Save Changes
           </Button>
         </div>
       </SlideOverContent>
