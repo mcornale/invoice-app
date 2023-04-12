@@ -61,21 +61,21 @@ export default function InvoicesIndexRoute() {
                 <VisuallyHidden.Root>
                   <dt>Due Date</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoices-list-item-due-date'>Due 19 Aug 2021</dd>
+                <dd className='invoice-list-item-due-date'>Due 19 Aug 2021</dd>
                 <VisuallyHidden.Root>
                   <dt>Client Name</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoices-list-item-client-name'>Jensen Huang</dd>
+                <dd className='invoice-list-item-client-name'>Jensen Huang</dd>
                 <VisuallyHidden.Root>
                   <dt>Amount Due</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoices-list-item-amount-due'>
+                <dd className='invoice-list-item-amount-due'>
                   {formatPrice(1800.9)}
                 </dd>
                 <VisuallyHidden.Root>
                   <dt>Status</dt>
                 </VisuallyHidden.Root>
-                <dd className='invoices-list-item-status'>
+                <dd className='invoice-list-item-status'>
                   <Badge variant='success'>Paid</Badge>
                 </dd>
                 <CaretRightIcon />
