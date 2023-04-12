@@ -5,6 +5,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant:
     | 'primary'
+    | 'primary-destructive'
     | 'secondary-color'
     | 'secondary-gray'
     | 'tertiary-color'

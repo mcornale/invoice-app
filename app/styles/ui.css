@@ -27,6 +27,20 @@ body.dark-mode .button-primary {
   color: var(--color-mauve-12);
 }
 
+.button-primary-destructive {
+  background-color: var(--color-red9);
+  color: var(--color-mauve1);
+  border: 0.1rem solid var(--color-red9);
+}
+
+.button-primary-destructive:focus {
+  outline-color: var(--color-red6);
+}
+
+body.dark-mode .button-primary {
+  color: var(--color-mauve12);
+}
+
 .button-secondary-color {
   background-color: var(--color-violet3);
   color: var(--color-violet10);
@@ -65,6 +79,11 @@ body.dark-mode .button-primary {
   .button-primary:hover {
     background-color: var(--color-violet10);
     border-color: var(--color-violet10);
+  }
+
+  .button-primary-destructive:hover {
+    background-color: var(--color-red10);
+    border-color: var(--color-red10);
   }
 
   .button-secondary-color:hover {
