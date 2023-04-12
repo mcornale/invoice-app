@@ -16,7 +16,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, variant, className, ...props }, forwardedRed) => {
     return (
       <button
-        className={`button button-${variant} ${className}`}
+        className={`button button-${variant} ${className ?? ''}`}
         {...props}
         ref={forwardedRed}
       >
