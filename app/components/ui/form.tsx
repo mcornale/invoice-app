@@ -1,6 +1,7 @@
 import type {
   FieldsetHTMLAttributes,
   FormHTMLAttributes,
+  HTMLAttributes,
   InputHTMLAttributes,
   ReactNode,
 } from 'react';
@@ -30,6 +31,18 @@ export function Fieldset({ children, ...props }: FieldsetProps) {
     <fieldset className={`fieldset ${props.className ?? ''}`} {...props}>
       {children}
     </fieldset>
+  );
+}
+
+interface LegendProps extends HTMLAttributes<HTMLLegendElement> {
+  children: ReactNode;
+}
+
+export function Legend({ children, ...props }: LegendProps) {
+  return (
+    <legend className={`legend ${props.className ?? ''}`} {...props}>
+      {children}
+    </legend>
   );
 }
 

@@ -1,6 +1,6 @@
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
-import { Form, InputField, SelectField } from './ui/form';
+import { Fieldset, Form, InputField, Legend, SelectField } from './ui/form';
 import { Button } from './ui/button';
 import type { FormHTMLAttributes } from 'react';
 
@@ -13,8 +13,8 @@ export function InvoiceForm(props: InvoiceFormProps) {
         <VisuallyHidden.Root>
           <h3>Billing Information</h3>
         </VisuallyHidden.Root>
-        <fieldset className='fieldset'>
-          <legend className='legend'>Bill From</legend>
+        <Fieldset>
+          <Legend>Bill From</Legend>
           <InputField
             label='Street Address'
             name='street-address'
@@ -25,9 +25,9 @@ export function InvoiceForm(props: InvoiceFormProps) {
             <InputField label='Post Code' name='post-code' type='text' />
             <InputField label='Country' name='country' type='text' />
           </div>
-        </fieldset>
-        <fieldset>
-          <legend>Bill To</legend>
+        </Fieldset>
+        <Fieldset>
+          <Legend>Bill To</Legend>
           <InputField label='Client Name' name='client-name' type='text' />
           <InputField label='Client Email' name='client-email' type='text' />
           <InputField
@@ -54,7 +54,7 @@ export function InvoiceForm(props: InvoiceFormProps) {
             name='project-description'
             type='text'
           />
-        </fieldset>
+        </Fieldset>
       </section>
       <section className='item-list-section'>
         <h3>Item List</h3>
