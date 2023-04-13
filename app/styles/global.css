@@ -128,7 +128,6 @@ html {
 body {
   font: var(--font-text-md);
   height: 100vh;
-  height: calc(100vh - env(safe-area-inset-bottom));
   color: var(--color-mauve-12);
 }
 
@@ -257,6 +256,13 @@ input {
 
 address {
   font-style: normal;
+}
+
+@media (max-width: 52em) {
+  h1 {
+    font: var(--font-text-2xl);
+    font-weight: 600;
+  }
 }
 
 /* interactive elements generic styles */

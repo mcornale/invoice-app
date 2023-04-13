@@ -15,7 +15,7 @@ export default function AppRoute() {
   return (
     <div className='app'>
       <header className='app-header'>
-        <img src='/logo.svg' alt='logo' />
+        <img className='logo' src='/logo.svg' alt='logo' />
       </header>
       <main className='app-main'>
         <div className='app-outlet'>

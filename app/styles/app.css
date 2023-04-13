@@ -23,3 +23,34 @@
   overflow: auto;
   padding: var(--spacing-16);
 }
+
+@media (max-width: 64em) {
+  .app {
+    flex-direction: column;
+  }
+
+  .app-header {
+    border-bottom: 0.1rem solid var(--color-mauve-6);
+    padding: var(--spacing-6);
+  }
+
+  .app-outlet {
+    padding: var(--spacing-12);
+  }
+}
+
+@media (max-width: 52em) {
+  .app-header {
+    border-bottom: 0.1rem solid var(--color-mauve-6);
+    padding: var(--spacing-4) var(--spacing-6);
+  }
+
+  .app-header .logo {
+    height: 3.2rem;
+    width: auto;
+  }
+
+  .app-outlet {
+    padding: var(--spacing-10) var(--spacing-6);
+  }
+}

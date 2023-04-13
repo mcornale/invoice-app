@@ -245,6 +245,7 @@ body.dark-mode .button-primary-destructive {
   align-items: center;
   justify-content: space-between;
   font-weight: 400;
+  color: var(--color-mauve-12);
 }
 
 .select-trigger svg {
@@ -325,6 +326,7 @@ body.dark-mode .button-primary-destructive {
 
 .popover-content {
   width: var(--radix-popover-trigger-width);
+  min-width: 16rem;
   background-color: var(--color-mauve-1);
   border-radius: var(--border-radius-2);
   padding: var(--spacing-4);

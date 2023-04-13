@@ -7,13 +7,17 @@ import {
   SlideOverTrigger,
 } from './ui/slide-over';
 import { InvoiceForm } from './invoice-form';
+import { useIsScreenSmall } from '~/utils/hooks/use-is-screen-small';
 
 export function NewInvoice() {
+  const isScreenSmall = useIsScreenSmall();
+
   return (
     <SlideOver>
       <SlideOverTrigger asChild>
         <Button variant='primary'>
-          <PlusIcon /> New Invoice
+          <PlusIcon />
+          {isScreenSmall ? 'New' : 'New Invoice'}{' '}
         </Button>
       </SlideOverTrigger>
       <SlideOverContent title='New Invoice'>
