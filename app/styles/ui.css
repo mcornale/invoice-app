@@ -1,12 +1,10 @@
 /* button styles */
 .button {
-  font-weight: 600;
   border-radius: var(--border-radius-2);
   display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: var(--spacing-2);
-  box-shadow: var(--shadow-xs);
   font: var(--font-text-sm);
   font-weight: 500;
   padding: 1rem var(--spacing-4);
@@ -34,7 +32,7 @@ body.dark-mode .button-primary {
 }
 
 .button-primary-destructive:focus {
-  outline-color: var(--color-red-6);
+  box-shadow: var(--shadow-outline-red);
 }
 
 body.dark-mode .button-primary-destructive {
@@ -54,25 +52,23 @@ body.dark-mode .button-primary-destructive {
 }
 
 .button-secondary-gray:focus {
-  outline-color: var(--color-mauve-6);
+  box-shadow: var(--shadow-outline-mauve);
 }
 
 .button-tertiary-color {
   background-color: transparent;
   color: var(--color-violet-10);
   border: 0.1rem solid transparent;
-  box-shadow: none;
 }
 
 .button-tertiary-gray {
   background-color: transparent;
   color: var(--color-mauve-12);
   border: 0.1rem solid transparent;
-  box-shadow: none;
 }
 
 .button-tertiary-gray:focus {
-  outline-color: var(--color-mauve-6);
+  box-shadow: var(--shadow-outline-mauve);
 }
 
 @media (hover: hover) {
@@ -155,16 +151,12 @@ body.dark-mode .button-primary-destructive {
   font: var(--font-text-sm);
   font-weight: 400;
   width: 100%;
-  box-shadow: var(--shadow-xs);
 }
 
 .input[readonly] {
-  cursor: not-allowed;
-  outline: none;
   border: none;
   padding-left: 0;
   padding-right: 0;
-  box-shadow: none;
 }
 
 .input:focus:not([readonly]) {
@@ -280,7 +272,6 @@ body.dark-mode .button-primary-destructive {
 
 .select-item:focus {
   background-color: var(--color-violet-4);
-  outline: none;
 }
 
 .select-item-indicator {
@@ -336,10 +327,6 @@ body.dark-mode .button-primary-destructive {
   gap: var(--spacing-2);
 }
 
-.popover-content:focus {
-  outline: none;
-}
-
 /* slide over styles */
 .slide-over-overlay {
   background-color: var(--color-mauve-12);
@@ -358,10 +345,6 @@ body.dark-mode .button-primary-destructive {
   display: flex;
   flex-direction: column;
   background-color: var(--color-mauve-1);
-}
-
-.slide-over-content:focus {
-  outline: none;
 }
 
 .slide-over-title {

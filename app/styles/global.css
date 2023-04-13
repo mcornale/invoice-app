@@ -77,6 +77,9 @@
   --font-text-xs: 1.2rem/1.8rem var(--font-family);
 
   /* SHADOWS */
+  --shadow-outline-violet: 0 0 0 0.3rem var(--color-violet-6);
+  --shadow-outline-mauve: 0 0 0 0.3rem var(--color-mauve-6);
+  --shadow-outline-red: 0 0 0 0.3rem var(--color-red-6);
   --shadow-3xl: 0rem 3.2rem 6.4rem -1.2rem hsla(260, 25%, 11%, 1.4);
   --shadow-2xl: 0rem 2.4rem 4.8rem -1.2rem hsla(260, 25%, 11%, 1.8);
   --shadow-xl: 0rem 2rem 2.4rem -0.4rem hsla(260, 25%, 11%, 0.08),
@@ -199,17 +202,17 @@ body.dark-mode {
   --color-red-12: hsl(351, 89%, 96%);
 
   /* SHADOWS */
-  --shadow-3xl: 0rem 3.2rem 6.4rem -1.2rem hsla(256, 6%, 93.2%, 1.4);
-  --shadow-2xl: 0rem 2.4rem 4.8rem -1.2rem hsla(256, 6%, 93.2%, 1.8);
-  --shadow-xl: 0rem 2rem 2.4rem -0.4rem hsla(256, 6%, 93.2%, 0.08),
-    0rem 0.8rem 0.8rem -0.4rem hsla(256, 6%, 93.2%, 0.03);
-  --shadow-lg: 0rem 1.2rem 1.6rem -0.4rem hsla(256, 6%, 93.2%, 0.08),
-    0rem 0.4rem 0.6rem -0.2rem hsla(256, 6%, 93.2%, 0.03);
-  --shadow-md: 0rem 0.4rem 0.8rem -0.2rem hsla(256, 6%, 93.2%, 0.1),
-    0rem 0.2rem 0.4rem -0.2rem hsla(256, 6%, 93.2%, 0.06);
-  --shadow-sm: 0rem 0.1rem 0.3rem hsla(256, 6%, 93.2%, 0.1),
-    0rem 0.1rem 0.2rem hsla(256, 6%, 93.2%, 0.06);
-  --shadow-xs: 0rem 0.1rem 0.2rem hsla(256, 6%, 93.2% 0.05);
+  --shadow-3xl: 0 3.2rem 6.4rem -1.2rem hsla(256, 6%, 93.2%, 1.4);
+  --shadow-2xl: 0 2.4rem 4.8rem -1.2rem hsla(256, 6%, 93.2%, 1.8);
+  --shadow-xl: 0 2rem 2.4rem -0.4rem hsla(256, 6%, 93.2%, 0.08),
+    0 0.8rem 0.8rem -0.4rem hsla(256, 6%, 93.2%, 0.03);
+  --shadow-lg: 0 1.2rem 1.6rem -0.4rem hsla(256, 6%, 93.2%, 0.08),
+    0 0.4rem 0.6rem -0.2rem hsla(256, 6%, 93.2%, 0.03);
+  --shadow-md: 0 0.4rem 0.8rem -0.2rem hsla(256, 6%, 93.2%, 0.1),
+    0 0.2rem 0.4rem -0.2rem hsla(256, 6%, 93.2%, 0.06);
+  --shadow-sm: 0 0.1rem 0.3rem hsla(256, 6%, 93.2%, 0.1),
+    0 0.1rem 0.2rem hsla(256, 6%, 93.2%, 0.06);
+  --shadow-xs: 0 0.1rem 0.2rem hsla(256, 6%, 93.2% 0.05);
 }
 
 h1 {
@@ -239,7 +242,6 @@ button {
 
 a {
   text-decoration: none;
-  outline-offset: 0;
   color: var(--color-mauve-12);
   display: inline-flex;
 }
@@ -267,11 +269,12 @@ address {
 
 /* interactive elements generic styles */
 :focus {
-  outline: 0.3rem solid var(--color-violet-6);
+  box-shadow: var(--shadow-outline-violet);
+  outline: none;
 }
 
 [disabled],
 [aria-disabled='true'] {
-  pointer-events: none;
+  cursor: not-allowed;
   opacity: 0.7;
 }

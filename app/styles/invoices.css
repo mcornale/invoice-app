@@ -38,7 +38,6 @@
   background-color: var(--color-mauve-1);
   padding: var(--spacing-6);
   border-radius: var(--border-radius-2);
-  box-shadow: var(--shadow-xs);
   border: 0.1rem solid var(--color-mauve-6);
 }
 
@@ -155,7 +154,6 @@
 .invoice-details {
   background-color: var(--color-mauve-1);
   border-radius: var(--border-radius-2);
-  box-shadow: var(--shadow-xs);
   border: 0.1rem solid var(--color-mauve-6);
   margin-top: var(--spacing-6);
 }
