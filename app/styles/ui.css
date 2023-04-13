@@ -352,6 +352,12 @@ body.dark-mode .button-primary-destructive {
   border-bottom: 0.1rem solid var(--color-mauve-6);
 }
 
+@media (max-width: 52em) {
+  .slide-over-title {
+    padding: var(--spacing-8) var(--spacing-6);
+  }
+}
+
 /* alert dialog styles */
 .alert-dialog-overlay {
   background-color: var(--color-mauve-12);

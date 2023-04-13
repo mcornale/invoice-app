@@ -43,14 +43,14 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
           <div className='fieldset-row'>
             <InputField label='Invoice Date' name='invoice-date' type='date' />
             <SelectField
-              label='Payment terms'
+              label='Payment Terms'
               name='payment-terms'
               placeholder='Select Payment Terms'
               values={['net 1 day', 'net 7 days', 'net 14 days', 'net 30 days']}
             />
           </div>
           <InputField
-            label='Project description'
+            label='Project Description'
             name='project-description'
             type='text'
           />

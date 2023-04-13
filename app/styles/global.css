@@ -130,7 +130,6 @@ html {
 
 body {
   font: var(--font-text-md);
-  height: 100vh;
   color: var(--color-mauve-12);
 }
 

@@ -127,16 +127,6 @@ export default function InvoiceRoute() {
                       {formatPrice(158)}
                     </span>
                   </li>
-                  <li>
-                    <span aria-labelledby='item-name-title'>Banner Design</span>
-                    <span aria-labelledby='quantity-title'>1</span>
-                    <span aria-labelledby='price-title'>
-                      {formatPrice(158)}
-                    </span>
-                    <span aria-labelledby='total-title'>
-                      {formatPrice(158)}
-                    </span>
-                  </li>
                 </ul>
               </dd>
             </div>
