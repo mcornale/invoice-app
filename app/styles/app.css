@@ -30,6 +30,19 @@
   padding: var(--spacing-16);
 }
 
+.app-outlet::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+.app-outlet::-webkit-scrollbar-track {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+}
+
+.app-outlet::-webkit-scrollbar-thumb {
+  background-color: var(--color-mauve-9);
+}
+
 @media (max-width: 64em) {
   .app {
     grid-template-rows: auto 1fr;
