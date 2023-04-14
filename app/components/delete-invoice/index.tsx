@@ -5,12 +5,15 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
+  links as alertDialogLinks,
 } from '../ui/alert-dialog';
-import { Button } from '../ui/button';
+import { Button, links as buttonLinks } from '../ui/button';
 import styles from './styles.css';
 
 export const links: LinksFunction = () => {
   return [
+    ...buttonLinks(),
+    ...alertDialogLinks(),
     {
       rel: 'stylesheet',
       href: styles,
