@@ -21,6 +21,10 @@
   transform: rotate(180deg);
 }
 
+.invoices-filter-form {
+  gap: inherit;
+}
+
 .invoices-filter-content {
   width: var(--radix-popover-trigger-width);
   min-width: 16rem;

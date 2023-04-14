@@ -1,3 +1,7 @@
+.back-button {
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+}
+
 .invoice-management,
 .invoice-details {
   background-color: var(--color-mauve-1);

@@ -37,7 +37,11 @@ export default function InvoiceRoute() {
 
   return (
     <>
-      <Button variant='tertiary-gray' onClick={handleBackButtonClick}>
+      <Button
+        className='back-button'
+        variant='tertiary-gray'
+        onClick={handleBackButtonClick}
+      >
         <CaretLeftIcon /> Back
       </Button>
       <VisuallyHidden.Root>

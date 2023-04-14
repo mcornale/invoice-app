@@ -39,12 +39,12 @@ export default function InvoicesIndexRoute() {
               </Button>
             </Popover.Trigger>
             <Popover.Portal>
-              <Form>
-                <Popover.Content
-                  className='invoices-filter-content'
-                  sideOffset={8}
-                  align='start'
-                >
+              <Popover.Content
+                className='invoices-filter-content'
+                sideOffset={8}
+                align='start'
+              >
+                <Form className='invoices-filter-form'>
                   <CheckboxField label='Draft' name='status' value='draft' />
                   <CheckboxField
                     label='Pending'
@@ -52,8 +52,8 @@ export default function InvoicesIndexRoute() {
                     value='pending'
                   />
                   <CheckboxField label='Paid' name='status' value='paid' />
-                </Popover.Content>
-              </Form>
+                </Form>
+              </Popover.Content>
             </Popover.Portal>
           </Popover.Root>
           <NewInvoice />
