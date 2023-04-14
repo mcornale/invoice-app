@@ -116,23 +116,6 @@
   --spacing-48: calc(48 * var(--spacing-unit));
 }
 
-*,
-*::before,
-*::after {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font: var(--font-text-md);
-  color: var(--color-mauve-12);
-}
-
 body.dark-mode {
   /* brand scale dark */
   --color-violet-1: hsl(250, 20%, 10.2%);
@@ -212,6 +195,23 @@ body.dark-mode {
   --shadow-sm: 0 0.1rem 0.3rem hsla(256, 6%, 93.2%, 0.1),
     0 0.1rem 0.2rem hsla(256, 6%, 93.2%, 0.06);
   --shadow-xs: 0 0.1rem 0.2rem hsla(256, 6%, 93.2% 0.05);
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font: var(--font-text-md);
+  color: var(--color-mauve-12);
 }
 
 h1 {
