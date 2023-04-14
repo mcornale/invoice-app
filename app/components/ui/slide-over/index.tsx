@@ -1,12 +1,23 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import type { LinksFunction } from '@remix-run/node';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import styles from './styles.css';
 
 interface SlideOverContentProps extends Dialog.DialogContentProps {
   children: ReactNode;
   title: string;
 }
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export const SlideOver = Dialog.Root;
 export const SlideOverTrigger = Dialog.Trigger;

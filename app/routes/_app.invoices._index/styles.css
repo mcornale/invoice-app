@@ -1,0 +1,160 @@
+.invoices-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+}
+
+.invoices-summary {
+  font: var(--font-text-xs);
+  color: var(--color-mauve-11);
+}
+
+.invoices-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.invoices-filter-trigger[data-state='open'] svg {
+  transform: rotate(180deg);
+}
+
+.invoices-filter-content {
+  width: var(--radix-popover-trigger-width);
+  min-width: 16rem;
+  background-color: var(--color-mauve-1);
+  border-radius: var(--border-radius-2);
+  padding: var(--spacing-4);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.invoices-section {
+  margin-top: var(--spacing-10);
+}
+
+.invoices-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.invoices-list .invoice-link {
+  display: block;
+  background-color: var(--color-mauve-1);
+  padding: var(--spacing-6);
+  border-radius: var(--border-radius-2);
+  border: 0.1rem solid var(--color-mauve-6);
+}
+
+.invoices-list .invoice-link:hover:not(:focus) {
+  border-color: var(--color-mauve-7);
+}
+
+.invoices-list .invoice-link:focus {
+  border-color: var(--color-violet-8);
+}
+
+.invoices-list .invoice-link svg {
+  width: 2rem;
+  height: auto;
+}
+
+.invoices-list dl {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto 1fr 1fr auto auto;
+  align-items: center;
+  font: var(--font-text-sm);
+}
+
+.invoices-list .invoice-id dd {
+  font-weight: 600;
+}
+
+.invoices-list .invoice-id dd::before {
+  content: '#';
+  color: var(--color-mauve-11);
+}
+
+.invoices-list .invoice-amount-due {
+  font: var(--font-text-lg);
+  font-weight: 600;
+}
+
+.invoices-list .invoice-due-date,
+.invoices-list .invoice-client-name {
+  color: var(--color-mauve-11);
+}
+
+.invoices-list .invoice-id,
+.invoices-list .invoice-due-date,
+.invoices-list .invoice-client-name,
+.invoices-list .invoice-amount-due {
+  margin-right: var(--spacing-10);
+}
+
+.invoices-list .invoice-status {
+  margin-right: var(--spacing-4);
+  width: 10rem;
+}
+
+.invoices-list .invoice-status dd > * {
+  display: block;
+}
+
+.invoices-list .invoice-amount-due {
+  justify-self: end;
+}
+
+@media (max-width: 52em) {
+  .invoices-list dl {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--spacing-6);
+  }
+
+  .invoices-list .invoice-id {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+    margin: 0;
+    margin-bottom: var(--spacing-6);
+  }
+
+  .invoices-list .invoice-client-name {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+    margin: 0;
+    justify-self: end;
+    margin-bottom: var(--spacing-6);
+  }
+
+  .invoices-list .invoice-due-date {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+    margin: 0;
+    margin-bottom: var(--spacing-1);
+  }
+
+  .invoices-list .invoice-amount-due {
+    grid-column: 1 / span 1;
+    grid-row: 4 / span 1;
+    margin: 0;
+    justify-self: start;
+  }
+
+  .invoices-list .invoice-status {
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 2;
+    margin: 0;
+    justify-self: end;
+    align-self: end;
+  }
+
+  .invoices-list .invoice-link svg {
+    display: none;
+  }
+}

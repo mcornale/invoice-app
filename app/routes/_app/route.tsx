@@ -1,12 +1,12 @@
 import type { LinksFunction } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
-import appStylesUrl from '~/styles/app.css';
+import styles from './styles.css';
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
-      href: appStylesUrl,
+      href: styles,
     },
   ];
 };

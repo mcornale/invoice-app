@@ -1,12 +1,12 @@
 import { Outlet } from '@remix-run/react';
 import type { LinksFunction } from '@remix-run/node';
-import invoicesStylesUrl from '~/styles/invoices.css';
+import styles from './styles.css';
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
-      href: invoicesStylesUrl,
+      href: styles,
     },
   ];
 };

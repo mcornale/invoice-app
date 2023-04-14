@@ -1,0 +1,29 @@
+.slide-over-overlay {
+  background-color: var(--color-mauve-12);
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+}
+
+.slide-over-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 72rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-mauve-1);
+}
+
+.slide-over-title {
+  padding: var(--spacing-8) var(--spacing-12);
+  border-bottom: 0.1rem solid var(--color-mauve-6);
+}
+
+@media (max-width: 52em) {
+  .slide-over-title {
+    padding: var(--spacing-6);
+  }
+}

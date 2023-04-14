@@ -1,11 +1,32 @@
 import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { useNavigate } from '@remix-run/react';
-import { DeleteInvoice } from '~/components/delete-invoice';
-import { EditInvoice } from '~/components/edit-invoice';
-import { Badge } from '~/components/ui/badge';
-import { Button } from '~/components/ui/button';
+import {
+  DeleteInvoice,
+  links as deleteInvoiceLinks,
+} from '~/components/delete-invoice';
+import {
+  EditInvoice,
+  links as editInvoiceLinks,
+} from '~/components/edit-invoice';
+import { Badge, links as badgeLinks } from '~/components/ui/badge';
+import { Button, links as buttonLinks } from '~/components/ui/button';
 import { formatPrice } from '~/utils/helpers/format-price';
+import type { LinksFunction } from '@remix-run/node';
+import styles from './styles.css';
+
+export const links: LinksFunction = () => {
+  return [
+    ...deleteInvoiceLinks(),
+    ...editInvoiceLinks(),
+    ...badgeLinks(),
+    ...buttonLinks(),
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export default function InvoiceRoute() {
   const navigate = useNavigate();

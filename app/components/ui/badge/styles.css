@@ -1,0 +1,22 @@
+.badge {
+  text-align: center;
+  border-radius: var(--border-radius-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  font: var(--font-text-sm);
+  font-weight: 500;
+}
+
+.badge-gray {
+  background-color: var(--color-mauve-3);
+  color: var(--color-mauve-9);
+}
+
+.badge-warning {
+  background-color: var(--color-orange-3);
+  color: var(--color-orange-9);
+}
+
+.badge-success {
+  background-color: var(--color-green-3);
+  color: var(--color-green-9);
+}

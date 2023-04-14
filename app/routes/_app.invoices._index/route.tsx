@@ -3,10 +3,25 @@ import { CaretRightIcon, CaretDownIcon } from '@radix-ui/react-icons';
 import { formatPrice } from '~/utils/helpers/format-price';
 import * as Popover from '@radix-ui/react-popover';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Button } from '~/components/ui/button';
-import { CheckboxField, Form } from '~/components/ui/form';
-import { Badge } from '~/components/ui/badge';
-import { NewInvoice } from '~/components/new-invoice';
+import { Button, links as buttonLinks } from '~/components/ui/button';
+import { CheckboxField, Form, links as formLinks } from '~/components/ui/form';
+import { Badge, links as badgeLinks } from '~/components/ui/badge';
+import { NewInvoice, links as newInvoiceLinks } from '~/components/new-invoice';
+import type { LinksFunction } from '@remix-run/node';
+import styles from './styles.css';
+
+export const links: LinksFunction = () => {
+  return [
+    ...buttonLinks(),
+    ...badgeLinks(),
+    ...formLinks(),
+    ...newInvoiceLinks(),
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export default function InvoicesIndexRoute() {
   return (
@@ -18,7 +33,7 @@ export default function InvoicesIndexRoute() {
         </div>
         <div className='invoices-actions'>
           <Popover.Root>
-            <Popover.Trigger className='popover-trigger' asChild>
+            <Popover.Trigger className='invoices-filter-trigger' asChild>
               <Button variant='secondary-gray'>
                 Filter by status <CaretDownIcon />
               </Button>
@@ -26,7 +41,7 @@ export default function InvoicesIndexRoute() {
             <Popover.Portal>
               <Form>
                 <Popover.Content
-                  className='popover-content'
+                  className='invoices-filter-content'
                   sideOffset={8}
                   align='start'
                 >

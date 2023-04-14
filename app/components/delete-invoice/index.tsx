@@ -1,11 +1,22 @@
+import type { LinksFunction } from '@remix-run/node';
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
-} from './ui/alert-dialog';
-import { Button } from './ui/button';
+} from '../ui/alert-dialog';
+import { Button } from '../ui/button';
+import styles from './styles.css';
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export function DeleteInvoice() {
   return (

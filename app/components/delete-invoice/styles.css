@@ -1,0 +1,5 @@
+.delete-invoice-actions {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: var(--spacing-4);
+}

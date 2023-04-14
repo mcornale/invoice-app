@@ -7,19 +7,18 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
-import globalStylesUrl from '~/styles/global.css';
-import uiStylesUrl from '~/styles/ui.css';
+import globalStyles from '~/styles/global.css';
+import designSystemStyles from '~/styles/design-system.css';
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
-      href: globalStylesUrl,
+      href: globalStyles,
     },
-
     {
       rel: 'stylesheet',
-      href: uiStylesUrl,
+      href: designSystemStyles,
     },
   ];
 };

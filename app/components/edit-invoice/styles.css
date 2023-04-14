@@ -1,0 +1,16 @@
+.edit-invoice-form-actions {
+  padding: var(--spacing-8) var(--spacing-12);
+  border-top: 0.1rem solid var(--color-mauve-6);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-4);
+  position: sticky;
+  bottom: 0;
+  background-color: var(--color-mauve-1);
+}
+
+@media (max-width: 52em) {
+  .edit-invoice-form-actions {
+    padding: var(--spacing-6);
+  }
+}

@@ -1,4 +1,3 @@
-/* form styles */
 .form {
   display: flex;
   flex-direction: column;
@@ -179,76 +178,4 @@
 .select-item svg {
   width: 2rem;
   height: auto;
-}
-
-/* badge styles */
-.badge {
-  text-align: center;
-  border-radius: var(--border-radius-2);
-  padding: var(--spacing-2) var(--spacing-3);
-  font: var(--font-text-sm);
-  font-weight: 500;
-}
-
-.badge-gray {
-  background-color: var(--color-mauve-3);
-  color: var(--color-mauve-9);
-}
-
-.badge-warning {
-  background-color: var(--color-orange-3);
-  color: var(--color-orange-9);
-}
-
-.badge-success {
-  background-color: var(--color-green-3);
-  color: var(--color-green-9);
-}
-
-/* popover styles */
-.popover-trigger[data-state='open'] svg {
-  transform: rotate(180deg);
-}
-
-.popover-content {
-  width: var(--radix-popover-trigger-width);
-  min-width: 16rem;
-  background-color: var(--color-mauve-1);
-  border-radius: var(--border-radius-2);
-  padding: var(--spacing-4);
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-/* slide over styles */
-.slide-over-overlay {
-  background-color: var(--color-mauve-12);
-  position: absolute;
-  inset: 0;
-  opacity: 0.2;
-}
-
-.slide-over-content {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  max-width: 72rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-mauve-1);
-}
-
-.slide-over-title {
-  padding: var(--spacing-8) var(--spacing-12);
-  border-bottom: 0.1rem solid var(--color-mauve-6);
-}
-
-@media (max-width: 52em) {
-  .slide-over-title {
-    padding: var(--spacing-6);
-  }
 }

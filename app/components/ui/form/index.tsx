@@ -9,10 +9,44 @@ import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Select from '@radix-ui/react-select';
 import { CalendarIcon, CaretDownIcon, CheckIcon } from '@radix-ui/react-icons';
 import { upperFirst } from '~/utils/helpers/upper-first';
+import type { LinksFunction } from '@remix-run/node';
+import styles from './styles.css';
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode;
 }
+
+interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  children: ReactNode;
+}
+
+interface LegendProps extends HTMLAttributes<HTMLLegendElement> {
+  children: ReactNode;
+}
+
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+}
+
+interface SelectFieldProps {
+  label: string;
+  name: string;
+  placeholder: string;
+  values: string[];
+}
+
+interface CheckboxFieldProps extends Checkbox.CheckboxProps {
+  label: string;
+}
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export function Form({ children, className, ...props }: FormProps) {
   return (
@@ -20,10 +54,6 @@ export function Form({ children, className, ...props }: FormProps) {
       {children}
     </form>
   );
-}
-
-interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  children: ReactNode;
 }
 
 export function Fieldset({ children, className, ...props }: FieldsetProps) {
@@ -34,20 +64,12 @@ export function Fieldset({ children, className, ...props }: FieldsetProps) {
   );
 }
 
-interface LegendProps extends HTMLAttributes<HTMLLegendElement> {
-  children: ReactNode;
-}
-
 export function Legend({ children, className, ...props }: LegendProps) {
   return (
     <legend className={`legend ${className ?? ''}`} {...props}>
       {children}
     </legend>
   );
-}
-
-interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
 }
 
 export function InputField({
@@ -84,10 +106,6 @@ export function InputField({
   );
 }
 
-interface CheckboxFieldProps extends Checkbox.CheckboxProps {
-  label: string;
-}
-
 export function CheckboxField({
   label,
   name,
@@ -112,13 +130,6 @@ export function CheckboxField({
       </label>
     </div>
   );
-}
-
-interface SelectFieldProps {
-  label: string;
-  name: string;
-  placeholder: string;
-  values: string[];
 }
 
 export function SelectField({

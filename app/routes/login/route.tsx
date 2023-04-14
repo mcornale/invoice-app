@@ -1,11 +1,23 @@
 import type { LinksFunction } from '@remix-run/node';
-import loginStylesUrl from '~/styles/login.css';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Fieldset, Form, InputField } from '~/components/ui/form';
-import { Button } from '~/components/ui/button';
+import {
+  Fieldset,
+  Form,
+  InputField,
+  links as formLinks,
+} from '~/components/ui/form';
+import { Button, links as buttonLinks } from '~/components/ui/button';
+import styles from './styles.css';
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: loginStylesUrl }];
+  return [
+    ...buttonLinks(),
+    ...formLinks(),
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
 };
 
 export default function LoginRoute() {

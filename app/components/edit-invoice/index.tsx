@@ -1,11 +1,25 @@
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import {
   SlideOver,
   SlideOverClose,
   SlideOverContent,
   SlideOverTrigger,
-} from './ui/slide-over';
-import { InvoiceForm } from './invoice-form';
+  links as slideOverLinks,
+} from '../ui/slide-over';
+import { InvoiceForm, links as invoiceFormLinks } from '../invoice-form';
+import type { LinksFunction } from '@remix-run/node';
+import styles from './styles.css';
+
+export const links: LinksFunction = () => {
+  return [
+    ...slideOverLinks(),
+    ...invoiceFormLinks(),
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export function EditInvoice() {
   return (
@@ -15,7 +29,7 @@ export function EditInvoice() {
       </SlideOverTrigger>
       <SlideOverContent title='Edit Invoice'>
         <InvoiceForm id='edit-invoice-form' />
-        <div className='invoice-form-actions'>
+        <div className='edit-invoice-form-actions'>
           <SlideOverClose asChild>
             <Button variant='secondary-gray'>Cancel</Button>
           </SlideOverClose>
