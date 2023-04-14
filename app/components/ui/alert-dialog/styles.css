@@ -15,7 +15,7 @@
   width: 88vw;
   max-width: 56rem;
   max-height: 88vh;
-  padding: var(--spacing-12);
+  padding: var(--spacing-8);
   border-radius: var(--border-radius-2);
   background-color: var(--color-mauve-1);
   box-shadow: none;
