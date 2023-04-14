@@ -7,26 +7,20 @@ import { Button } from '~/components/ui/button';
 import { CheckboxField, Form } from '~/components/ui/form';
 import { Badge } from '~/components/ui/badge';
 import { NewInvoice } from '~/components/new-invoice';
-import { useIsScreenSmall } from '~/utils/hooks/use-is-screen-small';
 
 export default function InvoicesIndexRoute() {
-  const isScreenSmall = useIsScreenSmall();
-
   return (
     <>
       <header className='invoices-header'>
         <div>
           <h1>Invoices</h1>
-          <span className='invoices-summary'>
-            {isScreenSmall ? '7 invoices' : 'There are 7 total invoices'}
-          </span>
+          <span className='invoices-summary'>There are 7 total invoices</span>
         </div>
         <div className='invoices-actions'>
           <Popover.Root>
             <Popover.Trigger className='popover-trigger' asChild>
               <Button variant='secondary-gray'>
-                {isScreenSmall ? 'Filter' : 'Filter by status'}{' '}
-                <CaretDownIcon />
+                Filter by status <CaretDownIcon />
               </Button>
             </Popover.Trigger>
             <Popover.Portal>
