@@ -260,9 +260,13 @@ address {
 }
 
 @media (max-width: 52em) {
-  h1 {
-    font: var(--font-text-2xl);
-    font-weight: 600;
+  body {
+    --font-text-3xl: 2.4rem/3.2rem var(--font-family);
+    --font-text-2xl: 2rem/3rem var(--font-family);
+    --font-text-xl: 1.8rem/2.8rem var(--font-family);
+    --font-text-lg: 1.6rem/2.4rem var(--font-family);
+    --font-text-md: 1.4rem/2rem var(--font-family);
+    --font-text-sm: 1.2rem/1.8rem var(--font-family);
   }
 }
 

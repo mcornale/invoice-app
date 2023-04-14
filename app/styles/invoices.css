@@ -141,7 +141,7 @@
     margin: 0;
     justify-self: end;
     align-self: end;
-    width: 12rem;
+    width: 10rem;
   }
 
   .invoices-list .invoice-link svg {
@@ -165,6 +165,10 @@
   padding: var(--spacing-6);
 }
 
+.invoice-details {
+  padding: var(--spacing-12);
+}
+
 .invoice-management .invoice-status,
 .invoice-actions {
   display: flex;
@@ -176,7 +180,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-12);
-  padding: var(--spacing-12);
 }
 
 .invoice-details dl > *:nth-child(1) {
@@ -296,12 +299,20 @@
 }
 
 @media (max-width: 52em) {
+  .invoice-details {
+    padding: var(--spacing-6);
+  }
+
+  .invoice-details dl {
+    gap: var(--spacing-6);
+  }
+
   .invoice-details dl > *:nth-child(1) {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 5;
   }
 
   .invoice-details dl > *:nth-child(2) {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 5;
     text-align: left;
   }
 
@@ -313,16 +324,28 @@
   }
 
   .invoice-details dl > *:nth-child(4) {
-    grid-column: 3 / span 2;
+    grid-column: 3 / span 3;
   }
 
   .invoice-details dl > *:nth-child(5) {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 5;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .invoice-details dl > *:last-child {
+    grid-column: 1 / span 5;
   }
 
   .invoice-details .invoice-item-list {
     grid-template-columns: auto 1fr 1fr;
     column-gap: 0;
+    row-gap: var(--spacing-1);
+    padding: var(--spacing-6);
+  }
+
+  .invoice-details .invoice-amount-due {
+    padding: var(--spacing-6);
+    column-gap: var(--spacing-6);
     row-gap: var(--spacing-1);
   }
 
@@ -383,6 +406,53 @@
 
   .invoice-details {
     margin-bottom: var(--spacing-24);
+  }
+}
+
+@media (max-width: 28em) {
+  .invoice-details dl > *:nth-child(3) {
+    gap: var(--spacing-6);
+    grid-column: 1 / span 5;
+  }
+
+  .invoice-details dl > *:nth-child(4) {
+    grid-column: 1 / span 5;
+  }
+
+  .invoice-details .invoice-item-list li > *:nth-child(1) {
+    grid-column: 1 / span 4;
+  }
+
+  .invoice-details .invoice-item-list li > *:nth-child(2) {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+  }
+
+  .invoice-details .invoice-item-list li > *:nth-child(2)::after {
+    content: ' ';
+    white-space: pre;
+  }
+
+  .invoice-details .invoice-item-list li > *:nth-child(3) {
+    grid-column: 2 / span 3;
+    grid-row: 2 / span 1;
+    justify-self: start;
+  }
+
+  .invoice-details .invoice-item-list li > *:nth-child(3)::before {
+    content: 'x ';
+  }
+
+  .invoice-details .invoice-item-list li > *:nth-child(4) {
+    grid-column: 1 / span 4;
+    grid-row: 3 / span 1;
+    justify-self: start;
+    margin-top: var(--spacing-1);
+  }
+
+  .invoice-details .invoice-amount-due {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -455,6 +525,10 @@
   .invoice-form {
     overflow: auto;
     padding: var(--spacing-8) var(--spacing-6);
+  }
+
+  .invoice-form-actions {
+    padding: var(--spacing-6);
   }
 }
 
