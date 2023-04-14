@@ -409,7 +409,7 @@
   }
 }
 
-@media (max-width: 28em) {
+@media (max-width: 22em) {
   .invoice-details dl > *:nth-child(3) {
     gap: var(--spacing-6);
     grid-column: 1 / span 5;
