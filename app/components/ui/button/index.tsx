@@ -1,5 +1,7 @@
+import type { LinksFunction } from '@remix-run/node';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { forwardRef } from 'react';
+import styles from './styles.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -11,6 +13,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'tertiary-color'
     | 'tertiary-gray';
 }
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, variant, className, ...props }, forwardedRed) => {
