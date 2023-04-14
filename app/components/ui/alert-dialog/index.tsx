@@ -1,5 +1,7 @@
 import * as RadixAlertDialog from '@radix-ui/react-alert-dialog';
+import type { LinksFunction } from '@remix-run/node';
 import type { ReactNode } from 'react';
+import styles from './styles.css';
 
 interface AlertDialogContentProps
   extends RadixAlertDialog.AlertDialogContentProps {
@@ -7,6 +9,15 @@ interface AlertDialogContentProps
   title: string;
   description: string;
 }
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'stylesheet',
+      href: styles,
+    },
+  ];
+};
 
 export const AlertDialog = RadixAlertDialog.Root;
 export const AlertDialogTrigger = RadixAlertDialog.Trigger;

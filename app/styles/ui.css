@@ -252,36 +252,3 @@
     padding: var(--spacing-6);
   }
 }
-
-/* alert dialog styles */
-.alert-dialog-overlay {
-  background-color: var(--color-mauve-12);
-  position: fixed;
-  inset: 0;
-  opacity: 0.2;
-}
-
-.alert-dialog-content {
-  position: fixed;
-  left: 0;
-  top: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 88vw;
-  max-width: 56rem;
-  max-height: 88vh;
-  padding: var(--spacing-12);
-  border-radius: var(--border-radius-2);
-  background-color: var(--color-mauve-1);
-}
-
-.alert-dialog-title {
-  margin-bottom: var(--spacing-4);
-}
-
-.alert-dialog-description {
-  font: var(--font-text-sm);
-  color: var(--color-mauve-11);
-  margin-bottom: var(--spacing-6);
-}
