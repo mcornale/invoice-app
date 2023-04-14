@@ -18,14 +18,21 @@
   padding: var(--spacing-12);
   border-radius: var(--border-radius-2);
   background-color: var(--color-mauve-1);
+  box-shadow: none;
 }
 
 .alert-dialog-title {
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-2);
 }
 
 .alert-dialog-description {
   font: var(--font-text-sm);
   color: var(--color-mauve-11);
   margin-bottom: var(--spacing-6);
+}
+
+@media (max-width: 52em) {
+  .alert-dialog-content {
+    padding: var(--spacing-6);
+  }
 }

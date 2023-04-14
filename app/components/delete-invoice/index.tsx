@@ -32,14 +32,14 @@ export function DeleteInvoice() {
         description='Are you sure you want to delete invoice #XM9141? This action cannot be undone.'
       >
         <div className='delete-invoice-actions'>
+          <AlertDialogCancel asChild>
+            <Button variant='secondary-gray'>Cancel</Button>
+          </AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button type='submit' variant='primary-destructive'>
               Delete
             </Button>
           </AlertDialogAction>
-          <AlertDialogCancel asChild>
-            <Button variant='secondary-gray'>Cancel</Button>
-          </AlertDialogCancel>
         </div>
       </AlertDialogContent>
     </AlertDialog>
