@@ -72,7 +72,7 @@ address {
 }
 
 /* interactive elements generic styles */
-:focus {
+:focus-visible {
   box-shadow: var(--shadow-outline-violet);
   outline: none;
 }

@@ -51,11 +51,11 @@
   border: 0.1rem solid var(--color-mauve-6);
 }
 
-.invoices-list .invoice-link:hover:not(:focus) {
+.invoices-list .invoice-link:hover:not(:focus-visible) {
   border-color: var(--color-mauve-7);
 }
 
-.invoices-list .invoice-link:focus {
+.invoices-list .invoice-link:focus-visible {
   border-color: var(--color-violet-8);
 }
 
