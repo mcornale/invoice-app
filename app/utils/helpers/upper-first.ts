@@ -1,2 +1,2 @@
 export const upperFirst = (word: string) =>
-  word[0].toUpperCase() + word.slice(1);
+  word[0].toUpperCase() + word.slice(1).toLowerCase();
