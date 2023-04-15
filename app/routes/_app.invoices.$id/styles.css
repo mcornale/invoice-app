@@ -28,7 +28,8 @@
   gap: var(--spacing-4);
 }
 
-.invoice-management .invoice-status > span {
+.invoice-management .invoice-status dd > span {
+  display: block;
   width: 10rem;
 }
 
