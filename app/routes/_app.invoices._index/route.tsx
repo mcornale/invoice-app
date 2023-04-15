@@ -1,21 +1,24 @@
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { NewInvoice, links as newInvoiceLinks } from '~/components/new-invoice';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
   InvoicesFilter,
   links as invoicesFilterLinks,
 } from '~/components/invoices-filter';
 import {
-  InvoicesList,
-  links as invoicesListLinks,
-} from '~/components/invoices-list';
+  InvoiceList,
+  links as invoiceListLinks,
+} from '~/components/invoice-list';
+import { db } from '~/utils/db.server';
+import { useLoaderData } from '@remix-run/react';
 
 export const links: LinksFunction = () => {
   return [
     ...newInvoiceLinks(),
     ...invoicesFilterLinks(),
-    ...invoicesListLinks(),
+    ...invoiceListLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -23,24 +26,50 @@ export const links: LinksFunction = () => {
   ];
 };
 
+export const loader = async (args: LoaderArgs) => {
+  const invoices = await db.invoice.findMany({
+    select: {
+      id: true,
+      invoiceId: true,
+      clientName: true,
+      paymentDue: true,
+      status: true,
+      total: true,
+    },
+  });
+
+  return json({
+    invoices,
+  });
+};
+
 export default function InvoicesIndexRoute() {
+  const data = useLoaderData<typeof loader>();
+
+  const invoices = data.invoices.map((invoice) => ({
+    ...invoice,
+    paymentDue: new Date(invoice.paymentDue),
+  }));
+
   return (
     <>
-      <header className='invoices-header'>
+      <header className='invoice-list-header'>
         <div>
           <h1>Invoices</h1>
-          <span className='invoices-summary'>There are 7 total invoices</span>
+          <span className='invoice-list-summary'>
+            There are {invoices.length} total invoices
+          </span>
         </div>
-        <div className='invoices-actions'>
+        <div className='invoice-list-actions'>
           <InvoicesFilter />
           <NewInvoice />
         </div>
       </header>
-      <section className='invoices-section'>
+      <section className='invoice-list-section'>
         <VisuallyHidden.Root>
           <h2>Invoice list</h2>
         </VisuallyHidden.Root>
-        <InvoicesList />
+        <InvoiceList invoices={invoices} />
       </section>
     </>
   );

@@ -1,4 +1,4 @@
-.invoices-header {
+.invoice-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,17 +6,17 @@
   gap: var(--spacing-6);
 }
 
-.invoices-summary {
+.invoice-list-summary {
   font: var(--font-text-xs);
   color: var(--color-mauve-11);
 }
 
-.invoices-actions {
+.invoice-list-actions {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
 }
 
-.invoices-section {
+.invoice-list-section {
   margin-top: var(--spacing-10);
 }
