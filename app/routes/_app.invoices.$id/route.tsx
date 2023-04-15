@@ -1,6 +1,6 @@
 import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { useNavigate } from '@remix-run/react';
+import { useLoaderData, useNavigate } from '@remix-run/react';
 import {
   DeleteInvoice,
   links as deleteInvoiceLinks,
@@ -12,8 +12,13 @@ import {
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import { formatPrice } from '~/utils/helpers/format-price';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import styles from './styles.css';
+import { db } from '~/utils/db.server';
+import { Status } from '@prisma/client';
+import { upperFirst } from '~/utils/helpers/upper-first';
+import { formatDate } from '~/utils/helpers/format-date';
 
 export const links: LinksFunction = () => {
   return [
@@ -28,8 +33,28 @@ export const links: LinksFunction = () => {
   ];
 };
 
+export const loader = async ({ params }: LoaderArgs) => {
+  const invoiceId = params.id;
+  const invoice = await db.invoice.findUnique({ where: { id: invoiceId } });
+
+  if (!invoice) {
+    throw new Error('Invoice not found');
+  }
+
+  return json({
+    invoice,
+  });
+};
+
 export default function InvoiceRoute() {
+  const data = useLoaderData<typeof loader>();
   const navigate = useNavigate();
+
+  const invoice = {
+    ...data.invoice,
+    createdAt: new Date(data.invoice.createdAt),
+    paymentDue: new Date(data.invoice.paymentDue),
+  };
 
   function handleBackButtonClick() {
     navigate(-1);
@@ -54,7 +79,15 @@ export default function InvoiceRoute() {
         <dl className='invoice-status'>
           <dt>Status</dt>
           <dd>
-            <Badge variant='warning'>Pending</Badge>
+            {invoice.status === Status.PAID && (
+              <Badge variant='success'>{upperFirst(invoice.status)}</Badge>
+            )}
+            {invoice.status === Status.PENDING && (
+              <Badge variant='warning'>{upperFirst(invoice.status)}</Badge>
+            )}
+            {invoice.status === Status.DRAFT && (
+              <Badge variant='gray'>{upperFirst(invoice.status)}</Badge>
+            )}
           </dd>
         </dl>
         <div className='invoice-actions'>
@@ -73,13 +106,13 @@ export default function InvoiceRoute() {
               <VisuallyHidden.Root>
                 <dt>Id</dt>
               </VisuallyHidden.Root>
-              <dd>XM9141</dd>
+              <dd>{invoice.invoiceId}</dd>
             </div>
             <div className='invoice-project-desc'>
               <VisuallyHidden.Root>
                 <dt>Project Description</dt>
               </VisuallyHidden.Root>
-              <dd>Graphic Design</dd>
+              <dd>{invoice.description}</dd>
             </div>
           </div>
           <div>
@@ -89,13 +122,13 @@ export default function InvoiceRoute() {
               </VisuallyHidden.Root>
               <dd>
                 <address>
-                  19 Union Terrace
+                  {invoice.senderAddress.street}
                   <br />
-                  London
+                  {invoice.senderAddress.city}
                   <br />
-                  E1 3EZ
+                  {invoice.senderAddress.postCode}
                   <br />
-                  United Kingdom
+                  {invoice.senderAddress.country}
                 </address>
               </dd>
             </div>
@@ -103,11 +136,11 @@ export default function InvoiceRoute() {
           <div>
             <div className='invoice-date'>
               <dt>Invoice Date</dt>
-              <dd>21 Aug 2021</dd>
+              <dd>{formatDate(invoice.createdAt)}</dd>
             </div>
             <div className='invoice-payment-due'>
               <dt>Payment Due</dt>
-              <dd>20 Sep 2021</dd>
+              <dd>{formatDate(invoice.paymentDue)}</dd>
             </div>
           </div>
           <div className='invoice-bill-to'>
@@ -115,19 +148,19 @@ export default function InvoiceRoute() {
             <dd>
               <span className='invoice-client-name'>Alex Grim</span>
               <address className='invoice-client-address'>
-                19 Union Terrace
+                {invoice.clientAddress.street}
                 <br />
-                London
+                {invoice.clientAddress.city}
                 <br />
-                E1 3EZ
+                {invoice.clientAddress.postCode}
                 <br />
-                United Kingdom
+                {invoice.clientAddress.country}
               </address>
             </dd>
           </div>
           <div className='invoice-sent-to'>
             <dt>Sent To</dt>
-            <dd>alexgrim@mail.com</dd>
+            <dd>{invoice.clientEmail}</dd>
           </div>
           <div>
             <div className='invoice-item-list'>
@@ -142,22 +175,26 @@ export default function InvoiceRoute() {
                     <span id='price-title'>Price</span>
                     <span id='total-title'>Total</span>
                   </li>
-                  <li>
-                    <span aria-labelledby='item-name-title'>Banner Design</span>
-                    <span aria-labelledby='quantity-title'>1</span>
-                    <span aria-labelledby='price-title'>
-                      {formatPrice(158)}
-                    </span>
-                    <span aria-labelledby='total-title'>
-                      {formatPrice(158)}
-                    </span>
-                  </li>
+                  {invoice.items.map((item, index) => (
+                    <li key={index}>
+                      <span aria-labelledby='item-name-title'>{item.name}</span>
+                      <span aria-labelledby='quantity-title'>
+                        {item.quantity}
+                      </span>
+                      <span aria-labelledby='price-title'>
+                        {formatPrice(item.price)}
+                      </span>
+                      <span aria-labelledby='total-title'>
+                        {formatPrice(item.total)}
+                      </span>
+                    </li>
+                  ))}
                 </ul>
               </dd>
             </div>
             <div className='invoice-amount-due'>
               <dt>Amount Due</dt>
-              <dd>{formatPrice(580)}</dd>
+              <dd>{formatPrice(invoice.total)}</dd>
             </div>
           </div>
         </dl>
