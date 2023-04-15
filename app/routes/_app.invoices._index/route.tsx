@@ -1,21 +1,21 @@
 import { Link } from '@remix-run/react';
-import { CaretRightIcon, CaretDownIcon } from '@radix-ui/react-icons';
+import { CaretRightIcon } from '@radix-ui/react-icons';
 import { formatPrice } from '~/utils/helpers/format-price';
-import * as Popover from '@radix-ui/react-popover';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Button, links as buttonLinks } from '~/components/ui/button';
-import { CheckboxField, Form, links as formLinks } from '~/components/ui/form';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import { NewInvoice, links as newInvoiceLinks } from '~/components/new-invoice';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
+import {
+  InvoicesFilter,
+  links as invoicesFilterLinks,
+} from '~/components/invoices-filter';
 
 export const links: LinksFunction = () => {
   return [
-    ...buttonLinks(),
     ...badgeLinks(),
-    ...formLinks(),
     ...newInvoiceLinks(),
+    ...invoicesFilterLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -32,30 +32,7 @@ export default function InvoicesIndexRoute() {
           <span className='invoices-summary'>There are 7 total invoices</span>
         </div>
         <div className='invoices-actions'>
-          <Popover.Root>
-            <Popover.Trigger className='invoices-filter-trigger' asChild>
-              <Button variant='secondary-gray'>
-                Filter by status <CaretDownIcon />
-              </Button>
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Content
-                className='invoices-filter-content'
-                sideOffset={8}
-                align='start'
-              >
-                <Form className='invoices-filter-form'>
-                  <CheckboxField label='Draft' name='status' value='draft' />
-                  <CheckboxField
-                    label='Pending'
-                    name='status'
-                    value='pending'
-                  />
-                  <CheckboxField label='Paid' name='status' value='paid' />
-                </Form>
-              </Popover.Content>
-            </Popover.Portal>
-          </Popover.Root>
+          <InvoicesFilter />
           <NewInvoice />
         </div>
       </header>
