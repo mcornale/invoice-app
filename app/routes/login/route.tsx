@@ -4,6 +4,7 @@ import {
   Fieldset,
   Form,
   InputField,
+  Legend,
   links as formLinks,
 } from '~/components/ui/form';
 import { Button, links as buttonLinks } from '~/components/ui/button';
@@ -31,7 +32,7 @@ export default function LoginRoute() {
         <Form>
           <Fieldset className='fieldset'>
             <VisuallyHidden.Root>
-              <legend>Login or Sign Up</legend>
+              <Legend>Login or Sign Up</Legend>
             </VisuallyHidden.Root>
             <InputField label='Email' name='email' type='email' required />
             <InputField
