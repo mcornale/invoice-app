@@ -6,6 +6,7 @@ import styles from './styles.css';
 import type { LinksFunction } from '@remix-run/node';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import type { Invoice } from '@prisma/client';
+import { Status } from '@prisma/client';
 import { upperFirst } from '~/utils/helpers/upper-first';
 import { formatDate } from '~/utils/helpers/format-date';
 
@@ -62,17 +63,17 @@ export function InvoiceList({ invoices }: InvoiceListProps) {
                   <dt>Status</dt>
                 </VisuallyHidden.Root>
                 <dd>
-                  {invoice.status === 'paid' && (
+                  {invoice.status === Status.PAID && (
                     <Badge variant='success'>
                       {upperFirst(invoice.status)}
                     </Badge>
                   )}
-                  {invoice.status === 'pending' && (
+                  {invoice.status === Status.PENDING && (
                     <Badge variant='warning'>
                       {upperFirst(invoice.status)}
                     </Badge>
                   )}
-                  {invoice.status === 'draft' && (
+                  {invoice.status === Status.DRAFT && (
                     <Badge variant='gray'>{upperFirst(invoice.status)}</Badge>
                   )}
                 </dd>

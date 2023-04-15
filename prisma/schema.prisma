@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  PAID
+  PENDING
+  DRAFT
+}
+
 type Address {
   street   String
   city     String
@@ -30,7 +36,7 @@ model Invoice {
   paymentTerms  Int
   clientName    String
   clientEmail   String
-  status        String
+  status        Status
   total         Float
   senderAddress Address
   clientAddress Address
