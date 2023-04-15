@@ -6,6 +6,8 @@ import styles from './styles.css';
 import type { LinksFunction } from '@remix-run/node';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import type { Invoice } from '@prisma/client';
+import { upperFirst } from '~/utils/helpers/upper-first';
+import { formatDate } from '~/utils/helpers/format-date';
 
 interface InvoiceListProps {
   invoices: Pick<
@@ -41,12 +43,7 @@ export function InvoiceList({ invoices }: InvoiceListProps) {
                 <VisuallyHidden.Root>
                   <dt>Due Date</dt>
                 </VisuallyHidden.Root>
-                <dd>
-                  Due{' '}
-                  {new Intl.DateTimeFormat('en-GB', {
-                    dateStyle: 'medium',
-                  }).format(invoice.paymentDue)}
-                </dd>
+                <dd>Due {formatDate(invoice.paymentDue)}</dd>
               </div>
               <div className='invoice-client-name'>
                 <VisuallyHidden.Root>
@@ -65,7 +62,19 @@ export function InvoiceList({ invoices }: InvoiceListProps) {
                   <dt>Status</dt>
                 </VisuallyHidden.Root>
                 <dd>
-                  <Badge variant='success'>{invoice.status}</Badge>
+                  {invoice.status === 'paid' && (
+                    <Badge variant='success'>
+                      {upperFirst(invoice.status)}
+                    </Badge>
+                  )}
+                  {invoice.status === 'pending' && (
+                    <Badge variant='warning'>
+                      {upperFirst(invoice.status)}
+                    </Badge>
+                  )}
+                  {invoice.status === 'draft' && (
+                    <Badge variant='gray'>{upperFirst(invoice.status)}</Badge>
+                  )}
                 </dd>
               </div>
               <CaretRightIcon />
