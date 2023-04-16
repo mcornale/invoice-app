@@ -12,6 +12,8 @@ import {
 } from '~/components/invoice-list';
 import { db } from '~/utils/db.server';
 import { useLoaderData } from '@remix-run/react';
+import { useMediaQuery } from '~/hooks/use-media-query';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 export const links: LinksFunction = () => {
   return [
@@ -44,6 +46,7 @@ export const loader = async (args: LoaderArgs) => {
 
 export default function InvoicesIndexRoute() {
   const data = useLoaderData<typeof loader>();
+  const matches = useMediaQuery('(max-width: 40em)');
 
   const invoices = data.invoices.map((invoice) => ({
     ...invoice,
@@ -56,7 +59,15 @@ export default function InvoicesIndexRoute() {
         <div>
           <h1>Invoices</h1>
           <span className='invoice-list-summary'>
-            There are {invoices.length} total invoices
+            {matches ? (
+              <>
+                <VisuallyHidden.Root>There are</VisuallyHidden.Root>
+                {invoices.length}
+                <VisuallyHidden.Root>total</VisuallyHidden.Root> invoices
+              </>
+            ) : (
+              `There are ${invoices.length} total invoices`
+            )}
           </span>
         </div>
         <div className='invoice-list-actions'>

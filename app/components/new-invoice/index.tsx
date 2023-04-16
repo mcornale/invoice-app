@@ -10,6 +10,8 @@ import {
 import { InvoiceForm, links as invoiceFormLinks } from '../invoice-form';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
+import { useMediaQuery } from '~/hooks/use-media-query';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 export const links: LinksFunction = () => {
   return [
@@ -23,11 +25,20 @@ export const links: LinksFunction = () => {
 };
 
 export function NewInvoice() {
+  const matches = useMediaQuery('(max-width: 40em)');
+
   return (
     <SlideOver>
       <SlideOverTrigger asChild>
         <Button variant='primary'>
-          <PlusIcon /> New Invoice
+          <PlusIcon />{' '}
+          {matches ? (
+            <>
+              New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>
+            </>
+          ) : (
+            'New Invoice'
+          )}
         </Button>
       </SlideOverTrigger>
       <SlideOverContent title='New Invoice'>

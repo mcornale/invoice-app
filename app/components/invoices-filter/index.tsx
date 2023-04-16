@@ -13,6 +13,8 @@ import {
   PopoverTrigger,
   links as popoverLinks,
 } from '../ui/popover';
+import { useMediaQuery } from '~/hooks/use-media-query';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 export const links: LinksFunction = () => {
   return [
@@ -28,11 +30,19 @@ export const links: LinksFunction = () => {
 };
 
 export function InvoicesFilter() {
+  const matches = useMediaQuery('(max-width: 40em)');
   return (
     <Popover>
       <PopoverTrigger className='invoices-filter-trigger' asChild>
         <Button variant='secondary-gray'>
-          Filter by status <CaretDownIcon />
+          {matches ? (
+            <>
+              Filter <VisuallyHidden.Root>by status</VisuallyHidden.Root>
+            </>
+          ) : (
+            'Filter by status'
+          )}
+          <CaretDownIcon />
         </Button>
       </PopoverTrigger>
       <PopoverContent className='invoices-filter-content'>
