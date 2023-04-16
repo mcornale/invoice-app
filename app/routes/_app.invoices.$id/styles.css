@@ -111,13 +111,18 @@
 }
 
 .invoice-details .invoice-item-list {
-  display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-6);
   padding: var(--spacing-8);
   border: 0.1rem solid var(--color-mauve-6);
   border-bottom: none;
   border-radius: var(--border-radius-2) var(--border-radius-2) 0 0;
+}
+
+.invoice-details .invoice-item-list li {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
 }
 
 .invoice-details .invoice-amount-due {
@@ -136,8 +141,7 @@
 }
 
 .invoice-details .invoice-item-list dd,
-.invoice-details .invoice-item-list ul,
-.invoice-details .invoice-item-list li {
+.invoice-details .invoice-item-list ul {
   display: contents;
 }
 
@@ -199,15 +203,19 @@
   }
 
   .invoice-details .invoice-item-list {
-    grid-template-columns: auto 1fr 1fr;
-    column-gap: 0;
-    row-gap: var(--spacing-1);
-    padding: var(--spacing-6);
+    padding: var(--spacing-5);
   }
 
   .invoice-details .invoice-amount-due {
-    padding: var(--spacing-6);
+    padding: var(--spacing-5);
     column-gap: var(--spacing-6);
+    row-gap: var(--spacing-1);
+  }
+
+  .invoice-details .invoice-item-list li {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    column-gap: 0;
     row-gap: var(--spacing-1);
   }
 
@@ -271,7 +279,7 @@
   }
 }
 
-@media (max-width: 22em) {
+@media (max-width: 24em) {
   .invoice-details dl > *:nth-child(3) {
     gap: var(--spacing-6);
     grid-column: 1 / span 5;
