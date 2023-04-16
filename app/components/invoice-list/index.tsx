@@ -1,14 +1,12 @@
 import { Link } from '@remix-run/react';
 import { CaretRightIcon } from '@radix-ui/react-icons';
-import { formatPrice } from '~/utils/helpers/format-price';
+import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import styles from './styles.css';
 import type { LinksFunction } from '@remix-run/node';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import type { Invoice } from '@prisma/client';
 import { Status } from '@prisma/client';
-import { upperFirst } from '~/utils/helpers/upper-first';
-import { formatDate } from '~/utils/helpers/format-date';
 
 interface InvoiceListProps {
   invoices: Pick<

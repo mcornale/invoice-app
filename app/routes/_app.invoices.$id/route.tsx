@@ -11,14 +11,12 @@ import {
 } from '~/components/edit-invoice';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import { Button, links as buttonLinks } from '~/components/ui/button';
-import { formatPrice } from '~/utils/helpers/format-price';
+import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { db } from '~/utils/db.server';
 import { Status } from '@prisma/client';
-import { upperFirst } from '~/utils/helpers/upper-first';
-import { formatDate } from '~/utils/helpers/format-date';
 
 export const links: LinksFunction = () => {
   return [

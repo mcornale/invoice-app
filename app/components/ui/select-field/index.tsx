@@ -1,6 +1,6 @@
 import * as Select from '@radix-ui/react-select';
 import { CaretDownIcon, CheckIcon } from '@radix-ui/react-icons';
-import { upperFirst } from '~/utils/helpers/upper-first';
+import { upperFirst } from '~/utils/formatters';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 
