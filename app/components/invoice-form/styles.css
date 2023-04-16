@@ -39,7 +39,7 @@
 .invoice-form .item-list {
   display: grid;
   grid-template-columns: auto 7.2rem 10.4rem 8rem min-content;
-  row-gap: 0.6rem;
+  row-gap: var(--spacing-2);
   column-gap: var(--spacing-5);
 }
 
