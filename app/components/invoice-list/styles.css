@@ -35,6 +35,11 @@
 
 .invoice-list .invoice-id dd {
   font-weight: 600;
+  width: 7ch;
+}
+
+.invoice-list .invoice-due-date dd {
+  width: 15ch;
 }
 
 .invoice-list .invoice-id dd::before {
@@ -72,7 +77,12 @@
   justify-self: end;
 }
 
-@media (max-width: 52em) {
+@media (max-width: 60em) {
+  .invoice-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+  }
+
   .invoice-list dl {
     grid-template-columns: 1fr 1fr;
     column-gap: var(--spacing-6);
