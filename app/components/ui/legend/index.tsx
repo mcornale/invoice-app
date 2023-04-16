@@ -1,8 +1,8 @@
-import type { FormHTMLAttributes, ReactNode } from 'react';
 import type { LinksFunction } from '@remix-run/node';
+import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './styles.css';
 
-interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
+interface LegendProps extends HTMLAttributes<HTMLLegendElement> {
   children: ReactNode;
 }
 
@@ -15,10 +15,10 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function Form({ children, className, ...props }: FormProps) {
+export function Legend({ children, className, ...props }: LegendProps) {
   return (
-    <form className={`form ${className ?? ''}`} {...props}>
+    <legend className={`legend ${className ?? ''}`} {...props}>
       {children}
-    </form>
+    </legend>
   );
 }

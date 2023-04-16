@@ -1,23 +1,24 @@
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
-import {
-  Fieldset,
-  Form,
-  InputField,
-  Legend,
-  SelectField,
-  links as formLinks,
-} from '../ui/form';
+import { Form, links as formLinks } from '../ui/form';
 import { Button, links as buttonLinks } from '../ui/button';
 import type { FormHTMLAttributes } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
+import { Fieldset, links as fieldsetLinks } from '../ui/fieldset';
+import { Legend, links as legendLinks } from '../ui/legend';
+import { InputField, links as inputFieldLinks } from '../ui/input-field';
+import { SelectField, links as selectFieldLinks } from '../ui/select-field';
 
 interface InvoiceFormProps extends FormHTMLAttributes<HTMLFormElement> {}
 
 export const links: LinksFunction = () => {
   return [
     ...buttonLinks(),
+    ...fieldsetLinks(),
+    ...inputFieldLinks(),
+    ...legendLinks(),
+    ...selectFieldLinks(),
     ...formLinks(),
     {
       rel: 'stylesheet',

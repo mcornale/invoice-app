@@ -2,12 +2,17 @@ import { CaretDownIcon } from '@radix-ui/react-icons';
 import * as Popover from '@radix-ui/react-popover';
 import type { LinksFunction } from '@remix-run/node';
 import { Button, links as buttonLinks } from '~/components/ui/button';
-import { CheckboxField, Form, links as formLinks } from '~/components/ui/form';
+import { Form, links as formLinks } from '~/components/ui/form';
 import styles from './styles.css';
+import {
+  CheckboxField,
+  links as checkboxFieldLinks,
+} from '../ui/checkbox-field';
 
 export const links: LinksFunction = () => {
   return [
     ...buttonLinks(),
+    ...checkboxFieldLinks(),
     ...formLinks(),
     {
       rel: 'stylesheet',

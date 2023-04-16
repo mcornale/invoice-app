@@ -1,0 +1,36 @@
+.checkbox-field {
+  display: flex;
+}
+
+.checkbox-field .label {
+  padding-left: var(--spacing-2);
+}
+
+.checkbox {
+  border-radius: var(--border-radius-1);
+  border: 0.1rem solid var(--color-mauve-7);
+  background-color: var(--color-mauve-1);
+  color: var(--color-violet-9);
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.checkbox[data-state='checked'] {
+  background-color: var(--color-violet-3);
+  border-color: var(--color-violet-8);
+}
+
+.checkbox > * {
+  display: grid;
+  place-items: center;
+}
+
+.checkbox:focus-visible {
+  border-color: var(--color-violet-8);
+}
+
+@media (hover: hover) {
+  .checkbox:hover:not(:focus-visible):not([data-state='checked']) {
+    border-color: var(--color-mauve-8);
+  }
+}

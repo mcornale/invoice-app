@@ -1,18 +1,21 @@
 import type { LinksFunction } from '@remix-run/node';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import {
-  Fieldset,
-  Form,
-  InputField,
-  Legend,
-  links as formLinks,
-} from '~/components/ui/form';
+import { Form, links as formLinks } from '~/components/ui/form';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import styles from './styles.css';
+import { Fieldset, links as fieldsetLinks } from '~/components/ui/fieldset';
+import { Legend, links as legendLinks } from '~/components/ui/legend';
+import {
+  InputField,
+  links as inputFieldLinks,
+} from '~/components/ui/input-field';
 
 export const links: LinksFunction = () => {
   return [
     ...buttonLinks(),
+    ...fieldsetLinks(),
+    ...legendLinks(),
+    ...inputFieldLinks(),
     ...formLinks(),
     {
       rel: 'stylesheet',
