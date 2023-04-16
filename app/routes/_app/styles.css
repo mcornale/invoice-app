@@ -56,17 +56,6 @@
 
   .app-header {
     border-bottom: 0.1rem solid var(--color-mauve-6);
-    padding: var(--spacing-6);
-  }
-
-  .app-outlet-wrapper {
-    padding: var(--spacing-12);
-  }
-}
-
-@media (max-width: 52em) {
-  .app-header {
-    border-bottom: 0.1rem solid var(--color-mauve-6);
     padding: var(--spacing-4) var(--spacing-6);
   }
 

@@ -9,7 +9,7 @@
   background-color: var(--color-mauve-1);
 }
 
-@media (max-width: 52em) {
+@media (max-width: 64em) {
   .edit-invoice-form-actions {
     padding: var(--spacing-6);
   }

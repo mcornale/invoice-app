@@ -31,7 +31,7 @@
   margin-bottom: var(--spacing-6);
 }
 
-@media (max-width: 52em) {
+@media (max-width: 64em) {
   .alert-dialog-content {
     padding: var(--spacing-6);
   }

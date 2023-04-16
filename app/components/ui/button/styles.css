@@ -102,7 +102,7 @@ body.dark-mode .button-primary-destructive {
   }
 }
 
-@media (max-width: 52em) {
+@media (max-width: 64em) {
   .button {
     padding: var(--spacing-2) 1.4rem;
   }

@@ -77,10 +77,10 @@
   justify-self: end;
 }
 
-@media (max-width: 60em) {
+@media (max-width: 64em) {
   .invoice-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+    grid-template-columns: 1fr 1fr;
   }
 
   .invoice-list dl {
@@ -127,5 +127,11 @@
 
   .invoice-list .invoice-link svg {
     display: none;
+  }
+}
+
+@media (max-width: 40em) {
+  .invoice-list {
+    grid-template-columns: 1fr;
   }
 }

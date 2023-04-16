@@ -13,7 +13,7 @@
   gap: var(--spacing-4);
 }
 
-@media (max-width: 52em) {
+@media (max-width: 64em) {
   .new-invoice-form-actions {
     padding: var(--spacing-6);
   }

@@ -164,7 +164,7 @@
   text-align: right;
 }
 
-@media (max-width: 52em) {
+@media (max-width: 64em) {
   .invoice-details {
     padding: var(--spacing-6);
   }

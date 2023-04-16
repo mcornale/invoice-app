@@ -60,7 +60,7 @@ address {
   font-style: normal;
 }
 
-@media (max-width: 52em) {
+@media (max-width: 64em) {
   body {
     --font-text-3xl: 2.4rem/3.2rem var(--font-family);
     --font-text-2xl: 2rem/3rem var(--font-family);

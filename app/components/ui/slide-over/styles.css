@@ -23,7 +23,7 @@
   border-bottom: 0.1rem solid var(--color-mauve-6);
 }
 
-@media (max-width: 52em) {
+@media (max-width: 64em) {
   .slide-over-title {
     padding: var(--spacing-6);
   }
