@@ -4,6 +4,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--spacing-6);
+  margin-bottom: var(--spacing-10);
 }
 
 .invoice-list-summary {
@@ -15,8 +16,4 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-}
-
-.invoice-list-section {
-  margin-top: var(--spacing-10);
 }

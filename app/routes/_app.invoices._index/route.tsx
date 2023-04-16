@@ -1,4 +1,3 @@
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { NewInvoice, links as newInvoiceLinks } from '~/components/new-invoice';
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
@@ -65,12 +64,7 @@ export default function InvoicesIndexRoute() {
           <NewInvoice />
         </div>
       </header>
-      <section className='invoice-list-section'>
-        <VisuallyHidden.Root>
-          <h2>Invoice list</h2>
-        </VisuallyHidden.Root>
-        <InvoiceList invoices={invoices} />
-      </section>
+      <InvoiceList invoices={invoices} />
     </>
   );
 }
