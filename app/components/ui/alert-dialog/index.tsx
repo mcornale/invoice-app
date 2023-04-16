@@ -1,10 +1,10 @@
-import * as RadixAlertDialog from '@radix-ui/react-alert-dialog';
+import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import type { LinksFunction } from '@remix-run/node';
 import type { ReactNode } from 'react';
 import styles from './styles.css';
 
 interface AlertDialogContentProps
-  extends RadixAlertDialog.AlertDialogContentProps {
+  extends AlertDialogPrimitive.AlertDialogContentProps {
   children: ReactNode;
   title: string;
   description: string;
@@ -19,10 +19,10 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const AlertDialog = RadixAlertDialog.Root;
-export const AlertDialogTrigger = RadixAlertDialog.Trigger;
-export const AlertDialogAction = RadixAlertDialog.Action;
-export const AlertDialogCancel = RadixAlertDialog.Cancel;
+export const AlertDialog = AlertDialogPrimitive.Root;
+export const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
+export const AlertDialogAction = AlertDialogPrimitive.Action;
+export const AlertDialogCancel = AlertDialogPrimitive.Cancel;
 
 export function AlertDialogContent({
   children,
@@ -31,21 +31,21 @@ export function AlertDialogContent({
   ...props
 }: AlertDialogContentProps) {
   return (
-    <RadixAlertDialog.Portal>
-      <RadixAlertDialog.Overlay className='alert-dialog-overlay' />
-      <RadixAlertDialog.Content
+    <AlertDialogPrimitive.Portal>
+      <AlertDialogPrimitive.Overlay className='alert-dialog-overlay' />
+      <AlertDialogPrimitive.Content
         className='alert-dialog-content'
         aria-describedby={undefined}
         {...props}
       >
-        <RadixAlertDialog.Title className='alert-dialog-title'>
+        <AlertDialogPrimitive.Title className='alert-dialog-title'>
           {title}
-        </RadixAlertDialog.Title>
-        <RadixAlertDialog.Description className='alert-dialog-description'>
+        </AlertDialogPrimitive.Title>
+        <AlertDialogPrimitive.Description className='alert-dialog-description'>
           {description}
-        </RadixAlertDialog.Description>
+        </AlertDialogPrimitive.Description>
         {children}
-      </RadixAlertDialog.Content>
-    </RadixAlertDialog.Portal>
+      </AlertDialogPrimitive.Content>
+    </AlertDialogPrimitive.Portal>
   );
 }
