@@ -144,7 +144,7 @@ export default function InvoiceRoute() {
           <div className='invoice-bill-to'>
             <dt>Bill to</dt>
             <dd>
-              <span className='invoice-client-name'>Alex Grim</span>
+              <span className='invoice-client-name'>{invoice.clientName}</span>
               <address className='invoice-client-address'>
                 {invoice.clientAddress.street}
                 <br />
