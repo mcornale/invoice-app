@@ -37,13 +37,21 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
           <Legend>Bill From</Legend>
           <InputField
             label='Street Address'
-            name='street-address'
+            name='sender-address-street'
             type='text'
           />
           <div className='fieldset-row'>
-            <InputField label='City' name='city' type='text' />
-            <InputField label='Post Code' name='post-code' type='text' />
-            <InputField label='Country' name='country' type='text' />
+            <InputField label='City' name='sender-address-city' type='text' />
+            <InputField
+              label='Post Code'
+              name='sender-address-post-code'
+              type='text'
+            />
+            <InputField
+              label='Country'
+              name='sender-address-country'
+              type='text'
+            />
           </div>
         </Fieldset>
         <Fieldset>
@@ -52,16 +60,24 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
           <InputField label='Client Email' name='client-email' type='text' />
           <InputField
             label='Street Address'
-            name='client-street-address'
+            name='client-address-street'
             type='text'
           />
           <div className='fieldset-row'>
-            <InputField label='City' name='client-city' type='text' />
-            <InputField label='Post Code' name='client-post-code' type='text' />
-            <InputField label='Country' name='client-country' type='text' />
+            <InputField label='City' name='client-address-city' type='text' />
+            <InputField
+              label='Post Code'
+              name='client-address-post-code'
+              type='text'
+            />
+            <InputField
+              label='Country'
+              name='client-address-country'
+              type='text'
+            />
           </div>
           <div className='fieldset-row'>
-            <InputField label='Invoice Date' name='invoice-date' type='date' />
+            <InputField label='Invoice Date' name='created-at' type='date' />
             <SelectField
               label='Payment Terms'
               name='payment-terms'
@@ -71,7 +87,7 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
           </div>
           <InputField
             label='Project Description'
-            name='project-description'
+            name='description'
             type='text'
           />
         </Fieldset>
@@ -102,20 +118,20 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
             />
             <InputField
               aria-labelledby='quantity-label'
-              name='quantity'
+              name='item-quantity'
               type='number'
               min={0}
             />
             <InputField
               aria-labelledby='price-label'
-              name='price'
+              name='item-price'
               type='number'
               min={0}
               step={0.01}
             />
             <InputField
               aria-labelledby='total-label'
-              name='total'
+              name='item-total'
               type='number'
               defaultValue={120}
               readOnly
