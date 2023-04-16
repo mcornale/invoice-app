@@ -2,18 +2,12 @@
   transform: rotate(180deg);
 }
 
-.invoices-filter-form {
-  gap: inherit;
-}
-
 .invoices-filter-content {
-  width: var(--radix-popover-trigger-width);
-  min-width: 16rem;
-  background-color: var(--color-mauve-1);
-  border-radius: var(--border-radius-2);
-  padding: var(--spacing-4);
-  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
+}
+
+.invoices-filter-form {
+  gap: inherit;
 }
