@@ -13,7 +13,7 @@ import { formatDate } from '~/utils/helpers/format-date';
 interface InvoiceListProps {
   invoices: Pick<
     Invoice,
-    'id' | 'invoiceId' | 'clientName' | 'paymentDue' | 'status' | 'total'
+    'id' | 'displayId' | 'clientName' | 'paymentDue' | 'status' | 'total'
   >[];
 }
 
@@ -38,7 +38,7 @@ export function InvoiceList({ invoices }: InvoiceListProps) {
                 <VisuallyHidden.Root>
                   <dt>Id</dt>
                 </VisuallyHidden.Root>
-                <dd>{invoice.invoiceId}</dd>
+                <dd>{invoice.displayId}</dd>
               </div>
               <div className='invoice-due-date'>
                 <VisuallyHidden.Root>

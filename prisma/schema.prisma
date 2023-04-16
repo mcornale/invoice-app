@@ -29,7 +29,7 @@ type Item {
 
 model Invoice {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  invoiceId     String
+  displayId     String
   createdAt     DateTime
   paymentDue    DateTime
   description   String

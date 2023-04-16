@@ -106,7 +106,7 @@ export default function InvoiceRoute() {
               <VisuallyHidden.Root>
                 <dt>Id</dt>
               </VisuallyHidden.Root>
-              <dd>{invoice.invoiceId}</dd>
+              <dd>{invoice.displayId}</dd>
             </div>
             <div className='invoice-project-desc'>
               <VisuallyHidden.Root>

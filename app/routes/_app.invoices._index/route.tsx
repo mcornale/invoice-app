@@ -29,7 +29,7 @@ export const loader = async (args: LoaderArgs) => {
   const invoices = await db.invoice.findMany({
     select: {
       id: true,
-      invoiceId: true,
+      displayId: true,
       clientName: true,
       paymentDue: true,
       status: true,

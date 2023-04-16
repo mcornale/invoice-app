@@ -14,7 +14,7 @@ seed();
 function getInvoices() {
   return [
     {
-      invoiceId: 'RT3080',
+      displayId: 'RT3080',
       createdAt: new Date('2021-08-18').toISOString(),
       paymentDue: new Date('2021-08-19').toISOString(),
       description: 'Re-branding',
@@ -45,7 +45,7 @@ function getInvoices() {
       total: 1800.9,
     },
     {
-      invoiceId: 'XM9141',
+      displayId: 'XM9141',
       createdAt: new Date('2021-08-21').toISOString(),
       paymentDue: new Date('2021-09-20').toISOString(),
       description: 'Graphic Design',
@@ -82,7 +82,7 @@ function getInvoices() {
       total: 556,
     },
     {
-      invoiceId: 'RG0314',
+      displayId: 'RG0314',
       createdAt: new Date('2021-09-24').toISOString(),
       paymentDue: new Date('2021-10-01').toISOString(),
       description: 'Website Redesign',
@@ -113,7 +113,7 @@ function getInvoices() {
       total: 14002.33,
     },
     {
-      invoiceId: 'RT2080',
+      displayId: 'RT2080',
       createdAt: new Date('2021-10-11').toISOString(),
       paymentDue: new Date('2021-10-12').toISOString(),
       description: 'Logo Concept',
@@ -144,7 +144,7 @@ function getInvoices() {
       total: 102.04,
     },
     {
-      invoiceId: 'AA1449',
+      displayId: 'AA1449',
       createdAt: new Date('2021-10-7').toISOString(),
       paymentDue: new Date('2021-10-14').toISOString(),
       description: 'Re-branding',
@@ -181,7 +181,7 @@ function getInvoices() {
       total: 4032.33,
     },
     {
-      invoiceId: 'TY9141',
+      displayId: 'TY9141',
       createdAt: new Date('2021-10-01').toISOString(),
       paymentDue: new Date('2021-10-31').toISOString(),
       description: 'Landing Page Design',
@@ -212,7 +212,7 @@ function getInvoices() {
       total: 6155.91,
     },
     {
-      invoiceId: 'FV2353',
+      displayId: 'FV2353',
       createdAt: new Date('2021-11-05').toISOString(),
       paymentDue: new Date('2021-11-12').toISOString(),
       description: 'Logo Re-design',
