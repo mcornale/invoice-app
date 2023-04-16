@@ -18,8 +18,10 @@ export default function AppRoute() {
         <img className='logo' src='/logo.svg' alt='logo' />
       </header>
       <main className='app-main'>
-        <div className='app-outlet'>
-          <Outlet />
+        <div className='app-outlet-wrapper'>
+          <div className='app-outlet'>
+            <Outlet />
+          </div>
         </div>
       </main>
     </div>
