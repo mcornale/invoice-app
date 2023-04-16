@@ -3,6 +3,7 @@ import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Form, links as formLinks } from '../ui/form';
 import { Button, links as buttonLinks } from '../ui/button';
 import type { FormHTMLAttributes } from 'react';
+import { useState } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import { Fieldset, links as fieldsetLinks } from '../ui/fieldset';
@@ -28,6 +29,18 @@ export const links: LinksFunction = () => {
 };
 
 export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
+  const [items, setItems] = useState(
+    new Array(0).fill(null).map((_, index) => index)
+  );
+
+  function handleAddNewItemClick() {
+    setItems([...items, items.length]);
+  }
+
+  function handleDeleteItemClick(item: number) {
+    setItems(items.filter((i) => i !== item));
+  }
+
   return (
     <Form className={`invoice-form ${className ?? ''}`} {...props}>
       <section className='billing-information'>
@@ -40,56 +53,89 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
             label='Street Address'
             name='sender-address-street'
             type='text'
+            required
           />
           <div className='fieldset-row'>
-            <InputField label='City' name='sender-address-city' type='text' />
+            <InputField
+              label='City'
+              name='sender-address-city'
+              type='text'
+              required
+            />
             <InputField
               label='Post Code'
               name='sender-address-post-code'
               type='text'
+              required
             />
             <InputField
               label='Country'
               name='sender-address-country'
               type='text'
+              required
             />
           </div>
         </Fieldset>
         <Fieldset>
           <Legend>Bill To</Legend>
-          <InputField label='Client Name' name='client-name' type='text' />
-          <InputField label='Client Email' name='client-email' type='text' />
+          <InputField
+            label='Client Name'
+            name='client-name'
+            type='text'
+            required
+          />
+          <InputField
+            label='Client Email'
+            name='client-email'
+            type='text'
+            required
+          />
           <InputField
             label='Street Address'
             name='client-address-street'
             type='text'
+            required
           />
           <div className='fieldset-row'>
-            <InputField label='City' name='client-address-city' type='text' />
+            <InputField
+              label='City'
+              name='client-address-city'
+              type='text'
+              required
+            />
             <InputField
               label='Post Code'
               name='client-address-post-code'
               type='text'
+              required
             />
             <InputField
               label='Country'
               name='client-address-country'
               type='text'
+              required
             />
           </div>
           <div className='fieldset-row'>
-            <InputField label='Invoice Date' name='created-at' type='date' />
+            <InputField
+              label='Invoice Date'
+              name='created-at'
+              type='date'
+              required
+            />
             <SelectField
               label='Payment Terms'
               name='payment-terms'
               placeholder='Select Payment Terms'
               values={['net 1 day', 'net 7 days', 'net 14 days', 'net 30 days']}
+              required
             />
           </div>
           <InputField
             label='Project Description'
             name='description'
             type='text'
+            required
           />
         </Fieldset>
       </section>
@@ -111,39 +157,49 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
             </span>
             <span></span>
           </li>
-          <li className='item'>
-            <InputField
-              aria-labelledby='item-name-label'
-              name='item-name'
-              type='text'
-            />
-            <InputField
-              aria-labelledby='quantity-label'
-              name='item-quantity'
-              type='number'
-              min={0}
-            />
-            <InputField
-              aria-labelledby='price-label'
-              name='item-price'
-              type='number'
-              min={0}
-              step={0.01}
-            />
-            <InputField
-              aria-labelledby='total-label'
-              name='item-total'
-              type='number'
-              defaultValue={120}
-              readOnly
-            />
-            <Button type='button' variant='tertiary-gray'>
-              <TrashIcon />
-              <VisuallyHidden.Root>Delete Item</VisuallyHidden.Root>
-            </Button>
-          </li>
+          {items.map((item) => (
+            <li key={item} className='item'>
+              <InputField
+                aria-labelledby='item-name-label'
+                name='item-name'
+                type='text'
+              />
+              <InputField
+                aria-labelledby='quantity-label'
+                name='item-quantity'
+                type='number'
+                min={0}
+              />
+              <InputField
+                aria-labelledby='price-label'
+                name='item-price'
+                type='number'
+                min={0}
+                step={0.01}
+              />
+              <InputField
+                aria-labelledby='total-label'
+                name='item-total'
+                type='number'
+                defaultValue={0}
+                readOnly
+              />
+              <Button
+                onClick={handleDeleteItemClick.bind(null, item)}
+                type='button'
+                variant='tertiary-gray'
+              >
+                <TrashIcon />
+                <VisuallyHidden.Root>Delete Item</VisuallyHidden.Root>
+              </Button>
+            </li>
+          ))}
         </ul>
-        <Button type='button' variant='secondary-gray'>
+        <Button
+          onClick={handleAddNewItemClick}
+          type='button'
+          variant='secondary-gray'
+        >
           <PlusIcon />
           Add New Item
         </Button>

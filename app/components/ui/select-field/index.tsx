@@ -4,7 +4,7 @@ import { upperFirst } from '~/utils/formatters';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 
-interface SelectFieldProps {
+interface SelectFieldProps extends Select.SelectProps {
   label: string;
   name: string;
   placeholder: string;
@@ -25,13 +25,14 @@ export function SelectField({
   name,
   placeholder,
   values,
+  ...props
 }: SelectFieldProps) {
   return (
     <div className='input-field'>
       <label className='label' htmlFor={`${name}-select`}>
         {label}
       </label>
-      <Select.Root>
+      <Select.Root {...props}>
         <Select.Trigger className='select-trigger input' id={`${name}-select`}>
           <Select.Value placeholder={placeholder} />
           <CaretDownIcon />

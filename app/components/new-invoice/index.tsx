@@ -31,7 +31,7 @@ export function NewInvoice() {
     <SlideOver>
       <SlideOverTrigger asChild>
         <Button variant='primary'>
-          <PlusIcon />{' '}
+          <PlusIcon />
           {matches ? (
             <>
               New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>

@@ -54,7 +54,7 @@ export default function InvoiceRoute() {
     paymentDue: new Date(data.invoice.paymentDue),
   };
 
-  function handleBackButtonClick() {
+  function handleBackClick() {
     navigate(-1);
   }
 
@@ -63,7 +63,7 @@ export default function InvoiceRoute() {
       <Button
         className='back-button'
         variant='tertiary-gray'
-        onClick={handleBackButtonClick}
+        onClick={handleBackClick}
       >
         <CaretLeftIcon /> Back
       </Button>
