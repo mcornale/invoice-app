@@ -35,14 +35,11 @@ import {
 import { Button } from '~/components/ui/button';
 import { useActionData, useNavigate } from '@remix-run/react';
 import {
-  getDisplayId,
-  getItems,
-  getPaymentDue,
+  getFormattedDraftInvoice,
+  getFormattedPendingInvoice,
   getTypedFormData,
 } from '~/helpers/invoice';
 import { db } from '~/utils/db.server';
-import { InvoiceStatus } from '@prisma/client';
-import { parseDate } from '~/utils/parsers';
 
 interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -68,96 +65,74 @@ export const action = async ({ request }: ActionArgs) => {
   if (!typedFormData) {
     return json<ActionData>(
       {
-        fieldErrors: null,
+        fieldErrors: undefined,
         formErrors: ['Form not submitted correctly.'],
       },
       400
     );
   }
 
-  const displayId = getDisplayId();
-  const senderAddress = {
-    street: typedFormData.senderAddressStreet,
-    city: typedFormData.senderAddressCity,
-    postCode: typedFormData.senderAddressPostCode,
-    country: typedFormData.senderAddressCountry,
-  };
-  const clientName = typedFormData.clientName;
-  const clientEmail = typedFormData.clientEmail;
-  const clientAddress = {
-    street: typedFormData.clientAddressStreet,
-    city: typedFormData.clientAddressCity,
-    postCode: typedFormData.clientAddressPostCode,
-    country: typedFormData.clientAddressCountry,
-  };
-  const paymentTerms = Number(typedFormData.paymentTerms);
-  const description = typedFormData.description;
-
-  const itemNames = typedFormData.itemNames;
-  const itemQuantities = typedFormData.itemQuantities?.map((qty) =>
-    Number(qty)
-  );
-  const itemPrices = typedFormData.itemPrices.map((price) => Number(price));
-  const itemTotals = typedFormData.itemTotals.map((total) => Number(total));
-
-  const createdAt = parseDate(typedFormData.createdAt);
-  const paymentDue =
-    createdAt instanceof Date ? getPaymentDue(createdAt, paymentTerms) : null;
-  const items = getItems({ itemNames, itemQuantities, itemPrices, itemTotals });
-
   switch (intent) {
     case 'save-as-draft':
+      const newDraftInvoice = getFormattedDraftInvoice(typedFormData);
+
       await db.invoice.create({
-        data: {
-          displayId,
-          senderAddress,
-          clientName,
-          clientEmail,
-          clientAddress,
-          createdAt,
-          paymentTerms,
-          paymentDue,
-          description,
-          status: InvoiceStatus.DRAFT,
-          items,
-          total: itemTotals.reduce((prevVal, currVal) => prevVal + currVal, 0),
-        },
+        data: newDraftInvoice,
       });
+
       return redirect(`/invoices`);
     case 'save-and-send':
+      const newPendingInvoice = getFormattedPendingInvoice(typedFormData);
+
       const fieldErrors: ActionData['fieldErrors'] = {
-        senderAddressStreet: validateSenderAddressStreet(senderAddress.street),
-        senderAddressCity: validateSenderAddressCity(senderAddress.city),
+        senderAddressStreet: validateSenderAddressStreet(
+          newPendingInvoice.senderAddress.street
+        ),
+        senderAddressCity: validateSenderAddressCity(
+          newPendingInvoice.senderAddress.city
+        ),
         senderAddressPostCode: validateSenderAddressPostCode(
-          senderAddress.postCode
+          newPendingInvoice.senderAddress.postCode
         ),
         senderAddressCountry: validateSenderAddressCountry(
-          senderAddress.country
+          newPendingInvoice.senderAddress.country
         ),
-        clientName: validateClientName(clientName),
-        clientEmail: validateClientEmail(clientEmail),
-        clientAddressStreet: validateClientAddressStreet(clientAddress.street),
-        clientAddressCity: validateClientAddressCity(clientAddress.city),
+        clientName: validateClientName(newPendingInvoice.clientName),
+        clientEmail: validateClientEmail(newPendingInvoice.clientEmail),
+        clientAddressStreet: validateClientAddressStreet(
+          newPendingInvoice.clientAddress.street
+        ),
+        clientAddressCity: validateClientAddressCity(
+          newPendingInvoice.clientAddress.city
+        ),
         clientAddressPostCode: validateClientAddressPostCode(
-          clientAddress.postCode
+          newPendingInvoice.clientAddress.postCode
         ),
         clientAddressCountry: validateClientAddressCountry(
-          clientAddress.country
+          newPendingInvoice.clientAddress.country
         ),
-        createdAt: validateCreatedAt(createdAt),
-        paymentTerms: validatePaymentTerms(paymentTerms),
-        description: validateDescription(description),
-        itemNames: validateItemNames(itemNames),
-        itemQuantities: validateItemQuantities(itemQuantities),
-        itemPrices: validateItemPrices(itemPrices),
-        itemTotals: validateItemTotals(itemTotals),
+        createdAt: validateCreatedAt(newPendingInvoice.createdAt),
+        paymentTerms: validatePaymentTerms(newPendingInvoice.paymentTerms),
+        description: validateDescription(newPendingInvoice.description),
+        itemNames: validateItemNames(
+          newPendingInvoice.items.map((item) => item.name)
+        ),
+        itemQuantities: validateItemQuantities(
+          newPendingInvoice.items.map((item) => item.quantity)
+        ),
+        itemPrices: validateItemPrices(
+          newPendingInvoice.items.map((item) => item.price)
+        ),
+        itemTotals: validateItemTotals(
+          newPendingInvoice.items.map((item) => item.total)
+        ),
       };
 
       if (Object.values(fieldErrors).some(Boolean)) {
         return json<ActionData>(
           {
             fieldErrors,
-            formErrors: null,
+            formErrors: undefined,
           },
           { status: 400 }
         );
@@ -182,8 +157,8 @@ export default function NewInvoiceRoute() {
         <InvoiceForm
           id='new-invoice-form'
           method='post'
-          fieldErrors={actionData?.fieldErrors ?? null}
-          formErrors={actionData?.formErrors ?? null}
+          fieldErrors={actionData?.fieldErrors}
+          formErrors={actionData?.formErrors}
         />
         <div className='new-invoice-form-actions'>
           <div>

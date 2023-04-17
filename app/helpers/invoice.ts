@@ -1,9 +1,23 @@
+import { InvoiceStatus } from '@prisma/client';
+import type { Fields as InvoiceFormFields } from '~/components/invoice-form';
+import { parseDate } from '~/utils/parsers';
 import { isArrOfString, isString } from '~/utils/type-checkers';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NUMBERS = '0123456789';
 
-export function getTypedFormData(formData: FormData) {
+interface getInvoiceParams extends InvoiceFormFields {
+  status: InvoiceStatus;
+}
+
+type getItemsParams = Pick<
+  InvoiceFormFields,
+  'itemNames' | 'itemQuantities' | 'itemPrices' | 'itemTotals'
+>;
+
+export function getTypedFormData(
+  formData: FormData
+): InvoiceFormFields | undefined {
   const senderAddressStreet = formData.get('sender-address-street');
   const senderAddressCity = formData.get('sender-address-city');
   const senderAddressPostCode = formData.get('sender-address-post-code');
@@ -84,15 +98,67 @@ export const getPaymentDue = (createdAt: Date, paymentTerms: number) => {
   return new Date(createdAt.getTime() + paymentTermsInMS);
 };
 
-export const getItems = (items: {
-  itemNames: string[];
-  itemQuantities: number[];
-  itemPrices: number[];
-  itemTotals: number[];
-}) =>
-  new Array(items.itemNames.length).fill(null).map((_, i) => ({
-    name: items.itemNames[i],
-    quantity: items.itemQuantities[i],
-    price: items.itemPrices[i],
-    total: items.itemTotals[i],
+export function getItems(itemFields: getItemsParams) {
+  const itemNames = itemFields.itemNames;
+  const itemQuantities = itemFields.itemQuantities?.map((qty) => Number(qty));
+  const itemPrices = itemFields.itemPrices.map((price) => Number(price));
+  const itemTotals = itemFields.itemTotals.map((total) => Number(total));
+
+  return new Array(itemNames.length).fill(null).map((_, i) => ({
+    name: itemNames[i],
+    quantity: itemQuantities[i],
+    price: itemPrices[i],
+    total: itemTotals[i],
   }));
+}
+
+export function getFormattedInvoice({ status, ...fields }: getInvoiceParams) {
+  const displayId = getDisplayId();
+  const senderAddress = {
+    street: fields.senderAddressStreet,
+    city: fields.senderAddressCity,
+    postCode: fields.senderAddressPostCode,
+    country: fields.senderAddressCountry,
+  };
+  const clientName = fields.clientName;
+  const clientEmail = fields.clientEmail;
+  const clientAddress = {
+    street: fields.clientAddressStreet,
+    city: fields.clientAddressCity,
+    postCode: fields.clientAddressPostCode,
+    country: fields.clientAddressCountry,
+  };
+  const paymentTerms = Number(fields.paymentTerms);
+  const description = fields.description;
+
+  const createdAt = parseDate(fields.createdAt);
+  const paymentDue =
+    createdAt instanceof Date ? getPaymentDue(createdAt, paymentTerms) : null;
+  const items = getItems({
+    itemNames: fields.itemNames,
+    itemQuantities: fields.itemQuantities,
+    itemPrices: fields.itemPrices,
+    itemTotals: fields.itemTotals,
+  });
+
+  return {
+    displayId,
+    senderAddress,
+    clientName,
+    clientEmail,
+    clientAddress,
+    createdAt,
+    paymentTerms,
+    paymentDue,
+    description,
+    status: InvoiceStatus.DRAFT,
+    items,
+    total: items.reduce((prevVal, currItem) => prevVal + currItem.total, 0),
+  };
+}
+
+export const getFormattedDraftInvoice = (fields: InvoiceFormFields) =>
+  getFormattedInvoice({ status: InvoiceStatus.DRAFT, ...fields });
+
+export const getFormattedPendingInvoice = (fields: InvoiceFormFields) =>
+  getFormattedInvoice({ status: InvoiceStatus.PENDING, ...fields });
