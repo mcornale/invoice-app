@@ -3,7 +3,8 @@ import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import type { FormProps } from '../ui/form';
 import { Form, links as formLinks } from '../ui/form';
 import { Button, links as buttonLinks } from '../ui/button';
-import { useState } from 'react';
+import type { ChangeEvent } from 'react';
+import { useRef, useState } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import { Fieldset, links as fieldsetLinks } from '../ui/fieldset';
@@ -64,7 +65,6 @@ export interface InvoiceFormProps extends FormProps {
 }
 
 interface InvoiceFormItemProps {
-  id: number;
   onDelete: () => void;
 }
 
@@ -186,7 +186,6 @@ export function InvoiceForm({
           </li>
           {items.map((id) => (
             <InvoiceFormItem
-              id={id}
               key={id}
               onDelete={handleDeleteItemClick.bind(null, id)}
             />
@@ -205,7 +204,18 @@ export function InvoiceForm({
   );
 }
 
-export function InvoiceFormItem({ id, onDelete }: InvoiceFormItemProps) {
+export function InvoiceFormItem({ onDelete }: InvoiceFormItemProps) {
+  const [quantity, setQuantity] = useState('');
+  const [price, setPrice] = useState('');
+
+  function handleQuantityChange(e: ChangeEvent<HTMLInputElement>) {
+    setQuantity(e.target.value);
+  }
+
+  function handlePriceChange(e: ChangeEvent<HTMLInputElement>) {
+    setPrice(e.target.value);
+  }
+
   return (
     <li className='item'>
       <InputField
@@ -218,6 +228,8 @@ export function InvoiceFormItem({ id, onDelete }: InvoiceFormItemProps) {
         name='item-quantity'
         type='number'
         min={0}
+        value={quantity}
+        onChange={handleQuantityChange}
       />
       <InputField
         aria-labelledby='price-label'
@@ -225,6 +237,8 @@ export function InvoiceFormItem({ id, onDelete }: InvoiceFormItemProps) {
         type='number'
         min={0}
         step={0.01}
+        value={price}
+        onChange={handlePriceChange}
       />
       <InputField
         aria-labelledby='total-label'
@@ -232,6 +246,7 @@ export function InvoiceFormItem({ id, onDelete }: InvoiceFormItemProps) {
         type='number'
         defaultValue={0}
         readOnly
+        value={Number(quantity) * Number(price)}
       />
       <Button onClick={onDelete} type='button' variant='tertiary-gray'>
         <TrashIcon />
