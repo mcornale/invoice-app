@@ -1,6 +1,7 @@
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import type { LinksFunction } from '@remix-run/node';
 import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
 import styles from './styles.css';
 
 interface AlertDialogContentProps
@@ -24,12 +25,10 @@ export const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 export const AlertDialogAction = AlertDialogPrimitive.Action;
 export const AlertDialogCancel = AlertDialogPrimitive.Cancel;
 
-export function AlertDialogContent({
-  children,
-  title,
-  description,
-  ...props
-}: AlertDialogContentProps) {
+export const AlertDialogContent = forwardRef<
+  HTMLDivElement,
+  AlertDialogContentProps
+>(({ children, title, description, ...props }, ref) => {
   return (
     <AlertDialogPrimitive.Portal>
       <AlertDialogPrimitive.Overlay className='alert-dialog-overlay' />
@@ -37,6 +36,7 @@ export function AlertDialogContent({
         className='alert-dialog-content'
         aria-describedby={undefined}
         {...props}
+        ref={ref}
       >
         <AlertDialogPrimitive.Title className='alert-dialog-title'>
           {title}
@@ -48,4 +48,5 @@ export function AlertDialogContent({
       </AlertDialogPrimitive.Content>
     </AlertDialogPrimitive.Portal>
   );
-}
+});
+AlertDialogContent.displayName = 'AlertDialogContent';

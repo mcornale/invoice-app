@@ -1,4 +1,5 @@
 import type { FieldsetHTMLAttributes, ReactNode } from 'react';
+import { forwardRef } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 
@@ -15,10 +16,13 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function Fieldset({ children, className, ...props }: FieldsetProps) {
-  return (
-    <fieldset className={`fieldset ${className ?? ''}`} {...props}>
-      {children}
-    </fieldset>
-  );
-}
+export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <fieldset className={`fieldset ${className ?? ''}`} {...props} ref={ref}>
+        {children}
+      </fieldset>
+    );
+  }
+);
+Fieldset.displayName = 'Fieldset';

@@ -1,5 +1,6 @@
 import type { LinksFunction } from '@remix-run/node';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef } from 'react';
 import styles from './styles.css';
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
@@ -16,6 +17,13 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function Badge({ children, variant }: BadgeProps) {
-  return <span className={`badge badge-${variant}`}>{children}</span>;
-}
+export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ children, variant }, ref) => {
+    return (
+      <span className={`badge badge-${variant}`} ref={ref}>
+        {children}
+      </span>
+    );
+  }
+);
+Badge.displayName = 'Badge';

@@ -2,6 +2,7 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
 
 interface PopoverContentProps extends PopoverPrimitive.PopoverContentProps {
   children: ReactNode;
@@ -19,21 +20,21 @@ export const links: LinksFunction = () => {
 export const Popover = PopoverPrimitive.Root;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
 
-export function PopoverContent({
-  children,
-  className,
-  ...props
-}: PopoverContentProps) {
-  return (
-    <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content
-        className={`popover-content ${className ?? ''}`}
-        sideOffset={8}
-        align='start'
-        {...props}
-      >
-        {children}
-      </PopoverPrimitive.Content>
-    </PopoverPrimitive.Portal>
-  );
-}
+export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <PopoverPrimitive.Portal>
+        <PopoverPrimitive.Content
+          className={`popover-content ${className ?? ''}`}
+          sideOffset={8}
+          align='start'
+          {...props}
+          ref={ref}
+        >
+          {children}
+        </PopoverPrimitive.Content>
+      </PopoverPrimitive.Portal>
+    );
+  }
+);
+PopoverContent.displayName = 'PopoverContent';

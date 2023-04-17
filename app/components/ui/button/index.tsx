@@ -31,12 +31,12 @@ export const links: LinksFunction = () => {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, variant, className, ...props }, forwardedRed) => {
+  ({ children, variant, className, ...props }, ref) => {
     return (
       <button
         className={`button button-${variant} ${className ?? ''}`}
         {...props}
-        ref={forwardedRed}
+        ref={ref}
       >
         {children}
       </button>
@@ -46,12 +46,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 
 export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
-  ({ children, variant, className, ...props }, forwardedRed) => {
+  ({ children, variant, className, ...props }, ref) => {
     return (
       <Link
         className={`button button-${variant} ${className ?? ''}`}
         {...props}
-        ref={forwardedRed}
+        ref={ref}
       >
         {children}
       </Link>
