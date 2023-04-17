@@ -29,9 +29,6 @@
 
 .input-field .label {
   padding-bottom: 0.6rem;
-}
-
-.label {
   font: var(--font-text-sm);
   font-weight: 500;
   color: var(--color-mauve-12);

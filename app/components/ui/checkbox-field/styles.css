@@ -4,6 +4,9 @@
 
 .checkbox-field .label {
   padding-left: var(--spacing-2);
+  font: var(--font-text-sm);
+  font-weight: 500;
+  color: var(--color-mauve-12);
 }
 
 .checkbox {
