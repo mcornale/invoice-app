@@ -1,17 +1,24 @@
 import type { LinksFunction } from '@remix-run/node';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import styles from './styles.css';
+import type { LinkProps } from '@remix-run/react';
+import { Link } from '@remix-run/react';
+
+type ButtonVariant =
+  | 'primary'
+  | 'primary-destructive'
+  | 'secondary-color'
+  | 'secondary-gray'
+  | 'tertiary-color'
+  | 'tertiary-gray';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  variant:
-    | 'primary'
-    | 'primary-destructive'
-    | 'secondary-color'
-    | 'secondary-gray'
-    | 'tertiary-color'
-    | 'tertiary-gray';
+  variant: ButtonVariant;
+}
+
+interface ButtonLinkProps extends LinkProps {
+  variant: ButtonVariant;
 }
 
 export const links: LinksFunction = () => {
@@ -37,3 +44,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 Button.displayName = 'Button';
+
+export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
+  ({ children, variant, className, ...props }, forwardedRed) => {
+    return (
+      <Link
+        className={`button button-${variant} ${className ?? ''}`}
+        {...props}
+        ref={forwardedRed}
+      >
+        {children}
+      </Link>
+    );
+  }
+);
+ButtonLink.displayName = 'ButtonLink';

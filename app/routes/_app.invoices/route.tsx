@@ -1,4 +1,3 @@
-import { NewInvoice, links as newInvoiceLinks } from '~/components/new-invoice';
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
@@ -11,13 +10,14 @@ import {
   links as invoiceListLinks,
 } from '~/components/invoice-list';
 import { db } from '~/utils/db.server';
-import { useLoaderData } from '@remix-run/react';
+import { Outlet, useLoaderData } from '@remix-run/react';
 import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { ButtonLink } from '~/components/ui/button';
+import { PlusIcon } from '@radix-ui/react-icons';
 
 export const links: LinksFunction = () => {
   return [
-    ...newInvoiceLinks(),
     ...invoicesFilterLinks(),
     ...invoiceListLinks(),
     {
@@ -44,13 +44,13 @@ export const loader = async (args: LoaderArgs) => {
   });
 };
 
-export default function InvoicesIndexRoute() {
+export default function InvoicesRoute() {
   const data = useLoaderData<typeof loader>();
   const matches = useMediaQuery('(max-width: 40em)');
 
   const invoices = data.invoices.map((invoice) => ({
     ...invoice,
-    paymentDue: new Date(invoice.paymentDue),
+    paymentDue: invoice.paymentDue ? new Date(invoice.paymentDue) : null,
   }));
 
   return (
@@ -72,10 +72,20 @@ export default function InvoicesIndexRoute() {
         </div>
         <div className='invoice-list-actions'>
           <InvoicesFilter />
-          <NewInvoice />
+          <ButtonLink variant='primary' to='new'>
+            <PlusIcon />
+            {matches ? (
+              <>
+                New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>
+              </>
+            ) : (
+              'New Invoice'
+            )}
+          </ButtonLink>
         </div>
       </header>
       <InvoiceList invoices={invoices} />
+      <Outlet />
     </>
   );
 }

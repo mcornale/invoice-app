@@ -7,20 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Status {
+enum InvoiceStatus {
   PAID
   PENDING
   DRAFT
 }
 
-type Address {
+type InvoiceAddress {
   street   String
   city     String
   postCode String
   country  String
 }
 
-type Item {
+type InvoiceItem {
   name     String
   quantity Int
   price    Float
@@ -28,17 +28,17 @@ type Item {
 }
 
 model Invoice {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
   displayId     String
-  createdAt     DateTime
-  paymentDue    DateTime
+  createdAt     DateTime?
+  paymentDue    DateTime?
   description   String
   paymentTerms  Int
   clientName    String
   clientEmail   String
-  status        Status
+  status        InvoiceStatus
   total         Float
-  senderAddress Address
-  clientAddress Address
-  items         Item[]
+  senderAddress InvoiceAddress
+  clientAddress InvoiceAddress
+  items         InvoiceItem[]
 }

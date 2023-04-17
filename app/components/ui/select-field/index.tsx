@@ -4,11 +4,15 @@ import { upperFirst } from '~/utils/formatters';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 
+interface Option {
+  text: string;
+  value: string;
+}
 interface SelectFieldProps extends Select.SelectProps {
   label: string;
   name: string;
   placeholder: string;
-  values: string[];
+  options: Option[];
 }
 
 export const links: LinksFunction = () => {
@@ -24,7 +28,7 @@ export function SelectField({
   label,
   name,
   placeholder,
-  values,
+  options,
   ...props
 }: SelectFieldProps) {
   return (
@@ -32,7 +36,7 @@ export function SelectField({
       <label className='label' htmlFor={`${name}-select`}>
         {label}
       </label>
-      <Select.Root {...props}>
+      <Select.Root name={name} {...props}>
         <Select.Trigger className='select-trigger input' id={`${name}-select`}>
           <Select.Value placeholder={placeholder} />
           <CaretDownIcon />
@@ -44,9 +48,13 @@ export function SelectField({
             sideOffset={8}
           >
             <Select.Viewport className='select-viewport'>
-              {values.map((value, index) => (
-                <Select.Item key={index} className='select-item' value={value}>
-                  <Select.ItemText>{upperFirst(value)}</Select.ItemText>
+              {options.map((option, index) => (
+                <Select.Item
+                  key={index}
+                  className='select-item'
+                  value={option.value}
+                >
+                  <Select.ItemText>{upperFirst(option.text)}</Select.ItemText>
                   <Select.ItemIndicator className='select-item-indicator'>
                     <CheckIcon />
                   </Select.ItemIndicator>

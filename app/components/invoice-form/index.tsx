@@ -1,8 +1,8 @@
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
+import type { FormProps } from '../ui/form';
 import { Form, links as formLinks } from '../ui/form';
 import { Button, links as buttonLinks } from '../ui/button';
-import type { FormHTMLAttributes } from 'react';
 import { useState } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
@@ -11,7 +11,37 @@ import { Legend, links as legendLinks } from '../ui/legend';
 import { InputField, links as inputFieldLinks } from '../ui/input-field';
 import { SelectField, links as selectFieldLinks } from '../ui/select-field';
 
-interface InvoiceFormProps extends FormHTMLAttributes<HTMLFormElement> {}
+const PAYMENT_TERMS_OPTIONS = [
+  { text: 'net 1 day', value: '1' },
+  { text: 'net 7 days', value: '7' },
+  { text: 'net 14 days', value: '14' },
+  { text: 'net 30 days', value: '30' },
+];
+
+interface FieldErrors {
+  senderAddressStreet?: string;
+  senderAddressCity?: string;
+  senderAddressPostCode?: string;
+  senderAddressCountry?: string;
+  clientName?: string;
+  clientEmail?: string;
+  clientAddressStreet?: string;
+  clientAddressCity?: string;
+  clientAddressPostCode?: string;
+  clientAddressCountry?: string;
+  createdAt?: string;
+  paymentTerms?: string;
+  description?: string;
+  itemNames?: string;
+  itemQuantities?: string;
+  itemPrices?: string;
+  itemTotals?: string;
+}
+
+export interface InvoiceFormProps extends FormProps {
+  fieldErrors: FieldErrors | null;
+  formErrors: string[] | null;
+}
 
 export const links: LinksFunction = () => {
   return [
@@ -28,7 +58,12 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
+export function InvoiceForm({
+  className,
+  fieldErrors,
+  formErrors,
+  ...props
+}: InvoiceFormProps) {
   const [items, setItems] = useState(
     new Array(0).fill(null).map((_, index) => index)
   );
@@ -53,89 +88,56 @@ export function InvoiceForm({ className, ...props }: InvoiceFormProps) {
             label='Street Address'
             name='sender-address-street'
             type='text'
-            required
           />
           <div className='fieldset-row'>
-            <InputField
-              label='City'
-              name='sender-address-city'
-              type='text'
-              required
-            />
+            <InputField label='City' name='sender-address-city' type='text' />
             <InputField
               label='Post Code'
               name='sender-address-post-code'
               type='text'
-              required
             />
             <InputField
               label='Country'
               name='sender-address-country'
               type='text'
-              required
             />
           </div>
         </Fieldset>
         <Fieldset>
           <Legend>Bill To</Legend>
-          <InputField
-            label='Client Name'
-            name='client-name'
-            type='text'
-            required
-          />
-          <InputField
-            label='Client Email'
-            name='client-email'
-            type='text'
-            required
-          />
+          <InputField label='Client Name' name='client-name' type='text' />
+          <InputField label='Client Email' name='client-email' type='text' />
           <InputField
             label='Street Address'
             name='client-address-street'
             type='text'
-            required
           />
           <div className='fieldset-row'>
-            <InputField
-              label='City'
-              name='client-address-city'
-              type='text'
-              required
-            />
+            <InputField label='City' name='client-address-city' type='text' />
             <InputField
               label='Post Code'
               name='client-address-post-code'
               type='text'
-              required
             />
             <InputField
               label='Country'
               name='client-address-country'
               type='text'
-              required
             />
           </div>
           <div className='fieldset-row'>
-            <InputField
-              label='Invoice Date'
-              name='created-at'
-              type='date'
-              required
-            />
+            <InputField label='Invoice Date' name='created-at' type='date' />
             <SelectField
               label='Payment Terms'
               name='payment-terms'
               placeholder='Select Payment Terms'
-              values={['net 1 day', 'net 7 days', 'net 14 days', 'net 30 days']}
-              required
+              options={PAYMENT_TERMS_OPTIONS}
             />
           </div>
           <InputField
             label='Project Description'
             name='description'
             type='text'
-            required
           />
         </Fieldset>
       </section>

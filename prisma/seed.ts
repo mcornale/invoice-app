@@ -1,4 +1,4 @@
-import { PrismaClient, Status } from '@prisma/client';
+import { PrismaClient, InvoiceStatus } from '@prisma/client';
 const db = new PrismaClient();
 
 async function seed() {
@@ -15,13 +15,13 @@ function getInvoices() {
   return [
     {
       displayId: 'RT3080',
-      createdAt: new Date('2021-08-18').toISOString(),
-      paymentDue: new Date('2021-08-19').toISOString(),
+      createdAt: new Date('2021-08-18'),
+      paymentDue: new Date('2021-08-19'),
       description: 'Re-branding',
       paymentTerms: 1,
       clientName: 'Jensen Huang',
       clientEmail: 'jensenh@mail.com',
-      status: Status.PAID,
+      status: InvoiceStatus.PAID,
       senderAddress: {
         street: '19 Union Terrace',
         city: 'London',
@@ -46,13 +46,13 @@ function getInvoices() {
     },
     {
       displayId: 'XM9141',
-      createdAt: new Date('2021-08-21').toISOString(),
-      paymentDue: new Date('2021-09-20').toISOString(),
+      createdAt: new Date('2021-08-21'),
+      paymentDue: new Date('2021-09-20'),
       description: 'Graphic Design',
       paymentTerms: 30,
       clientName: 'Alex Grim',
       clientEmail: 'alexgrim@mail.com',
-      status: Status.PENDING,
+      status: InvoiceStatus.PENDING,
       senderAddress: {
         street: '19 Union Terrace',
         city: 'London',
@@ -83,13 +83,13 @@ function getInvoices() {
     },
     {
       displayId: 'RG0314',
-      createdAt: new Date('2021-09-24').toISOString(),
-      paymentDue: new Date('2021-10-01').toISOString(),
+      createdAt: new Date('2021-09-24'),
+      paymentDue: new Date('2021-10-01'),
       description: 'Website Redesign',
       paymentTerms: 7,
       clientName: 'John Morrison',
       clientEmail: 'jm@myco.com',
-      status: Status.PAID,
+      status: InvoiceStatus.PAID,
       senderAddress: {
         street: '19 Union Terrace',
         city: 'London',
@@ -114,13 +114,13 @@ function getInvoices() {
     },
     {
       displayId: 'RT2080',
-      createdAt: new Date('2021-10-11').toISOString(),
-      paymentDue: new Date('2021-10-12').toISOString(),
+      createdAt: new Date('2021-10-11'),
+      paymentDue: new Date('2021-10-12'),
       description: 'Logo Concept',
       paymentTerms: 1,
       clientName: 'Alysa Werner',
       clientEmail: 'alysa@email.co.uk',
-      status: Status.PENDING,
+      status: InvoiceStatus.PENDING,
       senderAddress: {
         street: '19 Union Terrace',
         city: 'London',
@@ -145,13 +145,13 @@ function getInvoices() {
     },
     {
       displayId: 'AA1449',
-      createdAt: new Date('2021-10-7').toISOString(),
-      paymentDue: new Date('2021-10-14').toISOString(),
+      createdAt: new Date('2021-10-7'),
+      paymentDue: new Date('2021-10-14'),
       description: 'Re-branding',
       paymentTerms: 7,
       clientName: 'Mellisa Clarke',
       clientEmail: 'mellisa.clarke@example.com',
-      status: Status.PENDING,
+      status: InvoiceStatus.PENDING,
       senderAddress: {
         street: '19 Union Terrace',
         city: 'London',
@@ -182,13 +182,13 @@ function getInvoices() {
     },
     {
       displayId: 'TY9141',
-      createdAt: new Date('2021-10-01').toISOString(),
-      paymentDue: new Date('2021-10-31').toISOString(),
+      createdAt: new Date('2021-10-01'),
+      paymentDue: new Date('2021-10-31'),
       description: 'Landing Page Design',
       paymentTerms: 30,
       clientName: 'Thomas Wayne',
       clientEmail: 'thomas@dc.com',
-      status: Status.PENDING,
+      status: InvoiceStatus.PENDING,
       senderAddress: {
         street: '19 Union Terrace',
         city: 'London',
@@ -213,13 +213,13 @@ function getInvoices() {
     },
     {
       displayId: 'FV2353',
-      createdAt: new Date('2021-11-05').toISOString(),
-      paymentDue: new Date('2021-11-12').toISOString(),
+      createdAt: new Date('2021-11-05'),
+      paymentDue: new Date('2021-11-12'),
       description: 'Logo Re-design',
       paymentTerms: 7,
       clientName: 'Anita Wainwright',
       clientEmail: '',
-      status: Status.DRAFT,
+      status: InvoiceStatus.DRAFT,
       senderAddress: {
         street: '19 Union Terrace',
         city: 'London',

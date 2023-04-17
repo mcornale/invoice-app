@@ -16,7 +16,7 @@ import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { db } from '~/utils/db.server';
-import { Status } from '@prisma/client';
+import { InvoiceStatus } from '@prisma/client';
 
 export const links: LinksFunction = () => {
   return [
@@ -77,13 +77,13 @@ export default function InvoiceRoute() {
         <dl className='invoice-status'>
           <dt>Status</dt>
           <dd>
-            {invoice.status === Status.PAID && (
+            {invoice.status === InvoiceStatus.PAID && (
               <Badge variant='success'>{upperFirst(invoice.status)}</Badge>
             )}
-            {invoice.status === Status.PENDING && (
+            {invoice.status === InvoiceStatus.PENDING && (
               <Badge variant='warning'>{upperFirst(invoice.status)}</Badge>
             )}
-            {invoice.status === Status.DRAFT && (
+            {invoice.status === InvoiceStatus.DRAFT && (
               <Badge variant='gray'>{upperFirst(invoice.status)}</Badge>
             )}
           </dd>
