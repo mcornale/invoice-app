@@ -233,7 +233,7 @@ export function InvoiceForm({
       </section>
       {formErrors &&
         formErrors.length > 0 &&
-        formErrors?.map((formError) => <p>{formError}</p>)}
+        formErrors?.map((formError, index) => <p key={index}>{formError}</p>)}
     </Form>
   );
 }
