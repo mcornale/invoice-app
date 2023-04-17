@@ -77,6 +77,13 @@ address {
   outline: none;
 }
 
+[readonly] {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+  box-shadow: none;
+}
+
 [disabled],
 [aria-disabled='true'] {
   cursor: not-allowed;

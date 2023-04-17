@@ -63,6 +63,11 @@ export interface InvoiceFormProps extends FormProps {
   formErrors?: string[];
 }
 
+interface InvoiceFormItemProps {
+  id: number;
+  onDelete: () => void;
+}
+
 export const links: LinksFunction = () => {
   return [
     ...buttonLinks(),
@@ -179,42 +184,12 @@ export function InvoiceForm({
             </span>
             <span></span>
           </li>
-          {items.map((item) => (
-            <li key={item} className='item'>
-              <InputField
-                aria-labelledby='item-name-label'
-                name='item-name'
-                type='text'
-              />
-              <InputField
-                aria-labelledby='quantity-label'
-                name='item-quantity'
-                type='number'
-                min={0}
-              />
-              <InputField
-                aria-labelledby='price-label'
-                name='item-price'
-                type='number'
-                min={0}
-                step={0.01}
-              />
-              <InputField
-                aria-labelledby='total-label'
-                name='item-total'
-                type='number'
-                defaultValue={0}
-                readOnly
-              />
-              <Button
-                onClick={handleDeleteItemClick.bind(null, item)}
-                type='button'
-                variant='tertiary-gray'
-              >
-                <TrashIcon />
-                <VisuallyHidden.Root>Delete Item</VisuallyHidden.Root>
-              </Button>
-            </li>
+          {items.map((id) => (
+            <InvoiceFormItem
+              id={id}
+              key={id}
+              onDelete={handleDeleteItemClick.bind(null, id)}
+            />
           ))}
         </ul>
         <Button
@@ -227,5 +202,41 @@ export function InvoiceForm({
         </Button>
       </section>
     </Form>
+  );
+}
+
+export function InvoiceFormItem({ id, onDelete }: InvoiceFormItemProps) {
+  return (
+    <li className='item'>
+      <InputField
+        aria-labelledby='item-name-label'
+        name='item-name'
+        type='text'
+      />
+      <InputField
+        aria-labelledby='quantity-label'
+        name='item-quantity'
+        type='number'
+        min={0}
+      />
+      <InputField
+        aria-labelledby='price-label'
+        name='item-price'
+        type='number'
+        min={0}
+        step={0.01}
+      />
+      <InputField
+        aria-labelledby='total-label'
+        name='item-total'
+        type='number'
+        defaultValue={0}
+        readOnly
+      />
+      <Button onClick={onDelete} type='button' variant='tertiary-gray'>
+        <TrashIcon />
+        <VisuallyHidden.Root>Delete Item</VisuallyHidden.Root>
+      </Button>
+    </li>
   );
 }

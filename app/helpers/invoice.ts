@@ -1,11 +1,13 @@
+import type { Invoice } from '@prisma/client';
 import { InvoiceStatus } from '@prisma/client';
-import type { Fields as InvoiceFormFields } from '~/components/invoice-form';
+import type {
+  FieldErrors as InvoiceFormFieldErrors,
+  Fields as InvoiceFormFields,
+} from '~/components/invoice-form';
 import { parseDate } from '~/utils/parsers';
 import { isArrOfString, isString } from '~/utils/type-checkers';
 
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const NUMBERS = '0123456789';
-
+type InvoiceWithoutId = Omit<Invoice, 'id'>;
 interface getInvoiceParams extends InvoiceFormFields {
   status: InvoiceStatus;
 }
@@ -14,6 +16,9 @@ type getItemsParams = Pick<
   InvoiceFormFields,
   'itemNames' | 'itemQuantities' | 'itemPrices' | 'itemTotals'
 >;
+
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const NUMBERS = '0123456789';
 
 export function getTypedFormData(
   formData: FormData
@@ -112,7 +117,10 @@ export function getItems(itemFields: getItemsParams) {
   }));
 }
 
-export function getFormattedInvoice({ status, ...fields }: getInvoiceParams) {
+export function getFormattedInvoice({
+  status,
+  ...fields
+}: getInvoiceParams): InvoiceWithoutId {
   const displayId = getDisplayId();
   const senderAddress = {
     street: fields.senderAddressStreet,
@@ -162,3 +170,107 @@ export const getFormattedDraftInvoice = (fields: InvoiceFormFields) =>
 
 export const getFormattedPendingInvoice = (fields: InvoiceFormFields) =>
   getFormattedInvoice({ status: InvoiceStatus.PENDING, ...fields });
+
+export const validateSenderAddressStreet = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateSenderAddressCity = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateSenderAddressPostCode = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateSenderAddressCountry = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateClientName = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateClientEmail = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateClientAddressStreet = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateClientAddressCity = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateClientAddressPostCode = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateClientAddressCountry = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateCreatedAt = (val: Date | null) => {
+  return "can't be empty";
+};
+
+export const validatePaymentTerms = (val: number) => {
+  return "can't be empty";
+};
+
+export const validateDescription = (val: string) => {
+  return "can't be empty";
+};
+
+export const validateItemNames = (vals: string[]) => {
+  return "can't be empty";
+};
+
+export const validateItemQuantities = (vals: number[]) => {
+  return "can't be empty";
+};
+
+export const validateItemPrices = (vals: number[]) => {
+  return "can't be empty";
+};
+
+export const validateItemTotals = (vals: number[]) => {
+  return "can't be empty";
+};
+
+export const getFieldErrors = (
+  invoice: InvoiceWithoutId
+): InvoiceFormFieldErrors => ({
+  senderAddressStreet: validateSenderAddressStreet(
+    invoice.senderAddress.street
+  ),
+  senderAddressCity: validateSenderAddressCity(invoice.senderAddress.city),
+  senderAddressPostCode: validateSenderAddressPostCode(
+    invoice.senderAddress.postCode
+  ),
+  senderAddressCountry: validateSenderAddressCountry(
+    invoice.senderAddress.country
+  ),
+  clientName: validateClientName(invoice.clientName),
+  clientEmail: validateClientEmail(invoice.clientEmail),
+  clientAddressStreet: validateClientAddressStreet(
+    invoice.clientAddress.street
+  ),
+  clientAddressCity: validateClientAddressCity(invoice.clientAddress.city),
+  clientAddressPostCode: validateClientAddressPostCode(
+    invoice.clientAddress.postCode
+  ),
+  clientAddressCountry: validateClientAddressCountry(
+    invoice.clientAddress.country
+  ),
+  createdAt: validateCreatedAt(invoice.createdAt),
+  paymentTerms: validatePaymentTerms(invoice.paymentTerms),
+  description: validateDescription(invoice.description),
+  itemNames: validateItemNames(invoice.items.map((item) => item.name)),
+  itemQuantities: validateItemQuantities(
+    invoice.items.map((item) => item.quantity)
+  ),
+  itemPrices: validateItemPrices(invoice.items.map((item) => item.price)),
+  itemTotals: validateItemTotals(invoice.items.map((item) => item.total)),
+});

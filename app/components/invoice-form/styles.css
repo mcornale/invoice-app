@@ -47,10 +47,6 @@
   display: contents;
 }
 
-.invoice-form-button-left {
-  margin-right: auto;
-}
-
 @media (max-width: 64em) {
   .invoice-form {
     overflow: auto;

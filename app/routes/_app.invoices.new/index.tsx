@@ -13,28 +13,10 @@ import type { ActionArgs, LinksFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
-import {
-  validateClientAddressCity,
-  validateClientAddressCountry,
-  validateClientAddressPostCode,
-  validateClientAddressStreet,
-  validateClientEmail,
-  validateClientName,
-  validateCreatedAt,
-  validateDescription,
-  validateItemNames,
-  validateItemPrices,
-  validateItemQuantities,
-  validateItemTotals,
-  validatePaymentTerms,
-  validateSenderAddressCity,
-  validateSenderAddressCountry,
-  validateSenderAddressPostCode,
-  validateSenderAddressStreet,
-} from '~/utils/validators';
 import { Button } from '~/components/ui/button';
 import { useActionData, useNavigate } from '@remix-run/react';
 import {
+  getFieldErrors,
   getFormattedDraftInvoice,
   getFormattedPendingInvoice,
   getTypedFormData,
@@ -84,50 +66,7 @@ export const action = async ({ request }: ActionArgs) => {
     case 'save-and-send':
       const newPendingInvoice = getFormattedPendingInvoice(typedFormData);
 
-      const fieldErrors: ActionData['fieldErrors'] = {
-        senderAddressStreet: validateSenderAddressStreet(
-          newPendingInvoice.senderAddress.street
-        ),
-        senderAddressCity: validateSenderAddressCity(
-          newPendingInvoice.senderAddress.city
-        ),
-        senderAddressPostCode: validateSenderAddressPostCode(
-          newPendingInvoice.senderAddress.postCode
-        ),
-        senderAddressCountry: validateSenderAddressCountry(
-          newPendingInvoice.senderAddress.country
-        ),
-        clientName: validateClientName(newPendingInvoice.clientName),
-        clientEmail: validateClientEmail(newPendingInvoice.clientEmail),
-        clientAddressStreet: validateClientAddressStreet(
-          newPendingInvoice.clientAddress.street
-        ),
-        clientAddressCity: validateClientAddressCity(
-          newPendingInvoice.clientAddress.city
-        ),
-        clientAddressPostCode: validateClientAddressPostCode(
-          newPendingInvoice.clientAddress.postCode
-        ),
-        clientAddressCountry: validateClientAddressCountry(
-          newPendingInvoice.clientAddress.country
-        ),
-        createdAt: validateCreatedAt(newPendingInvoice.createdAt),
-        paymentTerms: validatePaymentTerms(newPendingInvoice.paymentTerms),
-        description: validateDescription(newPendingInvoice.description),
-        itemNames: validateItemNames(
-          newPendingInvoice.items.map((item) => item.name)
-        ),
-        itemQuantities: validateItemQuantities(
-          newPendingInvoice.items.map((item) => item.quantity)
-        ),
-        itemPrices: validateItemPrices(
-          newPendingInvoice.items.map((item) => item.price)
-        ),
-        itemTotals: validateItemTotals(
-          newPendingInvoice.items.map((item) => item.total)
-        ),
-      };
-
+      const fieldErrors = getFieldErrors(newPendingInvoice);
       if (Object.values(fieldErrors).some(Boolean)) {
         return json<ActionData>(
           {
@@ -137,6 +76,11 @@ export const action = async ({ request }: ActionArgs) => {
           { status: 400 }
         );
       }
+
+      await db.invoice.create({
+        data: newPendingInvoice,
+      });
+
       return;
     default:
       return new Response(`Unsupported intent: ${intent}`, { status: 400 });
