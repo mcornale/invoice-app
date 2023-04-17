@@ -22,6 +22,7 @@ import {
   getTypedFormData,
 } from '~/helpers/invoice';
 import { db } from '~/utils/db.server';
+import { useEffect, useState } from 'react';
 
 interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -90,13 +91,18 @@ export const action = async ({ request }: ActionArgs) => {
 export default function NewInvoiceRoute() {
   const actionData = useActionData<ActionData>();
   const navigate = useNavigate();
+  const [navOpen, setNavOpen] = useState(false);
+
+  useEffect(() => {
+    setNavOpen(true);
+  }, []);
 
   function handleOpenChange(open: boolean) {
     if (!open) navigate(-1);
   }
 
   return (
-    <SlideOver open onOpenChange={handleOpenChange}>
+    <SlideOver open={navOpen} onOpenChange={handleOpenChange}>
       <SlideOverContent title='New Invoice'>
         <InvoiceForm
           id='new-invoice-form'
