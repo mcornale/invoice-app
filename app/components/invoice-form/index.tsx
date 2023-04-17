@@ -114,18 +114,30 @@ export function InvoiceForm({
             name='sender-address-street'
             type='text'
           />
+          {fieldErrors?.senderAddressStreet && (
+            <p>{fieldErrors.senderAddressStreet}</p>
+          )}
           <div className='fieldset-row'>
             <InputField label='City' name='sender-address-city' type='text' />
+            {fieldErrors?.senderAddressCity && (
+              <p>{fieldErrors.senderAddressCity}</p>
+            )}
             <InputField
               label='Post Code'
               name='sender-address-post-code'
               type='text'
             />
+            {fieldErrors?.senderAddressPostCode && (
+              <p>{fieldErrors.senderAddressPostCode}</p>
+            )}
             <InputField
               label='Country'
               name='sender-address-country'
               type='text'
             />
+            {fieldErrors?.senderAddressCountry && (
+              <p>{fieldErrors.senderAddressCountry}</p>
+            )}
           </div>
         </Fieldset>
         <Fieldset>
@@ -137,33 +149,48 @@ export function InvoiceForm({
             name='client-address-street'
             type='text'
           />
+          {fieldErrors?.clientAddressStreet && (
+            <p>{fieldErrors.clientAddressStreet}</p>
+          )}
           <div className='fieldset-row'>
             <InputField label='City' name='client-address-city' type='text' />
+            {fieldErrors?.clientAddressCity && (
+              <p>{fieldErrors.clientAddressCity}</p>
+            )}
             <InputField
               label='Post Code'
               name='client-address-post-code'
               type='text'
             />
+            {fieldErrors?.clientAddressPostCode && (
+              <p>{fieldErrors.clientAddressPostCode}</p>
+            )}
             <InputField
               label='Country'
               name='client-address-country'
               type='text'
             />
+            {fieldErrors?.clientAddressCountry && (
+              <p>{fieldErrors.clientAddressCountry}</p>
+            )}
           </div>
           <div className='fieldset-row'>
             <InputField label='Invoice Date' name='created-at' type='date' />
+            {fieldErrors?.createdAt && <p>{fieldErrors.createdAt}</p>}
             <SelectField
               label='Payment Terms'
               name='payment-terms'
               placeholder='Select Payment Terms'
               options={PAYMENT_TERMS_OPTIONS}
             />
+            {fieldErrors?.paymentTerms && <p>{fieldErrors.paymentTerms}</p>}
           </div>
           <InputField
             label='Project Description'
             name='description'
             type='text'
           />
+          {fieldErrors?.description && <p>{fieldErrors.description}</p>}
         </Fieldset>
       </section>
       <section className='item-list-section'>
@@ -191,6 +218,10 @@ export function InvoiceForm({
             />
           ))}
         </ul>
+        {fieldErrors?.itemNames && <p>{fieldErrors.itemNames}</p>}
+        {fieldErrors?.itemQuantities && <p>{fieldErrors.itemQuantities}</p>}
+        {fieldErrors?.itemPrices && <p>{fieldErrors.itemPrices}</p>}
+        {fieldErrors?.itemTotals && <p>{fieldErrors.itemTotals}</p>}
         <Button
           onClick={handleAddNewItemClick}
           type='button'
@@ -200,6 +231,9 @@ export function InvoiceForm({
           Add New Item
         </Button>
       </section>
+      {formErrors &&
+        formErrors.length > 0 &&
+        formErrors?.map((formError) => <p>{formError}</p>)}
     </Form>
   );
 }

@@ -16,7 +16,9 @@ import styles from './styles.css';
 import { Button } from '~/components/ui/button';
 import { useActionData, useNavigate } from '@remix-run/react';
 import {
+  areThereFieldErrors,
   getFieldErrors,
+  getFormErrors,
   getFormattedDraftInvoice,
   getFormattedPendingInvoice,
   getTypedFormData,
@@ -68,11 +70,12 @@ export const action = async ({ request }: ActionArgs) => {
       const newPendingInvoice = getFormattedPendingInvoice(typedFormData);
 
       const fieldErrors = getFieldErrors(newPendingInvoice);
-      if (Object.values(fieldErrors).some(Boolean)) {
+      const formErrors = getFormErrors(newPendingInvoice, fieldErrors);
+      if (areThereFieldErrors(fieldErrors) || formErrors) {
         return json<ActionData>(
           {
             fieldErrors,
-            formErrors: undefined,
+            formErrors,
           },
           { status: 400 }
         );

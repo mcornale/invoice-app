@@ -172,72 +172,78 @@ export const getFormattedPendingInvoice = (fields: InvoiceFormFields) =>
   getFormattedInvoice({ status: InvoiceStatus.PENDING, ...fields });
 
 export const validateSenderAddressStreet = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateSenderAddressCity = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateSenderAddressPostCode = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateSenderAddressCountry = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateClientName = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateClientEmail = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateClientAddressStreet = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateClientAddressCity = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateClientAddressPostCode = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateClientAddressCountry = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateCreatedAt = (val: Date | null) => {
-  return "can't be empty";
+  if (val === null) return 'choose a valid date';
 };
 
 export const validatePaymentTerms = (val: number) => {
-  return "can't be empty";
+  if (val === null) return 'choose a valid value';
 };
 
 export const validateDescription = (val: string) => {
-  return "can't be empty";
+  if (val === '') return "can't be empty";
 };
 
 export const validateItemNames = (vals: string[]) => {
-  return "can't be empty";
+  if (vals.some((val) => val === '')) return "item names can't be empty";
 };
 
 export const validateItemQuantities = (vals: number[]) => {
-  return "can't be empty";
+  if (vals.some((val) => val <= 0))
+    return 'item quantities must be a number greater than 0';
 };
 
 export const validateItemPrices = (vals: number[]) => {
-  return "can't be empty";
+  if (vals.some((val) => val <= 0))
+    return 'item prices must be a number greater than 0';
 };
 
 export const validateItemTotals = (vals: number[]) => {
-  return "can't be empty";
+  if (vals.some((val) => val <= 0))
+    return 'item totals must be a number greater than 0';
 };
+
+export const areThereFieldErrors = (fieldErrors: InvoiceFormFieldErrors) =>
+  Object.values(fieldErrors).some(Boolean);
 
 export const getFieldErrors = (
   invoice: InvoiceWithoutId
@@ -274,3 +280,15 @@ export const getFieldErrors = (
   itemPrices: validateItemPrices(invoice.items.map((item) => item.price)),
   itemTotals: validateItemTotals(invoice.items.map((item) => item.total)),
 });
+
+export const getFormErrors = (
+  invoice: InvoiceWithoutId,
+  fieldErrors: InvoiceFormFieldErrors
+) => {
+  const formErrors = [];
+  if (areThereFieldErrors(fieldErrors))
+    formErrors.push('All fields must be added');
+  if (invoice.items.length === 0) formErrors.push('An item must be added');
+
+  return formErrors.length > 0 ? formErrors : undefined;
+};
