@@ -4,7 +4,7 @@ import type { FormProps } from '../ui/form';
 import { Form, links as formLinks } from '../ui/form';
 import { Button, links as buttonLinks } from '../ui/button';
 import type { ChangeEvent } from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import { Fieldset, links as fieldsetLinks } from '../ui/fieldset';

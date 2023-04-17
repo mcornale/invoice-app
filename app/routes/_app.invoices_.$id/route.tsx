@@ -17,6 +17,7 @@ import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { db } from '~/utils/db.server';
 import { InvoiceStatus } from '@prisma/client';
+import { parseDate } from '~/utils/parsers';
 
 export const links: LinksFunction = () => {
   return [
@@ -50,8 +51,12 @@ export default function InvoiceRoute() {
 
   const invoice = {
     ...data.invoice,
-    createdAt: new Date(data.invoice.createdAt),
-    paymentDue: new Date(data.invoice.paymentDue),
+    createdAt: data.invoice.createdAt
+      ? parseDate(data.invoice.createdAt)
+      : null,
+    paymentDue: data.invoice.paymentDue
+      ? parseDate(data.invoice.paymentDue)
+      : null,
   };
 
   function handleBackClick() {
@@ -134,11 +139,13 @@ export default function InvoiceRoute() {
           <div>
             <div className='invoice-date'>
               <dt>Invoice Date</dt>
-              <dd>{formatDate(invoice.createdAt)}</dd>
+              <dd>{invoice.createdAt ? formatDate(invoice.createdAt) : ''}</dd>
             </div>
             <div className='invoice-payment-due'>
               <dt>Payment Due</dt>
-              <dd>{formatDate(invoice.paymentDue)}</dd>
+              <dd>
+                {invoice.paymentDue ? formatDate(invoice.paymentDue) : ''}
+              </dd>
             </div>
           </div>
           <div className='invoice-bill-to'>

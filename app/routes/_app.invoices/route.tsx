@@ -15,6 +15,7 @@ import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { ButtonLink } from '~/components/ui/button';
 import { PlusIcon } from '@radix-ui/react-icons';
+import { parseDate } from '~/utils/parsers';
 
 export const links: LinksFunction = () => {
   return [
@@ -50,7 +51,7 @@ export default function InvoicesRoute() {
 
   const invoices = data.invoices.map((invoice) => ({
     ...invoice,
-    paymentDue: invoice.paymentDue ? new Date(invoice.paymentDue) : null,
+    paymentDue: invoice.paymentDue ? parseDate(invoice.paymentDue) : null,
   }));
 
   return (

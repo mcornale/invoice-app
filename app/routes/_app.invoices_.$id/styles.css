@@ -52,6 +52,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: var(--spacing-6);
 }
 
 .invoice-details dl > *:nth-child(5) {
