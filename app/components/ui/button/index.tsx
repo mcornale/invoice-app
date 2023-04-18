@@ -13,11 +13,11 @@ type ButtonVariant =
   | 'tertiary-color'
   | 'tertiary-gray';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
 }
 
-interface ButtonLinkProps extends LinkProps {
+export interface ButtonLinkProps extends LinkProps {
   variant: ButtonVariant;
 }
 

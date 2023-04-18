@@ -5,7 +5,7 @@ import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import { forwardRef } from 'react';
 
-interface SelectOption {
+export interface SelectOption {
   text: string;
   value: string;
 }

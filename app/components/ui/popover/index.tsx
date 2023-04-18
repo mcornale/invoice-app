@@ -3,7 +3,8 @@ import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import { forwardRef } from 'react';
 
-interface PopoverContentProps extends PopoverPrimitive.PopoverContentProps {}
+export interface PopoverContentProps
+  extends PopoverPrimitive.PopoverContentProps {}
 
 export const links: LinksFunction = () => {
   return [

@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import styles from './styles.css';
 
-interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant: 'success' | 'warning' | 'gray';
 }
 

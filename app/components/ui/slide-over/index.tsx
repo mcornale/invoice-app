@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './styles.css';
 
-interface SlideOverContentProps extends Dialog.DialogContentProps {
+export interface SlideOverContentProps extends Dialog.DialogContentProps {
   title: string;
 }
 

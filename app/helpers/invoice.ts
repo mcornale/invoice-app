@@ -9,7 +9,7 @@ import { isArrOfString, isString, hasSomeTruthyValues } from '~/utils/checkers';
 import { isEmail, isEmpty, isNull, isPositive } from '~/utils/validators';
 
 type InvoiceWithoutId = Omit<Invoice, 'id'>;
-interface getInvoiceParams extends InvoiceFormFields {
+export interface getInvoiceParams extends InvoiceFormFields {
   status: InvoiceStatus;
 }
 

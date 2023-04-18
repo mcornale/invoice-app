@@ -25,7 +25,7 @@ import {
 import { db } from '~/utils/db.server';
 import { useEffect, useState } from 'react';
 
-interface ActionData {
+export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
   formErrors: InvoiceFormProps['formErrors'];
 }

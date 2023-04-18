@@ -8,7 +8,7 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import type { Invoice } from '@prisma/client';
 import { InvoiceStatus } from '@prisma/client';
 
-interface InvoiceListProps {
+export interface InvoiceListProps {
   invoices: Pick<
     Invoice,
     'id' | 'displayId' | 'clientName' | 'paymentDue' | 'status' | 'total'

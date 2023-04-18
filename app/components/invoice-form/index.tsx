@@ -12,7 +12,7 @@ import styles from './styles.css';
 import { Input, links as inputLinks } from '../ui/input';
 import { Select, links as selectLinks } from '../ui/select';
 
-const PAYMENT_TERMS_OPTIONS = [
+export const PAYMENT_TERMS_OPTIONS = [
   { text: 'net 1 day', value: '1' },
   { text: 'net 7 days', value: '7' },
   { text: 'net 14 days', value: '14' },
@@ -64,7 +64,7 @@ export interface InvoiceFormProps extends FormProps {
   formErrors?: string[];
 }
 
-interface InvoiceFormItemProps {
+export interface InvoiceFormItemProps {
   onDelete: () => void;
 }
 

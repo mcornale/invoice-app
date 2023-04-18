@@ -3,7 +3,7 @@ import type { LinksFunction } from '@remix-run/node';
 import { forwardRef } from 'react';
 import styles from './styles.css';
 
-interface AlertDialogContentProps
+export interface AlertDialogContentProps
   extends AlertDialogPrimitive.AlertDialogContentProps {
   title: string;
   description: string;
