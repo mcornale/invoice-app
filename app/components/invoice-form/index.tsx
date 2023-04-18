@@ -19,7 +19,7 @@ const PAYMENT_TERMS_OPTIONS = [
   { text: 'net 30 days', value: '30' },
 ];
 
-export interface Fields {
+export interface InvoiceFormFields {
   senderAddressStreet: string;
   senderAddressCity: string;
   senderAddressPostCode: string;
@@ -38,7 +38,7 @@ export interface Fields {
   itemPrices: string[];
   itemTotals: string[];
 }
-export interface FieldErrors {
+export interface InvoiceFormFieldErrors {
   senderAddressStreet?: string;
   senderAddressCity?: string;
   senderAddressPostCode?: string;
@@ -59,8 +59,8 @@ export interface FieldErrors {
 }
 
 export interface InvoiceFormProps extends FormProps {
-  fields?: Fields;
-  fieldErrors?: FieldErrors;
+  fields?: InvoiceFormFields;
+  fieldErrors?: InvoiceFormFieldErrors;
   formErrors?: string[];
 }
 

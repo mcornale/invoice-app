@@ -16,15 +16,15 @@ import styles from './styles.css';
 import { Button } from '~/components/ui/button';
 import { useActionData, useNavigate } from '@remix-run/react';
 import {
-  areThereFieldErrors,
   getFieldErrors,
   getFormErrors,
-  getFormattedDraftInvoice,
-  getFormattedPendingInvoice,
-  getTypedFormData,
+  getDraftInvoice,
+  getPendingInvoice,
+  getInvoiceFormData,
 } from '~/helpers/invoice';
 import { db } from '~/utils/db.server';
 import { useEffect, useState } from 'react';
+import { hasSomeTruthyValues } from '~/utils/validators';
 
 interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -46,7 +46,7 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const intent = formData.get('intent');
 
-  const typedFormData = getTypedFormData(formData);
+  const typedFormData = getInvoiceFormData(formData);
   if (!typedFormData) {
     return json<ActionData>(
       {
@@ -59,7 +59,7 @@ export const action = async ({ request }: ActionArgs) => {
 
   switch (intent) {
     case 'save-as-draft':
-      const newDraftInvoice = getFormattedDraftInvoice(typedFormData);
+      const newDraftInvoice = getDraftInvoice(typedFormData);
 
       await db.invoice.create({
         data: newDraftInvoice,
@@ -67,11 +67,11 @@ export const action = async ({ request }: ActionArgs) => {
 
       return redirect(`/invoices`);
     case 'save-and-send':
-      const newPendingInvoice = getFormattedPendingInvoice(typedFormData);
+      const newPendingInvoice = getPendingInvoice(typedFormData);
 
       const fieldErrors = getFieldErrors(newPendingInvoice);
       const formErrors = getFormErrors(newPendingInvoice, fieldErrors);
-      if (areThereFieldErrors(fieldErrors) || formErrors) {
+      if (fieldErrors || formErrors) {
         return json<ActionData>(
           {
             fieldErrors,

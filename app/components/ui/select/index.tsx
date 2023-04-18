@@ -5,7 +5,7 @@ import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import { forwardRef } from 'react';
 
-interface Option {
+interface SelectOption {
   text: string;
   value: string;
 }
@@ -13,7 +13,7 @@ interface Option {
 export interface SelectProps extends SelectPrimitive.SelectProps {
   id: string;
   placeholder: string;
-  options: Option[];
+  options: SelectOption[];
 }
 
 export const links: LinksFunction = () => {
