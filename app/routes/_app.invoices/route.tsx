@@ -132,7 +132,7 @@ export default function InvoicesRoute() {
               invoices by clicking the button below to get started.
             </p>
           </div>
-          <Form method='get' action='generate'>
+          <Form method='get' action='/generate-demo-invoices'>
             <Button variant='primary' showSpinner={isSubmitting}>
               Get Demo Invoices
             </Button>

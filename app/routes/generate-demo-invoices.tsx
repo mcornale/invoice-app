@@ -1,6 +1,6 @@
 import type { LoaderArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { DEMO_INVOICES } from '~/assets/data';
+import { DEMO_INVOICES } from '~/data/demo-invoices';
 import { db } from '~/utils/db.server';
 
 export const loader = async (args: LoaderArgs) => {
