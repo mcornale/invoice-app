@@ -40,7 +40,7 @@
   background-color: var(--color-violet-4);
 }
 
-.select-item:hover:not(:focus-visible) {
+.select-item:hover:not(:focus) {
   box-shadow: none;
 }
 

@@ -65,7 +65,7 @@ strong {
 }
 
 /* interactive elements generic styles */
-:focus-visible {
+:focus {
   box-shadow: var(--shadow-outline-violet);
   outline: none;
 }

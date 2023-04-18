@@ -8,12 +8,12 @@
   width: 100%;
 }
 
-.input:focus-visible:not([readonly]) {
+.input:focus:not([readonly]) {
   border-color: var(--color-violet-8);
 }
 
 @media (hover: hover) {
-  .input:hover:not(:focus-visible):not([readonly]) {
+  .input:hover:not(:focus):not([readonly]) {
     border-color: var(--color-mauve-8);
   }
 }
@@ -59,12 +59,12 @@
   place-items: center;
 }
 
-.checkbox:focus-visible {
+.checkbox:focus {
   border-color: var(--color-violet-8);
 }
 
 @media (hover: hover) {
-  .checkbox:hover:not(:focus-visible):not([data-state='checked']) {
+  .checkbox:hover:not(:focus):not([data-state='checked']) {
     border-color: var(--color-mauve-8);
   }
 }

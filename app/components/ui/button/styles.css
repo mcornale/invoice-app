@@ -35,7 +35,7 @@ body.dark-mode .button-primary {
   border: 0.1rem solid var(--color-red-9);
 }
 
-.button-primary-destructive:focus-visible {
+.button-primary-destructive:focus {
   box-shadow: var(--shadow-outline-red);
 }
 
@@ -55,7 +55,7 @@ body.dark-mode .button-primary-destructive {
   border: 0.1rem solid var(--color-mauve-7);
 }
 
-.button-secondary-gray:focus-visible {
+.button-secondary-gray:focus {
   box-shadow: var(--shadow-outline-mauve);
 }
 
@@ -71,7 +71,7 @@ body.dark-mode .button-primary-destructive {
   border: 0.1rem solid transparent;
 }
 
-.button-tertiary-gray:focus-visible {
+.button-tertiary-gray:focus {
   box-shadow: var(--shadow-outline-mauve);
 }
 
