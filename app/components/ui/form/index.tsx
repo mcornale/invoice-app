@@ -27,9 +27,14 @@ export const links: LinksFunction = () => {
 };
 
 export const Form = forwardRef<HTMLFormElement, FormProps>(
-  ({ children, className, ...props }, ref) => {
+  ({ children, className, noValidate = true, ...props }, ref) => {
     return (
-      <RemixForm className={`form ${className ?? ''}`} {...props} ref={ref}>
+      <RemixForm
+        className={`form ${className ?? ''}`}
+        {...props}
+        ref={ref}
+        noValidate={noValidate}
+      >
         {children}
       </RemixForm>
     );
