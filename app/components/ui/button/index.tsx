@@ -5,7 +5,7 @@ import styles from './styles.css';
 import type { LinkProps } from '@remix-run/react';
 import { Link } from '@remix-run/react';
 
-type ButtonVariant =
+export type ButtonVariant =
   | 'primary'
   | 'primary-destructive'
   | 'secondary-color'

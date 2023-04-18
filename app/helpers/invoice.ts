@@ -8,12 +8,12 @@ import { parseDate } from '~/utils/parsers';
 import { isArrOfString, isString, hasSomeTruthyValues } from '~/utils/checkers';
 import { isEmail, isEmpty, isNull, isPositive } from '~/utils/validators';
 
-type InvoiceWithoutId = Omit<Invoice, 'id'>;
+export type InvoiceWithoutId = Omit<Invoice, 'id'>;
 export interface getInvoiceParams extends InvoiceFormFields {
   status: InvoiceStatus;
 }
 
-type getItemsParams = Pick<
+export type getItemsParams = Pick<
   InvoiceFormFields,
   'itemNames' | 'itemQuantities' | 'itemPrices' | 'itemTotals'
 >;
