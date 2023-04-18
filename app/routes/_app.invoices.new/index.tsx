@@ -24,7 +24,6 @@ import {
 } from '~/helpers/invoice';
 import { db } from '~/utils/db.server';
 import { useEffect, useState } from 'react';
-import { hasSomeTruthyValues } from '~/utils/validators';
 
 interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
