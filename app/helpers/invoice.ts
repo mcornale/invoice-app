@@ -197,7 +197,7 @@ export const validateClientName = (val: string) => {
 
 export const validateClientEmail = (val: string) => {
   if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
-  if (!isEmail(val)) return 'must include @ sign';
+  if (!isEmail(val)) return ERROR_MESSAGES.EMAIL;
 };
 
 export const validateClientAddressStreet = (val: string) => {
