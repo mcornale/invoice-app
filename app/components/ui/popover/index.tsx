@@ -1,12 +1,9 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
-import type { ReactNode } from 'react';
 import { forwardRef } from 'react';
 
-interface PopoverContentProps extends PopoverPrimitive.PopoverContentProps {
-  children: ReactNode;
-}
+interface PopoverContentProps extends PopoverPrimitive.PopoverContentProps {}
 
 export const links: LinksFunction = () => {
   return [

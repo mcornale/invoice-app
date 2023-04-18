@@ -1,11 +1,9 @@
-import type { FieldsetHTMLAttributes, ReactNode } from 'react';
+import type { FieldsetHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 
-interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  children: ReactNode;
-}
+interface FieldsetProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {}
 
 export const links: LinksFunction = () => {
   return [
