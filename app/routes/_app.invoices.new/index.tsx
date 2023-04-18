@@ -11,7 +11,6 @@ import {
 } from '~/components/invoice-form';
 import type { ActionArgs, LinksFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { Button } from '~/components/ui/button';
 import { useActionData, useNavigate, useNavigation } from '@remix-run/react';
@@ -46,15 +45,7 @@ export const action = async ({ request }: ActionArgs) => {
   const intent = formData.get('intent');
 
   const typedFormData = getInvoiceFormData(formData);
-  if (!typedFormData) {
-    return json<ActionData>(
-      {
-        fieldErrors: undefined,
-        formErrors: ['Form not submitted correctly.'],
-      },
-      400
-    );
-  }
+  if (!typedFormData) throw new Error('Form not submitted correctly');
 
   switch (intent) {
     case 'save-as-draft':
@@ -73,7 +64,7 @@ export const action = async ({ request }: ActionArgs) => {
       await createInvoice({ status: InvoiceStatus.PENDING, ...typedFormData });
       return redirect(`/invoices`);
     default:
-      return badRequest(`Unsupported intent: ${intent}`);
+      throw new Error(`Unsupported intent: ${intent}`);
   }
 };
 

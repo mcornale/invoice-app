@@ -34,6 +34,10 @@
   align-items: center;
 }
 
+.form-field:has(input[type='checkbox']) .form-label {
+  flex: 1;
+}
+
 .form-label {
   font: var(--font-text-sm);
   font-weight: 500;
