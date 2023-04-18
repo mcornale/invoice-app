@@ -74,12 +74,12 @@ export default function NewInvoiceRoute() {
   const navigate = useNavigate();
   const [navOpen, setNavOpen] = useState(false);
 
-  const isSubmitting = navigation.state === 'submitting';
+  const isSubmitting =
+    navigation.state === 'submitting' || navigation.state === 'loading';
   const isSubmittingSaveAsDraft =
-    navigation.state === 'submitting' &&
-    navigation.formData.get('intent') === 'save-as-draft';
+    isSubmitting && navigation.formData?.get('intent') === 'save-as-draft';
   const isSubmittingSaveAndSend =
-    isSubmitting && navigation.formData.get('intent') === 'save-and-send';
+    isSubmitting && navigation.formData?.get('intent') === 'save-and-send';
 
   useEffect(() => {
     setNavOpen(true);
