@@ -162,10 +162,12 @@ export function InvoiceForm({
           <FormField>
             <FormLabel htmlFor='client-name'>Client Name</FormLabel>
             <Input id='client-name' name='client-name' type='text' />
+            {fieldErrors?.clientName && <p>{fieldErrors.clientName}</p>}
           </FormField>
           <FormField>
             <FormLabel htmlFor='client-email'>Client Email</FormLabel>
             <Input id='client-email' name='client-email' type='email' />
+            {fieldErrors?.clientEmail && <p>{fieldErrors.clientEmail}</p>}
           </FormField>
 
           <FormField>
