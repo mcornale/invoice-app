@@ -311,12 +311,21 @@ export const parseInvoiceStatusParams = (statusParams: string[]) =>
   statusParams.map((status) => {
     switch (status) {
       case 'draft':
-        return { status: InvoiceStatus.DRAFT };
+        return InvoiceStatus.DRAFT;
       case 'pending':
-        return { status: InvoiceStatus.PENDING };
+        return InvoiceStatus.PENDING;
       case 'paid':
-        return { status: InvoiceStatus.PAID };
+        return InvoiceStatus.PAID;
       default:
         throw new Error(`Not supported status found: ${status}`);
     }
   });
+
+export const getInvoiceSummaryStatus = (status: InvoiceStatus[]) => {
+  if (
+    status.length === 0 ||
+    status.length === Object.values(InvoiceStatus).length
+  )
+    return 'total';
+  else return status.join(' and ').toLowerCase();
+};

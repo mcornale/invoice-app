@@ -1,4 +1,4 @@
-import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
+import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
@@ -10,13 +10,16 @@ import {
   links as invoiceListLinks,
 } from '~/components/invoice-list';
 import { db } from '~/utils/db.server';
-import { Outlet, useLoaderData } from '@remix-run/react';
+import { Outlet, useLoaderData, useSearchParams } from '@remix-run/react';
 import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { ButtonLink } from '~/components/ui/button';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { parseDate } from '~/utils/parsers';
-import { parseInvoiceStatusParams } from '~/helpers/invoice';
+import {
+  getInvoiceSummaryStatus,
+  parseInvoiceStatusParams,
+} from '~/helpers/invoice';
 
 export const links: LinksFunction = () => {
   return [
@@ -29,15 +32,10 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const action = async ({ params }: ActionArgs) => {
-  console.log(params);
-};
-
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
-  const statusParams = url.searchParams
-    .getAll('status')
-    .map((s) => s.toLowerCase());
+  const statusParams = url.searchParams.getAll('status');
+  const status = parseInvoiceStatusParams(statusParams);
   const invoices = await db.invoice.findMany({
     select: {
       id: true,
@@ -49,7 +47,7 @@ export const loader = async ({ request }: LoaderArgs) => {
     },
     ...(statusParams.length > 0 && {
       where: {
-        OR: parseInvoiceStatusParams(statusParams),
+        OR: status.map((s) => ({ status: s })),
       },
     }),
   });
@@ -61,12 +59,19 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function InvoicesRoute() {
   const data = useLoaderData<typeof loader>();
+  const [params] = useSearchParams();
   const matches = useMediaQuery('(max-width: 40em)');
+
+  const statusParams = params.getAll('status');
+  const status = parseInvoiceStatusParams(statusParams);
 
   const invoices = data.invoices.map((invoice) => ({
     ...invoice,
     paymentDue: invoice.paymentDue ? parseDate(invoice.paymentDue) : null,
   }));
+
+  const invoiceSummaryVerb = invoices.length === 1 ? 'is' : 'are';
+  const invoiceSummaryStatus = getInvoiceSummaryStatus(status);
 
   return (
     <>
@@ -76,17 +81,24 @@ export default function InvoicesRoute() {
           <span className='invoice-list-summary'>
             {matches ? (
               <>
-                <VisuallyHidden.Root>There are</VisuallyHidden.Root>
+                <VisuallyHidden.Root>
+                  There {invoiceSummaryVerb}
+                </VisuallyHidden.Root>
                 {invoices.length}
-                <VisuallyHidden.Root>total</VisuallyHidden.Root> invoices
+                <VisuallyHidden.Root>
+                  {invoiceSummaryStatus}
+                </VisuallyHidden.Root>{' '}
+                invoices
               </>
             ) : (
-              `There are ${invoices.length} total invoices`
+              `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} invoices`
             )}
           </span>
         </div>
         <div className='invoice-list-actions'>
-          <InvoicesFilter />
+          <InvoicesFilter
+            activeStatus={parseInvoiceStatusParams(statusParams)}
+          />
           <ButtonLink variant='primary' to='new'>
             <PlusIcon />
             {matches ? (

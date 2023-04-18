@@ -21,6 +21,10 @@ import { useSubmit } from '@remix-run/react';
 import type { FormEvent } from 'react';
 import { InvoiceStatus } from '@prisma/client';
 
+export interface InvoicesFilterProps {
+  activeStatus: InvoiceStatus[];
+}
+
 export const links: LinksFunction = () => {
   return [
     ...buttonLinks(),
@@ -34,8 +38,9 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function InvoicesFilter() {
+export function InvoicesFilter({ activeStatus }: InvoicesFilterProps) {
   const submit = useSubmit();
+
   const matches = useMediaQuery('(max-width: 40em)');
 
   function handleChange(event: FormEvent<HTMLFormElement>) {
@@ -63,6 +68,7 @@ export function InvoicesFilter() {
             <InputCheckbox
               id='draft'
               name='status'
+              defaultChecked={activeStatus.includes(InvoiceStatus.DRAFT)}
               value={InvoiceStatus.DRAFT.toLowerCase()}
             />
           </FormField>
@@ -71,6 +77,7 @@ export function InvoicesFilter() {
             <InputCheckbox
               id='pending'
               name='status'
+              defaultChecked={activeStatus.includes(InvoiceStatus.PENDING)}
               value={InvoiceStatus.PENDING.toLowerCase()}
             />
           </FormField>
@@ -79,6 +86,7 @@ export function InvoicesFilter() {
             <InputCheckbox
               id='paid'
               name='status'
+              defaultChecked={activeStatus.includes(InvoiceStatus.PAID)}
               value={InvoiceStatus.PAID.toLowerCase()}
             />
           </FormField>

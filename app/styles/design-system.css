@@ -206,6 +206,6 @@ body.dark-mode {
     --font-text-lg: 1.6rem/2.4rem var(--font-family);
     --font-text-md: 1.4rem/2rem var(--font-family);
     --font-text-sm: 1.2rem/1.8rem var(--font-family);
-    --font-text-xs: --font-text-2xs;
+    --font-text-xs: var(--font-text-2xs);
   }
 }
