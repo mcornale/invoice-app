@@ -1,12 +1,14 @@
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import type { LinksFunction } from '@remix-run/node';
 import { Button, links as buttonLinks } from '~/components/ui/button';
-import { Form, links as formLinks } from '~/components/ui/form';
-import styles from './styles.css';
 import {
-  CheckboxField,
-  links as checkboxFieldLinks,
-} from '../ui/checkbox-field';
+  Form,
+  FormField,
+  FormLabel,
+  links as formLinks,
+} from '~/components/ui/form';
+import styles from './styles.css';
+import { InputCheckbox, links as inputLinks } from '../ui/input';
 import {
   Popover,
   PopoverContent,
@@ -20,7 +22,7 @@ export const links: LinksFunction = () => {
   return [
     ...buttonLinks(),
     ...popoverLinks(),
-    ...checkboxFieldLinks(),
+    ...inputLinks(),
     ...formLinks(),
     {
       rel: 'stylesheet',
@@ -47,9 +49,18 @@ export function InvoicesFilter() {
       </PopoverTrigger>
       <PopoverContent className='invoices-filter-content'>
         <Form className='invoices-filter-form'>
-          <CheckboxField label='Draft' name='status' value='draft' />
-          <CheckboxField label='Pending' name='status' value='pending' />
-          <CheckboxField label='Paid' name='status' value='paid' />
+          <FormField>
+            <FormLabel htmlFor='draft'>Draft</FormLabel>
+            <InputCheckbox id='draft' name='status' value='draft' />
+          </FormField>
+          <FormField>
+            <FormLabel htmlFor='pending'>Pending</FormLabel>
+            <InputCheckbox id='pending' name='status' value='pending' />
+          </FormField>
+          <FormField>
+            <FormLabel htmlFor='paid'>Paid</FormLabel>
+            <InputCheckbox id='paid' name='status' value='paid' />
+          </FormField>
         </Form>
       </PopoverContent>
     </Popover>

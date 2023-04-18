@@ -84,6 +84,10 @@ address {
   box-shadow: none;
 }
 
+::placeholder {
+  color: var(--color-mauve-10);
+}
+
 [disabled],
 [aria-disabled='true'] {
   cursor: not-allowed;

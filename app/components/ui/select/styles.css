@@ -1,0 +1,53 @@
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  color: var(--color-mauve-12);
+}
+
+.select-trigger svg {
+  width: 2rem;
+  height: auto;
+}
+
+.select-trigger[data-state='open'] svg {
+  transform: rotate(180deg);
+}
+
+.select-content {
+  overflow: hidden;
+  background-color: var(--color-mauve-1);
+  border-radius: var(--border-radius-2);
+  box-shadow: var(--shadow-lg);
+  width: var(--radix-select-trigger-width);
+}
+
+.select-viewport {
+  padding: 0.7rem;
+}
+
+.select-item {
+  font: var(--font-text-sm);
+  padding: 1rem 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+  border-radius: var(--border-radius-1);
+}
+
+.select-item:focus-visible {
+  background-color: var(--color-violet-4);
+}
+
+.select-item-indicator {
+  display: flex;
+  align-items: center;
+  color: var(--color-violet-9);
+  border: none;
+}
+
+.select-item svg {
+  width: 2rem;
+  height: auto;
+}

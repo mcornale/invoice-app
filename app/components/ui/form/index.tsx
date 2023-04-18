@@ -2,11 +2,26 @@ import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import type { FormProps as RemixFormProps } from '@remix-run/react';
 import { Form as RemixForm } from '@remix-run/react';
-import type { HTMLAttributes } from 'react';
+import type {
+  FieldsetHTMLAttributes,
+  HTMLAttributes,
+  LabelHTMLAttributes,
+} from 'react';
 import { forwardRef } from 'react';
+import type { SelectProps } from '../select';
+import type { InputCheckboxProps, InputProps } from '../input';
 
 export interface FormProps extends RemixFormProps {}
-export interface FormGroupProps extends HTMLAttributes<HTMLDivElement> {}
+export interface FormFieldsetProps
+  extends FieldsetHTMLAttributes<HTMLFieldSetElement> {}
+export interface FormLegendProps extends HTMLAttributes<HTMLLegendElement> {}
+export interface FormFieldProps extends HTMLAttributes<HTMLDivElement> {}
+export interface FormLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
+export interface SelectFormControlProps extends SelectProps {
+  type: 'select';
+}
+export interface InputFormControlProps extends InputProps {}
+export interface InputCheckboxFormControlProps extends InputCheckboxProps {}
 
 export const links: LinksFunction = () => {
   return [
@@ -28,13 +43,50 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
 );
 Form.displayName = 'Form';
 
-export const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
+export const FormFieldset = forwardRef<HTMLFieldSetElement, FormFieldsetProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <fieldset
+        className={`form-fieldset ${className ?? ''}`}
+        {...props}
+        ref={ref}
+      >
+        {children}
+      </fieldset>
+    );
+  }
+);
+FormFieldset.displayName = 'FormFieldset';
+
+export const FormLegend = forwardRef<HTMLLegendElement, FormLegendProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <legend className={`form-legend ${className ?? ''}`} {...props} ref={ref}>
+        {children}
+      </legend>
+    );
+  }
+);
+FormLegend.displayName = 'FormLegend';
+
+export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
   ({ children, ...props }, ref) => {
     return (
-      <div className='form-group' {...props} ref={ref}>
+      <div className='form-field' {...props} ref={ref}>
         {children}
       </div>
     );
   }
 );
-FormGroup.displayName = 'FormGroup';
+FormField.displayName = 'FormField';
+
+export const FormLabel = forwardRef<HTMLLabelElement, FormLabelProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <label className='form-label' {...props} ref={ref}>
+        {children}
+      </label>
+    );
+  }
+);
+FormLabel.displayName = 'FormLabel';
