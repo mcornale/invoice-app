@@ -24,6 +24,7 @@ import {
 } from '~/helpers/invoice';
 import { db } from '~/utils/db.server';
 import { useEffect, useState } from 'react';
+import { badRequest } from '~/utils/request.server';
 
 export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -71,13 +72,10 @@ export const action = async ({ request }: ActionArgs) => {
       const fieldErrors = getFieldErrors(newPendingInvoice);
       const formErrors = getFormErrors(newPendingInvoice, fieldErrors);
       if (fieldErrors || formErrors) {
-        return json<ActionData>(
-          {
-            fieldErrors,
-            formErrors,
-          },
-          { status: 400 }
-        );
+        return badRequest<ActionData>({
+          fieldErrors,
+          formErrors,
+        });
       }
 
       await db.invoice.create({
@@ -86,7 +84,7 @@ export const action = async ({ request }: ActionArgs) => {
 
       return;
     default:
-      return new Response(`Unsupported intent: ${intent}`, { status: 400 });
+      return badRequest(`Unsupported intent: ${intent}`);
   }
 };
 
