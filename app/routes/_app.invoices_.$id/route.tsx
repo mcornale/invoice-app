@@ -1,16 +1,16 @@
 import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { useLoaderData, useNavigate } from '@remix-run/react';
-import {
-  DeleteInvoice,
-  links as deleteInvoiceLinks,
-} from '~/components/delete-invoice';
+import { Outlet, useLoaderData, useNavigate } from '@remix-run/react';
 import {
   EditInvoice,
   links as editInvoiceLinks,
 } from '~/components/edit-invoice';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
-import { Button, links as buttonLinks } from '~/components/ui/button';
+import {
+  Button,
+  ButtonLink,
+  links as buttonLinks,
+} from '~/components/ui/button';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
@@ -21,7 +21,6 @@ import { parseDate } from '~/utils/parsers';
 
 export const links: LinksFunction = () => {
   return [
-    ...deleteInvoiceLinks(),
     ...editInvoiceLinks(),
     ...badgeLinks(),
     ...buttonLinks(),
@@ -95,7 +94,9 @@ export default function InvoiceRoute() {
         </dl>
         <div className='invoice-actions'>
           <EditInvoice />
-          <DeleteInvoice />
+          <ButtonLink to='delete' variant='primary-destructive'>
+            Delete
+          </ButtonLink>
           <Button variant='primary'>Mark as Paid</Button>
         </div>
       </section>
@@ -204,6 +205,7 @@ export default function InvoiceRoute() {
           </div>
         </dl>
       </section>
+      <Outlet />
     </>
   );
 }
