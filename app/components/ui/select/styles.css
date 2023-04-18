@@ -36,8 +36,12 @@
   border-radius: var(--border-radius-1);
 }
 
-.select-item:focus-visible {
+.select-item:hover {
   background-color: var(--color-violet-4);
+}
+
+.select-item:hover:not(:focus-visible) {
+  box-shadow: none;
 }
 
 .select-item-indicator {
