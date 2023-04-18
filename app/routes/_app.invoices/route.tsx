@@ -83,7 +83,18 @@ export default function InvoicesRoute() {
     paymentDue: invoice.paymentDue ? parseDate(invoice.paymentDue) : null,
   }));
   const invoiceSummaryVerb = invoices.length === 1 ? 'is' : 'are';
+  const invoiceSummaryObject = invoices.length === 1 ? 'invoice' : 'invoices';
   const invoiceSummaryStatus = getInvoiceSummaryStatus(status);
+
+  const invoiceSummaryText = matches ? (
+    <>
+      <VisuallyHidden.Root>There {invoiceSummaryVerb}</VisuallyHidden.Root>
+      {invoices.length}
+      <VisuallyHidden.Root>{invoiceSummaryStatus}</VisuallyHidden.Root> invoices
+    </>
+  ) : (
+    `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} ${invoiceSummaryObject}`
+  );
   const newInvoiceButtonText = matches ? (
     <>
       New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>
@@ -97,22 +108,7 @@ export default function InvoicesRoute() {
       <header className='invoice-list-header'>
         <div>
           <h1>Invoices</h1>
-          <span className='invoice-list-summary'>
-            {matches ? (
-              <>
-                <VisuallyHidden.Root>
-                  There {invoiceSummaryVerb}
-                </VisuallyHidden.Root>
-                {invoices.length}
-                <VisuallyHidden.Root>
-                  {invoiceSummaryStatus}
-                </VisuallyHidden.Root>{' '}
-                invoices
-              </>
-            ) : (
-              `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} invoices`
-            )}
-          </span>
+          <span className='invoice-list-summary'>{invoiceSummaryText}</span>
         </div>
         <div className='invoice-list-actions'>
           <InvoicesFilter

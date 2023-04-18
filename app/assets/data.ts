@@ -1,6 +1,6 @@
 import { InvoiceStatus } from '@prisma/client';
 
-export const demoInvoices = [
+export const DEMO_INVOICES = [
   {
     displayId: 'RT3080',
     createdAt: new Date('2021-08-18'),
