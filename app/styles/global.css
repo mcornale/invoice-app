@@ -60,6 +60,10 @@ address {
   font-style: normal;
 }
 
+strong {
+  font-weight: 600;
+}
+
 /* interactive elements generic styles */
 :focus-visible {
   box-shadow: var(--shadow-outline-violet);

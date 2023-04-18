@@ -75,7 +75,7 @@
   --font-text-md: 1.6rem/2.4rem var(--font-family);
   --font-text-sm: 1.4rem/2rem var(--font-family);
   --font-text-xs: 1.2rem/1.8rem var(--font-family);
-  --font-text-2xs: 1rem/1rem var(--font-family);
+  --font-text-2xs: 1rem/1.5rem var(--font-family);
 
   /* SHADOWS */
   --shadow-outline-violet: 0 0 0 0.3rem var(--color-violet-6);

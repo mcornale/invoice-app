@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
@@ -13,7 +13,7 @@ import { db } from '~/utils/db.server';
 import { Outlet, useLoaderData, useSearchParams } from '@remix-run/react';
 import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { ButtonLink } from '~/components/ui/button';
+import { ButtonLink, links as buttonLinks } from '~/components/ui/button';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { parseDate } from '~/utils/parsers';
 import {
@@ -25,11 +25,16 @@ export const links: LinksFunction = () => {
   return [
     ...invoicesFilterLinks(),
     ...invoiceListLinks(),
+    ...buttonLinks(),
     {
       rel: 'stylesheet',
       href: styles,
     },
   ];
+};
+
+export const action = (args: ActionArgs) => {
+  console.log(args);
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
@@ -72,6 +77,13 @@ export default function InvoicesRoute() {
 
   const invoiceSummaryVerb = invoices.length === 1 ? 'is' : 'are';
   const invoiceSummaryStatus = getInvoiceSummaryStatus(status);
+  const newInvoiceButtonText = matches ? (
+    <>
+      New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>
+    </>
+  ) : (
+    'New Invoice'
+  );
 
   return (
     <>
@@ -101,17 +113,23 @@ export default function InvoicesRoute() {
           />
           <ButtonLink variant='primary' to='new'>
             <PlusIcon />
-            {matches ? (
-              <>
-                New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>
-              </>
-            ) : (
-              'New Invoice'
-            )}
+            {newInvoiceButtonText}
           </ButtonLink>
         </div>
       </header>
-      <InvoiceList invoices={invoices} />
+      {invoices.length > 0 ? (
+        <InvoiceList invoices={invoices} />
+      ) : (
+        <section className='no-invoices'>
+          <div className='no-invoices-text-container'>
+            <h2 className='no-invoices-title'>There is nothing here</h2>
+            <p>
+              Create an invoice by clicking the{' '}
+              <strong>{newInvoiceButtonText}</strong> button and get started.
+            </p>
+          </div>
+        </section>
+      )}
       <Outlet />
     </>
   );

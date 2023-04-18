@@ -17,3 +17,35 @@
   align-items: center;
   gap: var(--spacing-2);
 }
+
+.no-invoices {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-6);
+  background-color: var(--color-mauve-3);
+  border: 0.1rem solid var(--color-mauve-6);
+  border-radius: var(--border-radius-2);
+  padding: var(--spacing-12);
+}
+
+.no-invoices-text-container {
+  max-width: 24rem;
+  text-align: center;
+  font: var(--font-text-xs);
+  color: var(--color-mauve-11);
+}
+
+.no-invoices-title {
+  font: var(--font-text-md);
+  color: var(--color-mauve-12);
+  font-weight: 600;
+  margin-bottom: var(--spacing-2);
+}
+
+@media (max-width: 40em) {
+  .no-invoices {
+    padding: var(--spacing-8);
+  }
+}

@@ -40,8 +40,15 @@ export const links: LinksFunction = () => {
 
 export function InvoicesFilter({ activeStatus }: InvoicesFilterProps) {
   const submit = useSubmit();
-
   const matches = useMediaQuery('(max-width: 40em)');
+
+  const filterByStatusText = matches ? (
+    <>
+      Filter <VisuallyHidden.Root>by status</VisuallyHidden.Root>
+    </>
+  ) : (
+    'Filter by status'
+  );
 
   function handleChange(event: FormEvent<HTMLFormElement>) {
     submit(event.currentTarget, { replace: true });
@@ -51,18 +58,15 @@ export function InvoicesFilter({ activeStatus }: InvoicesFilterProps) {
     <Popover>
       <PopoverTrigger className='invoices-filter-trigger' asChild>
         <Button variant='secondary-gray'>
-          {matches ? (
-            <>
-              Filter <VisuallyHidden.Root>by status</VisuallyHidden.Root>
-            </>
-          ) : (
-            'Filter by status'
-          )}
-          <CaretDownIcon />
+          {filterByStatusText} <CaretDownIcon />
         </Button>
       </PopoverTrigger>
       <PopoverContent className='invoices-filter-content'>
-        <Form className='invoices-filter-form' onChange={handleChange}>
+        <Form
+          method='get'
+          className='invoices-filter-form'
+          onChange={handleChange}
+        >
           <FormField>
             <FormLabel htmlFor='draft'>Draft</FormLabel>
             <InputCheckbox
