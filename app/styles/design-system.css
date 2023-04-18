@@ -75,6 +75,7 @@
   --font-text-md: 1.6rem/2.4rem var(--font-family);
   --font-text-sm: 1.4rem/2rem var(--font-family);
   --font-text-xs: 1.2rem/1.8rem var(--font-family);
+  --font-text-2xs: 1rem/1rem var(--font-family);
 
   /* SHADOWS */
   --shadow-outline-violet: 0 0 0 0.3rem var(--color-violet-6);
@@ -195,4 +196,16 @@ body.dark-mode {
   --shadow-sm: 0 0.1rem 0.3rem hsla(256, 6%, 93.2%, 0.1),
     0 0.1rem 0.2rem hsla(256, 6%, 93.2%, 0.06);
   --shadow-xs: 0 0.1rem 0.2rem hsla(256, 6%, 93.2% 0.05);
+}
+
+@media (max-width: 64em) {
+  :root {
+    --font-text-3xl: 2.4rem/3.2rem var(--font-family);
+    --font-text-2xl: 2rem/3rem var(--font-family);
+    --font-text-xl: 1.8rem/2.8rem var(--font-family);
+    --font-text-lg: 1.6rem/2.4rem var(--font-family);
+    --font-text-md: 1.4rem/2rem var(--font-family);
+    --font-text-sm: 1.2rem/1.8rem var(--font-family);
+    --font-text-xs: --font-text-2xs;
+  }
 }

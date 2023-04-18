@@ -60,24 +60,13 @@ address {
   font-style: normal;
 }
 
-@media (max-width: 64em) {
-  body {
-    --font-text-3xl: 2.4rem/3.2rem var(--font-family);
-    --font-text-2xl: 2rem/3rem var(--font-family);
-    --font-text-xl: 1.8rem/2.8rem var(--font-family);
-    --font-text-lg: 1.6rem/2.4rem var(--font-family);
-    --font-text-md: 1.4rem/2rem var(--font-family);
-    --font-text-sm: 1.2rem/1.8rem var(--font-family);
-  }
-}
-
 /* interactive elements generic styles */
 :focus-visible {
   box-shadow: var(--shadow-outline-violet);
   outline: none;
 }
 
-[readonly] {
+input[readonly] {
   border: none;
   padding-left: 0;
   padding-right: 0;

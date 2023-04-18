@@ -8,8 +8,6 @@ import type {
   LabelHTMLAttributes,
 } from 'react';
 import { forwardRef } from 'react';
-import type { SelectProps } from '../select';
-import type { InputCheckboxProps, InputProps } from '../input';
 
 export interface FormProps extends RemixFormProps {}
 export interface FormFieldsetProps
@@ -17,11 +15,7 @@ export interface FormFieldsetProps
 export interface FormLegendProps extends HTMLAttributes<HTMLLegendElement> {}
 export interface FormFieldProps extends HTMLAttributes<HTMLDivElement> {}
 export interface FormLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
-export interface SelectFormControlProps extends SelectProps {
-  type: 'select';
-}
-export interface InputFormControlProps extends InputProps {}
-export interface InputCheckboxFormControlProps extends InputCheckboxProps {}
+export interface FormErrorProps extends HTMLAttributes<HTMLSpanElement> {}
 
 export const links: LinksFunction = () => {
   return [
@@ -90,3 +84,14 @@ export const FormLabel = forwardRef<HTMLLabelElement, FormLabelProps>(
   }
 );
 FormLabel.displayName = 'FormLabel';
+
+export const FormError = forwardRef<HTMLSpanElement, FormErrorProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <span className='form-error' role='alert' {...props} ref={ref}>
+        {children}
+      </span>
+    );
+  }
+);
+FormError.displayName = 'FormError';

@@ -39,3 +39,9 @@
   font-weight: 500;
   color: var(--color-mauve-12);
 }
+
+.form-error {
+  font: var(--font-text-2xs);
+  font-weight: 500;
+  color: var(--color-red-9);
+}

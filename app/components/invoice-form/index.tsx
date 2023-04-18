@@ -1,6 +1,7 @@
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import type { FormProps } from '../ui/form';
+import { FormError } from '../ui/form';
 import { FormField, FormFieldset, FormLabel, FormLegend } from '../ui/form';
 import { Form, links as formLinks } from '../ui/form';
 import { Button, links as buttonLinks } from '../ui/button';
@@ -90,6 +91,15 @@ export function InvoiceForm({
     new Array(0).fill(null).map((_, index) => index)
   );
 
+  const itemListErrors = [
+    fieldErrors?.itemNames,
+    fieldErrors?.itemQuantities,
+    fieldErrors?.itemPrices,
+    fieldErrors?.itemTotals,
+  ]
+    .flat()
+    .filter(Boolean);
+
   function handleAddNewItemClick() {
     setItems([...items, items.length]);
   }
@@ -116,7 +126,7 @@ export function InvoiceForm({
               type='text'
             />
             {fieldErrors?.senderAddressStreet && (
-              <p>{fieldErrors.senderAddressStreet}</p>
+              <FormError>{fieldErrors.senderAddressStreet}</FormError>
             )}
           </FormField>
           <div className='fieldset-row'>
@@ -128,7 +138,7 @@ export function InvoiceForm({
                 type='text'
               />
               {fieldErrors?.senderAddressCity && (
-                <p>{fieldErrors.senderAddressCity}</p>
+                <FormError>{fieldErrors.senderAddressCity}</FormError>
               )}
             </FormField>
             <FormField>
@@ -141,7 +151,7 @@ export function InvoiceForm({
                 type='text'
               />
               {fieldErrors?.senderAddressPostCode && (
-                <p>{fieldErrors.senderAddressPostCode}</p>
+                <FormError>{fieldErrors.senderAddressPostCode}</FormError>
               )}
             </FormField>
             <FormField>
@@ -152,7 +162,7 @@ export function InvoiceForm({
                 type='text'
               />
               {fieldErrors?.senderAddressCountry && (
-                <p>{fieldErrors.senderAddressCountry}</p>
+                <FormError>{fieldErrors.senderAddressCountry}</FormError>
               )}
             </FormField>
           </div>
@@ -162,14 +172,17 @@ export function InvoiceForm({
           <FormField>
             <FormLabel htmlFor='client-name'>Client Name</FormLabel>
             <Input id='client-name' name='client-name' type='text' />
-            {fieldErrors?.clientName && <p>{fieldErrors.clientName}</p>}
+            {fieldErrors?.clientName && (
+              <FormError>{fieldErrors.clientName}</FormError>
+            )}
           </FormField>
           <FormField>
             <FormLabel htmlFor='client-email'>Client Email</FormLabel>
             <Input id='client-email' name='client-email' type='email' />
-            {fieldErrors?.clientEmail && <p>{fieldErrors.clientEmail}</p>}
+            {fieldErrors?.clientEmail && (
+              <FormError>{fieldErrors.clientEmail}</FormError>
+            )}
           </FormField>
-
           <FormField>
             <FormLabel htmlFor='client-address-street'>
               Street Address
@@ -180,7 +193,7 @@ export function InvoiceForm({
               type='text'
             />
             {fieldErrors?.clientAddressStreet && (
-              <p>{fieldErrors.clientAddressStreet}</p>
+              <FormError>{fieldErrors.clientAddressStreet}</FormError>
             )}
           </FormField>
           <div className='fieldset-row'>
@@ -192,7 +205,7 @@ export function InvoiceForm({
                 type='text'
               />
               {fieldErrors?.clientAddressCity && (
-                <p>{fieldErrors.clientAddressCity}</p>
+                <FormError>{fieldErrors.clientAddressCity}</FormError>
               )}
             </FormField>
             <FormField>
@@ -205,7 +218,7 @@ export function InvoiceForm({
                 type='text'
               />
               {fieldErrors?.clientAddressPostCode && (
-                <p>{fieldErrors.clientAddressPostCode}</p>
+                <FormError>{fieldErrors.clientAddressPostCode}</FormError>
               )}
             </FormField>
             <FormField>
@@ -216,7 +229,7 @@ export function InvoiceForm({
                 type='text'
               />
               {fieldErrors?.clientAddressCountry && (
-                <p>{fieldErrors.clientAddressCountry}</p>
+                <FormError>{fieldErrors.clientAddressCountry}</FormError>
               )}
             </FormField>
           </div>
@@ -224,7 +237,9 @@ export function InvoiceForm({
             <FormField>
               <FormLabel htmlFor='created-at'>Invoice Date</FormLabel>
               <Input id='created-at' name='created-at' type='date' />
-              {fieldErrors?.createdAt && <p>{fieldErrors.createdAt}</p>}
+              {fieldErrors?.createdAt && (
+                <FormError>{fieldErrors.createdAt}</FormError>
+              )}
             </FormField>
             <FormField>
               <FormLabel>Payment Terms</FormLabel>
@@ -234,13 +249,17 @@ export function InvoiceForm({
                 placeholder='Select Payment Terms'
                 options={PAYMENT_TERMS_OPTIONS}
               />
-              {fieldErrors?.paymentTerms && <p>{fieldErrors.paymentTerms}</p>}
+              {fieldErrors?.paymentTerms && (
+                <FormError>{fieldErrors.paymentTerms}</FormError>
+              )}
             </FormField>
           </div>
           <FormField>
             <FormLabel htmlFor='description'>Project Description</FormLabel>
             <Input id='description' name='description' type='text' />
-            {fieldErrors?.description && <p>{fieldErrors.description}</p>}
+            {fieldErrors?.description && (
+              <FormError>{fieldErrors.description}</FormError>
+            )}
           </FormField>
         </FormFieldset>
       </section>
@@ -248,16 +267,16 @@ export function InvoiceForm({
         <h3>Item List</h3>
         <ul className='item-list'>
           <li className='item' aria-hidden>
-            <span id='item-name-label' className='label'>
+            <span id='item-name-label' className='form-label'>
               Item Name
             </span>
-            <span id='quantity-label' className='label'>
+            <span id='quantity-label' className='form-label'>
               Qty.
             </span>
-            <span id='price-label' className='label'>
+            <span id='price-label' className='form-label'>
               Price
             </span>
-            <span id='total-label' className='label'>
+            <span id='total-label' className='form-label'>
               Total
             </span>
             <span></span>
@@ -269,10 +288,13 @@ export function InvoiceForm({
             />
           ))}
         </ul>
-        {fieldErrors?.itemNames && <p>{fieldErrors.itemNames}</p>}
-        {fieldErrors?.itemQuantities && <p>{fieldErrors.itemQuantities}</p>}
-        {fieldErrors?.itemPrices && <p>{fieldErrors.itemPrices}</p>}
-        {fieldErrors?.itemTotals && <p>{fieldErrors.itemTotals}</p>}
+        {itemListErrors.length > 0 && (
+          <FormField>
+            {itemListErrors?.map((itemListError, index) => (
+              <FormError key={index}>{itemListError}</FormError>
+            ))}
+          </FormField>
+        )}
         <Button
           onClick={handleAddNewItemClick}
           type='button'
@@ -282,9 +304,13 @@ export function InvoiceForm({
           Add New Item
         </Button>
       </section>
-      {formErrors &&
-        formErrors.length > 0 &&
-        formErrors?.map((formError, index) => <p key={index}>{formError}</p>)}
+      {formErrors && (
+        <FormField>
+          {formErrors?.map((formError, index) => (
+            <FormError key={index}>{formError}</FormError>
+          ))}
+        </FormField>
+      )}
     </Form>
   );
 }
@@ -325,7 +351,6 @@ export function InvoiceFormItem({ onDelete }: InvoiceFormItemProps) {
         aria-labelledby='total-label'
         name='item-total'
         type='number'
-        defaultValue={0}
         readOnly
         value={Number(quantity) * Number(price)}
       />
