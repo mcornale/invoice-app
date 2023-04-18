@@ -31,7 +31,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ params, request }: LoaderArgs) => {
   const invoiceId = params.id;
   const invoice = await db.invoice.findUnique({ where: { id: invoiceId } });
 

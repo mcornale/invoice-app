@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 import { badRequest } from '~/utils/request.server';
 import { createInvoice } from '~/models/invoice.server';
 import { InvoiceStatus } from '@prisma/client';
+import { getUserIdFromSession } from '~/utils/session.server';
 
 export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -51,9 +52,16 @@ export const action = async ({ request }: ActionArgs) => {
       formErrors: ['Form not submitted correctly'],
     });
 
+  const userId = await getUserIdFromSession(request);
+  if (!userId) throw new Error('User id should be defined here');
+
   switch (intent) {
     case 'save-as-draft':
-      await createInvoice({ status: InvoiceStatus.DRAFT, ...typedFormData });
+      await createInvoice({
+        userId,
+        status: InvoiceStatus.DRAFT,
+        ...typedFormData,
+      });
       return redirect(`/invoices`);
     case 'save-and-send':
       const fieldErrors = getFieldErrors(typedFormData);
@@ -65,7 +73,11 @@ export const action = async ({ request }: ActionArgs) => {
         });
       }
 
-      await createInvoice({ status: InvoiceStatus.PENDING, ...typedFormData });
+      await createInvoice({
+        userId,
+        status: InvoiceStatus.PENDING,
+        ...typedFormData,
+      });
       return redirect(`/invoices`);
     default:
       return badRequest<ActionData>({

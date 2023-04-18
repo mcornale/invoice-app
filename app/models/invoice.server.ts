@@ -13,6 +13,7 @@ export type InvoiceWithoutId = Omit<Invoice, 'id'>;
 
 export interface CreateInvoiceParams extends InvoiceFormFields {
   status: InvoiceStatus;
+  userId: string;
 }
 
 export async function createInvoice({
@@ -68,4 +69,22 @@ export async function createInvoice({
 
 export async function deleteInvoice(id: Invoice['id']) {
   return db.invoice.delete({ where: { id } });
+}
+
+export async function getInvoiceList(status: InvoiceStatus[]) {
+  return db.invoice.findMany({
+    select: {
+      id: true,
+      displayId: true,
+      clientName: true,
+      paymentDue: true,
+      status: true,
+      total: true,
+    },
+    ...(status.length > 0 && {
+      where: {
+        OR: status.map((s) => ({ status: s })),
+      },
+    }),
+  });
 }

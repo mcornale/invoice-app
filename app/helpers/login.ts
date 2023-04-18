@@ -3,6 +3,8 @@ import type {
   LoginFormFieldErrors,
 } from '~/components/login-form';
 import { hasSomeTruthyValues, isString } from '~/utils/checkers';
+import { ERROR_MESSAGES } from '~/utils/error-messages';
+import { isEmpty } from '~/utils/validators';
 
 export function getLoginFormData(
   formData: FormData
@@ -20,15 +22,15 @@ export function getLoginFormData(
   };
 }
 
-export function validateUsername(username: string) {
-  if (username.length < 3) {
-    return 'Usernames must be at least 3 characters long';
+export function validateUsername(val: string) {
+  if (isEmpty(val)) {
+    return ERROR_MESSAGES.EMPTY;
   }
 }
 
-export function validatePassword(password: string) {
-  if (password.length < 6) {
-    return 'Passwords must be at least 6 characters long';
+export function validatePassword(val: string) {
+  if (val.length < 6) {
+    return 'must be at least 6 chars long';
   }
 }
 

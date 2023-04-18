@@ -60,7 +60,7 @@ export function LoginForm({
     isSubmitting && navigation.formData?.get('intent') === 'sign-up';
 
   return (
-    <Form {...props}>
+    <Form className='login-form' {...props}>
       <FormFieldset>
         <VisuallyHidden.Root>
           <FormLegend>Login or Sign Up</FormLegend>
@@ -99,6 +99,17 @@ export function LoginForm({
           Sign Up
         </Button>
       </div>
+      <FormField>
+        <div className='login-form-errors'>
+          {formErrors && (
+            <FormField>
+              {formErrors?.map((formError, index) => (
+                <FormError key={index}>{formError}</FormError>
+              ))}
+            </FormField>
+          )}
+        </div>
+      </FormField>
     </Form>
   );
 }

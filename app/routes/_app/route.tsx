@@ -1,9 +1,17 @@
-import type { LinksFunction } from '@remix-run/node';
-import { Outlet } from '@remix-run/react';
+import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { Outlet, useLoaderData } from '@remix-run/react';
 import styles from './styles.css';
+import { requireUser } from '~/utils/session.server';
+import { Form, links as formLinks } from '~/components/ui/form';
+import { Button, links as buttonLinks } from '~/components/ui/button';
+import { ExitIcon } from '@radix-ui/react-icons';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 export const links: LinksFunction = () => {
   return [
+    ...formLinks(),
+    ...buttonLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -11,11 +19,32 @@ export const links: LinksFunction = () => {
   ];
 };
 
+export const loader = async ({ request }: LoaderArgs) => {
+  const userId = await requireUser(request);
+  return json({ userId });
+};
+
 export default function AppRoute() {
+  const data = useLoaderData<typeof loader>();
+
   return (
     <div className='app'>
       <header className='app-header'>
         <img className='logo' src='/logo.svg' alt='logo' />
+        <div className='app-header-actions'>
+          {data.userId && (
+            <Form action='/logout' method='post'>
+              <Button
+                variant='tertiary-gray'
+                type='submit'
+                className='logout-button'
+              >
+                <ExitIcon />
+                <VisuallyHidden.Root>Logout</VisuallyHidden.Root>
+              </Button>
+            </Form>
+          )}
+        </div>
       </header>
       <main className='app-main'>
         <div className='app-outlet-wrapper'>

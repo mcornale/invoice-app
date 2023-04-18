@@ -10,6 +10,8 @@ import { db } from '~/utils/db.server';
 import type { LoginFormFieldErrors } from '~/components/login-form';
 import { LoginForm, links as loginFormLinks } from '~/components/login-form';
 import { useActionData } from '@remix-run/react';
+import { loginUser, signUpUser } from '~/models/user.server';
+import { createUserSession } from '~/utils/session.server';
 
 export interface ActionData {
   fieldErrors?: LoginFormFieldErrors;
@@ -51,30 +53,39 @@ export const action = async ({ request }: ActionArgs) => {
 
   switch (intent) {
     case 'login':
-      return badRequest({
-        fieldErrors: null,
-        formError: `Not implemented ${intent}`,
-      });
+      const retrievedUser = await loginUser({ username, password });
+
+      if (!retrievedUser)
+        return badRequest<ActionData>({
+          fieldErrors: undefined,
+          formErrors: ['Username/Password combination is incorrect'],
+        });
+
+      return createUserSession(retrievedUser.id, validRedirectTo);
     case 'sign-up':
-      const userExists = await db.user.findUnique({
+      const userExists = await db.user.findFirst({
         where: { username },
       });
 
       if (userExists) {
         return badRequest<ActionData>({
           fieldErrors: undefined,
-          formErrors: [`User with username ${username} already exists`],
+          formErrors: [`User with username '${username}' already exists`],
         });
       }
 
-      return badRequest({
-        fieldErrors: null,
-        formError: `Not implemented ${intent}`,
-      });
+      const createdUser = await signUpUser({ username, password });
+      if (!createdUser)
+        return badRequest<ActionData>({
+          fieldErrors: undefined,
+          formErrors: ['Something went wrong trying to create a new user'],
+        });
+
+      return createUserSession(createdUser.id, validRedirectTo);
     default:
-      return badRequest({
-        fieldErrors: null,
-        formError: `Unhandled intent ${intent}`,
+      return badRequest<ActionData>({
+        fieldErrors: undefined,
+        formErrors: [`Unhandled intent: ${intent}`],
       });
   }
 };

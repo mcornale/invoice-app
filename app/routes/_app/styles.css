@@ -14,6 +14,15 @@
   background-color: var(--color-mauve-1);
   border-right: 0.1rem solid var(--color-mauve-6);
   padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header .logout-button svg {
+  width: 1.8rem;
+  height: auto;
 }
 
 .app-main {
@@ -57,6 +66,10 @@
   .app-header {
     border-bottom: 0.1rem solid var(--color-mauve-6);
     padding: var(--spacing-4) var(--spacing-6);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .app-header .logo {

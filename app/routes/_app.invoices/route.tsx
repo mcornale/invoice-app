@@ -9,7 +9,6 @@ import {
   InvoiceList,
   links as invoiceListLinks,
 } from '~/components/invoice-list';
-import { db } from '~/utils/db.server';
 import {
   Outlet,
   useLoaderData,
@@ -30,6 +29,7 @@ import {
   parseInvoiceStatusParams,
 } from '~/helpers/invoice';
 import { Form } from '~/components/ui/form';
+import { getInvoiceList } from '~/models/invoice.server';
 
 export const links: LinksFunction = () => {
   return [
@@ -47,25 +47,9 @@ export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
   const statusParams = url.searchParams.getAll('status');
   const status = parseInvoiceStatusParams(statusParams);
-  const invoices = await db.invoice.findMany({
-    select: {
-      id: true,
-      displayId: true,
-      clientName: true,
-      paymentDue: true,
-      status: true,
-      total: true,
-    },
-    ...(statusParams.length > 0 && {
-      where: {
-        OR: status.map((s) => ({ status: s })),
-      },
-    }),
-  });
+  const invoices = await getInvoiceList(status);
 
-  return json({
-    invoices,
-  });
+  return json({ invoices });
 };
 
 export default function InvoicesRoute() {
