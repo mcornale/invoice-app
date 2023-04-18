@@ -15,6 +15,7 @@ export type ButtonVariant =
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
+  showSpinner?: boolean;
 }
 
 export interface ButtonLinkProps extends LinkProps {
@@ -31,14 +32,21 @@ export const links: LinksFunction = () => {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, variant, className, ...props }, ref) => {
+  ({ children, variant, className, showSpinner = false, ...props }, ref) => {
     return (
       <button
-        className={`button button-${variant} ${className ?? ''}`}
+        className={`button button-${variant} ${
+          showSpinner ? 'button-spinner' : ''
+        } ${className ?? ''}`}
         {...props}
         ref={ref}
       >
-        {children}
+        <div className='content'>{children}</div>
+        {showSpinner && (
+          <div className='spinner-wrapper'>
+            <span className='spinner' />
+          </div>
+        )}
       </button>
     );
   }

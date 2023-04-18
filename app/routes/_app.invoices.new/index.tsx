@@ -14,7 +14,7 @@ import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { Button } from '~/components/ui/button';
-import { useActionData, useNavigate } from '@remix-run/react';
+import { useActionData, useNavigate, useNavigation } from '@remix-run/react';
 import {
   getFieldErrors,
   getFormErrors,
@@ -90,8 +90,16 @@ export const action = async ({ request }: ActionArgs) => {
 
 export default function NewInvoiceRoute() {
   const actionData = useActionData<ActionData>();
+  const navigation = useNavigation();
   const navigate = useNavigate();
   const [navOpen, setNavOpen] = useState(false);
+
+  const isSubmitting = navigation.state === 'submitting';
+  const isSubmittingSaveAsDraft =
+    navigation.state === 'submitting' &&
+    navigation.formData.get('intent') === 'save-as-draft';
+  const isSubmittingSaveAndSend =
+    isSubmitting && navigation.formData.get('intent') === 'save-and-send';
 
   useEffect(() => {
     setNavOpen(true);
@@ -123,6 +131,7 @@ export default function NewInvoiceRoute() {
               value='save-as-draft'
               variant='secondary-color'
               form='new-invoice-form'
+              showSpinner={isSubmittingSaveAsDraft}
             >
               Save as Draft
             </Button>
@@ -132,6 +141,7 @@ export default function NewInvoiceRoute() {
               value='save-and-send'
               variant='primary'
               form='new-invoice-form'
+              showSpinner={isSubmittingSaveAndSend}
             >
               Save & Send
             </Button>
