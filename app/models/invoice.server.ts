@@ -1,5 +1,5 @@
 import { InvoiceStatus } from '@prisma/client';
-import type { Invoice, InvoiceAddress } from '@prisma/client';
+import type { Invoice } from '@prisma/client';
 import type { InvoiceFormFields } from '~/components/invoice-form';
 import {
   getInvoiceDisplayId,
@@ -9,8 +9,6 @@ import {
 import { db } from '~/utils/db.server';
 import { parseDate } from '~/utils/parsers';
 
-export { InvoiceStatus };
-export type { Invoice, InvoiceAddress };
 export type InvoiceWithoutId = Omit<Invoice, 'id'>;
 
 export interface CreateInvoiceParams extends InvoiceFormFields {

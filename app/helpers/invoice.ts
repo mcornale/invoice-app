@@ -5,8 +5,8 @@ import type {
 import { isArrOfString, isString, hasSomeTruthyValues } from '~/utils/checkers';
 import { isEmail, isEmpty, isNull, isPositive } from '~/utils/validators';
 import { ERROR_MESSAGES } from '~/utils/error-messages';
-import { InvoiceStatus } from '~/models/invoice.server';
 import { parseDate } from '~/utils/parsers';
+import { InvoiceStatus } from '@prisma/client';
 
 export type getItemsParams = Pick<
   InvoiceFormFields,

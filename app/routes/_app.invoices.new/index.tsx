@@ -22,7 +22,8 @@ import {
 } from '~/helpers/invoice';
 import { useEffect, useState } from 'react';
 import { badRequest } from '~/utils/request.server';
-import { InvoiceStatus, createInvoice } from '~/models/invoice.server';
+import { createInvoice } from '~/models/invoice.server';
+import { InvoiceStatus } from '@prisma/client';
 
 export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];

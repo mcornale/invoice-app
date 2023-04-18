@@ -19,7 +19,7 @@ import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { useSubmit } from '@remix-run/react';
 import type { FormEvent } from 'react';
-import { InvoiceStatus } from '~/models/invoice.server';
+import { InvoiceStatus } from '@prisma/client';
 
 export interface InvoicesFilterProps {
   activeStatus: InvoiceStatus[];

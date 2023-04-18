@@ -14,10 +14,10 @@ import {
   useRouteLoaderData,
 } from '@remix-run/react';
 import { useEffect, useState } from 'react';
-import type { Invoice } from '~/models/invoice.server';
 import { Form } from '~/components/ui/form';
 import { deleteInvoice } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
+import type { Invoice } from '@prisma/client';
 
 export const links: LinksFunction = () => {
   return [
