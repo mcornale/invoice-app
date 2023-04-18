@@ -297,7 +297,7 @@ export const getFormErrors = (
     const fieldErrorsArr = Object.values(fieldErrors).filter(Boolean);
 
     if (!isArrOfString(fieldErrorsArr))
-      throw new Error('Something unexpected happened');
+      throw new Error('Not supported field error found');
 
     if (fieldErrorsArr.some((err) => err.includes(ERROR_MESSAGES.EMPTY)))
       formErrors.push('all fields must be added');
@@ -306,3 +306,17 @@ export const getFormErrors = (
 
   return formErrors.length > 0 ? formErrors : undefined;
 };
+
+export const parseInvoiceStatusParams = (statusParams: string[]) =>
+  statusParams.map((status) => {
+    switch (status) {
+      case 'draft':
+        return { status: InvoiceStatus.DRAFT };
+      case 'pending':
+        return { status: InvoiceStatus.PENDING };
+      case 'paid':
+        return { status: InvoiceStatus.PAID };
+      default:
+        throw new Error(`Not supported status found: ${status}`);
+    }
+  });

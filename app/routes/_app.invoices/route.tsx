@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
@@ -16,6 +16,7 @@ import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { ButtonLink } from '~/components/ui/button';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { parseDate } from '~/utils/parsers';
+import { parseInvoiceStatusParams } from '~/helpers/invoice';
 
 export const links: LinksFunction = () => {
   return [
@@ -28,7 +29,15 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async (args: LoaderArgs) => {
+export const action = async ({ params }: ActionArgs) => {
+  console.log(params);
+};
+
+export const loader = async ({ request }: LoaderArgs) => {
+  const url = new URL(request.url);
+  const statusParams = url.searchParams
+    .getAll('status')
+    .map((s) => s.toLowerCase());
   const invoices = await db.invoice.findMany({
     select: {
       id: true,
@@ -38,6 +47,11 @@ export const loader = async (args: LoaderArgs) => {
       status: true,
       total: true,
     },
+    ...(statusParams.length > 0 && {
+      where: {
+        OR: parseInvoiceStatusParams(statusParams),
+      },
+    }),
   });
 
   return json({

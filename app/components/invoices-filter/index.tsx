@@ -17,6 +17,9 @@ import {
 } from '../ui/popover';
 import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { useSubmit } from '@remix-run/react';
+import type { FormEvent } from 'react';
+import { InvoiceStatus } from '@prisma/client';
 
 export const links: LinksFunction = () => {
   return [
@@ -32,7 +35,13 @@ export const links: LinksFunction = () => {
 };
 
 export function InvoicesFilter() {
+  const submit = useSubmit();
   const matches = useMediaQuery('(max-width: 40em)');
+
+  function handleChange(event: FormEvent<HTMLFormElement>) {
+    submit(event.currentTarget, { replace: true });
+  }
+
   return (
     <Popover>
       <PopoverTrigger className='invoices-filter-trigger' asChild>
@@ -48,18 +57,30 @@ export function InvoicesFilter() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className='invoices-filter-content'>
-        <Form className='invoices-filter-form'>
+        <Form className='invoices-filter-form' onChange={handleChange}>
           <FormField>
             <FormLabel htmlFor='draft'>Draft</FormLabel>
-            <InputCheckbox id='draft' name='status' value='draft' />
+            <InputCheckbox
+              id='draft'
+              name='status'
+              value={InvoiceStatus.DRAFT.toLowerCase()}
+            />
           </FormField>
           <FormField>
             <FormLabel htmlFor='pending'>Pending</FormLabel>
-            <InputCheckbox id='pending' name='status' value='pending' />
+            <InputCheckbox
+              id='pending'
+              name='status'
+              value={InvoiceStatus.PENDING.toLowerCase()}
+            />
           </FormField>
           <FormField>
             <FormLabel htmlFor='paid'>Paid</FormLabel>
-            <InputCheckbox id='paid' name='status' value='paid' />
+            <InputCheckbox
+              id='paid'
+              name='status'
+              value={InvoiceStatus.PAID.toLowerCase()}
+            />
           </FormField>
         </Form>
       </PopoverContent>
