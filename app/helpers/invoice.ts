@@ -7,6 +7,7 @@ import type {
 import { parseDate } from '~/utils/parsers';
 import { isArrOfString, isString, hasSomeTruthyValues } from '~/utils/checkers';
 import { isEmail, isEmpty, isNull, isPositive } from '~/utils/validators';
+import { ERROR_MESSAGES } from '~/utils/error-messages';
 
 export type InvoiceWithoutId = Omit<Invoice, 'id'>;
 export interface getInvoiceParams extends InvoiceFormFields {
@@ -175,44 +176,44 @@ export const getPendingInvoice = (fields: InvoiceFormFields) =>
   getInvoice({ status: InvoiceStatus.PENDING, ...fields });
 
 export const validateSenderAddressStreet = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateSenderAddressCity = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateSenderAddressPostCode = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateSenderAddressCountry = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateClientName = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateClientEmail = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
   if (!isEmail(val)) return 'must include @ sign';
 };
 
 export const validateClientAddressStreet = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateClientAddressCity = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateClientAddressPostCode = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateClientAddressCountry = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateCreatedAt = (val: Date | null) => {
@@ -224,26 +225,27 @@ export const validatePaymentTerms = (val: number) => {
 };
 
 export const validateDescription = (val: string) => {
-  if (isEmpty(val)) return "can't be empty";
+  if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
 export const validateItemNames = (vals: string[]) => {
-  if (vals.some((val) => isEmpty(val))) return "item names can't be empty";
+  if (vals.some((val) => isEmpty(val)))
+    return `item names ${ERROR_MESSAGES.EMPTY}`;
 };
 
 export const validateItemQuantities = (vals: number[]) => {
   if (vals.some((val) => !isPositive(val)))
-    return 'item quantities must be a number greater than 0';
+    return `item quantities ${ERROR_MESSAGES.NOT_POSITIVE}`;
 };
 
 export const validateItemPrices = (vals: number[]) => {
   if (vals.some((val) => !isPositive(val)))
-    return 'item prices must be a number greater than 0';
+    return `item prices ${ERROR_MESSAGES.NOT_POSITIVE}`;
 };
 
 export const validateItemTotals = (vals: number[]) => {
   if (vals.some((val) => !isPositive(val)))
-    return 'item totals must be a number greater than 0';
+    return `item totals ${ERROR_MESSAGES.NOT_POSITIVE}`;
 };
 
 export const getFieldErrors = (
@@ -291,7 +293,15 @@ export const getFormErrors = (
   fieldErrors?: InvoiceFormFieldErrors
 ) => {
   const formErrors = [];
-  if (fieldErrors) formErrors.push('all fields must be added');
+  if (fieldErrors) {
+    const fieldErrorsArr = Object.values(fieldErrors).filter(Boolean);
+
+    if (!isArrOfString(fieldErrorsArr))
+      throw new Error('Something unexpected happened');
+
+    if (fieldErrorsArr.some((err) => err.includes(ERROR_MESSAGES.EMPTY)))
+      formErrors.push('all fields must be added');
+  }
   if (invoice.items.length === 0) formErrors.push('an item must be added');
 
   return formErrors.length > 0 ? formErrors : undefined;
