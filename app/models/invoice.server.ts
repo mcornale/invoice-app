@@ -67,3 +67,7 @@ export async function createInvoice({
 
   return db.invoice.create({ data });
 }
+
+export async function deleteInvoice(id: Invoice['id']) {
+  return db.invoice.delete({ where: { id } });
+}

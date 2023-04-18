@@ -17,6 +17,8 @@ import { useEffect, useState } from 'react';
 import type { Invoice } from '@prisma/client';
 import { Form } from '~/components/ui/form';
 import { db } from '~/utils/db.server';
+import { deleteInvoice } from '~/models/invoice.server';
+import { isString } from '~/utils/checkers';
 
 export const links: LinksFunction = () => {
   return [
@@ -30,7 +32,8 @@ export const links: LinksFunction = () => {
 };
 
 export const action = async ({ params }: ActionArgs) => {
-  await db.invoice.delete({ where: { id: params.id } });
+  if (!isString(params.id)) throw new Error('Unexpected error');
+  await deleteInvoice(params.id);
   return redirect('/invoices');
 };
 
