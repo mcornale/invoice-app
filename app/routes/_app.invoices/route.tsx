@@ -76,6 +76,8 @@ export default function InvoicesRoute() {
 
   const isSubmitting =
     navigation.state === 'submitting' || navigation.state === 'loading';
+  const isSubmittingDemoInvoices =
+    isSubmitting && navigation.formData?.get('intent') === 'get-demo-invoices';
   const statusParams = params.getAll('status');
   const status = parseInvoiceStatusParams(statusParams);
   const invoices = data.invoices.map((invoice) => ({
@@ -133,7 +135,12 @@ export default function InvoicesRoute() {
             </p>
           </div>
           <Form method='get' action='/generate-demo-invoices'>
-            <Button variant='primary' showSpinner={isSubmitting}>
+            <Button
+              variant='primary'
+              name='intent'
+              value='get-demo-invoices'
+              showSpinner={isSubmittingDemoInvoices}
+            >
               Get Demo Invoices
             </Button>
           </Form>
