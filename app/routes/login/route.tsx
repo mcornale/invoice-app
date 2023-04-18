@@ -1,22 +1,24 @@
-import type { LinksFunction } from '@remix-run/node';
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import {
-  Form,
-  FormField,
-  FormFieldset,
-  FormLabel,
-  FormLegend,
-  links as formLinks,
-} from '~/components/ui/form';
-import { Button, links as buttonLinks } from '~/components/ui/button';
+import type { ActionArgs, LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
-import { Input, links as inputLinks } from '~/components/ui/input';
+import {
+  getFieldErrors,
+  getLoginFormData,
+  validateRedirectTo,
+} from '~/helpers/login';
+import { badRequest } from '~/utils/request.server';
+import { db } from '~/utils/db.server';
+import type { LoginFormFieldErrors } from '~/components/login-form';
+import { LoginForm, links as loginFormLinks } from '~/components/login-form';
+import { useActionData } from '@remix-run/react';
+
+export interface ActionData {
+  fieldErrors?: LoginFormFieldErrors;
+  formErrors?: string[];
+}
 
 export const links: LinksFunction = () => {
   return [
-    ...buttonLinks(),
-    ...inputLinks(),
-    ...formLinks(),
+    ...loginFormLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -24,7 +26,62 @@ export const links: LinksFunction = () => {
   ];
 };
 
+export const action = async ({ request }: ActionArgs) => {
+  const formData = await request.formData();
+  const intent = formData.get('intent');
+
+  const typedFormData = getLoginFormData(formData);
+  if (!typedFormData)
+    return badRequest({
+      fieldErrors: null,
+      formError: 'Form not submitted correctly',
+    });
+
+  const redirectTo = formData.get('redirectTo') as string;
+  const validRedirectTo = validateRedirectTo(redirectTo);
+  const { username, password } = typedFormData;
+
+  const fieldErrors = getFieldErrors(typedFormData);
+  if (fieldErrors) {
+    return badRequest<ActionData>({
+      fieldErrors,
+      formErrors: undefined,
+    });
+  }
+
+  switch (intent) {
+    case 'login':
+      return badRequest({
+        fieldErrors: null,
+        formError: `Not implemented ${intent}`,
+      });
+    case 'sign-up':
+      const userExists = await db.user.findUnique({
+        where: { username },
+      });
+
+      if (userExists) {
+        return badRequest<ActionData>({
+          fieldErrors: undefined,
+          formErrors: [`User with username ${username} already exists`],
+        });
+      }
+
+      return badRequest({
+        fieldErrors: null,
+        formError: `Not implemented ${intent}`,
+      });
+    default:
+      return badRequest({
+        fieldErrors: null,
+        formError: `Unhandled intent ${intent}`,
+      });
+  }
+};
+
 export default function LoginRoute() {
+  const actionData = useActionData<ActionData>();
+
   return (
     <div className='login'>
       <header className='login-header'>
@@ -32,25 +89,11 @@ export default function LoginRoute() {
         <h1>Invoice App</h1>
       </header>
       <main className='login-main'>
-        <Form>
-          <FormFieldset>
-            <VisuallyHidden.Root>
-              <FormLegend>Login or Sign Up</FormLegend>
-            </VisuallyHidden.Root>
-            <FormField>
-              <FormLabel htmlFor='email'>Email</FormLabel>
-              <Input id='email' name='email' type='email' required />
-            </FormField>
-            <FormField>
-              <FormLabel htmlFor='password'>Password</FormLabel>
-              <Input id='password' name='password' type='password' required />
-            </FormField>
-          </FormFieldset>
-          <div className='login-form-actions'>
-            <Button variant='primary'>Login</Button>
-            <Button variant='secondary-gray'>Sign Up</Button>
-          </div>
-        </Form>
+        <LoginForm
+          method='post'
+          fieldErrors={actionData?.fieldErrors}
+          formErrors={actionData?.formErrors}
+        />
       </main>
     </div>
   );

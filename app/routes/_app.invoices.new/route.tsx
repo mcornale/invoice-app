@@ -45,7 +45,11 @@ export const action = async ({ request }: ActionArgs) => {
   const intent = formData.get('intent');
 
   const typedFormData = getInvoiceFormData(formData);
-  if (!typedFormData) throw new Error('Form not submitted correctly');
+  if (!typedFormData)
+    return badRequest<ActionData>({
+      fieldErrors: undefined,
+      formErrors: ['Form not submitted correctly'],
+    });
 
   switch (intent) {
     case 'save-as-draft':
@@ -64,7 +68,10 @@ export const action = async ({ request }: ActionArgs) => {
       await createInvoice({ status: InvoiceStatus.PENDING, ...typedFormData });
       return redirect(`/invoices`);
     default:
-      throw new Error(`Unsupported intent: ${intent}`);
+      return badRequest<ActionData>({
+        fieldErrors: undefined,
+        formErrors: [`Unhandled intent: ${intent}`],
+      });
   }
 };
 
