@@ -14,9 +14,8 @@ import {
   useRouteLoaderData,
 } from '@remix-run/react';
 import { useEffect, useState } from 'react';
-import type { Invoice } from '@prisma/client';
+import type { Invoice } from '~/models/invoice.server';
 import { Form } from '~/components/ui/form';
-import { db } from '~/utils/db.server';
 import { deleteInvoice } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
 

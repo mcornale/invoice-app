@@ -16,7 +16,7 @@ import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { db } from '~/utils/db.server';
-import { InvoiceStatus } from '@prisma/client';
+import { InvoiceStatus } from '~/models/invoice.server';
 import { parseDate } from '~/utils/parsers';
 
 export const links: LinksFunction = () => {

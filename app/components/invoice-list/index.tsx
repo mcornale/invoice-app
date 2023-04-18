@@ -5,8 +5,8 @@ import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import styles from './styles.css';
 import type { LinksFunction } from '@remix-run/node';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import type { Invoice } from '@prisma/client';
-import { InvoiceStatus } from '@prisma/client';
+import type { Invoice } from '~/models/invoice.server';
+import { InvoiceStatus } from '~/models/invoice.server';
 
 export interface InvoiceListProps {
   invoices: Pick<

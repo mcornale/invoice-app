@@ -1,4 +1,4 @@
-import { InvoiceStatus } from '@prisma/client';
+import { InvoiceStatus } from '~/models/invoice.server';
 
 export const DEMO_INVOICES = [
   {
