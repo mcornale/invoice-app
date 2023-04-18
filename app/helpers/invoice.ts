@@ -1,18 +1,12 @@
-import type { Invoice } from '@prisma/client';
-import { InvoiceStatus } from '@prisma/client';
 import type {
   InvoiceFormFieldErrors,
   InvoiceFormFields,
 } from '~/components/invoice-form';
-import { parseDate } from '~/utils/parsers';
 import { isArrOfString, isString, hasSomeTruthyValues } from '~/utils/checkers';
 import { isEmail, isEmpty, isNull, isPositive } from '~/utils/validators';
 import { ERROR_MESSAGES } from '~/utils/error-messages';
-
-export type InvoiceWithoutId = Omit<Invoice, 'id'>;
-export interface getInvoiceParams extends InvoiceFormFields {
-  status: InvoiceStatus;
-}
+import { InvoiceStatus } from '~/models/invoice.server';
+import { parseDate } from '~/utils/parsers';
 
 export type getItemsParams = Pick<
   InvoiceFormFields,
@@ -119,62 +113,6 @@ export function getInvoiceItems(itemFields: getItemsParams) {
   }));
 }
 
-export function getInvoice({
-  status,
-  ...fields
-}: getInvoiceParams): InvoiceWithoutId {
-  const displayId = getInvoiceDisplayId();
-  const senderAddress = {
-    street: fields.senderAddressStreet,
-    city: fields.senderAddressCity,
-    postCode: fields.senderAddressPostCode,
-    country: fields.senderAddressCountry,
-  };
-  const clientName = fields.clientName;
-  const clientEmail = fields.clientEmail;
-  const clientAddress = {
-    street: fields.clientAddressStreet,
-    city: fields.clientAddressCity,
-    postCode: fields.clientAddressPostCode,
-    country: fields.clientAddressCountry,
-  };
-  const paymentTerms = Number(fields.paymentTerms);
-  const description = fields.description;
-
-  const createdAt = parseDate(fields.createdAt);
-  const paymentDue =
-    createdAt instanceof Date
-      ? getInvoicePaymentDue(createdAt, paymentTerms)
-      : null;
-  const items = getInvoiceItems({
-    itemNames: fields.itemNames,
-    itemQuantities: fields.itemQuantities,
-    itemPrices: fields.itemPrices,
-    itemTotals: fields.itemTotals,
-  });
-
-  return {
-    displayId,
-    senderAddress,
-    clientName,
-    clientEmail,
-    clientAddress,
-    createdAt,
-    paymentTerms,
-    paymentDue,
-    description,
-    status: InvoiceStatus.DRAFT,
-    items,
-    total: items.reduce((prevVal, currItem) => prevVal + currItem.total, 0),
-  };
-}
-
-export const getDraftInvoice = (fields: InvoiceFormFields) =>
-  getInvoice({ status: InvoiceStatus.DRAFT, ...fields });
-
-export const getPendingInvoice = (fields: InvoiceFormFields) =>
-  getInvoice({ status: InvoiceStatus.PENDING, ...fields });
-
 export const validateSenderAddressStreet = (val: string) => {
   if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
@@ -216,12 +154,12 @@ export const validateClientAddressCountry = (val: string) => {
   if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
-export const validateCreatedAt = (val: Date | null) => {
-  if (isNull(val)) return 'choose a valid date';
+export const validateCreatedAt = (val: string) => {
+  if (isNull(parseDate(val))) return 'choose a valid date';
 };
 
-export const validatePaymentTerms = (val: number) => {
-  if (!isPositive(val)) return 'choose a valid option';
+export const validatePaymentTerms = (val: string) => {
+  if (!isPositive(Number(val))) return 'choose a valid option';
 };
 
 export const validateDescription = (val: string) => {
@@ -233,63 +171,61 @@ export const validateItemNames = (vals: string[]) => {
     return `item names ${ERROR_MESSAGES.EMPTY}`;
 };
 
-export const validateItemQuantities = (vals: number[]) => {
-  if (vals.some((val) => !isPositive(val)))
+export const validateItemQuantities = (vals: string[]) => {
+  if (vals.some((val) => !isPositive(Number(val))))
     return `item quantities ${ERROR_MESSAGES.NOT_POSITIVE}`;
 };
 
-export const validateItemPrices = (vals: number[]) => {
-  if (vals.some((val) => !isPositive(val)))
+export const validateItemPrices = (vals: string[]) => {
+  if (vals.some((val) => !isPositive(Number(val))))
     return `item prices ${ERROR_MESSAGES.NOT_POSITIVE}`;
 };
 
-export const validateItemTotals = (vals: number[]) => {
-  if (vals.some((val) => !isPositive(val)))
+export const validateItemTotals = (vals: string[]) => {
+  if (vals.some((val) => !isPositive(Number(val))))
     return `item totals ${ERROR_MESSAGES.NOT_POSITIVE}`;
 };
 
 export const getFieldErrors = (
-  invoice: InvoiceWithoutId
+  fields: InvoiceFormFields
 ): InvoiceFormFieldErrors | undefined => {
   const fieldErrors = {
     senderAddressStreet: validateSenderAddressStreet(
-      invoice.senderAddress.street
+      fields.senderAddressStreet
     ),
-    senderAddressCity: validateSenderAddressCity(invoice.senderAddress.city),
+    senderAddressCity: validateSenderAddressCity(fields.senderAddressCity),
     senderAddressPostCode: validateSenderAddressPostCode(
-      invoice.senderAddress.postCode
+      fields.senderAddressPostCode
     ),
     senderAddressCountry: validateSenderAddressCountry(
-      invoice.senderAddress.country
+      fields.senderAddressCountry
     ),
-    clientName: validateClientName(invoice.clientName),
-    clientEmail: validateClientEmail(invoice.clientEmail),
+    clientName: validateClientName(fields.clientName),
+    clientEmail: validateClientEmail(fields.clientEmail),
     clientAddressStreet: validateClientAddressStreet(
-      invoice.clientAddress.street
+      fields.clientAddressStreet
     ),
-    clientAddressCity: validateClientAddressCity(invoice.clientAddress.city),
+    clientAddressCity: validateClientAddressCity(fields.clientAddressCity),
     clientAddressPostCode: validateClientAddressPostCode(
-      invoice.clientAddress.postCode
+      fields.clientAddressPostCode
     ),
     clientAddressCountry: validateClientAddressCountry(
-      invoice.clientAddress.country
+      fields.clientAddressCountry
     ),
-    createdAt: validateCreatedAt(invoice.createdAt),
-    paymentTerms: validatePaymentTerms(invoice.paymentTerms),
-    description: validateDescription(invoice.description),
-    itemNames: validateItemNames(invoice.items.map((item) => item.name)),
-    itemQuantities: validateItemQuantities(
-      invoice.items.map((item) => item.quantity)
-    ),
-    itemPrices: validateItemPrices(invoice.items.map((item) => item.price)),
-    itemTotals: validateItemTotals(invoice.items.map((item) => item.total)),
+    createdAt: validateCreatedAt(fields.createdAt),
+    paymentTerms: validatePaymentTerms(fields.paymentTerms),
+    description: validateDescription(fields.description),
+    itemNames: validateItemNames(fields.itemNames),
+    itemQuantities: validateItemQuantities(fields.itemQuantities),
+    itemPrices: validateItemPrices(fields.itemPrices),
+    itemTotals: validateItemTotals(fields.itemTotals),
   };
 
   return hasSomeTruthyValues(fieldErrors) ? fieldErrors : undefined;
 };
 
 export const getFormErrors = (
-  invoice: InvoiceWithoutId,
+  fields: InvoiceFormFields,
   fieldErrors?: InvoiceFormFieldErrors
 ) => {
   const formErrors = [];
@@ -302,7 +238,7 @@ export const getFormErrors = (
     if (fieldErrorsArr.some((err) => err.includes(ERROR_MESSAGES.EMPTY)))
       formErrors.push('all fields must be added');
   }
-  if (invoice.items.length === 0) formErrors.push('an item must be added');
+  if (fields.itemNames.length === 0) formErrors.push('an item must be added');
 
   return formErrors.length > 0 ? formErrors : undefined;
 };

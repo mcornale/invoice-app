@@ -18,13 +18,11 @@ import { useActionData, useNavigate, useNavigation } from '@remix-run/react';
 import {
   getFieldErrors,
   getFormErrors,
-  getDraftInvoice,
-  getPendingInvoice,
   getInvoiceFormData,
 } from '~/helpers/invoice';
-import { db } from '~/utils/db.server';
 import { useEffect, useState } from 'react';
 import { badRequest } from '~/utils/request.server';
+import { InvoiceStatus, createInvoice } from '~/models/invoice.server';
 
 export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -59,18 +57,11 @@ export const action = async ({ request }: ActionArgs) => {
 
   switch (intent) {
     case 'save-as-draft':
-      const newDraftInvoice = getDraftInvoice(typedFormData);
-
-      await db.invoice.create({
-        data: newDraftInvoice,
-      });
-
+      await createInvoice({ status: InvoiceStatus.DRAFT, ...typedFormData });
       return redirect(`/invoices`);
     case 'save-and-send':
-      const newPendingInvoice = getPendingInvoice(typedFormData);
-
-      const fieldErrors = getFieldErrors(newPendingInvoice);
-      const formErrors = getFormErrors(newPendingInvoice, fieldErrors);
+      const fieldErrors = getFieldErrors(typedFormData);
+      const formErrors = getFormErrors(typedFormData, fieldErrors);
       if (fieldErrors || formErrors) {
         return badRequest<ActionData>({
           fieldErrors,
@@ -78,11 +69,8 @@ export const action = async ({ request }: ActionArgs) => {
         });
       }
 
-      await db.invoice.create({
-        data: newPendingInvoice,
-      });
-
-      return;
+      await createInvoice({ status: InvoiceStatus.PENDING, ...typedFormData });
+      return redirect(`/invoices`);
     default:
       return badRequest(`Unsupported intent: ${intent}`);
   }
