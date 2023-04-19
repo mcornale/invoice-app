@@ -24,7 +24,7 @@ import { useEffect, useState } from 'react';
 import { badRequest } from '~/utils/request.server';
 import { createInvoice } from '~/models/invoice.server';
 import { InvoiceStatus } from '@prisma/client';
-import { getUserIdFromSession } from '~/utils/session.server';
+import { requireUser } from '~/utils/session.server';
 
 export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -43,8 +43,7 @@ export const links: LinksFunction = () => {
 };
 
 export const action = async ({ request }: ActionArgs) => {
-  const userId = await getUserIdFromSession(request);
-  if (!userId) throw new Error('Not able to find userId from session');
+  const userId = await requireUser(request);
 
   const formData = await request.formData();
   const intent = formData.get('intent');
