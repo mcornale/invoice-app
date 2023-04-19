@@ -13,14 +13,13 @@ import type { ActionArgs, LinksFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import styles from './styles.css';
 import { Button } from '~/components/ui/button';
-import { useActionData, useNavigate, useNavigation } from '@remix-run/react';
+import { useActionData, useNavigation } from '@remix-run/react';
 import {
   getFieldErrors,
   getFormErrors,
   getFormattedInvoice,
   getInvoiceFormData,
 } from '~/helpers/invoice';
-import { useEffect, useState } from 'react';
 import { badRequest } from '~/utils/request.server';
 import { createInvoice } from '~/models/invoice.server';
 import { InvoiceStatus } from '@prisma/client';
@@ -97,8 +96,6 @@ export const action = async ({ request }: ActionArgs) => {
 export default function NewInvoiceRoute() {
   const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
-  const navigate = useNavigate();
-  const [navOpen, setNavOpen] = useState(false);
 
   const isSubmitting =
     navigation.state === 'submitting' || navigation.state === 'loading';
@@ -107,16 +104,8 @@ export default function NewInvoiceRoute() {
   const isSubmittingSaveAndSend =
     isSubmitting && navigation.formData?.get('intent') === 'save-and-send';
 
-  useEffect(() => {
-    setNavOpen(true);
-  }, []);
-
-  function handleOpenChange(open: boolean) {
-    if (!open) navigate(-1);
-  }
-
   return (
-    <SlideOver open={navOpen} onOpenChange={handleOpenChange}>
+    <SlideOver>
       <SlideOverContent title='New Invoice'>
         <InvoiceForm
           id='new-invoice-form'
