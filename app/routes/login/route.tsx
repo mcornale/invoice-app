@@ -64,11 +64,11 @@ export const action = async ({ request }: ActionArgs) => {
           ],
         });
 
-      const isLoginOk = await verifyPassword(
+      const canLogin = await verifyPassword(
         password,
         retrievedUser.passwordHash
       );
-      if (!isLoginOk)
+      if (!canLogin)
         return badRequest<ActionData>({
           fieldErrors: undefined,
           formErrors: ['Username/Password combination is incorrect'],
@@ -86,12 +86,6 @@ export const action = async ({ request }: ActionArgs) => {
       }
       const passwordHash = await getPasswordHash(password);
       const createdUser = await createUser({ username, passwordHash });
-      if (!createdUser)
-        return badRequest<ActionData>({
-          fieldErrors: undefined,
-          formErrors: ['Something went wrong trying to create a new user'],
-        });
-
       return createUserSession(createdUser.id, validRedirectTo);
     default:
       return badRequest<ActionData>({

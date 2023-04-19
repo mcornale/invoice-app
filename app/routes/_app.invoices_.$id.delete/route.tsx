@@ -55,7 +55,8 @@ export default function DeleteInvoiceRoute() {
 
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const isSubmitting = navigation.state === 'submitting';
+  const isSubmitting =
+    navigation.state === 'submitting' || navigation.state === 'loading';
 
   useEffect(() => {
     setDialogOpen(true);
