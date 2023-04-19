@@ -10,8 +10,6 @@ import {
   links as invoiceListLinks,
 } from '~/components/invoice-list';
 import { Outlet, useLoaderData, useSearchParams } from '@remix-run/react';
-import { useMediaQuery } from '~/hooks/use-media-query';
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { ButtonLink, links as buttonLinks } from '~/components/ui/button';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { parseDate } from '~/utils/parsers';
@@ -21,6 +19,7 @@ import {
 } from '~/helpers/invoice';
 import { getInvoiceList } from '~/models/invoice.server';
 import { getUserIdFromSession } from '~/utils/session.server';
+import { useResponsiveText } from '~/hooks/use-responsive-text';
 
 export const links: LinksFunction = () => {
   return [
@@ -47,33 +46,25 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function InvoicesRoute() {
   const data = useLoaderData<typeof loader>();
   const [params] = useSearchParams();
-  const matches = useMediaQuery('(max-width: 40em)');
 
-  const statusParams = params.getAll('status');
-  const status = parseInvoiceStatusParams(statusParams);
   const invoices = data.invoices.map((invoice) => ({
     ...invoice,
     paymentDue: invoice.paymentDue ? parseDate(invoice.paymentDue) : null,
   }));
+  const statusParams = params.getAll('status');
+  const status = parseInvoiceStatusParams(statusParams);
   const invoiceSummaryVerb = invoices.length === 1 ? 'is' : 'are';
   const invoiceSummaryObject = invoices.length === 1 ? 'invoice' : 'invoices';
   const invoiceSummaryStatus = getInvoiceSummaryStatus(status);
-  const invoiceSummaryText = matches ? (
-    <>
-      <VisuallyHidden.Root>There {invoiceSummaryVerb}</VisuallyHidden.Root>
-      {invoices.length}
-      <VisuallyHidden.Root>{invoiceSummaryStatus}</VisuallyHidden.Root> invoices
-    </>
-  ) : (
-    `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} ${invoiceSummaryObject}`
-  );
-  const newInvoiceButtonText = matches ? (
-    <>
-      New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>
-    </>
-  ) : (
-    'New Invoice'
-  );
+
+  const newButtonText = useResponsiveText({
+    defaultText: 'New Invoice',
+    smScreenText: 'New',
+  });
+  const invoiceSummaryText = useResponsiveText({
+    defaultText: `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} ${invoiceSummaryObject}`,
+    smScreenText: `${invoices.length} invoices`,
+  });
 
   return (
     <>
@@ -88,7 +79,7 @@ export default function InvoicesRoute() {
           />
           <ButtonLink variant='primary' to='new'>
             <PlusIcon />
-            {newInvoiceButtonText}
+            {newButtonText}
           </ButtonLink>
         </div>
       </header>
@@ -99,8 +90,8 @@ export default function InvoicesRoute() {
           <div className='no-invoices-text-container'>
             <h2 className='no-invoices-title'>There is nothing here</h2>
             <p>
-              Create an invoice by clicking the{' '}
-              <strong>{newInvoiceButtonText}</strong> button and get started
+              Create an invoice by clicking the <strong>{newButtonText}</strong>{' '}
+              button and get started
             </p>
           </div>
         </section>

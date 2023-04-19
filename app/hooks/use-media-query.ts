@@ -1,17 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+const doesWindowMatch = (query: string): boolean => {
+  if (typeof document !== 'undefined') {
+    return window.matchMedia(query).matches;
+  }
+  return false;
+};
 
 export function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false);
+  const [matches, setMatches] = useState<boolean>();
+
+  const handleResize = useCallback(() => {
+    setMatches(doesWindowMatch(query));
+  }, [query]);
 
   useEffect(() => {
-    const media = window.matchMedia(query);
-
-    const handleResize = () => {
-      setMatches(media.matches);
-    };
+    if (matches === undefined) handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [matches, query]);
+  }, [matches, handleResize]);
 
   return matches;
 }
