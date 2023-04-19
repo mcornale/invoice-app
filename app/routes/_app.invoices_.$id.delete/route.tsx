@@ -15,10 +15,9 @@ import {
 } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import { Form } from '~/components/ui/form';
-import { deleteInvoice, getInvoice } from '~/models/invoice.server';
+import { deleteInvoice } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
 import type { Invoice } from '@prisma/client';
-import { requireUser } from '~/utils/session.server';
 
 export const links: LinksFunction = () => {
   return [
@@ -31,17 +30,9 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const action = async ({ params, request }: ActionArgs) => {
-  const userId = await requireUser(request);
+export const action = async ({ params }: ActionArgs) => {
   const invoiceId = params.id;
   if (!isString(invoiceId)) throw new Error("This shouldn't be possible");
-
-  const invoice = await getInvoice(invoiceId);
-  if (!invoice) {
-    throw new Error('Invoice not found');
-  }
-  if (invoice.userId !== userId) throw new Error("You don't own this invoice!");
-
   await deleteInvoice(invoiceId);
   return redirect('/invoices');
 };

@@ -17,7 +17,7 @@ import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
-import { requireUser } from '~/utils/session.server';
+import { getUserIdFromSession } from '~/utils/session.server';
 import { getInvoice } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
 
@@ -34,7 +34,7 @@ export const links: LinksFunction = () => {
 };
 
 export const loader = async ({ params, request }: LoaderArgs) => {
-  const userId = await requireUser(request);
+  const userId = await getUserIdFromSession(request);
   const invoiceId = params.id;
   if (!isString(invoiceId)) throw new Error("This shouldn't be possible");
   const invoice = await getInvoice(invoiceId);

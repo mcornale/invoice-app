@@ -30,7 +30,7 @@ import {
 } from '~/helpers/invoice';
 import { Form, links as formLinks } from '~/components/ui/form';
 import { getInvoiceList } from '~/models/invoice.server';
-import { requireUser } from '~/utils/session.server';
+import { getUserIdFromSession } from '~/utils/session.server';
 
 export const links: LinksFunction = () => {
   return [
@@ -46,7 +46,7 @@ export const links: LinksFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const userId = await requireUser(request);
+  const userId = await getUserIdFromSession(request);
   const url = new URL(request.url);
   const statusParams = url.searchParams.getAll('status');
   const status = parseInvoiceStatusParams(statusParams);

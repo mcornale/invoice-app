@@ -36,7 +36,7 @@ export async function getUserIdFromSession(request: Request) {
   const session = await getUserSession(request);
   const userId = session.get('userId');
   if (!isString(userId)) {
-    return;
+    throw new Error("This shouldn't be possible");
   }
   return userId;
 }
