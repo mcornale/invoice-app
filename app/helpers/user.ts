@@ -3,7 +3,7 @@ import type {
   LoginFormFieldErrors,
 } from '~/components/login-form';
 import { hasSomeTruthyValues, isString } from '~/utils/checkers';
-import { ERROR_MESSAGES } from '~/utils/error-messages';
+import { ERROR_MESSAGES } from '~/constants/error-messages';
 import { isEmpty } from '~/utils/validators';
 import bcrypt from 'bcryptjs';
 import type { User } from '@prisma/client';

@@ -71,7 +71,7 @@ export const action = async ({ request }: ActionArgs) => {
       if (!canLogin)
         return badRequest<ActionData>({
           fieldErrors: undefined,
-          formErrors: ['Username/Password combination is incorrect'],
+          formErrors: ['username/password combination is incorrect'],
         });
 
       return createUserSession(retrievedUser.id, validRedirectTo);
@@ -90,7 +90,7 @@ export const action = async ({ request }: ActionArgs) => {
     default:
       return badRequest<ActionData>({
         fieldErrors: undefined,
-        formErrors: [`Unhandled intent: ${intent}`],
+        formErrors: [`unhandled intent: ${intent}`],
       });
   }
 };

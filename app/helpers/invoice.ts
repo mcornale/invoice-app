@@ -4,7 +4,7 @@ import type {
 } from '~/components/invoice-form';
 import { isArrOfString, isString, hasSomeTruthyValues } from '~/utils/checkers';
 import { isEmail, isEmpty, isNull, isPositive } from '~/utils/validators';
-import { ERROR_MESSAGES } from '~/utils/error-messages';
+import { ERROR_MESSAGES } from '~/constants/error-messages';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
 

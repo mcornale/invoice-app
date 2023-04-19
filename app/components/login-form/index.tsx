@@ -14,6 +14,7 @@ import styles from './styles.css';
 import { Input, links as inputLinks } from '../ui/input';
 import { Button, links as buttonLinks } from '../ui/button';
 import { useNavigation, useSearchParams } from '@remix-run/react';
+import { upperFirst } from '~/utils/formatters';
 
 export interface LoginFormFields {
   username: string;
@@ -104,7 +105,7 @@ export function LoginForm({
           {formErrors && (
             <FormField>
               {formErrors?.map((formError, index) => (
-                <FormError key={index}>{formError}</FormError>
+                <FormError key={index}>{upperFirst(formError)}</FormError>
               ))}
             </FormField>
           )}

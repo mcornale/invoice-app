@@ -52,7 +52,7 @@ export const action = async ({ request }: ActionArgs) => {
   if (!typedFormData)
     return badRequest<ActionData>({
       fieldErrors: undefined,
-      formErrors: ['Form not submitted correctly'],
+      formErrors: ['form not submitted correctly'],
     });
 
   switch (intent) {
@@ -88,7 +88,7 @@ export const action = async ({ request }: ActionArgs) => {
     default:
       return badRequest<ActionData>({
         fieldErrors: undefined,
-        formErrors: [`Unhandled intent: ${intent}`],
+        formErrors: [`unhandled intent: ${intent}`],
       });
   }
 };

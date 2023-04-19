@@ -17,6 +17,7 @@ import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 import { Input, links as inputLinks } from '../ui/input';
 import { Select, links as selectLinks } from '../ui/select';
+import { upperFirst } from '~/utils/formatters';
 
 export const PAYMENT_TERMS_OPTIONS = [
   { text: 'net 1 day', value: '1' },
@@ -313,7 +314,7 @@ export function InvoiceForm({
       {formErrors && (
         <FormField>
           {formErrors?.map((formError, index) => (
-            <FormError key={index}>{formError}</FormError>
+            <FormError key={index}>{upperFirst(formError)}</FormError>
           ))}
         </FormField>
       )}
