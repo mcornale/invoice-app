@@ -79,7 +79,7 @@ export default function InvoicesRoute() {
           <InvoiceListFilter
             activeStatus={parseInvoiceStatusParams(statusParams)}
           />
-          <ButtonLink variant='primary' to='new'>
+          <ButtonLink variant='primary' to={`new?${params}`}>
             <PlusIcon />
             {newButtonText}
           </ButtonLink>
