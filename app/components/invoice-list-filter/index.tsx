@@ -38,7 +38,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function InvoicesFilter({ activeStatus }: InvoicesFilterProps) {
+export function InvoiceListFilter({ activeStatus }: InvoicesFilterProps) {
   const submit = useSubmit();
   const matches = useMediaQuery('(max-width: 40em)');
 
@@ -56,15 +56,15 @@ export function InvoicesFilter({ activeStatus }: InvoicesFilterProps) {
 
   return (
     <Popover>
-      <PopoverTrigger className='invoices-filter-trigger' asChild>
+      <PopoverTrigger className='invoice-list-filter-trigger' asChild>
         <Button variant='secondary-gray'>
           {filterByStatusText} <CaretDownIcon />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='invoices-filter-content'>
+      <PopoverContent className='invoice-list-filter-content'>
         <Form
           method='get'
-          className='invoices-filter-form'
+          className='invoice-list-filter-form'
           onChange={handleChange}
         >
           <FormField>

@@ -1,13 +1,13 @@
-.invoices-filter-trigger[data-state='open'] svg {
+.invoice-list-filter-trigger[data-state='open'] svg {
   transform: rotate(180deg);
 }
 
-.invoices-filter-content {
+.invoice-list-filter-content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
 }
 
-.invoices-filter-form {
+.invoice-list-filter-form {
   gap: inherit;
 }

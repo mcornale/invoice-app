@@ -2,9 +2,9 @@ import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
-  InvoicesFilter,
+  InvoiceListFilter,
   links as invoicesFilterLinks,
-} from '~/components/invoices-filter';
+} from '~/components/invoice-list-filter';
 import {
   InvoiceList,
   links as invoiceListLinks,
@@ -101,7 +101,7 @@ export default function InvoicesRoute() {
           <span className='invoice-list-summary'>{invoiceSummaryText}</span>
         </div>
         <div className='invoice-list-actions'>
-          <InvoicesFilter
+          <InvoiceListFilter
             activeStatus={parseInvoiceStatusParams(statusParams)}
           />
           <ButtonLink variant='primary' to='new'>
