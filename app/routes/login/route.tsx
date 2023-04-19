@@ -35,9 +35,9 @@ export const action = async ({ request }: ActionArgs) => {
 
   const typedFormData = getLoginFormData(formData);
   if (!typedFormData)
-    return badRequest({
-      fieldErrors: null,
-      formError: 'Form not submitted correctly',
+    return badRequest<ActionData>({
+      fieldErrors: undefined,
+      formErrors: ['form not submitted correctly'],
     });
 
   const redirectTo = formData.get('redirectTo') as string;

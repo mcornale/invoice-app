@@ -1,10 +1,6 @@
-import { useNavigate } from '@remix-run/react';
-import { useEffect } from 'react';
+import type { LoaderArgs } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 
-export default function IndexRoute() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate('invoices', { replace: true });
-  }, [navigate]);
-}
+export const loader = ({ request }: LoaderArgs) => {
+  throw redirect('/invoices');
+};

@@ -8,7 +8,7 @@ if (!sessionSecret) {
 
 export const storage = createCookieSessionStorage({
   cookie: {
-    name: 'IA_session',
+    name: 'invoice_app',
     secure: process.env.NODE_ENV === 'production',
     secrets: [sessionSecret],
     sameSite: 'lax',
@@ -28,16 +28,19 @@ export async function createUserSession(userId: string, redirectTo: string) {
   });
 }
 
-export function getUserSession(request: Request) {
-  return storage.getSession(request.headers.get('Cookie'));
+function getUserSession(request: Request) {
+  const cookie = request.headers.get('Cookie');
+  return storage.getSession(cookie);
 }
 
-export async function getUserIdFromSession(request: Request) {
-  const session = await getUserSession(request);
+export async function getUserIdFromSession(
+  request: Request,
+  redirectTo: string = new URL(request.url).pathname
+) {
+  const session = await requireUserSession(request, redirectTo);
   const userId = session.get('userId');
-  if (!isString(userId)) {
-    throw new Error("This shouldn't be possible");
-  }
+  if (!isString(userId)) throw new Error("This shouldn't be possible");
+
   return userId;
 }
 
@@ -45,12 +48,13 @@ export async function requireUserSession(
   request: Request,
   redirectTo: string = new URL(request.url).pathname
 ) {
-  const userId = await getUserIdFromSession(request);
+  const session = await getUserSession(request);
+  const userId = session.get('userId');
   if (!userId) {
     const searchParams = new URLSearchParams([['redirectTo', redirectTo]]);
     throw redirect(`/login?${searchParams}`);
   }
-  return userId;
+  return session;
 }
 
 export async function destroyUserSession(request: Request) {
