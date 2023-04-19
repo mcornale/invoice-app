@@ -53,7 +53,7 @@ export async function requireUser(
   return userId;
 }
 
-export async function logoutUser(request: Request) {
+export async function destroyUserSession(request: Request) {
   const session = await getUserSession(request);
   return redirect('/login', {
     headers: {

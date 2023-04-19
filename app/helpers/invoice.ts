@@ -265,3 +265,60 @@ export const getInvoiceSummaryStatus = (status: InvoiceStatus[]) => {
     return 'total';
   else return status.join(' and ').toLowerCase();
 };
+
+export interface CreateInvoiceParams extends InvoiceFormFields {
+  status: InvoiceStatus;
+}
+
+export function getFormattedInvoice({
+  status,
+  ...fields
+}: CreateInvoiceParams) {
+  const displayId = getInvoiceDisplayId();
+  const senderAddress = {
+    street: fields.senderAddressStreet,
+    city: fields.senderAddressCity,
+    postCode: fields.senderAddressPostCode,
+    country: fields.senderAddressCountry,
+  };
+  const clientName = fields.clientName;
+  const clientEmail = fields.clientEmail;
+  const clientAddress = {
+    street: fields.clientAddressStreet,
+    city: fields.clientAddressCity,
+    postCode: fields.clientAddressPostCode,
+    country: fields.clientAddressCountry,
+  };
+  const paymentTerms = Number(fields.paymentTerms);
+  const description = fields.description;
+  const createdAt = parseDate(fields.createdAt);
+  const paymentDue =
+    createdAt instanceof Date
+      ? getInvoicePaymentDue(createdAt, paymentTerms)
+      : null;
+  const items = getInvoiceItems({
+    itemNames: fields.itemNames,
+    itemQuantities: fields.itemQuantities,
+    itemPrices: fields.itemPrices,
+    itemTotals: fields.itemTotals,
+  });
+  const total = items.reduce(
+    (prevVal, currItem) => prevVal + currItem.total,
+    0
+  );
+
+  return {
+    displayId,
+    senderAddress,
+    clientAddress,
+    clientName,
+    clientEmail,
+    description,
+    createdAt,
+    paymentTerms,
+    paymentDue,
+    items,
+    status,
+    total,
+  };
+}

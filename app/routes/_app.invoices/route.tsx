@@ -30,6 +30,7 @@ import {
 } from '~/helpers/invoice';
 import { Form } from '~/components/ui/form';
 import { getInvoiceList } from '~/models/invoice.server';
+import { requireUser } from '~/utils/session.server';
 
 export const links: LinksFunction = () => {
   return [
@@ -44,10 +45,11 @@ export const links: LinksFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
+  const userId = await requireUser(request);
   const url = new URL(request.url);
   const statusParams = url.searchParams.getAll('status');
   const status = parseInvoiceStatusParams(statusParams);
-  const invoices = await getInvoiceList(status);
+  const invoices = await getInvoiceList(status, userId);
 
   return json({ invoices });
 };
@@ -118,7 +120,7 @@ export default function InvoicesRoute() {
               invoices by clicking the button below to get started.
             </p>
           </div>
-          <Form method='get' action='/generate-demo-invoices'>
+          <Form method='get' action='/get-demo-invoices'>
             <Button
               variant='primary'
               name='intent'

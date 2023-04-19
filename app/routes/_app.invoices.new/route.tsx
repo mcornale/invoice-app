@@ -17,6 +17,7 @@ import { useActionData, useNavigate, useNavigation } from '@remix-run/react';
 import {
   getFieldErrors,
   getFormErrors,
+  getFormattedInvoice,
   getInvoiceFormData,
 } from '~/helpers/invoice';
 import { useEffect, useState } from 'react';
@@ -42,6 +43,9 @@ export const links: LinksFunction = () => {
 };
 
 export const action = async ({ request }: ActionArgs) => {
+  const userId = await getUserIdFromSession(request);
+  if (!userId) throw new Error('Not able to find userId from session');
+
   const formData = await request.formData();
   const intent = formData.get('intent');
 
@@ -52,15 +56,15 @@ export const action = async ({ request }: ActionArgs) => {
       formErrors: ['Form not submitted correctly'],
     });
 
-  const userId = await getUserIdFromSession(request);
-  if (!userId) throw new Error('User id should be defined here');
-
   switch (intent) {
     case 'save-as-draft':
-      await createInvoice({
-        userId,
+      const newDraftInvoice = getFormattedInvoice({
         status: InvoiceStatus.DRAFT,
         ...typedFormData,
+      });
+      await createInvoice({
+        userId,
+        ...newDraftInvoice,
       });
       return redirect(`/invoices`);
     case 'save-and-send':
@@ -73,10 +77,13 @@ export const action = async ({ request }: ActionArgs) => {
         });
       }
 
-      await createInvoice({
-        userId,
+      const newPendingInvoice = getFormattedInvoice({
         status: InvoiceStatus.PENDING,
         ...typedFormData,
+      });
+      await createInvoice({
+        userId,
+        ...newPendingInvoice,
       });
       return redirect(`/invoices`);
     default:

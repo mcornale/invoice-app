@@ -6,7 +6,7 @@ import {
   getPasswordHash,
   validateRedirectTo,
   verifyPassword,
-} from '~/helpers/login';
+} from '~/helpers/user';
 import { badRequest } from '~/utils/request.server';
 import type { LoginFormFieldErrors } from '~/components/login-form';
 import { LoginForm, links as loginFormLinks } from '~/components/login-form';
