@@ -2,9 +2,16 @@ import { PrismaClient, InvoiceStatus } from '@prisma/client';
 const db = new PrismaClient();
 
 async function seed() {
+  const demoUser = await db.user.create({
+    data: {
+      username: 'demo',
+      passwordHash:
+        '$2a$10$TTDegoQr6qAdnbUEwyspb.X7u7BvRAEqXqEOwR.8fRfjjMChLIgnO',
+    },
+  });
   await Promise.all(
     getInvoices().map((invoice) => {
-      return db.invoice.create({ data: invoice });
+      return db.invoice.create({ data: { userId: demoUser.id, ...invoice } });
     })
   );
 }

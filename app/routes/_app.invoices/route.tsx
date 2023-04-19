@@ -3,41 +3,30 @@ import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
   InvoiceListFilter,
-  links as invoicesFilterLinks,
+  links as invoiceListFilterLinks,
 } from '~/components/invoice-list-filter';
 import {
   InvoiceList,
   links as invoiceListLinks,
 } from '~/components/invoice-list';
-import {
-  Outlet,
-  useLoaderData,
-  useNavigation,
-  useSearchParams,
-} from '@remix-run/react';
+import { Outlet, useLoaderData, useSearchParams } from '@remix-run/react';
 import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import {
-  Button,
-  ButtonLink,
-  links as buttonLinks,
-} from '~/components/ui/button';
+import { ButtonLink, links as buttonLinks } from '~/components/ui/button';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { parseDate } from '~/utils/parsers';
 import {
   getInvoiceSummaryStatus,
   parseInvoiceStatusParams,
 } from '~/helpers/invoice';
-import { Form, links as formLinks } from '~/components/ui/form';
 import { getInvoiceList } from '~/models/invoice.server';
 import { getUserIdFromSession } from '~/utils/session.server';
 
 export const links: LinksFunction = () => {
   return [
-    ...invoicesFilterLinks(),
+    ...invoiceListFilterLinks(),
     ...invoiceListLinks(),
     ...buttonLinks(),
-    ...formLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -57,14 +46,9 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function InvoicesRoute() {
   const data = useLoaderData<typeof loader>();
-  const navigation = useNavigation();
   const [params] = useSearchParams();
   const matches = useMediaQuery('(max-width: 40em)');
 
-  const isSubmitting =
-    navigation.state === 'submitting' || navigation.state === 'loading';
-  const isSubmittingDemoInvoices =
-    isSubmitting && navigation.formData?.get('intent') === 'get-demo-invoices';
   const statusParams = params.getAll('status');
   const status = parseInvoiceStatusParams(statusParams);
   const invoices = data.invoices.map((invoice) => ({
@@ -74,7 +58,6 @@ export default function InvoicesRoute() {
   const invoiceSummaryVerb = invoices.length === 1 ? 'is' : 'are';
   const invoiceSummaryObject = invoices.length === 1 ? 'invoice' : 'invoices';
   const invoiceSummaryStatus = getInvoiceSummaryStatus(status);
-
   const invoiceSummaryText = matches ? (
     <>
       <VisuallyHidden.Root>There {invoiceSummaryVerb}</VisuallyHidden.Root>
@@ -84,7 +67,6 @@ export default function InvoicesRoute() {
   ) : (
     `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} ${invoiceSummaryObject}`
   );
-
   const newInvoiceButtonText = matches ? (
     <>
       New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>
@@ -118,20 +100,9 @@ export default function InvoicesRoute() {
             <h2 className='no-invoices-title'>There is nothing here</h2>
             <p>
               Create an invoice by clicking the{' '}
-              <strong>{newInvoiceButtonText}</strong> button, or get demo
-              invoices by clicking the button below to get started.
+              <strong>{newInvoiceButtonText}</strong> button and get started
             </p>
           </div>
-          <Form method='get' action='/get-demo-invoices'>
-            <Button
-              variant='primary'
-              name='intent'
-              value='get-demo-invoices'
-              showSpinner={isSubmittingDemoInvoices}
-            >
-              Get Demo Invoices
-            </Button>
-          </Form>
         </section>
       )}
       <Outlet />
