@@ -35,6 +35,7 @@ export const links: LinksFunction = () => {
 
 export const loader = async ({ params, request }: LoaderArgs) => {
   const userId = await getUserIdFromSession(request);
+  if (!userId) throw new Error("This shouldn't be possible");
   const invoiceId = params.id;
   if (!isString(invoiceId)) throw new Error("This shouldn't be possible");
   const invoice = await getInvoice(invoiceId);

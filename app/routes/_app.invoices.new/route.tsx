@@ -44,6 +44,7 @@ export const links: LinksFunction = () => {
 
 export const action = async ({ request }: ActionArgs) => {
   const userId = await getUserIdFromSession(request);
+  if (!userId) throw new Error("This shouldn't be possible");
 
   const formData = await request.formData();
   const intent = formData.get('intent');

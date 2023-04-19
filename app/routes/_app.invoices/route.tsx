@@ -35,6 +35,8 @@ export const links: LinksFunction = () => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   const userId = await getUserIdFromSession(request);
+  if (!userId) throw new Error("This shouldn't be possible");
+
   const url = new URL(request.url);
   const statusParams = url.searchParams.getAll('status');
   const status = parseInvoiceStatusParams(statusParams);

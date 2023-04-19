@@ -33,13 +33,10 @@ function getUserSession(request: Request) {
   return storage.getSession(cookie);
 }
 
-export async function getUserIdFromSession(
-  request: Request,
-  redirectTo: string = new URL(request.url).pathname
-) {
-  const session = await requireUserSession(request, redirectTo);
+export async function getUserIdFromSession(request: Request) {
+  const session = await getUserSession(request);
   const userId = session.get('userId');
-  if (!isString(userId)) throw new Error("This shouldn't be possible");
+  if (!userId || !isString(userId)) return;
 
   return userId;
 }
