@@ -18,7 +18,6 @@ import { Form } from '~/components/ui/form';
 import { deleteInvoice } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
 import type { Invoice } from '@prisma/client';
-import { requireUser } from '~/utils/session.server';
 
 export const links: LinksFunction = () => {
   return [

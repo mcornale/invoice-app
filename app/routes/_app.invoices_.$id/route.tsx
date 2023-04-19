@@ -15,9 +15,10 @@ import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
-import { db } from '~/utils/db.server';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
+import { requireUser } from '~/utils/session.server';
+import { getInvoice } from '~/models/invoice.server';
 
 export const links: LinksFunction = () => {
   return [
@@ -32,12 +33,14 @@ export const links: LinksFunction = () => {
 };
 
 export const loader = async ({ params, request }: LoaderArgs) => {
+  const userId = await requireUser(request);
   const invoiceId = params.id;
-  const invoice = await db.invoice.findUnique({ where: { id: invoiceId } });
-
+  const invoice = await getInvoice(invoiceId);
   if (!invoice) {
     throw new Error('Invoice not found');
   }
+
+  if (invoice.userId !== userId) throw new Error("You don't own this invoice!");
 
   return json({
     invoice,

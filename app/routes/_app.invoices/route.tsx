@@ -28,7 +28,7 @@ import {
   getInvoiceSummaryStatus,
   parseInvoiceStatusParams,
 } from '~/helpers/invoice';
-import { Form } from '~/components/ui/form';
+import { Form, links as formLinks } from '~/components/ui/form';
 import { getInvoiceList } from '~/models/invoice.server';
 import { requireUser } from '~/utils/session.server';
 
@@ -37,6 +37,7 @@ export const links: LinksFunction = () => {
     ...invoicesFilterLinks(),
     ...invoiceListLinks(),
     ...buttonLinks(),
+    ...formLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -83,6 +84,7 @@ export default function InvoicesRoute() {
   ) : (
     `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} ${invoiceSummaryObject}`
   );
+
   const newInvoiceButtonText = matches ? (
     <>
       New <VisuallyHidden.Root>Invoice</VisuallyHidden.Root>

@@ -1,6 +1,6 @@
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Outlet, useLoaderData } from '@remix-run/react';
+import { Outlet } from '@remix-run/react';
 import styles from './styles.css';
 import { requireUser } from '~/utils/session.server';
 import { Form, links as formLinks } from '~/components/ui/form';
@@ -25,25 +25,21 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 export default function AppRoute() {
-  const data = useLoaderData<typeof loader>();
-
   return (
     <div className='app'>
       <header className='app-header'>
         <img className='logo' src='/logo.svg' alt='logo' />
         <div className='app-header-actions'>
-          {data.userId && (
-            <Form action='/logout' method='post'>
-              <Button
-                variant='tertiary-gray'
-                type='submit'
-                className='logout-button'
-              >
-                <ExitIcon />
-                <VisuallyHidden.Root>Logout</VisuallyHidden.Root>
-              </Button>
-            </Form>
-          )}
+          <Form action='/logout' method='post'>
+            <Button
+              variant='tertiary-gray'
+              type='submit'
+              className='logout-button'
+            >
+              <ExitIcon />
+              <VisuallyHidden.Root>Logout</VisuallyHidden.Root>
+            </Button>
+          </Form>
         </div>
       </header>
       <main className='app-main'>

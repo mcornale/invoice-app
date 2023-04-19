@@ -31,3 +31,7 @@ export async function getInvoiceList(
     },
   });
 }
+
+export async function getInvoice(invoiceId?: Invoice['id']) {
+  return db.invoice.findUnique({ where: { id: invoiceId } });
+}

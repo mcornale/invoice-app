@@ -32,7 +32,7 @@ export function validateUsername(val: string) {
 
 export function validatePassword(val: string) {
   if (val.length < 6) {
-    return 'must be at least 6 chars long';
+    return 'must be at least 6 characters long';
   }
 }
 
