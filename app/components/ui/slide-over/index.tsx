@@ -8,6 +8,7 @@ import styles from './styles.css';
 export interface SlideOverContentProps extends Dialog.DialogContentProps {
   title: string;
 }
+export interface SlideOverProps extends Omit<Dialog.DialogProps, 'modal'> {}
 
 export const links: LinksFunction = () => {
   return [
@@ -18,7 +19,10 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const SlideOver = Dialog.Root;
+export const SlideOver = ({ ...props }: SlideOverProps) => {
+  return <Dialog.Root modal={false} {...props} />;
+};
+
 export const SlideOverTrigger = Dialog.Trigger;
 export const SlideOverClose = Dialog.Close;
 
@@ -34,7 +38,7 @@ export const SlideOverContent = forwardRef<
 
   return (
     <Dialog.Portal container={container}>
-      <Dialog.Overlay className='slide-over-overlay' />
+      <div className='slide-over-overlay' aria-hidden />
       <Dialog.Content
         className='slide-over-content'
         aria-describedby={undefined}
