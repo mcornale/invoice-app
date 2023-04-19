@@ -3,15 +3,16 @@ import styles from './styles.css';
 import {
   getFieldErrors,
   getLoginFormData,
+  getPasswordHash,
   validateRedirectTo,
+  verifyPassword,
 } from '~/helpers/login';
 import { badRequest } from '~/utils/request.server';
-import { db } from '~/utils/db.server';
 import type { LoginFormFieldErrors } from '~/components/login-form';
 import { LoginForm, links as loginFormLinks } from '~/components/login-form';
 import { useActionData } from '@remix-run/react';
-import { loginUser, signUpUser } from '~/models/user.server';
 import { createUserSession } from '~/utils/session.server';
+import { createUser, getUserByUsername } from '~/models/user.server';
 
 export interface ActionData {
   fieldErrors?: LoginFormFieldErrors;
@@ -51,11 +52,23 @@ export const action = async ({ request }: ActionArgs) => {
     });
   }
 
+  const retrievedUser = await getUserByUsername(username);
+
   switch (intent) {
     case 'login':
-      const retrievedUser = await loginUser({ username, password });
-
       if (!retrievedUser)
+        return badRequest<ActionData>({
+          fieldErrors: undefined,
+          formErrors: [
+            `User with username '${username}' doesn't exist. You must sign up`,
+          ],
+        });
+
+      const isLoginOk = await verifyPassword(
+        password,
+        retrievedUser.passwordHash
+      );
+      if (!isLoginOk)
         return badRequest<ActionData>({
           fieldErrors: undefined,
           formErrors: ['Username/Password combination is incorrect'],
@@ -63,18 +76,16 @@ export const action = async ({ request }: ActionArgs) => {
 
       return createUserSession(retrievedUser.id, validRedirectTo);
     case 'sign-up':
-      const userExists = await db.user.findFirst({
-        where: { username },
-      });
-
-      if (userExists) {
+      if (retrievedUser) {
         return badRequest<ActionData>({
           fieldErrors: undefined,
-          formErrors: [`User with username '${username}' already exists`],
+          formErrors: [
+            `User with username '${username}' already exists. You must login`,
+          ],
         });
       }
-
-      const createdUser = await signUpUser({ username, password });
+      const passwordHash = await getPasswordHash(password);
+      const createdUser = await createUser({ username, passwordHash });
       if (!createdUser)
         return badRequest<ActionData>({
           fieldErrors: undefined,

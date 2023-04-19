@@ -5,6 +5,8 @@ import type {
 import { hasSomeTruthyValues, isString } from '~/utils/checkers';
 import { ERROR_MESSAGES } from '~/utils/error-messages';
 import { isEmpty } from '~/utils/validators';
+import bcrypt from 'bcryptjs';
+import type { User } from '@prisma/client';
 
 export function getLoginFormData(
   formData: FormData
@@ -51,4 +53,18 @@ export function getFieldErrors(
   };
 
   return hasSomeTruthyValues(fieldErrors) ? fieldErrors : undefined;
+}
+
+export async function verifyPassword(
+  password: LoginFormFields['password'],
+  passwordHash: User['passwordHash']
+) {
+  const isPasswordOk = await bcrypt.compare(password, passwordHash);
+
+  return isPasswordOk;
+}
+
+export async function getPasswordHash(password: LoginFormFields['password']) {
+  const passwordHash = await bcrypt.hash(password, 10);
+  return passwordHash;
 }

@@ -78,9 +78,9 @@
   --font-text-2xs: 1rem/1.5rem var(--font-family);
 
   /* SHADOWS */
-  --shadow-outline-violet: 0 0 0 0.3rem var(--color-violet-6);
-  --shadow-outline-mauve: 0 0 0 0.3rem var(--color-mauve-6);
-  --shadow-outline-red: 0 0 0 0.3rem var(--color-red-6);
+  --shadow-outline-violet: 0 0 0 0.2rem var(--color-violet-6);
+  --shadow-outline-mauve: 0 0 0 0.2rem var(--color-mauve-6);
+  --shadow-outline-red: 0 0 0 0.2rem var(--color-red-6);
   --shadow-3xl: 0rem 3.2rem 6.4rem -1.2rem hsla(260, 25%, 11%, 1.4);
   --shadow-2xl: 0rem 2.4rem 4.8rem -1.2rem hsla(260, 25%, 11%, 1.8);
   --shadow-xl: 0rem 2rem 2.4rem -0.4rem hsla(260, 25%, 11%, 0.08),

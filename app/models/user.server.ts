@@ -1,45 +1,35 @@
-import bcrypt from 'bcryptjs';
-import type { LoginFormFields } from '~/components/login-form';
+import type { User } from '@prisma/client';
 import { db } from '~/utils/db.server';
-import { getUserIdFromSession, logoutUser } from '~/utils/session.server';
 
-export async function loginUser({ password, username }: LoginFormFields) {
+export type UserWithoutId = Omit<User, 'id'>;
+
+export async function getUserByUsername(username: User['username']) {
   const user = await db.user.findUnique({
     where: { username },
   });
+
   if (!user) {
     return;
   }
 
-  const isCorrectPassword = await bcrypt.compare(password, user.passwordHash);
-  if (!isCorrectPassword) {
-    return;
-  }
-
-  return { id: user.id, username };
+  return user;
 }
 
-export async function signUpUser({ password, username }: LoginFormFields) {
-  const passwordHash = await bcrypt.hash(password, 10);
-  const user = await db.user.create({
-    data: { passwordHash, username },
+export async function getUserById(userId: User['id']) {
+  const user = await db.user.findUnique({
+    where: { id: userId },
   });
-  return { id: user.id, username };
-}
 
-export async function getUser(request: Request) {
-  const userId = await getUserIdFromSession(request);
-  if (!userId) {
+  if (!user) {
     return;
   }
 
-  try {
-    const user = await db.user.findUnique({
-      select: { id: true, username: true },
-      where: { id: userId },
-    });
-    return user;
-  } catch {
-    throw logoutUser(request);
-  }
+  return user;
+}
+
+export async function createUser(data: UserWithoutId) {
+  const user = await db.user.create({
+    data: { username: data.username, passwordHash: data.passwordHash },
+  });
+  return user;
 }
