@@ -2,7 +2,7 @@ import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 import styles from './styles.css';
-import { requireUser } from '~/utils/session.server';
+import { requireUserSession } from '~/utils/session.server';
 import { Form, links as formLinks } from '~/components/ui/form';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import { ExitIcon } from '@radix-ui/react-icons';
@@ -20,7 +20,7 @@ export const links: LinksFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const userId = await requireUser(request);
+  const userId = await requireUserSession(request);
   return json({ userId });
 };
 
