@@ -1,12 +1,14 @@
-import { Button } from '../ui/button';
+import { Button } from '~/components/ui/button';
 import {
   SlideOver,
   SlideOverClose,
   SlideOverContent,
-  SlideOverTrigger,
   links as slideOverLinks,
-} from '../ui/slide-over';
-import { InvoiceForm, links as invoiceFormLinks } from '../invoice-form';
+} from '~/components/ui/slide-over';
+import {
+  InvoiceForm,
+  links as invoiceFormLinks,
+} from '~/components/invoice-form';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
 
@@ -21,12 +23,9 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function EditInvoice() {
+export default function EditInvoiceRoute() {
   return (
     <SlideOver>
-      <SlideOverTrigger asChild>
-        <Button variant='secondary-gray'>Edit</Button>
-      </SlideOverTrigger>
       <SlideOverContent title='Edit Invoice'>
         <InvoiceForm id='edit-invoice-form' />
         <div className='edit-invoice-form-actions'>

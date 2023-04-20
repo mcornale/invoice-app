@@ -1,10 +1,6 @@
 import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { Outlet, useLoaderData, useNavigate } from '@remix-run/react';
-import {
-  EditInvoice,
-  links as editInvoiceLinks,
-} from '~/components/edit-invoice';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import {
   Button,
@@ -23,7 +19,6 @@ import { isString } from '~/utils/checkers';
 
 export const links: LinksFunction = () => {
   return [
-    ...editInvoiceLinks(),
     ...badgeLinks(),
     ...buttonLinks(),
     {
@@ -98,7 +93,9 @@ export default function InvoiceRoute() {
           </dd>
         </dl>
         <div className='invoice-actions'>
-          <EditInvoice />
+          <ButtonLink to='edit' variant='secondary-gray'>
+            Edit
+          </ButtonLink>
           <ButtonLink to='delete' variant='primary-destructive'>
             Delete
           </ButtonLink>
