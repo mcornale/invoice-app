@@ -36,14 +36,6 @@ export function validatePassword(val: string) {
   }
 }
 
-export function validateRedirectTo(redirectTo: string) {
-  const urls = ['/invoices'];
-  if (urls.includes(redirectTo)) {
-    return redirectTo;
-  }
-  return '/invoices';
-}
-
 export function getFieldErrors(
   fields: LoginFormFields
 ): LoginFormFieldErrors | undefined {

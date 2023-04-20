@@ -6,7 +6,6 @@ import {
   getFieldErrors,
   getLoginFormData,
   getPasswordHash,
-  validateRedirectTo,
   verifyPassword,
 } from '~/helpers/user';
 import { badRequest } from '~/utils/request.server';
@@ -52,7 +51,6 @@ export const action = async ({ request }: ActionArgs) => {
     });
 
   const redirectTo = formData.get('redirectTo') as string;
-  const validRedirectTo = validateRedirectTo(redirectTo);
   const { username, password } = typedFormData;
 
   const fieldErrors = getFieldErrors(typedFormData);
@@ -85,7 +83,7 @@ export const action = async ({ request }: ActionArgs) => {
           formErrors: ['username/password combination is incorrect'],
         });
 
-      return createUserSession(retrievedUser.id, validRedirectTo);
+      return createUserSession(retrievedUser.id, redirectTo);
     case 'sign-up':
       if (retrievedUser) {
         return badRequest<ActionData>({
@@ -97,7 +95,7 @@ export const action = async ({ request }: ActionArgs) => {
       }
       const passwordHash = await getPasswordHash(password);
       const createdUser = await createUser({ username, passwordHash });
-      return createUserSession(createdUser.id, validRedirectTo);
+      return createUserSession(createdUser.id, redirectTo);
     default:
       return badRequest<ActionData>({
         fieldErrors: undefined,
