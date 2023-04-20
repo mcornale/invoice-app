@@ -1,4 +1,4 @@
-:root {
+html {
   /* COLORS */
   /* brand scale */
   --color-violet-1: hsl(255, 65%, 99.4%);
@@ -117,7 +117,7 @@
   --spacing-48: calc(48 * var(--spacing-unit));
 }
 
-body.dark-mode {
+html.dark {
   /* brand scale dark */
   --color-violet-1: hsl(250, 20%, 10.2%);
   --color-violet-2: hsl(255, 30.3%, 12.9%);
@@ -199,7 +199,7 @@ body.dark-mode {
 }
 
 @media (max-width: 64em) {
-  :root {
+  html {
     --font-text-3xl: 2.4rem/3.2rem var(--font-family);
     --font-text-2xl: 2rem/3rem var(--font-family);
     --font-text-xl: 1.8rem/2.8rem var(--font-family);

@@ -361,7 +361,7 @@ export function InvoiceFormItem({ onDelete }: InvoiceFormItemProps) {
         readOnly
         value={Number(quantity) * Number(price)}
       />
-      <Button onClick={onDelete} type='button' variant='tertiary-gray'>
+      <Button onClick={onDelete} type='button' variant='tertiary-gray' iconOnly>
         <TrashIcon />
         <VisuallyHidden.Root>Delete Item</VisuallyHidden.Root>
       </Button>

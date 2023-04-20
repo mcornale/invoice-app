@@ -20,9 +20,10 @@
   align-items: center;
 }
 
-.app-header .logout-button svg {
-  width: 1.6rem;
-  height: auto;
+.app-header-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
 }
 
 .app-main {

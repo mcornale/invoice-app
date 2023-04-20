@@ -6,9 +6,9 @@ if (!sessionSecret) {
   throw new Error('SESSION_SECRET must be set');
 }
 
-export const storage = createCookieSessionStorage({
+export const userStorage = createCookieSessionStorage({
   cookie: {
-    name: 'invoice_app',
+    name: 'invoice_app_user',
     secure: process.env.NODE_ENV === 'production',
     secrets: [sessionSecret],
     sameSite: 'lax',
@@ -18,19 +18,49 @@ export const storage = createCookieSessionStorage({
   },
 });
 
+export const themeStorage = createCookieSessionStorage({
+  cookie: {
+    name: 'invoice_app_theme',
+    secure: process.env.NODE_ENV === 'production',
+    secrets: [sessionSecret],
+    sameSite: 'lax',
+    path: '/',
+    httpOnly: true,
+  },
+});
+
 export async function createUserSession(userId: string, redirectTo: string) {
-  const session = await storage.getSession();
+  const session = await userStorage.getSession();
   session.set('userId', userId);
   return redirect(redirectTo, {
     headers: {
-      'Set-Cookie': await storage.commitSession(session),
+      'Set-Cookie': await userStorage.commitSession(session),
+    },
+  });
+}
+
+export async function createThemeSession(
+  theme: string,
+  request: Request,
+  redirectTo: string = new URL(request.url).pathname
+) {
+  const session = await themeStorage.getSession();
+  session.set('theme', theme);
+  return redirect(redirectTo, {
+    headers: {
+      'Set-Cookie': await themeStorage.commitSession(session),
     },
   });
 }
 
 function getUserSession(request: Request) {
   const cookie = request.headers.get('Cookie');
-  return storage.getSession(cookie);
+  return userStorage.getSession(cookie);
+}
+
+export function getThemeSession(request: Request) {
+  const cookie = request.headers.get('Cookie');
+  return themeStorage.getSession(cookie);
 }
 
 export async function getUserIdFromSession(request: Request) {
@@ -39,6 +69,19 @@ export async function getUserIdFromSession(request: Request) {
   if (!userId || !isString(userId)) return;
 
   return userId;
+}
+
+export async function getThemeFromSession(request: Request) {
+  const session = await getThemeSession(request);
+  const theme = session.get('theme');
+  if (!theme || !isString(theme)) return;
+
+  return theme;
+}
+
+export async function setThemeInSession(theme: string, request: Request) {
+  const session = await getThemeSession(request);
+  session.set('theme', theme);
 }
 
 export async function requireUserSession(
@@ -58,7 +101,7 @@ export async function destroyUserSession(request: Request) {
   const session = await getUserSession(request);
   return redirect('/login', {
     headers: {
-      'Set-Cookie': await storage.destroySession(session),
+      'Set-Cookie': await userStorage.destroySession(session),
     },
   });
 }

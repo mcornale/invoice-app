@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.button.button-icon-only {
+  padding: 1rem;
+}
+
 .button,
 .button .content {
   display: inline-flex;
@@ -25,7 +29,7 @@
   border: 0.1rem solid var(--color-violet-9);
 }
 
-body.dark-mode .button-primary {
+html.dark .button-primary {
   color: var(--color-mauve--12);
 }
 
@@ -39,7 +43,7 @@ body.dark-mode .button-primary {
   box-shadow: var(--shadow-outline-red);
 }
 
-body.dark-mode .button-primary-destructive {
+html.dark .button-primary-destructive {
   color: var(--color-mauve-12);
 }
 
@@ -96,8 +100,8 @@ body.dark-mode .button-primary-destructive {
   animation: rotate 0.8s linear infinite;
 }
 
-.button-spinner.button-primary .spinner,
-.button-spinner.button-primary-destructive .spinner {
+html.dark .button-spinner.button-primary .spinner,
+html.dark .button-spinner.button-primary-destructive .spinner {
   border-top-color: var(--color-mauve-1);
 }
 
