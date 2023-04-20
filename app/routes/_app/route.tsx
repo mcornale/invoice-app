@@ -41,7 +41,7 @@ export default function AppRoute() {
           <Form method='post' action='/set-theme'>
             <Input type='hidden' name='redirectTo' value={location.pathname} />
             <Button variant='tertiary-gray' iconOnly>
-              {data.theme && data.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+              {data.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
               <VisuallyHidden.Root>Toggle Theme</VisuallyHidden.Root>
             </Button>
           </Form>

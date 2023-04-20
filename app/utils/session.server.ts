@@ -70,7 +70,7 @@ export async function getUserIdFromSession(request: Request) {
 export async function getThemeFromSession(request: Request) {
   const session = await getThemeSession(request);
   const theme = session.get('theme');
-  if (!theme || !isString(theme)) return;
+  if (!theme || !isString(theme)) return 'light';
 
   return theme;
 }
