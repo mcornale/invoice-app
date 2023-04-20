@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--color-mauve-2);
-  padding: var(--spacing-4);
+  padding: var(--spacing-8);
 }
 
 .login-header {

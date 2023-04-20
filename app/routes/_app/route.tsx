@@ -39,11 +39,6 @@ export default function AppRoute() {
         <img className='logo' src='/logo.svg' alt='logo' />
         <div className='app-header-actions'>
           <Form method='post' action='/set-theme'>
-            <Input
-              type='hidden'
-              name='theme'
-              value={data.theme === 'light' ? 'dark' : 'light'}
-            />
             <Input type='hidden' name='redirectTo' value={location.pathname} />
             <Button variant='tertiary-gray' iconOnly>
               {data.theme && data.theme === 'dark' ? <SunIcon /> : <MoonIcon />}

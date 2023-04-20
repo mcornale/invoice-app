@@ -100,9 +100,18 @@ html.dark .button-primary-destructive {
   animation: rotate 0.8s linear infinite;
 }
 
+.button-spinner.button-primary .spinner,
+.button-spinner.button-primary-destructive .spinner {
+  border-top-color: var(--color-mauve-1);
+}
+
 html.dark .button-spinner.button-primary .spinner,
 html.dark .button-spinner.button-primary-destructive .spinner {
   border-top-color: var(--color-mauve-1);
+}
+
+html.dark .button-primary-destructive {
+  color: var(--color-mauve-12);
 }
 
 .button-spinner.button-secondary-color .spinner,

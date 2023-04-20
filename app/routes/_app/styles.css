@@ -78,6 +78,10 @@
     width: auto;
   }
 
+  .app-header-actions {
+    flex-direction: row;
+  }
+
   .app-outlet-wrapper {
     padding: var(--spacing-10) var(--spacing-6);
   }

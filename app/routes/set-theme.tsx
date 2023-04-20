@@ -1,15 +1,17 @@
 import type { ActionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { isString } from '~/utils/checkers';
-import { createThemeSession } from '~/utils/session.server';
+import {
+  createThemeSession,
+  getThemeFromSession,
+} from '~/utils/session.server';
 
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
-  const theme = formData.get('theme');
-  if (!isString(theme)) throw new Error(`Cannot set theme: ${theme}`);
+  const theme = await getThemeFromSession(request);
 
+  const newTheme = theme === 'dark' ? 'light' : 'dark';
   const redirectTo = formData.get('redirectTo') as string;
-  return createThemeSession(theme, redirectTo);
+  return createThemeSession(newTheme, redirectTo);
 };
 
 export const loader = async () => redirect('/');
