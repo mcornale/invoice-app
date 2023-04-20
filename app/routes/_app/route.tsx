@@ -1,6 +1,6 @@
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Outlet, useLoaderData } from '@remix-run/react';
+import { Outlet, useLoaderData, useLocation } from '@remix-run/react';
 import styles from './styles.css';
 import {
   getThemeFromSession,
@@ -31,6 +31,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function AppRoute() {
   const data = useLoaderData<typeof loader>();
+  const location = useLocation();
 
   return (
     <div className='app'>
@@ -43,6 +44,7 @@ export default function AppRoute() {
               name='theme'
               value={data.theme === 'light' ? 'dark' : 'light'}
             />
+            <Input type='hidden' name='redirectTo' value={location.pathname} />
             <Button variant='tertiary-gray' iconOnly>
               {data.theme && data.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
               <VisuallyHidden.Root>Toggle Theme</VisuallyHidden.Root>

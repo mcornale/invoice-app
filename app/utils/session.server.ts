@@ -39,11 +39,7 @@ export async function createUserSession(userId: string, redirectTo: string) {
   });
 }
 
-export async function createThemeSession(
-  theme: string,
-  request: Request,
-  redirectTo: string = new URL(request.url).pathname
-) {
+export async function createThemeSession(theme: string, redirectTo: string) {
   const session = await themeStorage.getSession();
   session.set('theme', theme);
   return redirect(redirectTo, {

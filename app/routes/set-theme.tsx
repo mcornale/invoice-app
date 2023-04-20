@@ -8,7 +8,8 @@ export const action = async ({ request }: ActionArgs) => {
   const theme = formData.get('theme');
   if (!isString(theme)) throw new Error(`Cannot set theme: ${theme}`);
 
-  return createThemeSession(theme, request);
+  const redirectTo = formData.get('redirectTo') as string;
+  return createThemeSession(theme, redirectTo);
 };
 
 export const loader = async () => redirect('/');
