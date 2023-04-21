@@ -107,7 +107,7 @@ html.dark .button-primary-destructive {
 
 html.dark .button-spinner.button-primary .spinner,
 html.dark .button-spinner.button-primary-destructive .spinner {
-  border-top-color: var(--color-mauve-1);
+  border-top-color: var(--color-mauve-12);
 }
 
 html.dark .button-primary-destructive {
