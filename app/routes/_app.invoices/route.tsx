@@ -40,6 +40,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const url = new URL(request.url);
   const status = url.searchParams.getAll('status');
+  console.log(status);
   if (!isArrOfInvoiceStatus(status))
     throw new Error("This shouldn't be possible");
   const invoices = await getInvoiceList(status, userId);

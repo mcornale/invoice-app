@@ -78,7 +78,7 @@ export const action = async ({ params, request }: ActionArgs) => {
     ...typedFormData,
   });
   await updateInvoice({ id: invoiceId, ...updatedInvoice });
-  return redirect(`/invoices`);
+  return redirect(`/invoices/${invoiceId}`);
 };
 
 export default function EditInvoiceRoute() {
