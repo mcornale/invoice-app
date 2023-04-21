@@ -8,11 +8,7 @@ import {
 } from '~/components/ui/alert-dialog';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import styles from './styles.css';
-import {
-  useNavigate,
-  useNavigation,
-  useRouteLoaderData,
-} from '@remix-run/react';
+import { useNavigate, useNavigation, useOutletContext } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import { Form } from '~/components/ui/form';
 import { deleteInvoice } from '~/models/invoice.server';
@@ -40,9 +36,7 @@ export const action = async ({ params }: ActionArgs) => {
 export default function DeleteInvoiceRoute() {
   const navigate = useNavigate();
   const navigation = useNavigation();
-  const data = useRouteLoaderData('routes/_app.invoices_.$id') as {
-    invoice: Invoice;
-  };
+  const context = useOutletContext() as { invoice: Invoice };
 
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -61,7 +55,7 @@ export default function DeleteInvoiceRoute() {
     <AlertDialog open={dialogOpen} onOpenChange={handleOpenChange}>
       <AlertDialogContent
         title='Confirm Deletion'
-        description={`Are you sure you want to delete invoice #${data.invoice.displayId}? This action cannot be undone.`}
+        description={`Are you sure you want to delete invoice #${context.invoice.displayId}? This action cannot be undone.`}
       >
         <div className='delete-invoice-actions'>
           <AlertDialogCancel asChild>

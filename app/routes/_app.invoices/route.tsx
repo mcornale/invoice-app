@@ -15,11 +15,12 @@ import { PlusIcon } from '@radix-ui/react-icons';
 import { parseDate } from '~/utils/parsers';
 import {
   getInvoiceSummaryStatus,
-  parseInvoiceStatusParams,
+  isArrOfInvoiceStatus,
 } from '~/helpers/invoice';
 import { getInvoiceList } from '~/models/invoice.server';
 import { getUserIdFromSession } from '~/utils/session.server';
 import { useResponsiveText } from '~/hooks/use-responsive-text';
+import type { InvoiceStatus } from '@prisma/client';
 
 export const links: LinksFunction = () => {
   return [
@@ -38,8 +39,9 @@ export const loader = async ({ request }: LoaderArgs) => {
   if (!userId) throw new Error("This shouldn't be possible");
 
   const url = new URL(request.url);
-  const statusParams = url.searchParams.getAll('status');
-  const status = parseInvoiceStatusParams(statusParams);
+  const status = url.searchParams.getAll('status');
+  if (!isArrOfInvoiceStatus(status))
+    throw new Error("This shouldn't be possible");
   const invoices = await getInvoiceList(status, userId);
 
   return json({ invoices });
@@ -53,8 +55,7 @@ export default function InvoicesRoute() {
     ...invoice,
     paymentDue: invoice.paymentDue ? parseDate(invoice.paymentDue) : null,
   }));
-  const statusParams = params.getAll('status');
-  const status = parseInvoiceStatusParams(statusParams);
+  const status = params.getAll('status') as InvoiceStatus[];
   const invoiceSummaryVerb = invoices.length === 1 ? 'is' : 'are';
   const invoiceSummaryObject = invoices.length === 1 ? 'invoice' : 'invoices';
   const invoiceSummaryStatus = getInvoiceSummaryStatus(status);
@@ -76,9 +77,7 @@ export default function InvoicesRoute() {
           <span className='invoice-list-summary'>{invoiceSummaryText}</span>
         </div>
         <div className='invoice-list-actions'>
-          <InvoiceListFilter
-            activeStatus={parseInvoiceStatusParams(statusParams)}
-          />
+          <InvoiceListFilter activeStatus={status} />
           <ButtonLink variant='primary' to={`new?${params}`}>
             <PlusIcon />
             {newButtonText}

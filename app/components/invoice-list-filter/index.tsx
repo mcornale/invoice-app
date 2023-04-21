@@ -73,7 +73,7 @@ export function InvoiceListFilter({ activeStatus }: InvoicesFilterProps) {
               id='draft'
               name='status'
               defaultChecked={activeStatus.includes(InvoiceStatus.DRAFT)}
-              value={InvoiceStatus.DRAFT.toLowerCase()}
+              value={InvoiceStatus.DRAFT}
             />
           </FormField>
           <FormField>
@@ -82,7 +82,7 @@ export function InvoiceListFilter({ activeStatus }: InvoicesFilterProps) {
               id='pending'
               name='status'
               defaultChecked={activeStatus.includes(InvoiceStatus.PENDING)}
-              value={InvoiceStatus.PENDING.toLowerCase()}
+              value={InvoiceStatus.PENDING}
             />
           </FormField>
           <FormField>
@@ -91,7 +91,7 @@ export function InvoiceListFilter({ activeStatus }: InvoicesFilterProps) {
               id='paid'
               name='status'
               defaultChecked={activeStatus.includes(InvoiceStatus.PAID)}
-              value={InvoiceStatus.PAID.toLowerCase()}
+              value={InvoiceStatus.PAID}
             />
           </FormField>
         </Form>

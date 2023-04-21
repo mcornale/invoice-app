@@ -247,19 +247,13 @@ export const getFormErrors = (
   return formErrors.length > 0 ? formErrors : undefined;
 };
 
-export const parseInvoiceStatusParams = (statusParams: string[]) =>
-  statusParams.map((status) => {
-    switch (status) {
-      case 'draft':
-        return InvoiceStatus.DRAFT;
-      case 'pending':
-        return InvoiceStatus.PENDING;
-      case 'paid':
-        return InvoiceStatus.PAID;
-      default:
-        throw new Error(`Not supported status found: ${status}`);
-    }
-  });
+export const isInvoiceStatus = (val: unknown): val is InvoiceStatus =>
+  val === InvoiceStatus.DRAFT ||
+  val === InvoiceStatus.PENDING ||
+  val === InvoiceStatus.PAID;
+
+export const isArrOfInvoiceStatus = (val: unknown): val is InvoiceStatus[] =>
+  Array.isArray(val) && val.every((v) => isInvoiceStatus(v));
 
 export const getInvoiceSummaryStatus = (status: InvoiceStatus[]) => {
   if (

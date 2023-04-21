@@ -18,6 +18,7 @@ import styles from './styles.css';
 import { Input, links as inputLinks } from '../ui/input';
 import { Select, links as selectLinks } from '../ui/select';
 import { upperFirst } from '~/utils/formatters';
+import type { Invoice, InvoiceItem } from '@prisma/client';
 
 export const PAYMENT_TERMS_OPTIONS = [
   { text: 'net 1 day', value: '1' },
@@ -66,12 +67,13 @@ export interface InvoiceFormFieldErrors {
 }
 
 export interface InvoiceFormProps extends FormProps {
-  fields?: InvoiceFormFields;
+  initData?: Invoice;
   fieldErrors?: InvoiceFormFieldErrors;
   formErrors?: string[];
 }
 
 export interface InvoiceFormItemProps {
+  initData?: InvoiceItem;
   onDelete: () => void;
 }
 
@@ -90,12 +92,13 @@ export const links: LinksFunction = () => {
 
 export function InvoiceForm({
   className,
+  initData,
   fieldErrors,
   formErrors,
   ...props
 }: InvoiceFormProps) {
   const [items, setItems] = useState(
-    new Array(0).fill(null).map((_, index) => index)
+    new Array(initData?.items.length ?? 0).fill(null).map((_, index) => index)
   );
 
   const itemListErrors = [
@@ -131,6 +134,7 @@ export function InvoiceForm({
               id='sender-address-street'
               name='sender-address-street'
               type='text'
+              defaultValue={initData?.senderAddress.street}
             />
             {fieldErrors?.senderAddressStreet && (
               <FormError>{fieldErrors.senderAddressStreet}</FormError>
@@ -143,6 +147,7 @@ export function InvoiceForm({
                 id='sender-address-city'
                 name='sender-address-city'
                 type='text'
+                defaultValue={initData?.senderAddress.city}
               />
               {fieldErrors?.senderAddressCity && (
                 <FormError>{fieldErrors.senderAddressCity}</FormError>
@@ -156,6 +161,7 @@ export function InvoiceForm({
                 id='sender-address-post-code'
                 name='sender-address-post-code'
                 type='text'
+                defaultValue={initData?.senderAddress.postCode}
               />
               {fieldErrors?.senderAddressPostCode && (
                 <FormError>{fieldErrors.senderAddressPostCode}</FormError>
@@ -167,6 +173,7 @@ export function InvoiceForm({
                 id='sender-address-country'
                 name='sender-address-country'
                 type='text'
+                defaultValue={initData?.senderAddress.country}
               />
               {fieldErrors?.senderAddressCountry && (
                 <FormError>{fieldErrors.senderAddressCountry}</FormError>
@@ -178,14 +185,24 @@ export function InvoiceForm({
           <FormLegend>Bill To</FormLegend>
           <FormField>
             <FormLabel htmlFor='client-name'>Client Name</FormLabel>
-            <Input id='client-name' name='client-name' type='text' />
+            <Input
+              id='client-name'
+              name='client-name'
+              type='text'
+              defaultValue={initData?.clientName}
+            />
             {fieldErrors?.clientName && (
               <FormError>{fieldErrors.clientName}</FormError>
             )}
           </FormField>
           <FormField>
             <FormLabel htmlFor='client-email'>Client Email</FormLabel>
-            <Input id='client-email' name='client-email' type='email' />
+            <Input
+              id='client-email'
+              name='client-email'
+              type='email'
+              defaultValue={initData?.clientEmail}
+            />
             {fieldErrors?.clientEmail && (
               <FormError>{fieldErrors.clientEmail}</FormError>
             )}
@@ -198,6 +215,7 @@ export function InvoiceForm({
               id='client-address-street'
               name='client-address-street'
               type='text'
+              defaultValue={initData?.clientAddress.street}
             />
             {fieldErrors?.clientAddressStreet && (
               <FormError>{fieldErrors.clientAddressStreet}</FormError>
@@ -210,6 +228,7 @@ export function InvoiceForm({
                 id='client-address-city'
                 name='client-address-city'
                 type='text'
+                defaultValue={initData?.clientAddress.city}
               />
               {fieldErrors?.clientAddressCity && (
                 <FormError>{fieldErrors.clientAddressCity}</FormError>
@@ -223,6 +242,7 @@ export function InvoiceForm({
                 id='client-address-post-code'
                 name='client-address-post-code'
                 type='text'
+                defaultValue={initData?.clientAddress.postCode}
               />
               {fieldErrors?.clientAddressPostCode && (
                 <FormError>{fieldErrors.clientAddressPostCode}</FormError>
@@ -234,6 +254,7 @@ export function InvoiceForm({
                 id='client-address-country'
                 name='client-address-country'
                 type='text'
+                defaultValue={initData?.clientAddress.country}
               />
               {fieldErrors?.clientAddressCountry && (
                 <FormError>{fieldErrors.clientAddressCountry}</FormError>
@@ -243,7 +264,12 @@ export function InvoiceForm({
           <div className='fieldset-row'>
             <FormField>
               <FormLabel htmlFor='created-at'>Invoice Date</FormLabel>
-              <Input id='created-at' name='created-at' type='date' />
+              <Input
+                id='created-at'
+                name='created-at'
+                type='date'
+                defaultValue={initData?.createdAt?.toISOString().slice(0, 10)}
+              />
               {fieldErrors?.createdAt && (
                 <FormError>{fieldErrors.createdAt}</FormError>
               )}
@@ -255,6 +281,7 @@ export function InvoiceForm({
                 name='payment-terms'
                 placeholder='Select Payment Terms'
                 options={PAYMENT_TERMS_OPTIONS}
+                defaultValue={initData?.paymentTerms.toString()}
               />
               {fieldErrors?.paymentTerms && (
                 <FormError>{fieldErrors.paymentTerms}</FormError>
@@ -263,7 +290,12 @@ export function InvoiceForm({
           </div>
           <FormField>
             <FormLabel htmlFor='description'>Project Description</FormLabel>
-            <Input id='description' name='description' type='text' />
+            <Input
+              id='description'
+              name='description'
+              type='text'
+              defaultValue={initData?.description}
+            />
             {fieldErrors?.description && (
               <FormError>{fieldErrors.description}</FormError>
             )}
@@ -292,6 +324,7 @@ export function InvoiceForm({
             <InvoiceFormItem
               key={id}
               onDelete={handleDeleteItemClick.bind(null, id)}
+              initData={initData?.items[id]}
             />
           ))}
         </ul>
@@ -311,6 +344,7 @@ export function InvoiceForm({
           Add New Item
         </Button>
       </section>
+      <Input type='hidden' name='status' defaultValue={initData?.status} />
       {formErrors && (
         <FormField>
           {formErrors?.map((formError, index) => (
@@ -322,9 +356,9 @@ export function InvoiceForm({
   );
 }
 
-export function InvoiceFormItem({ onDelete }: InvoiceFormItemProps) {
-  const [quantity, setQuantity] = useState('');
-  const [price, setPrice] = useState('');
+export function InvoiceFormItem({ initData, onDelete }: InvoiceFormItemProps) {
+  const [quantity, setQuantity] = useState(initData?.quantity.toString() ?? '');
+  const [price, setPrice] = useState(initData?.price.toString() ?? '');
 
   function handleQuantityChange(e: ChangeEvent<HTMLInputElement>) {
     setQuantity(e.target.value);
@@ -336,7 +370,12 @@ export function InvoiceFormItem({ onDelete }: InvoiceFormItemProps) {
 
   return (
     <li className='item'>
-      <Input aria-labelledby='item-name-label' name='item-name' type='text' />
+      <Input
+        aria-labelledby='item-name-label'
+        name='item-name'
+        type='text'
+        defaultValue={initData?.name}
+      />
       <Input
         aria-labelledby='quantity-label'
         name='item-quantity'

@@ -207,7 +207,7 @@ export default function InvoiceRoute() {
           </div>
         </dl>
       </section>
-      <Outlet />
+      <Outlet context={{ invoice }} />
     </>
   );
 }
