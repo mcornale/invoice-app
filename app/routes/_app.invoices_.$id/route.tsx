@@ -1,6 +1,11 @@
 import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Outlet, useLoaderData, useNavigate } from '@remix-run/react';
+import {
+  Outlet,
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+} from '@remix-run/react';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
@@ -14,6 +19,7 @@ import { getUserIdFromSession } from '~/utils/session.server';
 import {
   deleteInvoice,
   getInvoice,
+  markInvoiceAsPaid,
   updateInvoice,
 } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
@@ -34,6 +40,7 @@ import {
   DeleteInvoice,
   links as deleteInvoiceLinks,
 } from '~/components/delete-invoice';
+import { Form } from '~/components/ui/form';
 
 export interface ActionData {
   fieldErrors?: InvoiceFormProps['fieldErrors'];
@@ -80,7 +87,7 @@ export const action = async ({ params, request }: ActionArgs) => {
 
   const intent = formData.get('intent');
   switch (intent) {
-    case 'edit':
+    case 'save-changes':
       const status = formData.get('status');
       if (!isInvoiceStatus(status))
         throw new Error("This shouldn't be possible");
@@ -106,20 +113,24 @@ export const action = async ({ params, request }: ActionArgs) => {
       });
       await updateInvoice({ id: invoiceId, ...updatedInvoice });
       return json({ success: true });
+    case 'mark-as-paid':
+      await markInvoiceAsPaid(invoiceId, InvoiceStatus.PAID);
+      return json({ success: true });
     case 'delete':
       await deleteInvoice(invoiceId);
       return redirect('/invoices');
     default:
-      return badRequest<ActionData>({
-        fieldErrors: undefined,
-        formErrors: [`unhandled intent: ${intent}`],
-      });
   }
 };
 
 export default function InvoiceRoute() {
   const data = useLoaderData<typeof loader>();
   const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting =
+    navigation.state === 'submitting' &&
+    navigation.formData.get('intent') === 'mark-as-paid';
 
   const invoice = {
     ...data.invoice,
@@ -168,7 +179,17 @@ export default function InvoiceRoute() {
         <div className='invoice-actions'>
           <EditInvoice invoice={invoice} />
           <DeleteInvoice invoiceDisplayId={invoice.displayId} />
-          <Button variant='primary'>Mark as Paid</Button>
+          <Form method='put'>
+            <Button
+              type='submit'
+              variant='primary'
+              name='intent'
+              value='mark-as-paid'
+              showSpinner={isSubmitting}
+            >
+              Mark as Paid
+            </Button>
+          </Form>
         </div>
       </section>
       <section className='invoice-details'>

@@ -14,6 +14,13 @@ export async function updateInvoice(data: InvoiceWithoutUserId) {
   return db.invoice.update({ where: { id }, data: restData });
 }
 
+export async function markInvoiceAsPaid(
+  id: Invoice['id'],
+  status: InvoiceStatus
+) {
+  return db.invoice.update({ where: { id }, data: { status } });
+}
+
 export async function deleteInvoice(id: Invoice['id']) {
   return db.invoice.delete({ where: { id } });
 }

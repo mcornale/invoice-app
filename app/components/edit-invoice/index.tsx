@@ -55,7 +55,7 @@ export function EditInvoice({ invoice }: EditInvoiceProps) {
       <SlideOverContent title='Edit Invoice'>
         <InvoiceForm
           id='edit-invoice-form'
-          method='post'
+          method='put'
           initData={invoice}
           fieldErrors={actionData?.fieldErrors}
           formErrors={actionData?.formErrors}
@@ -69,7 +69,7 @@ export function EditInvoice({ invoice }: EditInvoiceProps) {
             variant='primary'
             form='edit-invoice-form'
             name='intent'
-            value='edit'
+            value='save-changes'
             showSpinner={isSubmitting}
           >
             Save Changes
