@@ -55,6 +55,14 @@ export const action = async ({ params, request }: ActionArgs) => {
   if (!isString(invoiceId)) throw new Error("This shouldn't be possible");
 
   const formData = await request.formData();
+
+  const intent = formData.get('intent');
+  if (intent !== 'save-changes')
+    return badRequest<ActionData>({
+      fieldErrors: undefined,
+      formErrors: [`unhandled intent: ${intent}`],
+    });
+
   const status = formData.get('status');
   if (!isInvoiceStatus(status)) throw new Error("This shouldn't be possible");
   const typedFormData = getInvoiceFormData(formData);
@@ -85,7 +93,9 @@ export default function EditInvoiceRoute() {
   const actionData = useActionData<ActionData>();
   const context = useOutletContext() as { invoice: Invoice };
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
+  const isSubmitting =
+    navigation.state === 'submitting' &&
+    navigation.formData.get('intent') === 'save-changes';
 
   return (
     <SlideOver>
@@ -105,6 +115,8 @@ export default function EditInvoiceRoute() {
             type='submit'
             variant='primary'
             form='edit-invoice-form'
+            name='intent'
+            value='save-changes'
             showSpinner={isSubmitting}
           >
             Save Changes
