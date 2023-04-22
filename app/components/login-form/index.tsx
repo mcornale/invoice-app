@@ -53,8 +53,7 @@ export function LoginForm({
   const navigation = useNavigation();
 
   const redirectTo = searchParams.get('redirectTo') ?? undefined;
-  const isSubmitting =
-    navigation.state === 'submitting' || navigation.state === 'loading';
+  const isSubmitting = navigation.state === 'submitting';
   const isSubmittingLogin =
     isSubmitting && navigation.formData?.get('intent') === 'login';
   const isSubmittingSignUp =
