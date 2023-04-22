@@ -8,19 +8,39 @@ import {
   links as buttonLinks,
 } from '~/components/ui/button';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
 import { getUserIdFromSession } from '~/utils/session.server';
-import { getInvoice } from '~/models/invoice.server';
+import { getInvoice, updateInvoice } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
+import type { InvoiceFormProps } from '~/components/invoice-form';
+import { badRequest } from '~/utils/request.server';
+import {
+  getFieldErrors,
+  getFormErrors,
+  getFormattedInvoice,
+  getInvoiceFormData,
+  isInvoiceStatus,
+} from '~/helpers/invoice';
+import {
+  EditInvoice,
+  links as editInvoiceLinks,
+} from '~/components/edit-invoice';
+
+export interface ActionData {
+  fieldErrors: InvoiceFormProps['fieldErrors'];
+  formErrors: InvoiceFormProps['formErrors'];
+}
 
 export const links: LinksFunction = () => {
   return [
     ...badgeLinks(),
     ...buttonLinks(),
+    ...editInvoiceLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -42,6 +62,47 @@ export const loader = async ({ params, request }: LoaderArgs) => {
   return json({
     invoice,
   });
+};
+
+export const action = async ({ params, request }: ActionArgs) => {
+  const userId = await getUserIdFromSession(request);
+  if (!userId) throw new Error("This shouldn't be possible");
+  const invoiceId = params.id;
+  if (!isString(invoiceId)) throw new Error("This shouldn't be possible");
+
+  const formData = await request.formData();
+
+  const intent = formData.get('intent');
+  if (intent !== 'save-changes')
+    return badRequest<ActionData>({
+      fieldErrors: undefined,
+      formErrors: [`unhandled intent: ${intent}`],
+    });
+
+  const status = formData.get('status');
+  if (!isInvoiceStatus(status)) throw new Error("This shouldn't be possible");
+  const typedFormData = getInvoiceFormData(formData);
+  if (!typedFormData)
+    return badRequest<ActionData>({
+      fieldErrors: undefined,
+      formErrors: ['form not submitted correctly'],
+    });
+
+  const fieldErrors = getFieldErrors(typedFormData);
+  const formErrors = getFormErrors(typedFormData, fieldErrors);
+  if (fieldErrors || formErrors) {
+    return badRequest<ActionData>({
+      fieldErrors,
+      formErrors,
+    });
+  }
+
+  const updatedInvoice = getFormattedInvoice({
+    status: status === InvoiceStatus.DRAFT ? InvoiceStatus.PENDING : status,
+    ...typedFormData,
+  });
+  await updateInvoice({ id: invoiceId, ...updatedInvoice });
+  return redirect(`/invoices/${invoiceId}`);
 };
 
 export default function InvoiceRoute() {
@@ -93,9 +154,7 @@ export default function InvoiceRoute() {
           </dd>
         </dl>
         <div className='invoice-actions'>
-          <ButtonLink to='edit' variant='secondary-gray'>
-            Edit
-          </ButtonLink>
+          <EditInvoice invoice={invoice} />
           <ButtonLink to='delete' variant='primary-destructive'>
             Delete
           </ButtonLink>

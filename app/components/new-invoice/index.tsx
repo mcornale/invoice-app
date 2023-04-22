@@ -29,7 +29,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export function NewInvoiceForm({ newButtonText }: NewInvoiceFormProps) {
+export function NewInvoice({ newButtonText }: NewInvoiceFormProps) {
   const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
 

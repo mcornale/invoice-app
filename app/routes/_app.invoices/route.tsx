@@ -26,10 +26,7 @@ import { useResponsiveText } from '~/hooks/use-responsive-text';
 import { InvoiceStatus } from '@prisma/client';
 import type { InvoiceFormProps } from '~/components/invoice-form';
 import { badRequest } from '~/utils/request.server';
-import {
-  NewInvoiceForm,
-  links as newInvoiceFormLinks,
-} from '~/components/new-invoice';
+import { NewInvoice, links as newInvoiceLinks } from '~/components/new-invoice';
 
 export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -40,7 +37,7 @@ export const links: LinksFunction = () => {
   return [
     ...invoiceListFilterLinks(),
     ...invoiceListLinks(),
-    ...newInvoiceFormLinks(),
+    ...newInvoiceLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -144,7 +141,7 @@ export default function InvoicesRoute() {
         </div>
         <div className='invoice-list-actions'>
           <InvoiceListFilter activeStatus={status} />
-          <NewInvoiceForm newButtonText={newButtonText} />
+          <NewInvoice newButtonText={newButtonText} />
         </div>
       </header>
       {invoices.length > 0 ? (
