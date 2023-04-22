@@ -4,6 +4,12 @@
   justify-content: space-between;
   font-weight: 400;
   color: var(--color-mauve-12);
+  background-color: var(--color-mauve-1);
+  border: 0.1rem solid var(--color-mauve-7);
+  border-radius: var(--border-radius-2);
+  padding: 1rem 1.4rem;
+  font: var(--font-text-sm);
+  font-weight: 400;
 }
 
 .select-trigger svg {
@@ -11,7 +17,7 @@
   height: auto;
 }
 
-.select-trigger[data-state='open'] svg {
+.select-trigger .select-trigger[data-state='open'] svg {
   transform: rotate(180deg);
 }
 
@@ -36,11 +42,11 @@
   border-radius: var(--border-radius-1);
 }
 
-.select-item:hover {
+.select-item:hover:not(:disabled) {
   background-color: var(--color-violet-4);
 }
 
-.select-item:hover:not(:focus) {
+.select-item:hover:not(:disabled):not(:focus) {
   box-shadow: none;
 }
 

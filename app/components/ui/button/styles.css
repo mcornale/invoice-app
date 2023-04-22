@@ -130,32 +130,32 @@ html.dark .button-primary-destructive {
 }
 
 @media (hover: hover) {
-  .button-primary:hover {
+  .button-primary:hover:not(:disabled) {
     background-color: var(--color-violet-10);
     border-color: var(--color-violet-10);
   }
 
-  .button-primary-destructive:hover {
+  .button-primary-destructive:hover:not(:disabled) {
     background-color: var(--color-red-10);
     border-color: var(--color-red-10);
   }
 
-  .button-secondary-color:hover {
+  .button-secondary-color:hover:not(:disabled) {
     background-color: var(--color-violet-4);
     border-color: var(--color-violet-4);
   }
 
-  .button-secondary-gray:hover {
+  .button-secondary-gray:hover:not(:disabled) {
     background-color: var(--color-mauve-4);
     border-color: var(--color-mauve-8);
   }
 
-  .button-tertiary-color:hover {
+  .button-tertiary-color:hover:not(:disabled) {
     background-color: var(--color-violet-4);
     border-color: var(--color-violet-4);
   }
 
-  .button-tertiary-gray:hover {
+  .button-tertiary-gray:hover:not(:disabled) {
     background-color: var(--color-mauve-4);
     border-color: var(--color-mauve-4);
   }

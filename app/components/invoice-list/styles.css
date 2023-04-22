@@ -12,7 +12,7 @@
   border: 0.1rem solid var(--color-mauve-6);
 }
 
-.invoice-list .invoice-link:hover:not(:focus) {
+.invoice-list .invoice-link:hover:not(:disabled):not(:focus) {
   border-color: var(--color-mauve-7);
 }
 

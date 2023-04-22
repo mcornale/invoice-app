@@ -29,11 +29,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
   ({ name, id, placeholder, options, ...props }, ref) => {
     return (
       <SelectPrimitive.Root name={name} {...props}>
-        <SelectPrimitive.Trigger
-          className='select-trigger input'
-          id={id}
-          ref={ref}
-        >
+        <SelectPrimitive.Trigger className='select-trigger' id={id} ref={ref}>
           <SelectPrimitive.Value placeholder={placeholder} />
           <CaretDownIcon />
         </SelectPrimitive.Trigger>

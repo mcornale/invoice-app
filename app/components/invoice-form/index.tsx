@@ -269,6 +269,7 @@ export function InvoiceForm({
                 name='created-at'
                 type='date'
                 defaultValue={initData?.createdAt?.toISOString().slice(0, 10)}
+                disabled={Boolean(initData?.createdAt)}
               />
               {fieldErrors?.createdAt && (
                 <FormError>{fieldErrors.createdAt}</FormError>

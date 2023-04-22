@@ -1,6 +1,6 @@
 import type { LinksFunction } from '@remix-run/node';
-import { useActionData, useNavigation } from '@remix-run/react';
-import type { ActionData } from '~/routes/_app.invoices_.$id/route';
+import { useActionData, useLoaderData, useNavigation } from '@remix-run/react';
+import type { ActionData, loader } from '~/routes/_app.invoices_.$id/route';
 import {
   SlideOver,
   SlideOverClose,
@@ -12,6 +12,7 @@ import { InvoiceForm, links as invoiceFormLinks } from '../invoice-form';
 import { Button, links as buttonLinks } from '../ui/button';
 import styles from './styles.css';
 import type { Invoice } from '@prisma/client';
+import { InvoiceStatus } from '@prisma/client';
 import { useEffect, useState } from 'react';
 
 export interface EditInvoiceProps {
@@ -32,6 +33,7 @@ export const links: LinksFunction = () => {
 
 export function EditInvoice({ invoice }: EditInvoiceProps) {
   const actionData = useActionData<ActionData>();
+  const data = useLoaderData<typeof loader>();
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
 
@@ -50,7 +52,12 @@ export function EditInvoice({ invoice }: EditInvoiceProps) {
   return (
     <SlideOver open={open} onOpenChange={handleOpenChange}>
       <SlideOverTrigger asChild>
-        <Button variant='secondary-gray'>Edit</Button>
+        <Button
+          variant='secondary-gray'
+          disabled={data.invoice.status === InvoiceStatus.PAID}
+        >
+          Edit
+        </Button>
       </SlideOverTrigger>
       <SlideOverContent title='Edit Invoice'>
         <InvoiceForm

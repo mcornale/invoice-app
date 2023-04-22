@@ -84,8 +84,8 @@ export const action = async ({ params, request }: ActionArgs) => {
   if (!isString(invoiceId)) throw new Error("This shouldn't be possible");
 
   const formData = await request.formData();
-
   const intent = formData.get('intent');
+
   switch (intent) {
     case 'save-changes':
       const status = formData.get('status');
@@ -129,7 +129,7 @@ export default function InvoiceRoute() {
   const navigate = useNavigate();
   const navigation = useNavigation();
 
-  const isSubmitting =
+  const isMarkingAsPaid =
     navigation.state === 'submitting' &&
     navigation.formData.get('intent') === 'mark-as-paid';
 
@@ -186,7 +186,8 @@ export default function InvoiceRoute() {
               variant='primary'
               name='intent'
               value='mark-as-paid'
-              showSpinner={isSubmitting}
+              showSpinner={isMarkingAsPaid}
+              disabled={invoice.status === InvoiceStatus.PAID}
             >
               Mark as Paid
             </Button>
