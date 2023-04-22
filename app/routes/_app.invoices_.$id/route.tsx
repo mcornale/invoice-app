@@ -20,7 +20,7 @@ import {
   deleteInvoice,
   getInvoice,
   markInvoiceAsPaid,
-  updateInvoice,
+  editInvoice,
 } from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
 import type { InvoiceFormProps } from '~/components/invoice-form';
@@ -91,15 +91,15 @@ export const action = async ({ params, request }: ActionArgs) => {
       const status = formData.get('status');
       if (!isInvoiceStatus(status))
         throw new Error("This shouldn't be possible");
-      const typedFormData = getInvoiceFormData(formData);
-      if (!typedFormData)
+      const invoiceFormData = getInvoiceFormData(formData);
+      if (!invoiceFormData)
         return badRequest<ActionData>({
           fieldErrors: undefined,
           formErrors: ['form not submitted correctly'],
         });
 
-      const fieldErrors = getFieldErrors(typedFormData);
-      const formErrors = getFormErrors(typedFormData, fieldErrors);
+      const fieldErrors = getFieldErrors(invoiceFormData);
+      const formErrors = getFormErrors(invoiceFormData, fieldErrors);
       if (fieldErrors || formErrors) {
         return badRequest<ActionData>({
           fieldErrors,
@@ -107,11 +107,12 @@ export const action = async ({ params, request }: ActionArgs) => {
         });
       }
 
-      const updatedInvoice = getFormattedInvoice({
+      const updatedInvoice = getFormattedInvoice(invoiceFormData);
+      await editInvoice({
+        id: invoiceId,
         status: status === InvoiceStatus.DRAFT ? InvoiceStatus.PENDING : status,
-        ...typedFormData,
+        ...updatedInvoice,
       });
-      await updateInvoice({ id: invoiceId, ...updatedInvoice });
       return json({ success: true });
     case 'mark-as-paid':
       await markInvoiceAsPaid(invoiceId, InvoiceStatus.PAID);

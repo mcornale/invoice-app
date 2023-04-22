@@ -13,10 +13,6 @@ export type getItemsParams = Pick<
   'itemNames' | 'itemQuantities' | 'itemPrices' | 'itemTotals'
 >;
 
-export interface GetFormattedInvoiceParams extends InvoiceFormFields {
-  status: InvoiceStatus;
-}
-
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NUMBERS = '0123456789';
 
@@ -264,10 +260,7 @@ export const getInvoiceSummaryStatus = (status: InvoiceStatus[]) => {
   else return status.join(' and ').toLowerCase();
 };
 
-export function getFormattedInvoice({
-  status,
-  ...fields
-}: GetFormattedInvoiceParams) {
+export function getFormattedInvoice(fields: InvoiceFormFields) {
   const displayId = getInvoiceDisplayId();
   const senderAddress = {
     street: fields.senderAddressStreet,
@@ -312,7 +305,6 @@ export function getFormattedInvoice({
     paymentTerms,
     paymentDue,
     items,
-    status,
     total,
   };
 }

@@ -9,7 +9,7 @@ export async function createInvoice(data: InvoiceWithoutId) {
   return db.invoice.create({ data });
 }
 
-export async function updateInvoice(data: InvoiceWithoutUserId) {
+export async function editInvoice(data: InvoiceWithoutUserId) {
   const { id, ...restData } = data;
   return db.invoice.update({ where: { id }, data: restData });
 }

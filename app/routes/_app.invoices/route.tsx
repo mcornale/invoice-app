@@ -65,8 +65,8 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const intent = formData.get('intent');
 
-  const typedFormData = getInvoiceFormData(formData);
-  if (!typedFormData)
+  const invoiceFormData = getInvoiceFormData(formData);
+  if (!invoiceFormData)
     return badRequest<ActionData>({
       fieldErrors: undefined,
       formErrors: ['form not submitted correctly'],
@@ -74,18 +74,15 @@ export const action = async ({ request }: ActionArgs) => {
 
   switch (intent) {
     case 'save-as-draft':
-      const newDraftInvoice = getFormattedInvoice({
-        status: InvoiceStatus.DRAFT,
-        ...typedFormData,
-      });
       await createInvoice({
         userId,
-        ...newDraftInvoice,
+        status: InvoiceStatus.DRAFT,
+        ...getFormattedInvoice(invoiceFormData),
       });
       return json({ success: true });
     case 'save-and-send':
-      const fieldErrors = getFieldErrors(typedFormData);
-      const formErrors = getFormErrors(typedFormData, fieldErrors);
+      const fieldErrors = getFieldErrors(invoiceFormData);
+      const formErrors = getFormErrors(invoiceFormData, fieldErrors);
       if (fieldErrors || formErrors) {
         return badRequest<ActionData>({
           fieldErrors,
@@ -93,13 +90,10 @@ export const action = async ({ request }: ActionArgs) => {
         });
       }
 
-      const newPendingInvoice = getFormattedInvoice({
-        status: InvoiceStatus.PENDING,
-        ...typedFormData,
-      });
       await createInvoice({
         userId,
-        ...newPendingInvoice,
+        status: InvoiceStatus.PENDING,
+        ...getFormattedInvoice(invoiceFormData),
       });
       return json({ success: true });
     default:
