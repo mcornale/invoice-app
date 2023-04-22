@@ -30,7 +30,7 @@ export const links: LinksFunction = () => {
 export function DeleteInvoice({ invoiceDisplayId }: DeleteInvoiceProps) {
   const navigation = useNavigation();
 
-  const isSubmitting =
+  const isMarkingAsPaid =
     navigation.state === 'submitting' &&
     navigation.formData.get('intent') === 'delete';
 
@@ -51,7 +51,7 @@ export function DeleteInvoice({ invoiceDisplayId }: DeleteInvoiceProps) {
             <Button
               type='submit'
               variant='primary-destructive'
-              showSpinner={isSubmitting}
+              showSpinner={isMarkingAsPaid}
               name='intent'
               value='delete'
             >

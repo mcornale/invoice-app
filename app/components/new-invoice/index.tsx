@@ -41,9 +41,9 @@ export function NewInvoice({ newButtonText }: NewInvoiceFormProps) {
   }
 
   const isSubmitting = navigation.state === 'submitting';
-  const isSubmittingSaveAsDraft =
+  const isSavingAsDraft =
     isSubmitting && navigation.formData?.get('intent') === 'save-as-draft';
-  const isSubmittingSaveAndSend =
+  const isSavingAndSend =
     isSubmitting && navigation.formData?.get('intent') === 'save-and-send';
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export function NewInvoice({ newButtonText }: NewInvoiceFormProps) {
               value='save-as-draft'
               variant='secondary-color'
               form='new-invoice-form'
-              showSpinner={isSubmittingSaveAsDraft}
+              showSpinner={isSavingAsDraft}
             >
               Save as Draft
             </Button>
@@ -88,7 +88,7 @@ export function NewInvoice({ newButtonText }: NewInvoiceFormProps) {
               value='save-and-send'
               variant='primary'
               form='new-invoice-form'
-              showSpinner={isSubmittingSaveAndSend}
+              showSpinner={isSavingAndSend}
             >
               Save & Send
             </Button>

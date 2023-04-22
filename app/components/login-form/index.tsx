@@ -54,9 +54,9 @@ export function LoginForm({
 
   const redirectTo = searchParams.get('redirectTo') ?? undefined;
   const isSubmitting = navigation.state === 'submitting';
-  const isSubmittingLogin =
+  const isLoggingIn =
     isSubmitting && navigation.formData?.get('intent') === 'login';
-  const isSubmittingSignUp =
+  const isSigningUp =
     isSubmitting && navigation.formData?.get('intent') === 'sign-up';
 
   return (
@@ -86,7 +86,7 @@ export function LoginForm({
           name='intent'
           value='login'
           variant='primary'
-          showSpinner={isSubmittingLogin}
+          showSpinner={isLoggingIn}
         >
           Login
         </Button>
@@ -94,7 +94,7 @@ export function LoginForm({
           name='intent'
           value='sign-up'
           variant='secondary-gray'
-          showSpinner={isSubmittingSignUp}
+          showSpinner={isSigningUp}
         >
           Sign Up
         </Button>

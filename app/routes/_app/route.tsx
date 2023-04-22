@@ -39,7 +39,7 @@ export default function AppRoute() {
   const location = useLocation();
   const navigation = useNavigation();
 
-  const isSubmitting =
+  const isSettingTheme =
     navigation.state === 'submitting' && navigation.formAction === '/set-theme';
 
   return (
@@ -49,7 +49,11 @@ export default function AppRoute() {
         <div className='app-header-actions'>
           <Form method='post' action='/set-theme'>
             <Input type='hidden' name='redirectTo' value={location.pathname} />
-            <Button variant='tertiary-gray' showSpinner={isSubmitting} iconOnly>
+            <Button
+              variant='tertiary-gray'
+              showSpinner={isSettingTheme}
+              iconOnly
+            >
               {data.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
               <VisuallyHidden.Root>Toggle Theme</VisuallyHidden.Root>
             </Button>
