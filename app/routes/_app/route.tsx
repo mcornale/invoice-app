@@ -1,6 +1,11 @@
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Outlet, useLoaderData, useLocation } from '@remix-run/react';
+import {
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigation,
+} from '@remix-run/react';
 import styles from './styles.css';
 import {
   getThemeFromSession,
@@ -32,6 +37,10 @@ export const loader = async ({ request }: LoaderArgs) => {
 export default function AppRoute() {
   const data = useLoaderData<typeof loader>();
   const location = useLocation();
+  const navigation = useNavigation();
+
+  const isSubmitting =
+    navigation.state === 'submitting' && navigation.formAction === '/set-theme';
 
   return (
     <div className='app'>
@@ -40,7 +49,7 @@ export default function AppRoute() {
         <div className='app-header-actions'>
           <Form method='post' action='/set-theme'>
             <Input type='hidden' name='redirectTo' value={location.pathname} />
-            <Button variant='tertiary-gray' iconOnly>
+            <Button variant='tertiary-gray' showSpinner={isSubmitting} iconOnly>
               {data.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
               <VisuallyHidden.Root>Toggle Theme</VisuallyHidden.Root>
             </Button>
