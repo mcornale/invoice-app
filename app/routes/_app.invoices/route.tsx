@@ -1,4 +1,5 @@
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
@@ -10,23 +11,36 @@ import {
   links as invoiceListLinks,
 } from '~/components/invoice-list';
 import { Outlet, useLoaderData, useSearchParams } from '@remix-run/react';
-import { ButtonLink, links as buttonLinks } from '~/components/ui/button';
-import { PlusIcon } from '@radix-ui/react-icons';
 import { parseDate } from '~/utils/parsers';
 import {
+  getFieldErrors,
+  getFormErrors,
+  getFormattedInvoice,
+  getInvoiceFormData,
   getInvoiceSummaryStatus,
   isArrOfInvoiceStatus,
 } from '~/helpers/invoice';
-import { getInvoiceList } from '~/models/invoice.server';
+import { createInvoice, getInvoiceList } from '~/models/invoice.server';
 import { getUserIdFromSession } from '~/utils/session.server';
 import { useResponsiveText } from '~/hooks/use-responsive-text';
-import type { InvoiceStatus } from '@prisma/client';
+import { InvoiceStatus } from '@prisma/client';
+import type { InvoiceFormProps } from '~/components/invoice-form';
+import { badRequest } from '~/utils/request.server';
+import {
+  NewInvoiceForm,
+  links as newInvoiceFormLinks,
+} from '~/components/new-invoice';
+
+export interface ActionData {
+  fieldErrors: InvoiceFormProps['fieldErrors'];
+  formErrors: InvoiceFormProps['formErrors'];
+}
 
 export const links: LinksFunction = () => {
   return [
     ...invoiceListFilterLinks(),
     ...invoiceListLinks(),
-    ...buttonLinks(),
+    ...newInvoiceFormLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -40,12 +54,63 @@ export const loader = async ({ request }: LoaderArgs) => {
 
   const url = new URL(request.url);
   const status = url.searchParams.getAll('status');
-  console.log(status);
   if (!isArrOfInvoiceStatus(status))
     throw new Error("This shouldn't be possible");
   const invoices = await getInvoiceList(status, userId);
 
   return json({ invoices });
+};
+
+export const action = async ({ request }: ActionArgs) => {
+  const userId = await getUserIdFromSession(request);
+  if (!userId) throw new Error("This shouldn't be possible");
+
+  const formData = await request.formData();
+  const intent = formData.get('intent');
+
+  const typedFormData = getInvoiceFormData(formData);
+  if (!typedFormData)
+    return badRequest<ActionData>({
+      fieldErrors: undefined,
+      formErrors: ['form not submitted correctly'],
+    });
+
+  switch (intent) {
+    case 'save-as-draft':
+      const newDraftInvoice = getFormattedInvoice({
+        status: InvoiceStatus.DRAFT,
+        ...typedFormData,
+      });
+      await createInvoice({
+        userId,
+        ...newDraftInvoice,
+      });
+      return redirect(`/invoices`);
+    case 'save-and-send':
+      const fieldErrors = getFieldErrors(typedFormData);
+      const formErrors = getFormErrors(typedFormData, fieldErrors);
+      if (fieldErrors || formErrors) {
+        return badRequest<ActionData>({
+          fieldErrors,
+          formErrors,
+        });
+      }
+
+      const newPendingInvoice = getFormattedInvoice({
+        status: InvoiceStatus.PENDING,
+        ...typedFormData,
+      });
+      await createInvoice({
+        userId,
+        ...newPendingInvoice,
+      });
+      return redirect(`/invoices`);
+    default:
+      return badRequest<ActionData>({
+        fieldErrors: undefined,
+        formErrors: [`unhandled intent: ${intent}`],
+      });
+  }
 };
 
 export default function InvoicesRoute() {
@@ -79,10 +144,7 @@ export default function InvoicesRoute() {
         </div>
         <div className='invoice-list-actions'>
           <InvoiceListFilter activeStatus={status} />
-          <ButtonLink variant='primary' to={`new?${params}`}>
-            <PlusIcon />
-            {newButtonText}
-          </ButtonLink>
+          <NewInvoiceForm newButtonText={newButtonText} />
         </div>
       </header>
       {invoices.length > 0 ? (

@@ -4,15 +4,13 @@ import { forwardRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './styles.css';
-import { useNavigate } from '@remix-run/react';
 import type { DialogContentProps } from '@radix-ui/react-alert-dialog';
 
 export interface SlideOverContentProps
   extends Omit<Dialog.DialogContentProps, 'onInteractOutside'> {
   title: string;
 }
-export interface SlideOverProps
-  extends Omit<Dialog.DialogProps, 'open' | 'onOpenChange' | 'modal'> {}
+export interface SlideOverProps extends Omit<Dialog.DialogProps, 'modal'> {}
 
 export const links: LinksFunction = () => {
   return [
@@ -24,25 +22,7 @@ export const links: LinksFunction = () => {
 };
 
 export const SlideOver = ({ ...props }: SlideOverProps) => {
-  const navigate = useNavigate();
-  const [navOpen, setNavOpen] = useState(false);
-
-  useEffect(() => {
-    setNavOpen(true);
-  }, []);
-
-  function handleOpenChange(open: boolean) {
-    if (!open) navigate(-1);
-  }
-
-  return (
-    <Dialog.Root
-      open={navOpen}
-      onOpenChange={handleOpenChange}
-      modal={false}
-      {...props}
-    />
-  );
+  return <Dialog.Root modal={false} {...props} />;
 };
 
 export const SlideOverTrigger = Dialog.Trigger;
