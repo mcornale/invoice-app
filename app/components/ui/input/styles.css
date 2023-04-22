@@ -32,12 +32,9 @@
   pointer-events: none;
 }
 
-.input-date-container .input::-webkit-calendar-picker-indicator {
-  opacity: 0;
-}
-
 .input-date-container .input {
   padding: 0.9rem 1.4rem;
+  height: 4rem;
 }
 
 .checkbox {

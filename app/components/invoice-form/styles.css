@@ -82,6 +82,7 @@
 
 @media (max-width: 32em) {
   .invoice-form .fieldset-row {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 }
