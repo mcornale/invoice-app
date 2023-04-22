@@ -38,6 +38,7 @@
   height: 100%;
   overflow: auto;
   padding: var(--spacing-16);
+  scroll-behavior: smooth;
 }
 
 .app-outlet-wrapper::-webkit-scrollbar {

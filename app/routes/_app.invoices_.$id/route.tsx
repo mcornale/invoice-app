@@ -41,6 +41,7 @@ import {
   links as deleteInvoiceLinks,
 } from '~/components/delete-invoice';
 import { Form } from '~/components/ui/form';
+import { useEffect } from 'react';
 
 export interface ActionData {
   fieldErrors?: InvoiceFormProps['fieldErrors'];
@@ -146,6 +147,13 @@ export default function InvoiceRoute() {
   function handleBackClick() {
     navigate(-1);
   }
+
+  useEffect(() => {
+    (document.querySelector('.app-outlet-wrapper') as HTMLElement).scrollTo(
+      0,
+      0
+    );
+  }, []);
 
   return (
     <>
