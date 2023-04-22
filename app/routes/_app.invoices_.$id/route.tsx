@@ -2,11 +2,7 @@ import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { Outlet, useLoaderData, useNavigate } from '@remix-run/react';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
-import {
-  Button,
-  ButtonLink,
-  links as buttonLinks,
-} from '~/components/ui/button';
+import { Button, links as buttonLinks } from '~/components/ui/button';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
@@ -15,7 +11,11 @@ import styles from './styles.css';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
 import { getUserIdFromSession } from '~/utils/session.server';
-import { getInvoice, updateInvoice } from '~/models/invoice.server';
+import {
+  deleteInvoice,
+  getInvoice,
+  updateInvoice,
+} from '~/models/invoice.server';
 import { isString } from '~/utils/checkers';
 import type { InvoiceFormProps } from '~/components/invoice-form';
 import { badRequest } from '~/utils/request.server';
@@ -30,6 +30,10 @@ import {
   EditInvoice,
   links as editInvoiceLinks,
 } from '~/components/edit-invoice';
+import {
+  DeleteInvoice,
+  links as deleteInvoiceLinks,
+} from '~/components/delete-invoice';
 
 export interface ActionData {
   fieldErrors: InvoiceFormProps['fieldErrors'];
@@ -41,6 +45,7 @@ export const links: LinksFunction = () => {
     ...badgeLinks(),
     ...buttonLinks(),
     ...editInvoiceLinks(),
+    ...deleteInvoiceLinks(),
     {
       rel: 'stylesheet',
       href: styles,
@@ -73,36 +78,42 @@ export const action = async ({ params, request }: ActionArgs) => {
   const formData = await request.formData();
 
   const intent = formData.get('intent');
-  if (intent !== 'save-changes')
-    return badRequest<ActionData>({
-      fieldErrors: undefined,
-      formErrors: [`unhandled intent: ${intent}`],
-    });
+  switch (intent) {
+    case 'edit':
+      const status = formData.get('status');
+      if (!isInvoiceStatus(status))
+        throw new Error("This shouldn't be possible");
+      const typedFormData = getInvoiceFormData(formData);
+      if (!typedFormData)
+        return badRequest<ActionData>({
+          fieldErrors: undefined,
+          formErrors: ['form not submitted correctly'],
+        });
 
-  const status = formData.get('status');
-  if (!isInvoiceStatus(status)) throw new Error("This shouldn't be possible");
-  const typedFormData = getInvoiceFormData(formData);
-  if (!typedFormData)
-    return badRequest<ActionData>({
-      fieldErrors: undefined,
-      formErrors: ['form not submitted correctly'],
-    });
+      const fieldErrors = getFieldErrors(typedFormData);
+      const formErrors = getFormErrors(typedFormData, fieldErrors);
+      if (fieldErrors || formErrors) {
+        return badRequest<ActionData>({
+          fieldErrors,
+          formErrors,
+        });
+      }
 
-  const fieldErrors = getFieldErrors(typedFormData);
-  const formErrors = getFormErrors(typedFormData, fieldErrors);
-  if (fieldErrors || formErrors) {
-    return badRequest<ActionData>({
-      fieldErrors,
-      formErrors,
-    });
+      const updatedInvoice = getFormattedInvoice({
+        status: status === InvoiceStatus.DRAFT ? InvoiceStatus.PENDING : status,
+        ...typedFormData,
+      });
+      await updateInvoice({ id: invoiceId, ...updatedInvoice });
+      return redirect(`/invoices/${invoiceId}`);
+    case 'delete':
+      await deleteInvoice(invoiceId);
+      return redirect('/invoices');
+    default:
+      return badRequest<ActionData>({
+        fieldErrors: undefined,
+        formErrors: [`unhandled intent: ${intent}`],
+      });
   }
-
-  const updatedInvoice = getFormattedInvoice({
-    status: status === InvoiceStatus.DRAFT ? InvoiceStatus.PENDING : status,
-    ...typedFormData,
-  });
-  await updateInvoice({ id: invoiceId, ...updatedInvoice });
-  return redirect(`/invoices/${invoiceId}`);
 };
 
 export default function InvoiceRoute() {
@@ -155,9 +166,7 @@ export default function InvoiceRoute() {
         </dl>
         <div className='invoice-actions'>
           <EditInvoice invoice={invoice} />
-          <ButtonLink to='delete' variant='primary-destructive'>
-            Delete
-          </ButtonLink>
+          <DeleteInvoice invoiceDisplayId={invoice.displayId} />
           <Button variant='primary'>Mark as Paid</Button>
         </div>
       </section>

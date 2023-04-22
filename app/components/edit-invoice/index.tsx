@@ -58,7 +58,7 @@ export function EditInvoice({ invoice }: EditInvoiceProps) {
             variant='primary'
             form='edit-invoice-form'
             name='intent'
-            value='save-changes'
+            value='edit'
             showSpinner={isSubmitting}
           >
             Save Changes
