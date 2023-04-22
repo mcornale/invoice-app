@@ -19,6 +19,7 @@ import { Input, links as inputLinks } from '../ui/input';
 import { Select, links as selectLinks } from '../ui/select';
 import { upperFirst } from '~/utils/formatters';
 import type { Invoice, InvoiceItem } from '@prisma/client';
+import { InvoiceStatus } from '@prisma/client';
 
 export const PAYMENT_TERMS_OPTIONS = [
   { text: 'net 1 day', value: '1' },
@@ -269,7 +270,7 @@ export function InvoiceForm({
                 name='created-at'
                 type='date'
                 defaultValue={initData?.createdAt?.toISOString().slice(0, 10)}
-                disabled={Boolean(initData?.createdAt)}
+                disabled={initData?.status !== InvoiceStatus.DRAFT}
               />
               {fieldErrors?.createdAt && (
                 <FormError>{fieldErrors.createdAt}</FormError>
