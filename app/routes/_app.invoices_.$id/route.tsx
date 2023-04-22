@@ -36,8 +36,9 @@ import {
 } from '~/components/delete-invoice';
 
 export interface ActionData {
-  fieldErrors: InvoiceFormProps['fieldErrors'];
-  formErrors: InvoiceFormProps['formErrors'];
+  fieldErrors?: InvoiceFormProps['fieldErrors'];
+  formErrors?: InvoiceFormProps['formErrors'];
+  success?: boolean;
 }
 
 export const links: LinksFunction = () => {
@@ -104,7 +105,7 @@ export const action = async ({ params, request }: ActionArgs) => {
         ...typedFormData,
       });
       await updateInvoice({ id: invoiceId, ...updatedInvoice });
-      return redirect(`/invoices/${invoiceId}`);
+      return json({ success: true });
     case 'delete':
       await deleteInvoice(invoiceId);
       return redirect('/invoices');

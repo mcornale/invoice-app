@@ -1,5 +1,4 @@
 import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
-import { redirect } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import styles from './styles.css';
 import {
@@ -29,8 +28,9 @@ import { badRequest } from '~/utils/request.server';
 import { NewInvoice, links as newInvoiceLinks } from '~/components/new-invoice';
 
 export interface ActionData {
-  fieldErrors: InvoiceFormProps['fieldErrors'];
-  formErrors: InvoiceFormProps['formErrors'];
+  fieldErrors?: InvoiceFormProps['fieldErrors'];
+  formErrors?: InvoiceFormProps['formErrors'];
+  success?: boolean;
 }
 
 export const links: LinksFunction = () => {
@@ -82,7 +82,7 @@ export const action = async ({ request }: ActionArgs) => {
         userId,
         ...newDraftInvoice,
       });
-      return redirect(`/invoices`);
+      return json({ success: true });
     case 'save-and-send':
       const fieldErrors = getFieldErrors(typedFormData);
       const formErrors = getFormErrors(typedFormData, fieldErrors);
@@ -101,7 +101,7 @@ export const action = async ({ request }: ActionArgs) => {
         userId,
         ...newPendingInvoice,
       });
-      return redirect(`/invoices`);
+      return json({ success: true });
     default:
       return badRequest<ActionData>({
         fieldErrors: undefined,

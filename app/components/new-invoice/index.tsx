@@ -12,6 +12,7 @@ import styles from './styles.css';
 import type { LinksFunction } from '@remix-run/node';
 import type { ActionData } from '~/routes/_app.invoices/route';
 import { PlusIcon } from '@radix-ui/react-icons';
+import { useEffect, useState } from 'react';
 
 export interface NewInvoiceFormProps {
   newButtonText: string;
@@ -33,15 +34,24 @@ export function NewInvoice({ newButtonText }: NewInvoiceFormProps) {
   const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
 
-  const isSubmitting =
-    navigation.state === 'submitting' || navigation.state === 'loading';
+  const [open, setOpen] = useState(false);
+
+  function handleOpenChange(newOpen: boolean) {
+    setOpen(newOpen);
+  }
+
+  const isSubmitting = navigation.state === 'submitting';
   const isSubmittingSaveAsDraft =
     isSubmitting && navigation.formData?.get('intent') === 'save-as-draft';
   const isSubmittingSaveAndSend =
     isSubmitting && navigation.formData?.get('intent') === 'save-and-send';
 
+  useEffect(() => {
+    if (actionData?.success) setOpen(false);
+  }, [actionData]);
+
   return (
-    <SlideOver>
+    <SlideOver open={open} onOpenChange={handleOpenChange}>
       <SlideOverTrigger asChild>
         <Button variant='primary'>
           <PlusIcon />

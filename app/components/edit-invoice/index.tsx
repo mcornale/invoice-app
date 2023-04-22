@@ -12,6 +12,7 @@ import { InvoiceForm, links as invoiceFormLinks } from '../invoice-form';
 import { Button, links as buttonLinks } from '../ui/button';
 import styles from './styles.css';
 import type { Invoice } from '@prisma/client';
+import { useEffect, useState } from 'react';
 
 export interface EditInvoiceProps {
   invoice: Invoice;
@@ -32,12 +33,22 @@ export const links: LinksFunction = () => {
 export function EditInvoice({ invoice }: EditInvoiceProps) {
   const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
+  const [open, setOpen] = useState(false);
+
+  function handleOpenChange(newOpen: boolean) {
+    setOpen(newOpen);
+  }
+
   const isSubmitting =
     navigation.state === 'submitting' &&
     navigation.formData.get('intent') === 'edit';
 
+  useEffect(() => {
+    if (actionData?.success) setOpen(false);
+  }, [actionData]);
+
   return (
-    <SlideOver>
+    <SlideOver open={open} onOpenChange={handleOpenChange}>
       <SlideOverTrigger asChild>
         <Button variant='secondary-gray'>Edit</Button>
       </SlideOverTrigger>
