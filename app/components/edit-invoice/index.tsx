@@ -34,7 +34,7 @@ export function EditInvoice({ invoice }: EditInvoiceProps) {
   const navigation = useNavigation();
   const isSubmitting =
     navigation.state === 'submitting' &&
-    navigation.formData.get('intent') === 'save-changes';
+    navigation.formData.get('intent') === 'edit';
 
   return (
     <SlideOver>
