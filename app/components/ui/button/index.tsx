@@ -54,9 +54,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <div className='content'>{children}</div>
         {showSpinner && (
-          <div className='spinner-wrapper'>
+          <span className='spinner-wrapper'>
             <span className='spinner' />
-          </div>
+          </span>
         )}
       </button>
     );

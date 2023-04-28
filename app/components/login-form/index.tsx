@@ -67,14 +67,14 @@ export function LoginForm({
         </VisuallyHidden.Root>
         <FormField>
           <FormLabel htmlFor='username'>Username</FormLabel>
-          <Input id='username' name='username' type='username' required />
+          <Input id='username' name='username' type='text' />
           {fieldErrors?.username && (
             <FormError>{fieldErrors.username}</FormError>
           )}
         </FormField>
         <FormField>
           <FormLabel htmlFor='password'>Password</FormLabel>
-          <Input id='password' name='password' type='password' required />
+          <Input id='password' name='password' type='password' />
           {fieldErrors?.password && (
             <FormError>{fieldErrors.password}</FormError>
           )}
