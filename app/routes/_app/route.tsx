@@ -42,6 +42,9 @@ export default function AppRoute() {
   const isSettingTheme =
     navigation.state === 'submitting' && navigation.formAction === '/set-theme';
 
+  const isLoggingOut =
+    navigation.state === 'submitting' && navigation.formAction === '/logout';
+
   return (
     <div className='app'>
       <header className='app-header'>
@@ -59,7 +62,12 @@ export default function AppRoute() {
             </Button>
           </Form>
           <Form action='/logout' method='post'>
-            <Button variant='tertiary-gray' type='submit' iconOnly>
+            <Button
+              variant='tertiary-gray'
+              type='submit'
+              showSpinner={isLoggingOut}
+              iconOnly
+            >
               <ExitIcon />
               <VisuallyHidden.Root>Logout</VisuallyHidden.Root>
             </Button>
