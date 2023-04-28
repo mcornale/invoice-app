@@ -1,62 +1,49 @@
-# Welcome to Remix!
+# Frontend Mentor - Invoice app solution
 
-- [Remix Docs](https://remix.run/docs)
-- [Netlify Functions](https://www.netlify.com/products/functions/)
+This is a solution to the [Invoice app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQjl). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Netlify Setup
+## Table of contents
 
-1. Install the [Netlify CLI](https://www.netlify.com/products/dev/):
+- [The challenge](#the-challenge)
+- [Screenshot](#screenshot)
+- [Links](#links)
+- [Built with](#built-with)
+- [Demo user](#demo-user)
 
-```sh
-npm i -g netlify-cli
-```
+## The challenge
 
-If you have previously installed the Netlify CLI, you should update it to the latest version:
+Users should be able to:
 
-```sh
-npm i -g netlify-cli@latest
-```
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Create, read, update, and delete invoices
+- Receive form validations when trying to create/edit an invoice
+- Save draft invoices, and mark pending invoices as paid
+- Filter invoices by status (draft/pending/paid)
+- Toggle light and dark mode
+- **Bonus**: Keep track of any changes, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
 
-2. Sign up and log in to Netlify:
+## Screenshot
 
-```sh
-netlify login
-```
+![](./screenshot.jpg)
 
-3. Create a new site:
+## Links
 
-```sh
-netlify init
-```
+- Solution URL: [Add solution URL here](https://www.frontendmentor.io/solutions/invoice-app-U32prWfzFE)
+- Live Site URL: [Add live site URL here](mcornale-invoice-app.netlify.app)
 
-## Development
+## Built with
 
-The Remix dev server starts your app in development mode, rebuilding assets on file changes. To start the Remix dev server:
+- React
+- CSS
+- Typescript
+- Radix UI
+- Remix
 
-```sh
-npm run dev
-```
+## Demo user
 
-Open up [http://localhost:3000](http://localhost:3000), and you should be ready to go!
+I've created a demo user so you can have a look at the application with some sample data.
+Here's the user credentials:
 
-The Netlify CLI builds a production version of your Remix App Server and splits it into Netlify Functions that run locally. This includes any custom Netlify functions you've developed. The Netlify CLI runs all of this in its development mode.
-
-```sh
-netlify dev
-```
-
-Open up [http://localhost:3000](http://localhost:3000), and you should be ready to go!
-
-Note: When running the Netlify CLI, file changes will rebuild assets, but you will not see the changes to the page you are on unless you do a browser refresh of the page. Due to how the Netlify CLI builds the Remix App Server, it does not support hot module reloading.
-
-## Deployment
-
-There are two ways to deploy your app to Netlify, you can either link your app to your git repo and have it auto deploy changes to Netlify, or you can deploy your app manually. If you've followed the setup instructions already, all you need to do is run this:
-
-```sh
-# preview deployment
-netlify deploy --build
-
-# production deployment
-netlify deploy --build --prod
-```
+- username: `demo`
+- password: `demo123`
