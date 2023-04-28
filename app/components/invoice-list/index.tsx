@@ -30,7 +30,7 @@ export function InvoiceList({ invoices }: InvoiceListProps) {
     <ul className='invoice-list'>
       {invoices.map((invoice) => (
         <li key={invoice.id}>
-          <Link to={invoice.id} className='invoice-link'>
+          <Link to={invoice.id} className='invoice-link' prefetch='intent'>
             <dl>
               <div className='invoice-id'>
                 <VisuallyHidden.Root>

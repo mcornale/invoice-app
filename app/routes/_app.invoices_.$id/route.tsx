@@ -4,12 +4,15 @@ import {
   Outlet,
   isRouteErrorResponse,
   useLoaderData,
-  useNavigate,
   useNavigation,
   useRouteError,
 } from '@remix-run/react';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
-import { Button, links as buttonLinks } from '~/components/ui/button';
+import {
+  Button,
+  ButtonLink,
+  links as buttonLinks,
+} from '~/components/ui/button';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
@@ -133,7 +136,6 @@ export const action = async ({ params, request }: ActionArgs) => {
 
 export default function InvoiceRoute() {
   const data = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
   const navigation = useNavigation();
 
   const isMarkingAsPaid =
@@ -150,10 +152,6 @@ export default function InvoiceRoute() {
       : null,
   };
 
-  function handleBackClick() {
-    navigate(-1);
-  }
-
   useEffect(() => {
     (document.querySelector('.app-outlet-wrapper') as HTMLElement).scrollTo(
       0,
@@ -163,13 +161,15 @@ export default function InvoiceRoute() {
 
   return (
     <>
-      <Button
+      <ButtonLink
+        to='/invoices'
+        replace
+        prefetch='intent'
         className='back-button'
         variant='tertiary-gray'
-        onClick={handleBackClick}
       >
         <CaretLeftIcon /> Back
-      </Button>
+      </ButtonLink>
       <VisuallyHidden.Root>
         <h1>Invoice XM9141</h1>
       </VisuallyHidden.Root>
