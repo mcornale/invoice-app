@@ -86,3 +86,18 @@ input[readonly] {
   cursor: not-allowed;
   opacity: 0.4;
 }
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-6);
+  background-color: var(--color-red-3);
+  color: var(--color-red-10);
+  font: var(--font-text-sm);
+  font-weight: 600;
+  border: 0.1rem solid var(--color-red-6);
+  border-radius: var(--border-radius-2);
+  padding: var(--spacing-12);
+}

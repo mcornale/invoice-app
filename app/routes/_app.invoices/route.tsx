@@ -97,9 +97,8 @@ export const action = async ({ request }: ActionArgs) => {
       });
       return json({ success: true });
     default:
-      return badRequest<ActionData>({
-        fieldErrors: undefined,
-        formErrors: [`unhandled intent: ${intent}`],
+      throw new Response(`The intent "${intent}" is not supported`, {
+        status: 400,
       });
   }
 };
@@ -154,4 +153,8 @@ export default function InvoicesRoute() {
       <Outlet />
     </>
   );
+}
+
+export function ErrorBoundary() {
+  return <div className='error-container'>Something bad happened. Sorry</div>;
 }

@@ -2,9 +2,11 @@ import { CaretLeftIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import {
   Outlet,
+  isRouteErrorResponse,
   useLoaderData,
   useNavigate,
   useNavigation,
+  useRouteError,
 } from '@remix-run/react';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import { Button, links as buttonLinks } from '~/components/ui/button';
@@ -69,9 +71,10 @@ export const loader = async ({ params, request }: LoaderArgs) => {
   if (!isString(invoiceId)) throw new Error("This shouldn't be possible");
   const invoice = await getInvoice(invoiceId);
   if (!invoice) {
-    throw new Error('Invoice not found');
+    throw new Response('Invoice not found', { status: 404 });
   }
-  if (invoice.userId !== userId) throw new Error("You don't own this invoice!");
+  if (invoice.userId !== userId)
+    throw new Response("You don't own this invoice!", { status: 403 });
 
   return json({
     invoice,
@@ -122,6 +125,9 @@ export const action = async ({ params, request }: ActionArgs) => {
       await deleteInvoice(invoiceId);
       return redirect('/invoices');
     default:
+      throw new Response(`The intent "${intent}" is not supported`, {
+        status: 400,
+      });
   }
 };
 
@@ -310,4 +316,14 @@ export default function InvoiceRoute() {
       <Outlet context={{ invoice }} />
     </>
   );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  const errorMessage = isRouteErrorResponse(error)
+    ? error.data
+    : 'Something bad happened. Sorry';
+
+  return <div className='error-container'>{errorMessage}</div>;
 }
