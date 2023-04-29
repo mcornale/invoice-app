@@ -122,7 +122,7 @@ export default function InvoicesRoute() {
   });
   const invoiceSummaryText = useResponsiveText({
     defaultText: `There ${invoiceSummaryVerb} ${invoices.length} ${invoiceSummaryStatus} ${invoiceSummaryObject}`,
-    smScreenText: `${invoices.length} invoices`,
+    smScreenText: `${invoices.length} ${invoiceSummaryObject}`,
   });
 
   return (
