@@ -56,6 +56,10 @@ input {
   border: none;
 }
 
+input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
 address {
   font-style: normal;
 }
