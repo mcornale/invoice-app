@@ -32,7 +32,7 @@ export function DeleteInvoice({ invoiceDisplayId }: DeleteInvoiceProps) {
 
   const isDeleting =
     navigation.state === 'submitting' &&
-    navigation.formData.get('intent') === 'delete';
+    navigation.formData?.get('intent') === 'delete';
 
   return (
     <AlertDialog>

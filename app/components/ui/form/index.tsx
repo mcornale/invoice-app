@@ -9,13 +9,12 @@ import type {
 } from 'react';
 import { forwardRef } from 'react';
 
-export interface FormProps extends RemixFormProps {}
-export interface FormFieldsetProps
-  extends FieldsetHTMLAttributes<HTMLFieldSetElement> {}
-export interface FormLegendProps extends HTMLAttributes<HTMLLegendElement> {}
-export interface FormFieldProps extends HTMLAttributes<HTMLDivElement> {}
-export interface FormLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
-export interface FormErrorProps extends HTMLAttributes<HTMLSpanElement> {}
+export type FormProps = RemixFormProps;
+export type FormFieldsetProps = FieldsetHTMLAttributes<HTMLFieldSetElement>;
+export type FormLegendProps = HTMLAttributes<HTMLLegendElement>;
+export type FormFieldProps = HTMLAttributes<HTMLDivElement>;
+export type FormLabelProps = LabelHTMLAttributes<HTMLLabelElement>;
+export type FormErrorProps = HTMLAttributes<HTMLSpanElement>;
 
 export const links: LinksFunction = () => {
   return [

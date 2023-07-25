@@ -8,7 +8,7 @@ import { ERROR_MESSAGES } from '~/constants/error-messages';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
 
-export type getItemsParams = Pick<
+export type GetItemsParams = Pick<
   InvoiceFormFields,
   'itemNames' | 'itemQuantities' | 'itemPrices' | 'itemTotals'
 >;
@@ -17,7 +17,8 @@ const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NUMBERS = '0123456789';
 
 export function getInvoiceFormData(
-  formData: FormData
+  formData: FormData,
+  isDateRequired = true
 ): InvoiceFormFields | undefined {
   const senderAddressStreet = formData.get('sender-address-street');
   const senderAddressCity = formData.get('sender-address-city');
@@ -48,7 +49,6 @@ export function getInvoiceFormData(
     !isString(clientAddressCity) ||
     !isString(clientAddressPostCode) ||
     !isString(clientAddressCountry) ||
-    !isString(createdAt) ||
     !isString(paymentTerms) ||
     !isString(description) ||
     !isArrOfString(itemNames) ||
@@ -58,6 +58,8 @@ export function getInvoiceFormData(
   ) {
     return;
   }
+
+  if (isDateRequired && !isString(createdAt)) return;
 
   return {
     senderAddressStreet,
@@ -70,7 +72,7 @@ export function getInvoiceFormData(
     clientAddressCity,
     clientAddressPostCode,
     clientAddressCountry,
-    createdAt,
+    createdAt: createdAt?.toString() ?? undefined,
     paymentTerms,
     description,
     itemNames,
@@ -99,7 +101,7 @@ export const getInvoicePaymentDue = (createdAt: Date, paymentTerms: number) => {
   return new Date(createdAt.getTime() + paymentTermsInMS);
 };
 
-export function getInvoiceItems(itemFields: getItemsParams) {
+export function getInvoiceItems(itemFields: GetItemsParams) {
   const itemNames = itemFields.itemNames;
   const itemQuantities = itemFields.itemQuantities?.map((qty) => Number(qty));
   const itemPrices = itemFields.itemPrices.map((price) => Number(price));
@@ -154,8 +156,8 @@ export const validateClientAddressCountry = (val: string) => {
   if (isEmpty(val)) return ERROR_MESSAGES.EMPTY;
 };
 
-export const validateCreatedAt = (val: string) => {
-  if (isNull(parseDate(val))) return 'choose a valid date';
+export const validateCreatedAt = (val: string | null | undefined) => {
+  if (!val || isNull(parseDate(val))) return 'choose a valid date';
 };
 
 export const validatePaymentTerms = (val: string) => {
@@ -187,7 +189,8 @@ export const validateItemTotals = (vals: string[]) => {
 };
 
 export const getFieldErrors = (
-  fields: InvoiceFormFields
+  fields: InvoiceFormFields,
+  isDateRequired = true
 ): InvoiceFormFieldErrors | undefined => {
   const fieldErrors = {
     senderAddressStreet: validateSenderAddressStreet(
@@ -212,7 +215,7 @@ export const getFieldErrors = (
     clientAddressCountry: validateClientAddressCountry(
       fields.clientAddressCountry
     ),
-    createdAt: validateCreatedAt(fields.createdAt),
+    createdAt: isDateRequired ? validateCreatedAt(fields.createdAt) : undefined,
     paymentTerms: validatePaymentTerms(fields.paymentTerms),
     description: validateDescription(fields.description),
     itemNames: validateItemNames(fields.itemNames),
@@ -278,7 +281,7 @@ export function getFormattedInvoice(fields: InvoiceFormFields) {
   };
   const paymentTerms = Number(fields.paymentTerms);
   const description = fields.description;
-  const createdAt = parseDate(fields.createdAt);
+  const createdAt = fields.createdAt ? parseDate(fields.createdAt) : undefined;
   const paymentDue =
     createdAt instanceof Date
       ? getInvoicePaymentDue(createdAt, paymentTerms)

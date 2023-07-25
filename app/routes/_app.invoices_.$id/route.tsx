@@ -15,8 +15,7 @@ import {
 } from '~/components/ui/button';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
-import { redirect } from '@remix-run/node';
-import { json } from '@remix-run/node';
+import { redirect, json } from '@remix-run/node';
 import styles from './styles.css';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
@@ -98,14 +97,17 @@ export const action = async ({ params, request }: ActionArgs) => {
       const status = formData.get('status');
       if (!isInvoiceStatus(status))
         throw new Error("This shouldn't be possible");
-      const invoiceFormData = getInvoiceFormData(formData);
+      const invoiceFormData = getInvoiceFormData(formData, false);
       if (!invoiceFormData)
         return badRequest<ActionData>({
           fieldErrors: undefined,
           formErrors: ['form not submitted correctly'],
         });
 
-      const fieldErrors = getFieldErrors(invoiceFormData);
+      const fieldErrors = getFieldErrors(
+        invoiceFormData,
+        status !== InvoiceStatus.PENDING
+      );
       const formErrors = getFormErrors(invoiceFormData, fieldErrors);
       if (fieldErrors || formErrors) {
         return badRequest<ActionData>({
@@ -140,7 +142,7 @@ export default function InvoiceRoute() {
 
   const isMarkingAsPaid =
     navigation.state === 'submitting' &&
-    navigation.formData.get('intent') === 'mark-as-paid';
+    navigation.formData?.get('intent') === 'mark-as-paid';
 
   const invoice = {
     ...data.invoice,

@@ -23,6 +23,10 @@
   position: relative;
 }
 
+.input-date-container :disabled + svg {
+  opacity: 0.4;
+}
+
 .input-date-container svg {
   width: 1.6rem;
   height: auto;

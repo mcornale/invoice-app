@@ -43,7 +43,7 @@ export function EditInvoice({ invoice }: EditInvoiceProps) {
 
   const isSubmitting =
     navigation.state === 'submitting' &&
-    navigation.formData.get('intent') === 'edit';
+    navigation.formData?.get('intent') === 'edit';
 
   useEffect(() => {
     if (actionData?.success) setOpen(false);

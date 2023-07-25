@@ -1,17 +1,16 @@
-import type { InvoiceStatus } from '@prisma/client';
-import type { Invoice, User } from '@prisma/client';
+import type { InvoiceStatus, Invoice, User, Prisma } from '@prisma/client';
 import { db } from '~/utils/db.server';
 
-export type InvoiceWithoutId = Omit<Invoice, 'id'>;
-export type InvoiceWithoutUserId = Omit<Invoice, 'userId'>;
+type EditInvoiceParams = {
+  id: Invoice['id'];
+} & Prisma.InvoiceUpdateArgs['data'];
 
-export async function createInvoice(data: InvoiceWithoutId) {
+export async function createInvoice(data: Prisma.InvoiceCreateArgs['data']) {
   return db.invoice.create({ data });
 }
 
-export async function editInvoice(data: InvoiceWithoutUserId) {
-  const { id, ...restData } = data;
-  return db.invoice.update({ where: { id }, data: restData });
+export async function editInvoice({ id, ...data }: EditInvoiceParams) {
+  return db.invoice.update({ where: { id }, data });
 }
 
 export async function markInvoiceAsPaid(

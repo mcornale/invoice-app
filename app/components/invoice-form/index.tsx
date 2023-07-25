@@ -39,7 +39,7 @@ export interface InvoiceFormFields {
   clientAddressCity: string;
   clientAddressPostCode: string;
   clientAddressCountry: string;
-  createdAt: string;
+  createdAt?: string | null;
   paymentTerms: string;
   description: string;
   itemNames: string[];
