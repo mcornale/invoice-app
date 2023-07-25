@@ -1,8 +1,8 @@
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import type { LinksFunction } from '@remix-run/node';
 import type { FormProps } from '~/components/ui/form';
-import { FormError } from '~/components/ui/form';
 import {
+  FormError,
   Form,
   FormField,
   FormFieldset,

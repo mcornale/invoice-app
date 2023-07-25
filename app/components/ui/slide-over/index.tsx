@@ -1,8 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import type { LinksFunction } from '@remix-run/node';
-import { forwardRef } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import styles from './styles.css';
 import type { DialogContentProps } from '@radix-ui/react-alert-dialog';
 
