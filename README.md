@@ -29,8 +29,8 @@ Users should be able to:
 
 ## Links
 
-- Solution URL: [Add solution URL here](https://www.frontendmentor.io/solutions/invoice-app-U32prWfzFE)
-- Live Site URL: [Add live site URL here](mcornale-invoice-app.netlify.app)
+- Solution URL: [frontendmentor.io/solutions/invoice-app-U32prWfzFE](https://www.frontendmentor.io/solutions/invoice-app-U32prWfzFE)
+- Live Site URL: [mcornale-invoice-app.netlify.app](https://mcornale-invoice-app.netlify.app/invoices)
 
 ## Built with
 
