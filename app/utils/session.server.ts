@@ -1,5 +1,6 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { isString } from './checkers';
+import { createThemeSessionResolver } from 'remix-themes';
 
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
@@ -18,17 +19,6 @@ export const userStorage = createCookieSessionStorage({
   },
 });
 
-export const themeStorage = createCookieSessionStorage({
-  cookie: {
-    name: 'invoice_app_theme',
-    secure: process.env.NODE_ENV === 'production',
-    secrets: [sessionSecret],
-    sameSite: 'lax',
-    path: '/',
-    httpOnly: true,
-  },
-});
-
 export async function createUserSession(userId: string, redirectTo: string) {
   const session = await userStorage.getSession();
   session.set('userId', userId);
@@ -39,24 +29,9 @@ export async function createUserSession(userId: string, redirectTo: string) {
   });
 }
 
-export async function createThemeSession(theme: string, redirectTo: string) {
-  const session = await themeStorage.getSession();
-  session.set('theme', theme);
-  return redirect(redirectTo, {
-    headers: {
-      'Set-Cookie': await themeStorage.commitSession(session),
-    },
-  });
-}
-
 function getUserSession(request: Request) {
   const cookie = request.headers.get('Cookie');
   return userStorage.getSession(cookie);
-}
-
-export function getThemeSession(request: Request) {
-  const cookie = request.headers.get('Cookie');
-  return themeStorage.getSession(cookie);
 }
 
 export async function getUserIdFromSession(request: Request) {
@@ -65,19 +40,6 @@ export async function getUserIdFromSession(request: Request) {
   if (!userId || !isString(userId)) return;
 
   return userId;
-}
-
-export async function getThemeFromSession(request: Request) {
-  const session = await getThemeSession(request);
-  const theme = session.get('theme');
-  if (!theme || !isString(theme)) return 'light';
-
-  return theme;
-}
-
-export async function setThemeInSession(theme: string, request: Request) {
-  const session = await getThemeSession(request);
-  session.set('theme', theme);
 }
 
 export async function requireUserSession(
@@ -101,3 +63,16 @@ export async function destroyUserSession(request: Request) {
     },
   });
 }
+
+export const themeStorage = createCookieSessionStorage({
+  cookie: {
+    name: 'invoice_app_theme',
+    secure: process.env.NODE_ENV === 'production',
+    secrets: [sessionSecret],
+    sameSite: 'lax',
+    path: '/',
+    httpOnly: true,
+  },
+});
+
+export const themeSessionResolver = createThemeSessionResolver(themeStorage);

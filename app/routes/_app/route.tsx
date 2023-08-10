@@ -1,21 +1,12 @@
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import {
-  Outlet,
-  useLoaderData,
-  useLocation,
-  useNavigation,
-} from '@remix-run/react';
+import { json, type LinksFunction, type LoaderArgs } from '@remix-run/node';
+import { Outlet, useNavigation } from '@remix-run/react';
 import styles from './styles.css';
-import {
-  getThemeFromSession,
-  requireUserSession,
-} from '~/utils/session.server';
+import { requireUserSession } from '~/utils/session.server';
 import { Form, links as formLinks } from '~/components/ui/form';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import { ExitIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Input } from '~/components/ui/input';
+import { Theme, useTheme } from 'remix-themes';
 
 export const links: LinksFunction = () => {
   return [
@@ -30,37 +21,32 @@ export const links: LinksFunction = () => {
 
 export const loader = async ({ request }: LoaderArgs) => {
   await requireUserSession(request);
-  const theme = await getThemeFromSession(request);
-  return json({ theme });
+
+  return json({});
 };
 
 export default function AppRoute() {
-  const data = useLoaderData<typeof loader>();
-  const location = useLocation();
+  const [theme, setTheme] = useTheme();
   const navigation = useNavigation();
-
-  const isSettingTheme =
-    navigation.state === 'submitting' && navigation.formAction === '/set-theme';
 
   const isLoggingOut =
     navigation.state === 'submitting' && navigation.formAction === '/logout';
+
+  function toggleTheme() {
+    setTheme((prevTheme) =>
+      prevTheme === Theme.DARK ? Theme.LIGHT : Theme.DARK
+    );
+  }
 
   return (
     <div className='app'>
       <header className='app-header'>
         <img className='logo' src='/logo.svg' alt='logo' />
         <div className='app-header-actions'>
-          <Form method='post' action='/set-theme'>
-            <Input type='hidden' name='redirectTo' value={location.pathname} />
-            <Button
-              variant='tertiary-gray'
-              showSpinner={isSettingTheme}
-              iconOnly
-            >
-              {data.theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-              <VisuallyHidden.Root>Toggle Theme</VisuallyHidden.Root>
-            </Button>
-          </Form>
+          <Button onClick={toggleTheme} variant='tertiary-gray' iconOnly>
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            <VisuallyHidden.Root>Toggle Theme</VisuallyHidden.Root>
+          </Button>
           <Form action='/logout' method='post'>
             <Button
               variant='tertiary-gray'

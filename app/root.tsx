@@ -1,5 +1,4 @@
 import type { LinksFunction, LoaderArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -11,7 +10,12 @@ import {
 } from '@remix-run/react';
 import globalStyles from '~/styles/global.css';
 import designSystemStyles from '~/styles/design-system.css';
-import { getThemeFromSession } from './utils/session.server';
+import { themeSessionResolver } from './utils/session.server';
+import {
+  PreventFlashOnWrongTheme,
+  ThemeProvider,
+  useTheme,
+} from 'remix-themes';
 
 export const links: LinksFunction = () => {
   return [
@@ -27,15 +31,27 @@ export const links: LinksFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const theme = await getThemeFromSession(request);
-  return json({ theme });
+  const { getTheme } = await themeSessionResolver(request);
+  return {
+    theme: getTheme(),
+  };
 };
 
-export default function App() {
+export default function AppWithProviders() {
   const data = useLoaderData<typeof loader>();
+  return (
+    <ThemeProvider specifiedTheme={data.theme} themeAction='/set-theme'>
+      <App />
+    </ThemeProvider>
+  );
+}
+
+export function App() {
+  const data = useLoaderData<typeof loader>();
+  const [theme] = useTheme();
 
   return (
-    <html lang='en' className={`${data.theme ?? ''} `}>
+    <html lang='en' className={`${theme ?? ''} `}>
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
@@ -51,6 +67,7 @@ export default function App() {
           rel='stylesheet'
         ></link>
         <Meta />
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
       <body>
