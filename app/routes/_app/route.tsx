@@ -1,5 +1,5 @@
 import { json, type LinksFunction, type LoaderArgs } from '@remix-run/node';
-import { Outlet, useNavigation } from '@remix-run/react';
+import { Outlet } from '@remix-run/react';
 import styles from './styles.css';
 import { requireUserSession } from '~/utils/session.server';
 import { Form, links as formLinks } from '~/components/ui/form';
@@ -27,10 +27,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function AppRoute() {
   const [theme, setTheme] = useTheme();
-  const navigation = useNavigation();
-
-  const isLoggingOut =
-    navigation.state === 'submitting' && navigation.formAction === '/logout';
 
   function toggleTheme() {
     setTheme((prevTheme) =>
@@ -48,12 +44,7 @@ export default function AppRoute() {
             <VisuallyHidden.Root>Toggle Theme</VisuallyHidden.Root>
           </Button>
           <Form action='/logout' method='post'>
-            <Button
-              variant='tertiary-gray'
-              type='submit'
-              showSpinner={isLoggingOut}
-              iconOnly
-            >
+            <Button variant='tertiary-gray' type='submit' iconOnly>
               <ExitIcon />
               <VisuallyHidden.Root>Logout</VisuallyHidden.Root>
             </Button>
