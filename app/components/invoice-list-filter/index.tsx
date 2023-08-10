@@ -51,6 +51,7 @@ export function InvoiceListFilter({ activeStatus }: InvoicesFilterProps) {
   );
 
   function handleChange(event: FormEvent<HTMLFormElement>) {
+    event.stopPropagation();
     submit(event.currentTarget, { replace: true });
   }
 
