@@ -2,7 +2,7 @@ import type { InputHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import type { LinksFunction } from '@remix-run/node';
 import styles from './styles.css';
-import { CalendarIcon, CheckIcon } from '@radix-ui/react-icons';
+import { CheckIcon } from '@radix-ui/react-icons';
 import * as Checkbox from '@radix-ui/react-checkbox';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
@@ -19,17 +19,8 @@ export const links: LinksFunction = () => {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
-    const input = (
+    return (
       <input className={`input ${className ?? ''}`} {...props} ref={ref} />
-    );
-
-    return props.type === 'date' ? (
-      <div className='input-date-container'>
-        {input}
-        <CalendarIcon />
-      </div>
-    ) : (
-      input
     );
   }
 );
