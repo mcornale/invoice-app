@@ -2,18 +2,25 @@ import { PrismaClient, InvoiceStatus } from '@prisma/client';
 const db = new PrismaClient();
 
 async function seed() {
-  const demoUser = await db.user.create({
-    data: {
+  const demoUser = await db.user.upsert({
+    where: { username: 'demo' },
+    create: {
       username: 'demo',
       passwordHash:
         '$2a$10$TTDegoQr6qAdnbUEwyspb.X7u7BvRAEqXqEOwR.8fRfjjMChLIgnO',
     },
+    update: {},
   });
-  await Promise.all(
-    getInvoices().map((invoice) => {
-      return db.invoice.create({ data: { userId: demoUser.id, ...invoice } });
-    })
-  );
+  const existingInvoices = await db.invoice.count({
+    where: { userId: demoUser.id },
+  });
+  if (existingInvoices === 0) {
+    await Promise.all(
+      getInvoices().map((invoice) => {
+        return db.invoice.create({ data: { userId: demoUser.id, ...invoice } });
+      })
+    );
+  }
 }
 
 seed();
