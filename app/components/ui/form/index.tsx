@@ -1,7 +1,7 @@
-import type { LinksFunction } from '@remix-run/node';
-import styles from './styles.css';
-import type { FormProps as RemixFormProps } from '@remix-run/react';
-import { Form as RemixForm } from '@remix-run/react';
+import type { LinksFunction } from 'react-router';
+import styles from './styles.css?url';
+import type { FormProps as RemixFormProps } from 'react-router';
+import { Form as RemixForm } from 'react-router';
 import type {
   FieldsetHTMLAttributes,
   HTMLAttributes,

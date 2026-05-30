@@ -1,5 +1,5 @@
-import type { LinksFunction } from '@remix-run/node';
-import { useActionData, useLoaderData, useNavigation } from '@remix-run/react';
+import type { LinksFunction } from 'react-router';
+import { useActionData, useLoaderData, useNavigation } from 'react-router';
 import type { ActionData, loader } from '~/routes/_app.invoices_.$id/route';
 import {
   SlideOver,
@@ -10,7 +10,7 @@ import {
 } from '../ui/slide-over';
 import { InvoiceForm, links as invoiceFormLinks } from '../invoice-form';
 import { Button, links as buttonLinks } from '../ui/button';
-import styles from './styles.css';
+import styles from './styles.css?url';
 import type { Invoice } from '@prisma/client';
 import { InvoiceStatus } from '@prisma/client';
 import { useEffect, useState } from 'react';

@@ -1,6 +1,5 @@
-import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import styles from './styles.css';
+import type { ActionFunctionArgs, LinksFunction, LoaderFunctionArgs } from 'react-router';
+import styles from './styles.css?url';
 import {
   InvoiceListFilter,
   links as invoiceListFilterLinks,
@@ -9,7 +8,7 @@ import {
   InvoiceList,
   links as invoiceListLinks,
 } from '~/components/invoice-list';
-import { Outlet, useLoaderData, useSearchParams } from '@remix-run/react';
+import { Outlet, useLoaderData, useSearchParams } from 'react-router';
 import { parseDate } from '~/utils/parsers';
 import {
   getFieldErrors,
@@ -45,7 +44,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserIdFromSession(request);
   if (!userId) throw new Error("This shouldn't be possible");
 
@@ -55,10 +54,10 @@ export const loader = async ({ request }: LoaderArgs) => {
     throw new Error("This shouldn't be possible");
   const invoices = await getInvoiceList(status, userId);
 
-  return json({ invoices });
+  return { invoices };
 };
 
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const userId = await getUserIdFromSession(request);
   if (!userId) throw new Error("This shouldn't be possible");
 
@@ -79,7 +78,7 @@ export const action = async ({ request }: ActionArgs) => {
         status: InvoiceStatus.DRAFT,
         ...getFormattedInvoice(invoiceFormData),
       });
-      return json({ success: true });
+      return { success: true };
     case 'save-and-send':
       const fieldErrors = getFieldErrors(invoiceFormData);
       const formErrors = getFormErrors(invoiceFormData, fieldErrors);
@@ -95,7 +94,7 @@ export const action = async ({ request }: ActionArgs) => {
         status: InvoiceStatus.PENDING,
         ...getFormattedInvoice(invoiceFormData),
       });
-      return json({ success: true });
+      return { success: true };
     default:
       throw new Response(`The intent "${intent}" is not supported`, {
         status: 400,

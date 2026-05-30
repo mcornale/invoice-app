@@ -1,5 +1,5 @@
 import { CaretDownIcon } from '@radix-ui/react-icons';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction } from 'react-router';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import {
   Form,
@@ -7,7 +7,7 @@ import {
   FormLabel,
   links as formLinks,
 } from '~/components/ui/form';
-import styles from './styles.css';
+import styles from './styles.css?url';
 import { InputCheckbox, links as inputLinks } from '../ui/input';
 import {
   Popover,
@@ -17,7 +17,7 @@ import {
 } from '../ui/popover';
 import { useMediaQuery } from '~/hooks/use-media-query';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { useSubmit } from '@remix-run/react';
+import { useSubmit } from 'react-router';
 import type { FormEvent } from 'react';
 import { InvoiceStatus } from '@prisma/client';
 

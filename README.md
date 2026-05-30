@@ -38,7 +38,7 @@ Users should be able to:
 - CSS
 - Typescript
 - Radix UI
-- Remix
+- Remix / React Router
 
 ## Demo user
 

@@ -1,6 +1,6 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import type { LinksFunction } from '@remix-run/node';
-import styles from './styles.css';
+import type { LinksFunction } from 'react-router';
+import styles from './styles.css?url';
 import { forwardRef } from 'react';
 
 export interface PopoverContentProps

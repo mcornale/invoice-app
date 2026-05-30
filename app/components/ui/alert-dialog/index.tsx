@@ -1,7 +1,7 @@
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction } from 'react-router';
 import { forwardRef } from 'react';
-import styles from './styles.css';
+import styles from './styles.css?url';
 
 export interface AlertDialogContentProps
   extends AlertDialogPrimitive.AlertDialogContentProps {

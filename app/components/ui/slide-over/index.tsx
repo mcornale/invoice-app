@@ -1,8 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction } from 'react-router';
 import { forwardRef, useEffect, useState } from 'react';
-import styles from './styles.css';
-import type { DialogContentProps } from '@radix-ui/react-alert-dialog';
+import styles from './styles.css?url';
 
 export interface SlideOverContentProps
   extends Omit<Dialog.DialogContentProps, 'onInteractOutside'> {
@@ -36,8 +35,8 @@ export const SlideOverContent = forwardRef<
     setContainer(document.querySelector('main') as HTMLElement);
   }, []);
 
-  const handleOnInteractOutside: DialogContentProps['onInteractOutside'] = (
-    event
+  const handleOnInteractOutside = (
+    event: CustomEvent
   ) => {
     const appHeader = document.querySelector('.app-header');
     if (appHeader?.contains(event.target as HTMLElement)) {

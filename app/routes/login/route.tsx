@@ -1,7 +1,6 @@
-import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import { redirect } from '@remix-run/node';
-import styles from './styles.css';
+import type { ActionFunctionArgs, LinksFunction, LoaderFunctionArgs } from 'react-router';
+import { redirect } from 'react-router';
+import styles from './styles.css?url';
 import {
   getFieldErrors,
   getLoginFormData,
@@ -11,7 +10,7 @@ import {
 import { badRequest } from '~/utils/request.server';
 import type { LoginFormFieldErrors } from '~/components/login-form';
 import { LoginForm, links as loginFormLinks } from '~/components/login-form';
-import { useActionData } from '@remix-run/react';
+import { useActionData } from 'react-router';
 import {
   createUserSession,
   getUserIdFromSession,
@@ -33,13 +32,13 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserIdFromSession(request);
   if (userId) return redirect('/invoices');
-  return json({});
+  return {};
 };
 
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const intent = formData.get('intent');
 

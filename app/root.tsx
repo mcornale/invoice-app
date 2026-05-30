@@ -1,21 +1,20 @@
-import type { LinksFunction, LoaderArgs } from '@remix-run/node';
+import type { LinksFunction, LoaderFunctionArgs } from 'react-router';
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
-} from '@remix-run/react';
-import globalStyles from '~/styles/global.css';
-import designSystemStyles from '~/styles/design-system.css';
+} from 'react-router';
+import globalStyles from '~/styles/global.css?url';
+import designSystemStyles from '~/styles/design-system.css?url';
 import { themeSessionResolver } from './utils/session.server';
 import {
   PreventFlashOnWrongTheme,
   ThemeProvider,
   useTheme,
-} from 'remix-themes';
+} from './utils/theme';
 
 export const links: LinksFunction = () => {
   return [
@@ -30,7 +29,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { getTheme } = await themeSessionResolver(request);
   return {
     theme: getTheme(),
@@ -74,7 +73,6 @@ export function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );

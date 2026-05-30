@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
-import type { LinksFunction } from '@remix-run/node';
-import styles from './styles.css';
+import type { LinksFunction } from 'react-router';
+import styles from './styles.css?url';
 import { CheckIcon } from '@radix-ui/react-icons';
 import * as Checkbox from '@radix-ui/react-checkbox';
 

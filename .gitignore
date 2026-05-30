@@ -1,8 +1,9 @@
 node_modules
 
 /.cache
-/public/build
+/build
 /.netlify
+/.react-router
 .env
 
 /prisma/dev.db

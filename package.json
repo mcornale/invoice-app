@@ -5,14 +5,14 @@
     "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
   },
   "scripts": {
-    "build": "remix build",
-    "dev": "remix dev",
-    "start": "cross-env NODE_ENV=production netlify dev",
-    "typecheck": "tsc",
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc",
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@netlify/functions": "^1.3.0",
+    "@netlify/vite-plugin-react-router": "^3.1.1",
     "@prisma/client": "^6.19.2",
     "@radix-ui/react-alert-dialog": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.3",
@@ -21,20 +21,17 @@
     "@radix-ui/react-popover": "^1.0.5",
     "@radix-ui/react-select": "^1.2.1",
     "@radix-ui/react-visually-hidden": "^1.0.2",
-    "@remix-run/netlify": "^1.15.0",
-    "@remix-run/node": "^1.15.0",
-    "@remix-run/react": "^2.17.4",
+    "@react-router/fs-routes": "^7.16.0",
+    "@react-router/node": "^7.16.0",
     "bcryptjs": "^2.4.3",
-    "cross-env": "^7.0.3",
-    "isbot": "^3.6.5",
+    "isbot": "^5.1.40",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remix-themes": "^1.2.1"
+    "react-router": "^7.16.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.17.4",
-    "@remix-run/eslint-config": "^1.15.0",
-    "@remix-run/serve": "^2.17.4",
+    "@react-router/dev": "^7.16.0",
+    "@react-router/serve": "^7.16.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.25",
@@ -43,9 +40,10 @@
     "prisma": "^6.19.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^6.4.2"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=20"
   }
 }

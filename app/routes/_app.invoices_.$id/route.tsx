@@ -6,7 +6,7 @@ import {
   useLoaderData,
   useNavigation,
   useRouteError,
-} from '@remix-run/react';
+} from 'react-router';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
 import {
   Button,
@@ -14,9 +14,9 @@ import {
   links as buttonLinks,
 } from '~/components/ui/button';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
-import type { ActionArgs, LinksFunction, LoaderArgs } from '@remix-run/node';
-import { redirect, json } from '@remix-run/node';
-import styles from './styles.css';
+import type { ActionFunctionArgs, LinksFunction, LoaderFunctionArgs } from 'react-router';
+import { redirect } from 'react-router';
+import styles from './styles.css?url';
 import { parseDate } from '~/utils/parsers';
 import { InvoiceStatus } from '@prisma/client';
 import { getUserIdFromSession } from '~/utils/session.server';
@@ -66,7 +66,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async ({ params, request }: LoaderArgs) => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const userId = await getUserIdFromSession(request);
   if (!userId) throw new Error("This shouldn't be possible");
   const invoiceId = params.id;
@@ -78,12 +78,12 @@ export const loader = async ({ params, request }: LoaderArgs) => {
   if (invoice.userId !== userId)
     throw new Response("You don't own this invoice!", { status: 403 });
 
-  return json({
+  return {
     invoice,
-  });
+  };
 };
 
-export const action = async ({ params, request }: ActionArgs) => {
+export const action = async ({ params, request }: ActionFunctionArgs) => {
   const userId = await getUserIdFromSession(request);
   if (!userId) throw new Error("This shouldn't be possible");
   const invoiceId = params.id;
@@ -122,10 +122,10 @@ export const action = async ({ params, request }: ActionArgs) => {
         status: status === InvoiceStatus.DRAFT ? InvoiceStatus.PENDING : status,
         ...updatedInvoice,
       });
-      return json({ success: true });
+      return { success: true };
     case 'mark-as-paid':
       await markInvoiceAsPaid(invoiceId, InvoiceStatus.PAID);
-      return json({ success: true });
+      return { success: true };
     case 'delete':
       await deleteInvoice(invoiceId);
       return redirect('/invoices');

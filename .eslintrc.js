@@ -1,4 +1,23 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
-  extends: ["@remix-run/eslint-config", "@remix-run/eslint-config/node"],
+  extends: ["eslint:recommended"],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  env: {
+    browser: true,
+    node: true,
+    es2022: true,
+  },
+  overrides: [
+    {
+      files: ["**/*.{ts,tsx}"],
+      parser: "@typescript-eslint/parser",
+      extends: ["eslint:recommended"],
+    },
+  ],
 };

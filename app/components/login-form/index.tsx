@@ -1,5 +1,5 @@
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction } from 'react-router';
 import type { FormProps } from '~/components/ui/form';
 import {
   FormError,
@@ -10,10 +10,10 @@ import {
   FormLegend,
   links as formLinks,
 } from '~/components/ui/form';
-import styles from './styles.css';
+import styles from './styles.css?url';
 import { Input, links as inputLinks } from '../ui/input';
 import { Button, links as buttonLinks } from '../ui/button';
-import { useNavigation, useSearchParams } from '@remix-run/react';
+import { useNavigation, useSearchParams } from 'react-router';
 import { upperFirst } from '~/utils/formatters';
 
 export interface LoginFormFields {

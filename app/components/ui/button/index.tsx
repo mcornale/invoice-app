@@ -1,9 +1,9 @@
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction } from 'react-router';
 import type { ButtonHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
-import styles from './styles.css';
-import type { LinkProps } from '@remix-run/react';
-import { Link } from '@remix-run/react';
+import styles from './styles.css?url';
+import type { LinkProps } from 'react-router';
+import { Link } from 'react-router';
 
 export type ButtonVariant =
   | 'primary'

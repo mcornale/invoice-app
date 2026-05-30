@@ -1,8 +1,8 @@
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { CaretDownIcon, CheckIcon } from '@radix-ui/react-icons';
 import { upperFirst } from '~/utils/formatters';
-import type { LinksFunction } from '@remix-run/node';
-import styles from './styles.css';
+import type { LinksFunction } from 'react-router';
+import styles from './styles.css?url';
 import { forwardRef } from 'react';
 
 export interface SelectOption {

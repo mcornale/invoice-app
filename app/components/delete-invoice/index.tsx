@@ -1,5 +1,5 @@
-import type { LinksFunction } from '@remix-run/node';
-import { useNavigation } from '@remix-run/react';
+import type { LinksFunction } from 'react-router';
+import { useNavigation } from 'react-router';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -9,7 +9,7 @@ import {
 } from '../ui/alert-dialog';
 import { Button, links as buttonLinks } from '../ui/button';
 import { Form, links as formLinks } from '../ui/form';
-import styles from './styles.css';
+import styles from './styles.css?url';
 
 export interface DeleteInvoiceProps {
   invoiceDisplayId: string;

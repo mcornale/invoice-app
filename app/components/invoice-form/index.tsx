@@ -13,8 +13,8 @@ import {
 import { Button, links as buttonLinks } from '../ui/button';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import type { LinksFunction } from '@remix-run/node';
-import styles from './styles.css';
+import type { LinksFunction } from 'react-router';
+import styles from './styles.css?url';
 import { Input, links as inputLinks } from '../ui/input';
 import { Select, links as selectLinks } from '../ui/select';
 import { upperFirst } from '~/utils/formatters';

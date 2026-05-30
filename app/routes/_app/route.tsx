@@ -1,12 +1,12 @@
-import { json, type LinksFunction, type LoaderArgs } from '@remix-run/node';
-import { Outlet } from '@remix-run/react';
-import styles from './styles.css';
+import type { LinksFunction, LoaderFunctionArgs } from 'react-router';
+import { Outlet } from 'react-router';
+import styles from './styles.css?url';
 import { requireUserSession } from '~/utils/session.server';
 import { Form, links as formLinks } from '~/components/ui/form';
 import { Button, links as buttonLinks } from '~/components/ui/button';
 import { ExitIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { Theme, useTheme } from 'remix-themes';
+import { Theme, useTheme } from '~/utils/theme';
 
 export const links: LinksFunction = () => {
   return [
@@ -19,10 +19,10 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   await requireUserSession(request);
 
-  return json({});
+  return {};
 };
 
 export default function AppRoute() {

@@ -1,6 +1,6 @@
-import { createCookieSessionStorage, redirect } from '@remix-run/node';
+import { createCookieSessionStorage, redirect } from 'react-router';
 import { isString } from './checkers';
-import { createThemeSessionResolver } from 'remix-themes';
+import { createThemeSessionResolver } from './theme.server';
 
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {

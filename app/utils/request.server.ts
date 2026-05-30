@@ -1,3 +1,3 @@
-import { json } from '@remix-run/node';
+import { data } from 'react-router';
 
-export const badRequest = <T>(data: T) => json(data, { status: 400 });
+export const badRequest = <T>(d: T) => data(d, { status: 400 });

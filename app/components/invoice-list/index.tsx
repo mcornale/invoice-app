@@ -1,9 +1,9 @@
-import { Link } from '@remix-run/react';
+import { Link } from 'react-router';
 import { CaretRightIcon } from '@radix-ui/react-icons';
 import { formatPrice, formatDate, upperFirst } from '~/utils/formatters';
 import { Badge, links as badgeLinks } from '~/components/ui/badge';
-import styles from './styles.css';
-import type { LinksFunction } from '@remix-run/node';
+import styles from './styles.css?url';
+import type { LinksFunction } from 'react-router';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import type { Invoice } from '@prisma/client';
 import { InvoiceStatus } from '@prisma/client';

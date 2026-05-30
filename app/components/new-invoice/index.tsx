@@ -7,9 +7,9 @@ import {
 } from '../ui/slide-over';
 import { InvoiceForm, links as invoiceFormLinks } from '../invoice-form';
 import { Button, links as buttonLinks } from '../ui/button';
-import { useActionData, useNavigation } from '@remix-run/react';
-import styles from './styles.css';
-import type { LinksFunction } from '@remix-run/node';
+import { useActionData, useNavigation } from 'react-router';
+import styles from './styles.css?url';
+import type { LinksFunction } from 'react-router';
 import type { ActionData } from '~/routes/_app.invoices/route';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
